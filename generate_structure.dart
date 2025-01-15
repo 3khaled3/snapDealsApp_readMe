@@ -1,7 +1,9 @@
 import 'dart:io';
+//toRun
+// dart generate_structure.dart
 
 void main() {
-  const featureName = 'product';
+  const featureName = 'chat';
   final structure = {
     'lib': {
       'app': {
@@ -12,45 +14,45 @@ void main() {
               'i_${featureName}_repository.dart',
               '${featureName}_repository.dart'
             ],
-            'services': ['api_service.dart', 'local_storage_service.dart'],
+            'services': ['funcation.dart'],
           },
-          'presentation': {
+          'view': {
             'pages': [
               '${featureName}_view.dart',
             ],
             'widgets': [
               'custom_button.dart',
-              'custom_text_field.dart',
-              'error_widget.dart',
             ],
             'navigation': ['${featureName}_router.dart'],
+          },
+          'model_view': {
+            'cubit': [
+              '${featureName}_cubit.dart',
+              '${featureName}_state.dart',
+            ],
           },
         }
       }
     },
   };
 
-  // Generate the structure as a text-based tree representation
-  final structureAsText = generateStructureAsText(structure);
-  File('structure.txt').writeAsStringSync(structureAsText);
+  createStructure(structure);
 
-  print('Structure saved as structure.txt.');
+  print('Project structure created successfully!');
 }
 
-String generateStructureAsText(Map<String, dynamic> structure,
-    [String prefix = '']) {
-  final buffer = StringBuffer();
-
+void createStructure(Map<String, dynamic> structure, [String path = '']) {
   structure.forEach((key, value) {
-    buffer.writeln('$prefix$key/');
+    final currentPath = path.isEmpty ? key : '$path/$key';
+
     if (value is Map<String, dynamic>) {
-      buffer.write(generateStructureAsText(value, '$prefix  '));
+      Directory(currentPath).createSync(recursive: true);
+      createStructure(value, currentPath);
     } else if (value is List<String>) {
+      Directory(currentPath).createSync(recursive: true);
       for (var file in value) {
-        buffer.writeln('$prefix  $file');
+        File('$currentPath/$file').createSync();
       }
     }
   });
-
-  return buffer.toString();
 }
