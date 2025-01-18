@@ -1,10 +1,11 @@
 import 'dart:ui';
 
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/utils/responsive_manager.dart';
 
 String translateFont({required String arabicFont, required String otherFont}) {
   // TODO: Add logic to check the current locale dynamically.
-  return 'ar' == 'ar' ? arabicFont : otherFont;
+  return Tr.current.lang == 'ar' ? arabicFont : otherFont;
 }
 
 String defaultFontFamily() {

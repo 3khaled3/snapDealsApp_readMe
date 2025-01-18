@@ -1,8 +1,8 @@
 import 'dart:io';
 //toRun
 // dart generate_structure.dart
-
-void main() {
+// main () => fileGenerator();
+void fileGenerator() {
   const featureName = 'chat';
   final structure = {
     'lib': {
