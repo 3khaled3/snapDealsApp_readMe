@@ -1,7 +1,7 @@
 //handle go router
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snap_deals/app/home_feature/view/pages/home/home_view.dart';
+import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view_model/product_cubit/product_cubit.dart';
 
 abstract class HomeRouter {

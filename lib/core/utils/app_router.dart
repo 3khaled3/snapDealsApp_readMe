@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/home_feature/view/navigation/home_router.dart';
-import 'package:snap_deals/app/home_feature/view/pages/home/home_view.dart';
+import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 
 abstract class AppRouter {
   static final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
