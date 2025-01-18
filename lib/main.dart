@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/app_router.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
 import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
@@ -37,8 +38,9 @@ class MyApp extends StatelessWidget {
           locale: state.locale,
           supportedLocales: Tr.delegate.supportedLocales,
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+            fontFamily: state.locale == const Locale('ar')
+                ? AppTextStyles.fontFamilyNotoKufiArabic
+                : AppTextStyles.fontFamilyMontserrat,
           ),
           routerConfig: AppRouter.router(),
           builder: (context, child) {

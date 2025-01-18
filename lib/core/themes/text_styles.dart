@@ -6,7 +6,7 @@ import 'package:snap_deals/core/utils/responsive_manager.dart';
 
 String translateFont({required String arabicFont, required String otherFont}) {
   // Add logic to check the current locale dynamically.
-  return Tr.current.lang == AvailableLang.ar.lang ? arabicFont : otherFont;
+  return Tr.current.lang == Langs.ar.lang ? arabicFont : otherFont;
 }
 
 String defaultFontFamily() {

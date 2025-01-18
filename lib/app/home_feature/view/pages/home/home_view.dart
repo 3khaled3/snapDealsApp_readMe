@@ -24,17 +24,15 @@ class HomeView extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     if (Tr.current.lang == "ar") {
-                      BlocProvider.of<LangCubit>(context)
-                          .changeLang(AvailableLang.en);
+                      BlocProvider.of<LangCubit>(context).changeLang(Langs.en);
                     } else {
-                      BlocProvider.of<LangCubit>(context)
-                          .changeLang(AvailableLang.ar);
+                      BlocProvider.of<LangCubit>(context).changeLang(Langs.ar);
                     }
                   },
                   icon: const Icon(Icons.language)),
               Text(
                 context.tr.hello,
-                style: AppTextStyles.medium12(),
+                style: AppTextStyles.bold12(),
               ),
             ],
           ),

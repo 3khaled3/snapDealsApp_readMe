@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -6,22 +8,22 @@ import 'package:snap_deals/core/utils/hive_helper.dart';
 
 part 'lang_state.dart';
 
-enum AvailableLang {
+enum Langs {
   ar("ar"),
   en("en");
 
   final String lang;
 
-  const AvailableLang(this.lang);
+  const Langs(this.lang);
 }
 
 class LangCubit extends Cubit<LangState> {
   LangCubit() : super(LangInitial(locale: _initializeLocale()));
 
-  void changeLang(AvailableLang lang) {
+  void changeLang(Langs lang) {
     if (Tr.current.lang == lang.lang) {
       emit(LangError(locale: _initializeLocale()));
-    } else if (lang == AvailableLang.ar || lang == AvailableLang.en) {
+    } else if (lang == Langs.ar || lang == Langs.en) {
       HiveHelper.instance.addItem("currentLang", lang.lang);
 
       emit(LangChanged(locale: _initializeLocale()));
