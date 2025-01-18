@@ -46,7 +46,7 @@ class RM {
     deviceType = calculateDeviceTypeView();
     textDirectionality = Directionality.of(context);
     isLtr = Directionality.of(context) == TextDirection.ltr;
-    printScreenInfo();
+    // printScreenInfo();
   }
 
   // void reCalculateData(BuildContext context) => init(context);

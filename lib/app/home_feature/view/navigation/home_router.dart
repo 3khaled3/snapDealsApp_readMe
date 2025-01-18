@@ -9,7 +9,10 @@ abstract class HomeRouter {
     GoRoute(
       path: HomeView.routeName,
       builder: (context, state) {
-        final HomeViewArgs args = state.extra as HomeViewArgs;
+        HomeViewArgs? args;
+        if (state.extra != null) {
+          args = state.extra as HomeViewArgs;
+        }
 
         return MultiBlocProvider(
           providers: [
