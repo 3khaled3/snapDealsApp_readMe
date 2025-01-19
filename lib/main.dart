@@ -6,7 +6,6 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/app_router.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
 import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
-import 'package:snap_deals/core/utils/responsive_manager.dart';
 import 'core/localization/generated/l10n.dart';
 
 Future<void> main() async {
