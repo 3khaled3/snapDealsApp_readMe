@@ -13,6 +13,4 @@ extension EmptyPadding on num {
 // 15.ph
 //todo add sized box with width 20
 // 20.pw
-//todo add sized box with height 20 mop and 30 tap
-//  RM.data.mapSize(mobile: 20, tablet:30).ph;
 
