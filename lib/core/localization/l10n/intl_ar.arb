@@ -1,4 +1,6 @@
 {
     "lang": "ar",
-    "hello": "مرحبا"
+    "hello": "مرحبا",
+    "helloWorld": "مرحبا بالعالم",
+    "teste": "dfsd"
 }
