@@ -69,6 +69,26 @@ class Tr {
       args: [],
     );
   }
+
+  /// `hello world`
+  String get helloWorld {
+    return Intl.message(
+      'hello world',
+      name: 'helloWorld',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `donnne`
+  String get donnne {
+    return Intl.message(
+      'donnne',
+      name: 'donnne',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

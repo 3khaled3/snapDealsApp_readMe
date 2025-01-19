@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/app_router.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
 import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
-import 'core/localization/generated/l10n.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
