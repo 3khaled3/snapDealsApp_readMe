@@ -45,7 +45,6 @@ class MyApp extends StatelessWidget {
           routerConfig: AppRouter.router(),
           builder: (context, child) {
             // Initialize RM with a valid context
-            RM.data.init(context);
             return child!;
           },
         );
