@@ -1,4 +1,6 @@
 {
-    "lang":"en",
-    "hello":"hello"
+    "lang": "en",
+    "hello": "hello",
+    "helloWorld": "hello world",
+    "teste": "dfsd"
 }
