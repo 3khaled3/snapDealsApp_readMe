@@ -28,7 +28,7 @@ Locale _initializeLocale() {
     Locale systemLocale = window.locale;
     currentLang = systemLocale.languageCode;
     if (currentLang != Langs.ar.lang || currentLang != Langs.en.lang) {
-      currentLang = Langs.ar.lang;
+      currentLang = Langs.en.lang;
     }
 
     HiveHelper.instance.addItem("currentLang", currentLang);
