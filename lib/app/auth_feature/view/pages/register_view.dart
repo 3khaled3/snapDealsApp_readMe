@@ -1,0 +1,312 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
+import 'package:snap_deals/core/utils/strings_manager.dart';
+
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/text_styles.dart';
+import '../../model_view/cubit/validation_function.dart';
+import '../widgets/custom_primary_button.dart';
+import '../widgets/custom_text_field.dart';
+
+class RegisterViewArgs {
+  //todo add any parameters you need
+}
+
+class RegisterView extends StatefulWidget {
+  const RegisterView(this.args, {super.key});
+  final RegisterViewArgs args;
+  static const String routeName = '/register_route';
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  String? name;
+  String? email;
+  String? password;
+  String? number;
+  String? address;
+  String gender = 'male';
+  String? age;
+  final formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Stack(children: [
+            Container(
+              height: 216,
+              width: MediaQuery.sizeOf(context).width,
+              padding: const EdgeInsets.only(top: 82, left: 28),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    AppImageAssets.authImage,
+                  ),
+                ),
+              ),
+              child: Text(
+                AppStrings.appName,
+                style: AppTextStyles.bold42().copyWith(
+                    fontFamily: AppTextStyles.fontFamilyLora,
+                    color: ColorsBox.white),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 167),
+              padding: const EdgeInsets.only(left: 28, right: 29),
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(55),
+                      topRight: Radius.circular(55))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  33.ph,
+                  Text('Create an account',
+                      style: AppTextStyles.semiBold30()
+                          .copyWith(fontFamily: AppTextStyles.fontFamilyLora)),
+                  30.6.ph,
+                  CustomTextFormField(
+                    hintText: 'Your Name',
+                    labelText: 'Name',
+                    prefixIcon: EvaIcons.person,
+                    validator: validateName,
+                    onChanged: (value) {
+                      name = value;
+                    },
+                  ),
+                  32.8.ph,
+                  CustomTextFormField(
+                    hintText: AppStrings.hintEmail,
+                    labelText: AppStrings.emailLabel,
+                    prefixIcon: EvaIcons.emailOutline,
+                    validator: validateEmail,
+                    onChanged: (value) {
+                      email = value;
+                    },
+                  ),
+                  22.2.ph,
+                  CustomTextFormField(
+                    hintText: AppStrings.hintPassword,
+                    labelText: AppStrings.passwordLoginLabel,
+                    prefixIcon: EvaIcons.lockOutline,
+                    isPassword: true,
+                    validator: validatePassword,
+                    onChanged: (value) {
+                      password = value;
+                    },
+                  ),
+                  33.6.ph,
+                  CustomTextFormField(
+                    hintText: 'Your Number',
+                    labelText: 'Number',
+                    prefixIcon: EvaIcons.hashOutline,
+                    validator: validateNumber,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      number = value;
+                    },
+                  ),
+                  34.4.ph,
+                  CustomTextFormField(
+                    hintText: 'Your Age',
+                    labelText: 'Age',
+                    prefixIcon: EvaIcons.hashOutline,
+                    validator: validateAge,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      age = value;
+                    },
+                  ),
+                  31.4.ph,
+                  CustomTextFormField(
+                    hintText: 'Your Address',
+                    labelText: 'Address',
+                    prefixIcon: EvaIcons.pinOutline,
+                    validator: validateAddress,
+                    onChanged: (value) {
+                      address = value;
+                    },
+                  ),
+                  32.1.ph,
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 22,
+                      right: 22,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: ColorsBox.paleGrey,
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: DropdownButton<String>(
+                        items: const [
+                          DropdownMenuItem<String>(
+                              value: 'male', child: Text('Male')),
+                          DropdownMenuItem<String>(
+                              value: 'female', child: Text('Female'))
+                        ],
+                        value: gender,
+                        underline: Container(
+                          color: Colors.white,
+                        ),
+                        menuWidth: 373,
+                        isExpanded: true,
+                        style: AppTextStyles.regular16()
+                            .copyWith(color: ColorsBox.slateGrey),
+                        icon: Icon(
+                          gender == 'male'
+                              ? Icons.male_outlined
+                              : Icons.female_outlined,
+                          color: ColorsBox.brightBlue,
+                        ),
+                        onChanged: (String? value) {
+                          setState(() {
+                            gender = value!;
+                          });
+                        }),
+                  ),
+                  22.6.ph,
+                  Row(
+                    children: [
+                      OutlinedButton(
+                        onPressed: () {
+                          GoRouter.of(context).pop();
+                        },
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 26, vertical: 20),
+                          shape: const CircleBorder(),
+                          fixedSize: const Size(66, 66),
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          color: ColorsBox.brightBlue,
+                        ),
+                      ),
+                      10.pw,
+                      Expanded(
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: CustomPrimaryButton(
+                            title: AppStrings.registerButton,
+                            onTap: () {
+                              if (formKey.currentState?.validate() ?? false) {
+                                // loginCubit.loginWithEmail(email, password);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  16.ph,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80, right: 80),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Expanded(
+                            child: Divider(
+                          thickness: 2,
+                          color: Colors.black,
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            AppStrings.orWord,
+                            style: AppTextStyles.regular16(),
+                          ),
+                        ),
+                        const Expanded(
+                            child: Divider(
+                          thickness: 2,
+                          color: Colors.black,
+                        )),
+                      ],
+                    ),
+                  ),
+                  13.ph,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      66.pw,
+                      OutlinedButton(
+                        onPressed: () {
+                          // Handle login
+                        },
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.apple,
+                          color: Colors.black,
+                          size: 32,
+                        ),
+                      ),
+                      13.pw,
+                      OutlinedButton(
+                          onPressed: () {
+                            // Handle login
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            backgroundColor: Colors.white,
+                            elevation: 0,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                            ),
+                          ),
+                          child: const Icon(EvaIcons.google,
+                              color: Color(0xffd62d20))),
+                      13.pw,
+                      OutlinedButton(
+                        onPressed: () {
+                          // Handle login
+                        },
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.facebook,
+                          color: Colors.blue,
+                          size: 30,
+                        ),
+                      ),
+                      66.pw,
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}

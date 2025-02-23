@@ -8,7 +8,6 @@ import 'package:snap_deals/core/utils/app_router.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
 import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -28,6 +27,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<LangCubit, LangState>(
       builder: (context, state) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           title: 'Snap Deals',
           localizationsDelegates: const [
             Tr.delegate,
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           locale: state.locale,
           supportedLocales: Tr.delegate.supportedLocales,
           theme: ThemeData(
-            fontFamily: state.locale == const Locale('ar')
+            fontFamily: state.locale == const Locale('en')
                 ? AppTextStyles.fontFamilyNotoKufiArabic
                 : AppTextStyles.fontFamilyMontserrat,
           ),

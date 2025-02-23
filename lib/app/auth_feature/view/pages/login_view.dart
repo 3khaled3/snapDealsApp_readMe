@@ -1,0 +1,231 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/build_register_text.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
+import 'package:snap_deals/core/utils/strings_manager.dart';
+import 'package:snap_deals/core/utils/validators.dart';
+
+import '../../model_view/cubit/validation_function.dart';
+import '../widgets/custom_text_field.dart';
+import 'forgot_password_view.dart';
+
+class LoginViewArgs {
+  //todo add any parameters you need
+}
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen(this.args, {super.key});
+  final LoginViewArgs? args;
+  static const String routeName = '/login_route';
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String? email;
+  String? password;
+  final formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Stack(
+            children: [
+              Container(
+                height: 216,
+                width: MediaQuery.sizeOf(context).width,
+                padding: const EdgeInsets.only(top: 82, left: 28),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      AppImageAssets.authImage,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  AppStrings.appName,
+                  style: AppTextStyles.bold42().copyWith(
+                      fontFamily: AppTextStyles.fontFamilyLora,
+                      color: ColorsBox.white),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 167),
+                padding: const EdgeInsets.only(left: 28, right: 29),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(55),
+                        topRight: Radius.circular(55))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    33.ph,
+                    Text(AppStrings.loginLabel,
+                        style: AppTextStyles.semiBold30().copyWith(
+                            fontFamily: AppTextStyles.fontFamilyLora)),
+                    42.ph,
+                    Text(
+                      AppStrings.loginLabel,
+                      style: AppTextStyles.regular16(),
+                    ),
+                    71.ph,
+                    CustomTextFormField(
+                      hintText: AppStrings.hintEmail,
+                      labelText: AppStrings.emailLabel,
+                      prefixIcon: EvaIcons.emailOutline,
+                      validator: validateEmail,
+                      onChanged: (value) {
+                        email = value;
+                      },
+                    ),
+                    28.ph,
+                    CustomTextFormField(
+                      hintText: AppStrings.hintPassword,
+                      labelText: AppStrings.passwordLoginLabel,
+                      prefixIcon: EvaIcons.lockOutline,
+                      isPassword: true,
+                      validator: Validators.validatePassword,
+                      onChanged: (value) {
+                        password = value;
+                      },
+                    ),
+                    26.ph,
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          GoRouter.of(context).push(
+                              ForgetPasswordView.routeName,
+                              extra: ForgetPasswordViewArgs());
+                        },
+                        child: Text(
+                          AppStrings.forgetPasswordButton,
+                          style: AppTextStyles.medium14(),
+                        ),
+                      ),
+                    ),
+                    26.ph,
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomPrimaryButton(
+                        title: AppStrings.loginButton,
+                        onTap: () {
+                          if (formKey.currentState?.validate() ?? false) {
+                            // loginCubit.loginWithEmail(email, password);
+                          }
+                        },
+                      ),
+                    ),
+                    26.ph,
+                    const BuildRegisterText(),
+                    58.ph,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 80, right: 80),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Expanded(
+                              child: Divider(
+                            thickness: 2,
+                            color: Colors.black,
+                          )),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Text(
+                              "Or",
+                              style: AppTextStyles.regular16(),
+                            ),
+                          ),
+                          const Expanded(
+                              child: Divider(
+                            thickness: 2,
+                            color: Colors.black,
+                          )),
+                        ],
+                      ),
+                    ),
+                    13.ph,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        66.pw,
+                        OutlinedButton(
+                          onPressed: () {
+                            // Handle login
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            backgroundColor: Colors.white,
+                            elevation: 0,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.apple,
+                            color: Colors.black,
+                            size: 32,
+                          ),
+                        ),
+                        13.pw,
+                        OutlinedButton(
+                            onPressed: () {
+                              // Handle login
+                            },
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              backgroundColor: Colors.white,
+                              elevation: 0,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                              ),
+                            ),
+                            child: const Icon(EvaIcons.google,
+                                color: Color(0xffd62d20))),
+                        13.pw,
+                        OutlinedButton(
+                          onPressed: () {
+                            // Handle login
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            backgroundColor: Colors.white,
+                            elevation: 0,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.facebook,
+                            color: Colors.blue,
+                            size: 30,
+                          ),
+                        ),
+                        66.pw,
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
