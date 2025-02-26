@@ -60,15 +60,15 @@ class OnBoardScreen extends StatelessWidget {
                     extra: OnBoard2ScreenArgs());
               },
               style: OutlinedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 20),
                   shape: const CircleBorder(),
                   fixedSize: const Size(66, 66),
                   backgroundColor: ColorsBox.brightBlue),
-              child: const Icon(
-                Icons.arrow_forward,
-                color: ColorsBox.white,
-                size: 22,
+              child: const Center(
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: ColorsBox.white,
+                  size: 22,
+                ),
               ),
             ),
           ],
