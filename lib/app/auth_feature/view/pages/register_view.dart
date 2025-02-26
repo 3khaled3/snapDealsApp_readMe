@@ -2,8 +2,8 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-import 'package:snap_deals/core/utils/strings_manager.dart';
 
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
@@ -45,20 +45,21 @@ class _RegisterViewState extends State<RegisterView> {
               padding: const EdgeInsets.only(top: 82, left: 28),
               decoration: const BoxDecoration(
                 image: DecorationImage(
+                  fit: BoxFit.cover,
                   image: AssetImage(
                     AppImageAssets.authImage,
                   ),
                 ),
               ),
               child: Text(
-                AppStrings.appName,
+                Tr.current.appName,
                 style: AppTextStyles.bold42().copyWith(
                     fontFamily: AppTextStyles.fontFamilyLora,
                     color: ColorsBox.white),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 167),
+              margin: const EdgeInsets.only(top: 167, bottom: 8),
               padding: const EdgeInsets.only(left: 28, right: 29),
               decoration: const BoxDecoration(
                   color: Colors.white,
@@ -85,8 +86,8 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   32.8.ph,
                   CustomTextFormField(
-                    hintText: AppStrings.hintEmail,
-                    labelText: AppStrings.emailLabel,
+                    hintText: Tr.current.hintEmail,
+                    labelText: Tr.current.emailLabel,
                     prefixIcon: EvaIcons.emailOutline,
                     validator: validateEmail,
                     onChanged: (value) {
@@ -95,8 +96,8 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   22.2.ph,
                   CustomTextFormField(
-                    hintText: AppStrings.hintPassword,
-                    labelText: AppStrings.passwordLoginLabel,
+                    hintText: Tr.current.hintPassword,
+                    labelText: Tr.current.passwordLoginLabel,
                     prefixIcon: EvaIcons.lockOutline,
                     isPassword: true,
                     validator: validatePassword,
@@ -108,7 +109,7 @@ class _RegisterViewState extends State<RegisterView> {
                   CustomTextFormField(
                     hintText: 'Your Number',
                     labelText: 'Number',
-                    prefixIcon: EvaIcons.hashOutline,
+                    prefixIcon: EvaIcons.calendarOutline,
                     validator: validateNumber,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
@@ -198,7 +199,7 @@ class _RegisterViewState extends State<RegisterView> {
                         child: SizedBox(
                           width: double.infinity,
                           child: CustomPrimaryButton(
-                            title: AppStrings.registerButton,
+                            title: Tr.current.registerButton,
                             onTap: () {
                               if (formKey.currentState?.validate() ?? false) {
                                 // loginCubit.loginWithEmail(email, password);
@@ -223,7 +224,7 @@ class _RegisterViewState extends State<RegisterView> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                            AppStrings.orWord,
+                            Tr.current.orWord,
                             style: AppTextStyles.regular16(),
                           ),
                         ),
@@ -275,8 +276,11 @@ class _RegisterViewState extends State<RegisterView> {
                               vertical: 12,
                             ),
                           ),
-                          child: const Icon(EvaIcons.google,
-                              color: Color(0xffd62d20))),
+                          child: const Icon(
+                            EvaIcons.google,
+                            color: Color(0xffd62d20),
+                            size: 32,
+                          )),
                       13.pw,
                       OutlinedButton(
                         onPressed: () {

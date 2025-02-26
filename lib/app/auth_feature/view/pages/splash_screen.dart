@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
+
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
@@ -25,7 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() {
-    GoRouter.of(context).push(HomeView.routeName, extra: HomeViewArgs());
+    GoRouter.of(context)
+        .push(OnBoardScreen.routeName, extra: OnBoardScreenArgs());
   }
 
   @override

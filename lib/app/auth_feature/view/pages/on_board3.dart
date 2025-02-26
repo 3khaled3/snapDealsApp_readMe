@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/login_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-import 'package:snap_deals/core/utils/strings_manager.dart';
 
 class OnBoard3ScreenArgs {}
 
@@ -23,7 +23,7 @@ class OnBoard3Screen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            116.ph,
+            50.ph,
             Container(
               width: 350,
               height: 350,
@@ -34,14 +34,14 @@ class OnBoard3Screen extends StatelessWidget {
             ),
             78.ph,
             Text(
-              AppStrings.onBoardingSubtitle3,
+              Tr.current.onBoardingSubtitle3,
               style: AppTextStyles.semiBold20(),
               textAlign: TextAlign.center,
             ),
             33.ph,
-            Text(AppStrings.onBoardingDiscription3,
+            Text(Tr.current.onBoardingDescription3,
                 style: AppTextStyles.medium16(), textAlign: TextAlign.center),
-            108.ph,
+            90.ph,
             OutlinedButton(
               onPressed: () {
                 GoRouter.of(context)

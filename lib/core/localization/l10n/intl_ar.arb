@@ -1,6 +1,39 @@
 {
     "lang": "ar",
-    "hello": "مرحبا",
-    "helloWorld": "مرحبا بالعالم",
-    "donnne": "تم"
+    "appName": "SnapDeals",
+    "loginScreenLabel": "مرحبًا بعودتك",
+    
+    "loginLabel": "يرجى إدخال بريدك الإلكتروني لتسجيل الدخول",
+    "emailLabel": "البريد الإلكتروني",
+    "passwordLoginLabel": "كلمة المرور",
+    "hintEmail": "example@gmail.com",
+    "hintPassword": "كلمة المرور",
+    "forgotPasswordButton": "هل نسيت كلمة المرور؟",
+    "loginButton": "تسجيل الدخول",
+
+    "forgotPasswordScreenLabel": "إعادة تعيين كلمة المرور",
+    "forgotPasswordDescription": "أدخل بريدك الإلكتروني لتلقي رابط إعادة تعيين كلمة المرور",
+    "sendButtonLabel": "إرسال",
+
+    "otpScreenLabel": "إدخال رمز التحقق",
+    "otpDescription": "أدخل الرمز المرسل إلى بريدك الإلكتروني example@gmail.com.",
+    "resendCodeButton": "إعادة إرسال الرمز",
+    "nextButton": "التالي",
+
+    "resetPasswordDescription": "قم بتعيين كلمة مرور جديدة للوصول إلى حسابك.",
+    "newPasswordLabel": "كلمة المرور الجديدة",
+    "confirmPasswordLabel": "تأكيد كلمة المرور الجديدة",
+    "resetPasswordButton": "إعادة تعيين كلمة المرور",
+
+    "orWord": "أو",
+    "registerButton": "متابعة",
+
+    "onBoardingTitle": "مرحبًا بك في",
+    "onBoardingSubtitle1": "\"تعلم وطور مهاراتك بسهولة\"",
+    "onBoardingSubtitle2": "\"منتجات تعليمية متميزة\"",
+    "onBoardingSubtitle3": "\"دورات تعليمية شاملة\"",
+
+    "onBoardingDescription1": "اكتشف أدوات تعليمية مبتكرة ودورات متخصصة في تطبيق واحد.",
+    "onBoardingDescription2": "نحن نقدم مجموعة متنوعة من الأدوات والموارد التعليمية عالية الجودة لدعم رحلتك التعليمية، من الكتب إلى الأدوات التكنولوجية الحديثة، كل ما تحتاجه لتعزيز تجربتك الدراسية.",
+    "onBoardingDescription3": "استكشف دورات تدريبية مخصصة تلبي احتياجاتك التعليمية. من المهارات الأساسية إلى الموضوعات المتقدمة، نوفر محتوى عالي الجودة لمساعدتك في تحقيق أهدافك الأكاديمية والمهنية."
 }

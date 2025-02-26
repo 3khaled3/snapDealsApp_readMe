@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/on_board2.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-import 'package:snap_deals/core/utils/strings_manager.dart';
 
 class OnBoardScreenArgs {}
 
@@ -23,7 +23,7 @@ class OnBoardScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            116.ph,
+            50.ph,
             Container(
               width: 350,
               height: 350,
@@ -36,8 +36,8 @@ class OnBoardScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppStrings.onBoardingTitle, style: AppTextStyles.bold24()),
-                Text(AppStrings.appName,
+                Text(Tr.current.onBoardingTitle, style: AppTextStyles.bold24()),
+                Text(Tr.current.appName,
                     style: AppTextStyles.bold24().copyWith(
                       color: ColorsBox.brightBlue,
                       fontFamily: AppTextStyles.fontFamilyLora,
@@ -46,12 +46,12 @@ class OnBoardScreen extends StatelessWidget {
             ),
             29.ph,
             Text(
-              AppStrings.onBoardingSubtitle1,
+              Tr.current.onBoardingSubtitle1,
               style: AppTextStyles.semiBold20(),
               textAlign: TextAlign.center,
             ),
             10.ph,
-            Text(AppStrings.onBoardingDiscription1,
+            Text(Tr.current.onBoardingDescription1,
                 style: AppTextStyles.medium16(), textAlign: TextAlign.center),
             108.ph,
             OutlinedButton(

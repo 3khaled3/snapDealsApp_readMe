@@ -4,10 +4,10 @@ import 'package:snap_deals/app/auth_feature/view/pages/otp_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-import 'package:snap_deals/core/utils/strings_manager.dart';
 
 import '../../model_view/cubit/validation_function.dart';
 
@@ -36,20 +36,21 @@ class ForgetPasswordView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 82, left: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
+                    fit: BoxFit.cover,
                     image: AssetImage(
                       AppImageAssets.authImage,
                     ),
                   ),
                 ),
                 child: Text(
-                  AppStrings.appName,
+                  Tr.current.appName,
                   style: AppTextStyles.bold42().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 167),
+                margin: const EdgeInsets.only(top: 167, bottom: 8),
                 padding: const EdgeInsets.only(left: 28, right: 29),
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -71,21 +72,21 @@ class ForgetPasswordView extends StatelessWidget {
                       ),
                     ),
                     27.ph,
-                    Text(AppStrings.forgotPasswordScreenLabel,
+                    Text(Tr.current.forgotPasswordScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
                           fontFamily: AppTextStyles.fontFamilyLora,
                           color: ColorsBox.black,
                         )),
                     42.ph,
                     Text(
-                      AppStrings.forgotPasswordDiscription,
+                      Tr.current.forgotPasswordDescription,
                       style: AppTextStyles.regular16(),
                       textAlign: TextAlign.center,
                     ),
                     49.4.ph,
                     CustomTextFormField(
-                      hintText: AppStrings.hintEmail,
-                      labelText: AppStrings.emailLabel,
+                      hintText: Tr.current.hintEmail,
+                      labelText: Tr.current.emailLabel,
                       prefixIcon: Icons.email_outlined,
                       validator: validateEmail,
                       onChanged: (value) {
@@ -115,7 +116,7 @@ class ForgetPasswordView extends StatelessWidget {
                           child: SizedBox(
                             width: double.infinity,
                             child: CustomPrimaryButton(
-                              title: AppStrings.sendButton,
+                              title: Tr.current.sendButton,
                               onTap: () {
                                 if (formKey.currentState?.validate() ?? false) {
                                   // loginCubit.loginWithEmail(email, password);

@@ -1,6 +1,39 @@
 {
     "lang": "en",
-    "hello": "hello",
-    "helloWorld": "hello world",
-    "donnne": "donnne"
+    "appName": "SnapDeals",
+    "loginScreenLabel": "Welcome Back",
+    
+    "loginLabel": "Please enter your email to log in",
+    "emailLabel": "Email",
+    "passwordLoginLabel": "Password",
+    "hintEmail": "example@gmail.com",
+    "hintPassword": "Password",
+    "forgotPasswordButton": "Forgot Password?",
+    "loginButton": "Login",
+
+    "forgotPasswordScreenLabel": "Reset Password",
+    "forgotPasswordDescription": "Enter your email to receive a password reset link",
+    "sendButtonLabel": "Send",
+
+    "otpScreenLabel": "Enter Verification Code",
+    "otpDescription": "Enter the code sent to your email example@gmail.com.",
+    "resendCodeButton": "Resend Code",
+    "nextButton": "Next",
+
+    "resetPasswordDescription": "Set a new password to access your account.",
+    "newPasswordLabel": "New Password",
+    "confirmPasswordLabel": "Confirm New Password",
+    "resetPasswordButton": "Reset Password",
+
+    "orWord": "Or",
+    "registerButton": "Continue",
+
+    "onBoardingTitle": "Welcome To",
+    "onBoardingSubtitle1": "\"Learn and Develop Your Skills Easily\"",
+    "onBoardingSubtitle2": "\"Premium Educational Products\"",
+    "onBoardingSubtitle3": "\"Comprehensive Educational Courses\"",
+
+    "onBoardingDescription1": "Discover innovative educational tools and specialized courses in one app.",
+    "onBoardingDescription2": "We offer a variety of high-quality educational tools and resources to support your learning journey—from books to modern technology tools, everything you need to elevate your study experience.",
+    "onBoardingDescription3": "Explore tailored training courses that meet your educational needs. From foundational skills to advanced topics, we provide top-quality content to help you achieve your academic and professional goals."
 }

@@ -4,10 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/build_register_text.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-import 'package:snap_deals/core/utils/strings_manager.dart';
+
 import 'package:snap_deals/core/utils/validators.dart';
 
 import '../../model_view/cubit/validation_function.dart';
@@ -44,20 +45,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.only(top: 82, left: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
+                    fit: BoxFit.cover,
                     image: AssetImage(
                       AppImageAssets.authImage,
                     ),
                   ),
                 ),
                 child: Text(
-                  AppStrings.appName,
+                  Tr.current.appName,
                   style: AppTextStyles.bold42().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 167),
+                margin: const EdgeInsets.only(top: 167, bottom: 8),
                 padding: const EdgeInsets.only(left: 28, right: 29),
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -69,18 +71,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     33.ph,
-                    Text(AppStrings.loginLabel,
+                    Text(Tr.current.loginScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
                             fontFamily: AppTextStyles.fontFamilyLora)),
                     42.ph,
                     Text(
-                      AppStrings.loginLabel,
+                      Tr.current.loginLabel,
                       style: AppTextStyles.regular16(),
                     ),
                     71.ph,
                     CustomTextFormField(
-                      hintText: AppStrings.hintEmail,
-                      labelText: AppStrings.emailLabel,
+                      hintText: Tr.current.hintEmail,
+                      labelText: Tr.current.emailLabel,
                       prefixIcon: EvaIcons.emailOutline,
                       validator: validateEmail,
                       onChanged: (value) {
@@ -89,8 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     28.ph,
                     CustomTextFormField(
-                      hintText: AppStrings.hintPassword,
-                      labelText: AppStrings.passwordLoginLabel,
+                      hintText: Tr.current.hintPassword,
+                      labelText: Tr.current.passwordLoginLabel,
                       prefixIcon: EvaIcons.lockOutline,
                       isPassword: true,
                       validator: Validators.validatePassword,
@@ -108,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               extra: ForgetPasswordViewArgs());
                         },
                         child: Text(
-                          AppStrings.forgetPasswordButton,
+                          Tr.current.forgotPasswordButton,
                           style: AppTextStyles.medium14(),
                         ),
                       ),
@@ -117,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: CustomPrimaryButton(
-                        title: AppStrings.loginButton,
+                        title: Tr.current.loginButton,
                         onTap: () {
                           if (formKey.currentState?.validate() ?? false) {
                             // loginCubit.loginWithEmail(email, password);
@@ -193,8 +195,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 vertical: 12,
                               ),
                             ),
-                            child: const Icon(EvaIcons.google,
-                                color: Color(0xffd62d20))),
+                            child: const Icon(
+                              EvaIcons.google,
+                              color: Colors.red,
+                              size: 32,
+                            )),
                         13.pw,
                         OutlinedButton(
                           onPressed: () {
