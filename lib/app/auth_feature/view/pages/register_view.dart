@@ -2,12 +2,13 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
+import 'package:snap_deals/core/utils/validators.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
-import '../../model_view/cubit/validation_function.dart';
+
 import '../widgets/custom_primary_button.dart';
 import '../widgets/custom_text_field.dart';
 
@@ -42,7 +43,7 @@ class _RegisterViewState extends State<RegisterView> {
             Container(
               height: 216,
               width: MediaQuery.sizeOf(context).width,
-              padding: const EdgeInsets.only(top: 82, left: 28),
+              padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
@@ -52,7 +53,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ),
               child: Text(
-                Tr.current.appName,
+                context.tr.appName,
                 style: AppTextStyles.bold42().copyWith(
                     fontFamily: AppTextStyles.fontFamilyLora,
                     color: ColorsBox.white),
@@ -71,46 +72,46 @@ class _RegisterViewState extends State<RegisterView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   33.ph,
-                  Text('Create an account',
+                  Text(context.tr.registerLabel,
                       style: AppTextStyles.semiBold30()
                           .copyWith(fontFamily: AppTextStyles.fontFamilyLora)),
                   30.6.ph,
                   CustomTextFormField(
-                    hintText: 'Your Name',
-                    labelText: 'Name',
+                    hintText: context.tr.yourName,
+                    labelText: context.tr.Name,
                     prefixIcon: EvaIcons.person,
-                    validator: validateName,
+                    validator: Validators.validateEmail,
                     onChanged: (value) {
                       name = value;
                     },
                   ),
                   32.8.ph,
                   CustomTextFormField(
-                    hintText: Tr.current.hintEmail,
-                    labelText: Tr.current.emailLabel,
+                    hintText: context.tr.hintEmail,
+                    labelText: context.tr.emailLabel,
                     prefixIcon: EvaIcons.emailOutline,
-                    validator: validateEmail,
+                    validator: Validators.validateEmail,
                     onChanged: (value) {
                       email = value;
                     },
                   ),
                   22.2.ph,
                   CustomTextFormField(
-                    hintText: Tr.current.hintPassword,
-                    labelText: Tr.current.passwordLoginLabel,
+                    hintText: context.tr.hintPassword,
+                    labelText: context.tr.passwordLoginLabel,
                     prefixIcon: EvaIcons.lockOutline,
                     isPassword: true,
-                    validator: validatePassword,
+                    validator: Validators.validatePassword,
                     onChanged: (value) {
                       password = value;
                     },
                   ),
                   33.6.ph,
                   CustomTextFormField(
-                    hintText: 'Your Number',
-                    labelText: 'Number',
-                    prefixIcon: EvaIcons.calendarOutline,
-                    validator: validateNumber,
+                    hintText: context.tr.yourNumber,
+                    labelText: context.tr.Number,
+                    prefixIcon: EvaIcons.hashOutline,
+                    validator: Validators.validateNumber,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       number = value;
@@ -118,10 +119,10 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   34.4.ph,
                   CustomTextFormField(
-                    hintText: 'Your Age',
-                    labelText: 'Age',
-                    prefixIcon: EvaIcons.hashOutline,
-                    validator: validateAge,
+                    hintText: context.tr.yourAge,
+                    labelText: context.tr.Age,
+                    prefixIcon: EvaIcons.calendarOutline,
+                    validator: Validators.validateAge,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       age = value;
@@ -129,10 +130,10 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   31.4.ph,
                   CustomTextFormField(
-                    hintText: 'Your Address',
-                    labelText: 'Address',
+                    hintText: context.tr.yourAddress,
+                    labelText: context.tr.Address,
                     prefixIcon: EvaIcons.pinOutline,
-                    validator: validateAddress,
+                    validator: Validators.validateAddress,
                     onChanged: (value) {
                       address = value;
                     },
@@ -150,11 +151,11 @@ class _RegisterViewState extends State<RegisterView> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: DropdownButton<String>(
-                        items: const [
+                        items: [
                           DropdownMenuItem<String>(
-                              value: 'male', child: Text('Male')),
+                              value: 'male', child: Text(context.tr.male)),
                           DropdownMenuItem<String>(
-                              value: 'female', child: Text('Female'))
+                              value: 'female', child: Text(context.tr.female))
                         ],
                         value: gender,
                         underline: Container(
@@ -199,7 +200,7 @@ class _RegisterViewState extends State<RegisterView> {
                         child: SizedBox(
                           width: double.infinity,
                           child: CustomPrimaryButton(
-                            title: Tr.current.registerButton,
+                            title: context.tr.registerButton,
                             onTap: () {
                               if (formKey.currentState?.validate() ?? false) {
                                 // loginCubit.loginWithEmail(email, password);
@@ -224,7 +225,7 @@ class _RegisterViewState extends State<RegisterView> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                            Tr.current.orWord,
+                            context.tr.orWord,
                             style: AppTextStyles.regular16(),
                           ),
                         ),

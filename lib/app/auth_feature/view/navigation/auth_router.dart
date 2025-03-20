@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/forgot_password_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/on_board2.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/on_board3.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/otp_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/privacy_Policy.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/register_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/settings.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/splash_screen.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/your_profile.dart';
 import 'package:snap_deals/app/home_feature/view_model/product_cubit/product_cubit.dart';
 
 import '../pages/reset_password_view.dart';
@@ -18,67 +19,60 @@ abstract class AuthRouter {
     GoRoute(
       path: SplashScreen.routeName,
       builder: (context, state) {
-        SplashScreenArgs? args;
-        if (state.extra != null) {
-          args = state.extra as SplashScreenArgs;
-        }
-
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => ProductCubit()),
           ],
-          child: SplashScreen(args),
+          child: const SplashScreen(),
         );
       },
     ),
     GoRoute(
       path: OnBoardScreen.routeName,
       builder: (context, state) {
-        OnBoardScreenArgs? args;
-        if (state.extra != null) {
-          args = state.extra as OnBoardScreenArgs;
-        }
-
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => ProductCubit()),
           ],
-          child: OnBoardScreen(args),
+          child: const OnBoardScreen(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: YourProfileView.routeName,
+      builder: (context, state) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ProductCubit()),
+          ],
+          child: const YourProfileView(),
         );
       },
     ),
     GoRoute(
-      path: OnBoard2Screen.routeName,
+      path: SettingsView.routeName,
       builder: (context, state) {
-        OnBoard2ScreenArgs? args;
-        if (state.extra != null) {
-          args = state.extra as OnBoard2ScreenArgs;
-        }
-
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => ProductCubit()),
           ],
-          child: OnBoard2Screen(args),
+          child: const SettingsView(),
         );
       },
     ),
     GoRoute(
-      path: OnBoard3Screen.routeName,
+      path: PrivacyPolicyView.routeName,
       builder: (context, state) {
-        OnBoard3ScreenArgs? args;
-        if (state.extra != null) {
-          args = state.extra as OnBoard3ScreenArgs;
-        }
-
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => ProductCubit()),
           ],
-          child: OnBoard3Screen(args),
+          child: const PrivacyPolicyView(),
         );
       },
     ),
+
     GoRoute(
       path: LoginScreen.routeName,
       builder: (context, state) {

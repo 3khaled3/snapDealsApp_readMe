@@ -5,7 +5,7 @@ import '../../../../core/themes/app_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String hintText;
-  final String labelText;
+  final String? labelText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final Function(String)? onChanged;
@@ -17,7 +17,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     Key? key,
     required this.hintText,
-    required this.labelText,
+    this.labelText,
     this.prefixIcon,
     this.suffixIcon,
     this.onChanged,

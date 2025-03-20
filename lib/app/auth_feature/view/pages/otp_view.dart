@@ -5,10 +5,10 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_otp_text_field.d
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 
 class OtpViewArgs {
   //todo add any parameters you need
@@ -32,7 +32,7 @@ class OtpView extends StatelessWidget {
               Container(
                 height: 216,
                 width: MediaQuery.sizeOf(context).width,
-                padding: const EdgeInsets.only(top: 82, left: 28),
+                padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class OtpView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  Tr.current.appName,
+                  context.tr.appName,
                   style: AppTextStyles.bold42().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
@@ -61,14 +61,14 @@ class OtpView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     33.ph,
-                    Text(Tr.current.otpScreenLabel,
+                    Text(context.tr.otpScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
                           fontFamily: AppTextStyles.fontFamilyLora,
                           color: ColorsBox.black,
                         )),
                     42.ph,
                     Text(
-                      Tr.current.otpDescription,
+                      context.tr.otpDescription,
                       style: AppTextStyles.regular16(),
                       textAlign: TextAlign.center,
                     ),
@@ -100,7 +100,7 @@ class OtpView extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          Tr.current.resendCodeButton,
+                          context.tr.resendCodeButton,
                           style: AppTextStyles.regular16(),
                         ),
                       ),
@@ -128,7 +128,7 @@ class OtpView extends StatelessWidget {
                           child: SizedBox(
                             width: double.infinity,
                             child: CustomPrimaryButton(
-                              title: Tr.current.nextButton,
+                              title: context.tr.nextButton,
                               onTap: () {
                                 if (formKey.currentState?.validate() ?? false) {
                                   // loginCubit.loginWithEmail(email, password);

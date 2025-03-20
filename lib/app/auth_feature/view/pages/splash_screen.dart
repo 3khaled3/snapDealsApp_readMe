@@ -7,11 +7,9 @@ import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
-class SplashScreenArgs {}
-
 class SplashScreen extends StatefulWidget {
-  const SplashScreen(this.args, {super.key});
-  final SplashScreenArgs? args;
+  const SplashScreen({super.key});
+
   static const routeName = '/';
 
   @override
@@ -26,8 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() {
-    GoRouter.of(context)
-        .push(OnBoardScreen.routeName, extra: OnBoardScreenArgs());
+    GoRouter.of(context).push(OnBoardScreen.routeName);
   }
 
   @override

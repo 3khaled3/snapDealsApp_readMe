@@ -18,8 +18,10 @@ class Tr {
   static Tr? _current;
 
   static Tr get current {
-    assert(_current != null,
-        'No instance of Tr was loaded. Try to initialize the Tr delegate before accessing Tr.current.');
+    assert(
+      _current != null,
+      'No instance of Tr was loaded. Try to initialize the Tr delegate before accessing Tr.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +43,10 @@ class Tr {
 
   static Tr of(BuildContext context) {
     final instance = Tr.maybeOf(context);
-    assert(instance != null,
-        'No instance of Tr present in the widget tree. Did you add Tr.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of Tr present in the widget tree. Did you add Tr.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -52,301 +56,635 @@ class Tr {
 
   /// `en`
   String get lang {
-    return Intl.message(
-      'en',
-      name: 'lang',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('en', name: 'lang', desc: '', args: []);
   }
 
-  /// `hello`
-  String get hello {
-    return Intl.message(
-      'hello',
-      name: 'hello',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `hello world`
-  String get helloWorld {
-    return Intl.message(
-      'hello world',
-      name: 'helloWorld',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `donnne`
-  String get donnne {
-    return Intl.message(
-      'donnne',
-      name: 'donnne',
-      desc: '',
-      args: [],
-    );
-  }
-
+  /// `SnapDeals`
   String get appName {
-    return Intl.message(
-      'SnapDeals',
-      name: 'appName',
-      desc: 'App name',
-      args: [],
-    );
+    return Intl.message('SnapDeals', name: 'appName', desc: '', args: []);
   }
 
+  /// `Welcome Back`
   String get loginScreenLabel {
     return Intl.message(
       'Welcome Back',
       name: 'loginScreenLabel',
-      desc: 'Label for the login screen',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Good Morning`
+  String get homeTitle {
+    return Intl.message('Good Morning', name: 'homeTitle', desc: '', args: []);
+  }
+
+  /// `Please enter your email to log in`
   String get loginLabel {
     return Intl.message(
       'Please enter your email to log in',
       name: 'loginLabel',
-      desc: 'Login instruction',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Email`
   String get emailLabel {
-    return Intl.message(
-      'Email',
-      name: 'emailLabel',
-      desc: 'Email input label',
-      args: [],
-    );
+    return Intl.message('Email', name: 'emailLabel', desc: '', args: []);
   }
 
+  /// `Password`
   String get passwordLoginLabel {
     return Intl.message(
       'Password',
       name: 'passwordLoginLabel',
-      desc: 'Password input label',
+      desc: '',
       args: [],
     );
   }
 
+  /// `example@gmail.com`
   String get hintEmail {
     return Intl.message(
       'example@gmail.com',
       name: 'hintEmail',
-      desc: 'Email input hint',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Password`
   String get hintPassword {
-    return Intl.message(
-      'Password',
-      name: 'hintPassword',
-      desc: 'Password input hint',
-      args: [],
-    );
+    return Intl.message('Password', name: 'hintPassword', desc: '', args: []);
   }
 
+  /// `Forgot Password?`
   String get forgotPasswordButton {
     return Intl.message(
       'Forgot Password?',
       name: 'forgotPasswordButton',
-      desc: 'Forgot password button label',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Login`
   String get loginButton {
+    return Intl.message('Login', name: 'loginButton', desc: '', args: []);
+  }
+
+  /// `Create an account`
+  String get registerLabel {
     return Intl.message(
-      'Login',
-      name: 'loginButton',
-      desc: 'Login button label',
+      'Create an account',
+      name: 'registerLabel',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Your Name`
+  String get yourName {
+    return Intl.message('Your Name', name: 'yourName', desc: '', args: []);
+  }
+
+  /// `Name`
+  String get Name {
+    return Intl.message('Name', name: 'Name', desc: '', args: []);
+  }
+
+  /// `Your Number`
+  String get yourNumber {
+    return Intl.message('Your Number', name: 'yourNumber', desc: '', args: []);
+  }
+
+  /// `Number`
+  String get Number {
+    return Intl.message('Number', name: 'Number', desc: '', args: []);
+  }
+
+  /// `Your Age`
+  String get yourAge {
+    return Intl.message('Your Age', name: 'yourAge', desc: '', args: []);
+  }
+
+  /// `Age`
+  String get Age {
+    return Intl.message('Age', name: 'Age', desc: '', args: []);
+  }
+
+  /// `Your Address`
+  String get yourAddress {
+    return Intl.message(
+      'Your Address',
+      name: 'yourAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get Address {
+    return Intl.message('Address', name: 'Address', desc: '', args: []);
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message('Male', name: 'male', desc: '', args: []);
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message('Female', name: 'female', desc: '', args: []);
+  }
+
+  /// `Reset Password`
   String get forgotPasswordScreenLabel {
     return Intl.message(
       'Reset Password',
       name: 'forgotPasswordScreenLabel',
-      desc: 'Forgot password screen title',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Enter your email to receive a password reset link`
   String get forgotPasswordDescription {
     return Intl.message(
       'Enter your email to receive a password reset link',
       name: 'forgotPasswordDescription',
-      desc: 'Forgot password screen description',
+      desc: '',
       args: [],
     );
   }
 
-  String get sendButton {
-    return Intl.message(
-      'Send',
-      name: 'sendButton',
-      desc: 'Send button label',
-      args: [],
-    );
+  /// `Send`
+  String get sendButtonLabel {
+    return Intl.message('Send', name: 'sendButtonLabel', desc: '', args: []);
   }
 
+  /// `Enter Verification Code`
   String get otpScreenLabel {
     return Intl.message(
       'Enter Verification Code',
       name: 'otpScreenLabel',
-      desc: 'OTP screen title',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Enter the code sent to your email example@gmail.com.`
   String get otpDescription {
     return Intl.message(
       'Enter the code sent to your email example@gmail.com.',
       name: 'otpDescription',
-      desc: 'OTP screen description',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Resend Code`
   String get resendCodeButton {
     return Intl.message(
       'Resend Code',
       name: 'resendCodeButton',
-      desc: 'Resend code button label',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Next`
   String get nextButton {
-    return Intl.message(
-      'Next',
-      name: 'nextButton',
-      desc: 'Next button label',
-      args: [],
-    );
+    return Intl.message('Next', name: 'nextButton', desc: '', args: []);
   }
 
+  /// `Set a new password to access your account.`
   String get resetPasswordDescription {
     return Intl.message(
       'Set a new password to access your account.',
       name: 'resetPasswordDescription',
-      desc: 'Reset password screen description',
+      desc: '',
       args: [],
     );
   }
 
+  /// `New Password`
   String get newPasswordLabel {
     return Intl.message(
       'New Password',
       name: 'newPasswordLabel',
-      desc: 'New password input label',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Confirm New Password`
   String get confirmPasswordLabel {
     return Intl.message(
       'Confirm New Password',
       name: 'confirmPasswordLabel',
-      desc: 'Confirm new password input label',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Reset Password`
   String get resetPasswordButton {
     return Intl.message(
       'Reset Password',
       name: 'resetPasswordButton',
-      desc: 'Reset password button label',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Or`
   String get orWord {
-    return Intl.message(
-      'Or',
-      name: 'orWord',
-      desc: 'Word separator for options',
-      args: [],
-    );
+    return Intl.message('Or', name: 'orWord', desc: '', args: []);
   }
 
+  /// `Continue`
   String get registerButton {
-    return Intl.message(
-      'Continue',
-      name: 'registerButton',
-      desc: 'Register/continue button label',
-      args: [],
-    );
+    return Intl.message('Continue', name: 'registerButton', desc: '', args: []);
   }
 
+  /// `Welcome To`
   String get onBoardingTitle {
     return Intl.message(
       'Welcome To',
       name: 'onBoardingTitle',
-      desc: 'Onboarding title',
+      desc: '',
       args: [],
     );
   }
 
+  /// `"Learn and Develop Your Skills Easily"`
   String get onBoardingSubtitle1 {
     return Intl.message(
       '"Learn and Develop Your Skills Easily"',
       name: 'onBoardingSubtitle1',
-      desc: 'Onboarding subtitle 1',
+      desc: '',
       args: [],
     );
   }
 
+  /// `"Premium Educational Products"`
   String get onBoardingSubtitle2 {
     return Intl.message(
       '"Premium Educational Products"',
       name: 'onBoardingSubtitle2',
-      desc: 'Onboarding subtitle 2',
+      desc: '',
       args: [],
     );
   }
 
+  /// `"Comprehensive Educational Courses"`
   String get onBoardingSubtitle3 {
     return Intl.message(
       '"Comprehensive Educational Courses"',
       name: 'onBoardingSubtitle3',
-      desc: 'Onboarding subtitle 3',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Discover innovative educational tools and specialized courses in one app.`
   String get onBoardingDescription1 {
     return Intl.message(
       'Discover innovative educational tools and specialized courses in one app.',
       name: 'onBoardingDescription1',
-      desc: 'Onboarding description 1',
+      desc: '',
       args: [],
     );
   }
 
+  /// `We offer a variety of high-quality educational tools and resources to support your learning journey—from books to modern technology tools, everything you need to elevate your study experience.`
   String get onBoardingDescription2 {
     return Intl.message(
       'We offer a variety of high-quality educational tools and resources to support your learning journey—from books to modern technology tools, everything you need to elevate your study experience.',
       name: 'onBoardingDescription2',
-      desc: 'Onboarding description 2',
+      desc: '',
       args: [],
     );
   }
 
+  /// `Explore tailored training courses that meet your educational needs. From foundational skills to advanced topics, we provide top-quality content to help you achieve your academic and professional goals.`
   String get onBoardingDescription3 {
     return Intl.message(
       'Explore tailored training courses that meet your educational needs. From foundational skills to advanced topics, we provide top-quality content to help you achieve your academic and professional goals.',
       name: 'onBoardingDescription3',
-      desc: 'Onboarding description 3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What are you looking for?`
+  String get hintSearch {
+    return Intl.message(
+      'What are you looking for?',
+      name: 'hintSearch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Popular Course`
+  String get popularCourse {
+    return Intl.message(
+      'Popular Course',
+      name: 'popularCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Popular Product`
+  String get popularProduct {
+    return Intl.message(
+      'Popular Product',
+      name: 'popularProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic information`
+  String get yourProfileLabel {
+    return Intl.message(
+      'Basic information',
+      name: 'yourProfileLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact information`
+  String get contactInformation {
+    return Intl.message(
+      'Contact information',
+      name: 'contactInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `this is the number for buyers contacts and other notification`
+  String get contactNumber {
+    return Intl.message(
+      'this is the number for buyers contacts and other notification',
+      name: 'contactNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This email will be useful to keep in touch`
+  String get contactEmail {
+    return Intl.message(
+      'This email will be useful to keep in touch',
+      name: 'contactEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get saveButton {
+    return Intl.message('Save', name: 'saveButton', desc: '', args: []);
+  }
+
+  /// `Settings`
+  String get Settings {
+    return Intl.message('Settings', name: 'Settings', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get Language {
+    return Intl.message('Language', name: 'Language', desc: '', args: []);
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get Version {
+    return Intl.message('Version', name: 'Version', desc: '', args: []);
+  }
+
+  /// `English`
+  String get English {
+    return Intl.message('English', name: 'English', desc: '', args: []);
+  }
+
+  /// `العربية`
+  String get Arabic {
+    return Intl.message('العربية', name: 'Arabic', desc: '', args: []);
+  }
+
+  /// `Cancelation Policy`
+  String get CancelationPolicy {
+    return Intl.message(
+      'Cancelation Policy',
+      name: 'CancelationPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*Cancellation Before Shipping:*`
+  String get CancelationPolicyDiscription1 {
+    return Intl.message(
+      '*Cancellation Before Shipping:*',
+      name: 'CancelationPolicyDiscription1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can cancel your order at any time before it is shipped. To cancel, please contact our customer service team within 24 hours of placing your order. A full refund will be issued to your original payment method.`
+  String get CancelationPolicyDiscription2 {
+    return Intl.message(
+      'You can cancel your order at any time before it is shipped. To cancel, please contact our customer service team within 24 hours of placing your order. A full refund will be issued to your original payment method.',
+      name: 'CancelationPolicyDiscription2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*Cancellation After Shipping:*`
+  String get CancelationPolicyDiscription3 {
+    return Intl.message(
+      '*Cancellation After Shipping:*',
+      name: 'CancelationPolicyDiscription3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once your order has been shipped, it cannot be canceled. However, you may return or exchange the product according to our return policy.`
+  String get CancelationPolicyDiscription4 {
+    return Intl.message(
+      'Once your order has been shipped, it cannot be canceled. However, you may return or exchange the product according to our return policy.',
+      name: 'CancelationPolicyDiscription4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*How to Cancel:*`
+  String get CancelationPolicyDiscription5 {
+    return Intl.message(
+      '*How to Cancel:*',
+      name: 'CancelationPolicyDiscription5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To cancel your order, please contact us at [email address or phone number], or through the app directly.`
+  String get CancelationPolicyDiscription6 {
+    return Intl.message(
+      'To cancel your order, please contact us at [email address or phone number], or through the app directly.',
+      name: 'CancelationPolicyDiscription6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms & Condition`
+  String get TermsAndCondition {
+    return Intl.message(
+      'Terms & Condition',
+      name: 'TermsAndCondition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acceptance of Terms*`
+  String get TermsAndConditionTitle1 {
+    return Intl.message(
+      'Acceptance of Terms*',
+      name: 'TermsAndConditionTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By accessing or using our platform, you agree to these Terms and Conditions, as well as any applicable laws and regulations. If you do not agree to these terms, you should not use our services.`
+  String get TermsAndConditionDiscription1 {
+    return Intl.message(
+      'By accessing or using our platform, you agree to these Terms and Conditions, as well as any applicable laws and regulations. If you do not agree to these terms, you should not use our services.',
+      name: 'TermsAndConditionDiscription1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Registration*`
+  String get TermsAndConditionTitle2 {
+    return Intl.message(
+      'Account Registration*',
+      name: 'TermsAndConditionTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To make purchases or access certain features, you may need to create an account. You are responsible for maintaining the confidentiality of your account and password, and for all activities that occur under your account.`
+  String get TermsAndConditionDiscription2 {
+    return Intl.message(
+      'To make purchases or access certain features, you may need to create an account. You are responsible for maintaining the confidentiality of your account and password, and for all activities that occur under your account.',
+      name: 'TermsAndConditionDiscription2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products and Availability*`
+  String get TermsAndConditionTitle3 {
+    return Intl.message(
+      'Products and Availability*',
+      name: 'TermsAndConditionTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We strive to provide accurate product descriptions and images. However, we cannot guarantee the availability or accuracy of all products listed on the platform. Prices and product details are subject to change without notice.`
+  String get TermsAndConditionDiscription3 {
+    return Intl.message(
+      'We strive to provide accurate product descriptions and images. However, we cannot guarantee the availability or accuracy of all products listed on the platform. Prices and product details are subject to change without notice.',
+      name: 'TermsAndConditionDiscription3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders and Payment*`
+  String get TermsAndConditionTitle4 {
+    return Intl.message(
+      'Orders and Payment*',
+      name: 'TermsAndConditionTitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Once you place an order, it will be processed according to our order fulfillment procedures. We accept payment through various methods, including credit/debit cards and other secure payment options. You agree to pay for all orders placed under your account.`
+  String get TermsAndConditionDiscription4 {
+    return Intl.message(
+      'Once you place an order, it will be processed according to our order fulfillment procedures. We accept payment through various methods, including credit/debit cards and other secure payment options. You agree to pay for all orders placed under your account.',
+      name: 'TermsAndConditionDiscription4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shipping and Delivery*`
+  String get TermsAndConditionTitle5 {
+    return Intl.message(
+      'Shipping and Delivery*',
+      name: 'TermsAndConditionTitle5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We aim to ship your orders as quickly as possible. Delivery times may vary depending on location, shipping method, and product availability. We are not responsible for delays caused by third-party shipping carriers or force majeure events.`
+  String get TermsAndConditionDiscription5 {
+    return Intl.message(
+      'We aim to ship your orders as quickly as possible. Delivery times may vary depending on location, shipping method, and product availability. We are not responsible for delays caused by third-party shipping carriers or force majeure events.',
+      name: 'TermsAndConditionDiscription5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation and Returns*`
+  String get TermsAndConditionTitle6 {
+    return Intl.message(
+      'Cancellation and Returns*',
+      name: 'TermsAndConditionTitle6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refer to our Cancellation Policy and Return Policy for information on how to cancel or return orders. You can find detailed guidelines on how to initiate a cancellation or return process on our platform.`
+  String get TermsAndConditionDiscription6 {
+    return Intl.message(
+      'Refer to our Cancellation Policy and Return Policy for information on how to cancel or return orders. You can find detailed guidelines on how to initiate a cancellation or return process on our platform.',
+      name: 'TermsAndConditionDiscription6',
+      desc: '',
       args: [],
     );
   }

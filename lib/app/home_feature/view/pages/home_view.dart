@@ -1,50 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
-import 'package:snap_deals/core/localization/generated/l10n.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
 
 class HomeViewArgs {
   //todo add any parameters you need
 }
 
 class HomeView extends StatelessWidget {
-  const HomeView(this.args, {super.key});
+  const HomeView({this.args, super.key});
   final HomeViewArgs? args;
   static const String routeName = '/home_route';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    if (Tr.current.lang == "ar") {
-                      BlocProvider.of<LangCubit>(context).changeLang(Langs.en);
-                    } else {
-                      BlocProvider.of<LangCubit>(context).changeLang(Langs.ar);
-                    }
-                  },
-                  icon: const Icon(Icons.language)),
-              Text(
-                context.tr.hello,
-                style: AppTextStyles.bold12(),
-              ),
-              IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).push(OnBoardScreen.routeName,
-                        extra: OnBoardScreenArgs());
-                  },
-                  icon: const Icon(Icons.arrow_back_ios))
-            ],
+    List<ProductCard> products = [
+      const ProductCard(),
+      const ProductCard(),
+      const ProductCard(),
+      const ProductCard(),
+      const ProductCard(),
+    ];
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(left: 9, right: 9, bottom: 80),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          55.ph,
+          const HomeAppBar('User name'),
+          27.ph,
+          const Center(child: CategoriesAvatar()),
+          18.ph,
+          CustomTextFormField(
+            hintText: context.tr.hintSearch,
+            suffixIcon: Icons.search,
           ),
-        ),
+          26.ph,
+          Text(
+            context.tr.popularCourse,
+            style: AppTextStyles.medium20()
+                .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+          ),
+          23.ph,
+          SizedBox(
+            height: 300,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: products.length,
+                itemBuilder: (context, index) => Row(
+                      children: [products[index]],
+                    )),
+          ),
+          27.ph,
+          Text(
+            context.tr.popularProduct,
+            style: AppTextStyles.medium20()
+                .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+          ),
+          23.ph,
+          SizedBox(
+            height: 300,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: products.length,
+                itemBuilder: (context, index) => Row(
+                      children: [products[index]],
+                    )),
+          ),
+        ],
       ),
     );
   }

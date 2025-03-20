@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/localization/generated/l10n.dart';
+
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-
-import '../../model_view/cubit/validation_function.dart';
+import 'package:snap_deals/core/utils/validators.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 
 class ResetPasswordViewArgs {
   //todo add any parameters you need
@@ -35,7 +35,7 @@ class ResetPasswordView extends StatelessWidget {
               Container(
                 height: 216,
                 width: MediaQuery.sizeOf(context).width,
-                padding: const EdgeInsets.only(top: 82, left: 28),
+                padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -45,7 +45,7 @@ class ResetPasswordView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  Tr.current.appName,
+                  context.tr.appName,
                   style: AppTextStyles.bold42().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
@@ -74,32 +74,32 @@ class ResetPasswordView extends StatelessWidget {
                       ),
                     ),
                     27.ph,
-                    Text(Tr.current.forgotPasswordScreenLabel,
+                    Text(context.tr.forgotPasswordScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
                           fontFamily: AppTextStyles.fontFamilyLora,
                           color: ColorsBox.black,
                         )),
                     42.ph,
                     Text(
-                      Tr.current.resetPasswordDescription,
+                      context.tr.resetPasswordDescription,
                       style: AppTextStyles.regular16(),
                       textAlign: TextAlign.center,
                     ),
                     49.4.ph,
                     CustomTextFormField(
-                      hintText: Tr.current.hintPassword,
-                      labelText: Tr.current.newPasswordLabel,
+                      hintText: context.tr.hintPassword,
+                      labelText: context.tr.newPasswordLabel,
                       prefixIcon: EvaIcons.lockOutline,
                       isPassword: true,
-                      validator: validatePassword,
+                      validator: Validators.validatePassword,
                       onChanged: (value) {
                         newPassword1 = value;
                       },
                     ),
                     34.ph,
                     CustomTextFormField(
-                      hintText: Tr.current.hintPassword,
-                      labelText: Tr.current.confirmPasswordLabel,
+                      hintText: context.tr.hintPassword,
+                      labelText: context.tr.confirmPasswordLabel,
                       prefixIcon: EvaIcons.lockOutline,
                       isPassword: true,
                       validator: (value) {
@@ -137,7 +137,7 @@ class ResetPasswordView extends StatelessWidget {
                           child: SizedBox(
                             width: double.infinity,
                             child: CustomPrimaryButton(
-                              title: Tr.current.resetPasswordButton,
+                              title: context.tr.resetPasswordButton,
                               onTap: () {
                                 if (formKey.currentState?.validate() ?? false) {
                                   // loginCubit.loginWithEmail(email, password);

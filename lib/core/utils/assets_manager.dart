@@ -1,8 +1,9 @@
-const String IMAGE_PATH = 'assets/images';
+const String imagePath = 'assets/images';
 
 class AppImageAssets {
-  static const String splashScreen = '$IMAGE_PATH/START.png';
-  static const String authImage = '$IMAGE_PATH/login.jpeg';
-  static const String forgotPassImage = '$IMAGE_PATH/img.jpeg';
-  static const String onboardingImage = '$IMAGE_PATH/onBoard.png';
+  static const String splashScreen = '$imagePath/START.png';
+  static const String authImage = '$imagePath/login.jpeg';
+  static const String forgotPassImage = '$imagePath/img.jpeg';
+  static const String onboardingImage = '$imagePath/onBoard.png';
+  static const String profileImage = '$imagePath/profile.jpg';
 }

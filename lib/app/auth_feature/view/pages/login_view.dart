@@ -1,19 +1,20 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
+
 import 'package:snap_deals/app/auth_feature/view/widgets/build_register_text.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
+import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
+import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
-
 import 'package:snap_deals/core/utils/validators.dart';
-
-import '../../model_view/cubit/validation_function.dart';
 import '../widgets/custom_text_field.dart';
 import 'forgot_password_view.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 
 class LoginViewArgs {
   //todo add any parameters you need
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 height: 216,
                 width: MediaQuery.sizeOf(context).width,
-                padding: const EdgeInsets.only(top: 82, left: 28),
+                padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 child: Text(
-                  Tr.current.appName,
+                  context.tr.appName,
                   style: AppTextStyles.bold42().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
@@ -71,28 +72,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     33.ph,
-                    Text(Tr.current.loginScreenLabel,
+                    Text(context.tr.loginScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
                             fontFamily: AppTextStyles.fontFamilyLora)),
                     42.ph,
                     Text(
-                      Tr.current.loginLabel,
+                      context.tr.loginLabel,
                       style: AppTextStyles.regular16(),
                     ),
                     71.ph,
                     CustomTextFormField(
-                      hintText: Tr.current.hintEmail,
-                      labelText: Tr.current.emailLabel,
+                      hintText: context.tr.hintEmail,
+                      labelText: context.tr.emailLabel,
                       prefixIcon: EvaIcons.emailOutline,
-                      validator: validateEmail,
+                      validator: Validators.validateEmail,
                       onChanged: (value) {
                         email = value;
                       },
                     ),
                     28.ph,
                     CustomTextFormField(
-                      hintText: Tr.current.hintPassword,
-                      labelText: Tr.current.passwordLoginLabel,
+                      hintText: context.tr.hintPassword,
+                      labelText: context.tr.passwordLoginLabel,
                       prefixIcon: EvaIcons.lockOutline,
                       isPassword: true,
                       validator: Validators.validatePassword,
@@ -110,8 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               extra: ForgetPasswordViewArgs());
                         },
                         child: Text(
-                          Tr.current.forgotPasswordButton,
-                          style: AppTextStyles.medium14(),
+                          context.tr.forgotPasswordButton,
+                          style: AppTextStyles.medium14().copyWith(
+                            color: ColorsBox.brightBlue,
+                          ),
                         ),
                       ),
                     ),
@@ -119,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: CustomPrimaryButton(
-                        title: Tr.current.loginButton,
+                        title: context.tr.loginButton,
                         onTap: () {
                           if (formKey.currentState?.validate() ?? false) {
                             // loginCubit.loginWithEmail(email, password);
@@ -143,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Text(
-                              "Or",
+                              context.tr.orWord,
                               style: AppTextStyles.regular16(),
                             ),
                           ),
@@ -162,6 +165,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         66.pw,
                         OutlinedButton(
                           onPressed: () {
+                            GoRouter.of(context).push(MainHomeView.routeName,
+                                extra: MainHomeViewArgs());
                             // Handle login
                           },
                           style: OutlinedButton.styleFrom(
@@ -203,6 +208,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         13.pw,
                         OutlinedButton(
                           onPressed: () {
+                            GoRouter.of(context).push(HomeView.routeName,
+                                extra: HomeViewArgs());
                             // Handle login
                           },
                           style: OutlinedButton.styleFrom(
