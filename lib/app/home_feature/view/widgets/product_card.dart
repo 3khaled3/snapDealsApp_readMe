@@ -1,180 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/your_profile.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  final String productName;
+  final String productOwner;
+  final String imagePath;
+  final double price;
+  final bool isCourse;
+  final double width;
+  final double height;
+
+  const ProductCard({
+    super.key,
+    required this.productName,
+    required this.imagePath,
+    this.productOwner = '',
+    required this.price,
+    this.isCourse = false,
+    this.width = 180,
+    this.height = 280,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Ink(
-        height: 280,
-        width: 180,
-        decoration: BoxDecoration(
-            color: ColorsBox.white,
-            borderRadius: BorderRadius.circular(3),
-            border: Border.all(color: ColorsBox.greyish)),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// <---- product image ---->///
-              GestureDetector(
-                child: const _ProductImage(),
-                onTap: () {},
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: () {
+            GoRouter.of(context).push(YourProfileView.routeName);
+          },
+          child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Ink(
+              height: height,
+              width: width,
+              decoration: BoxDecoration(
+                color: ColorsBox.white,
+                borderRadius: BorderRadius.circular(3),
+                border: Border.all(color: ColorsBox.greyish),
               ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /// Product Image
+                    GestureDetector(
+                      onTap: () {},
+                      child: _ProductImage(imagePath: imagePath),
+                    ),
 
-              /// <---- product name ---->///
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                        top: 8, bottom: 8, start: 4),
-                    child:
-                        Text("product Name", style: AppTextStyles.medium14()),
-                  ),
+                    /// Product Name
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                          top: 8, bottom: 8, start: 4),
+                      child: Text(productName, style: AppTextStyles.medium14()),
+                    ),
 
-                  /// <---- favorite button ---->///
-                  const _FavoriteButton(),
-                ],
+                    /// Product Owner (if applicable)
+                    if (isCourse)
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(start: 4),
+                        child: Text(
+                          productOwner,
+                          style: AppTextStyles.semiBold12()
+                              .copyWith(color: ColorsBox.greyish),
+                        ),
+                      ),
+
+                    isCourse ? const Spacer() : 17.ph,
+
+                    /// Product Price
+                    isCourse
+                        ? Padding(
+                            padding: const EdgeInsetsDirectional.symmetric(
+                                horizontal: 8),
+                            child: Text(
+                              ' \$200',
+                              style: AppTextStyles.semiBold12()
+                                  .copyWith(color: ColorsBox.brightBlue),
+                            ),
+                          )
+                        : Center(
+                            child: Text(
+                              ' \$200',
+                              style: AppTextStyles.semiBold12()
+                                  .copyWith(color: ColorsBox.brightBlue),
+                            ),
+                          ),
+                  ],
+                ),
               ),
-
-              /// <---- product`s owner ---->///
-              Padding(
-                padding: const EdgeInsetsDirectional.only(
-                    top: 8, bottom: 8, start: 4),
-                child: Text("product owner",
-                    style: AppTextStyles.semiBold12()
-                        .copyWith(color: ColorsBox.greyish)),
-              ),
-
-              /// <---- Rating ---->///
-
-              // const _Rating(),
-              const Spacer(),
-
-              /// <---- product price ---->///
-              Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 8),
-                child: Text(' \$200',
-                    style: AppTextStyles.semiBold12()
-                        .copyWith(color: ColorsBox.brightBlue)),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+
+        /// Favorite Button
+        const Positioned(
+          top: 157,
+          right: 12,
+          child: _FavoriteButton(),
+        ),
+      ],
     );
   }
 }
 
-/// <---- product image ---->///
+/// Product Image
 class _ProductImage extends StatelessWidget {
-  const _ProductImage();
+  final String imagePath;
+  const _ProductImage({required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 140,
       width: 150,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(
-                AppImageAssets.forgotPassImage,
-              ))),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage(imagePath),
+        ),
+      ),
     );
   }
 }
 
-/// <---- rating ---->///
-class _Rating extends StatefulWidget {
-  const _Rating();
-
-  @override
-  State<_Rating> createState() => _RatingState();
-}
-
-class _RatingState extends State<_Rating> {
-  bool rate1 = false;
-  bool rate2 = false;
-  bool rate3 = false;
-  bool rate4 = false;
-  bool rate5 = false;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text("4.5",
-            style: AppTextStyles.semiBold12().copyWith(color: ColorsBox.black)),
-        0.2.pw,
-        IconButton(
-          onPressed: () {
-            setState(() {
-              rate1 = true;
-            });
-          },
-          icon: Icon(rate1 ? Icons.star : Icons.star_border_outlined,
-              color: ColorsBox.sunYellow),
-        ),
-        0.2.pw,
-        IconButton(
-          onPressed: () {
-            setState(() {
-              rate2 = !rate2;
-            });
-          },
-          icon: Icon(rate2 ? Icons.star : Icons.star_border_outlined,
-              color: ColorsBox.sunYellow),
-        ),
-        0.2.pw,
-        IconButton(
-          onPressed: () {
-            setState(() {
-              rate3 = !rate3;
-            });
-          },
-          icon: Icon(rate3 ? Icons.star : Icons.star_border_outlined,
-              color: ColorsBox.sunYellow),
-        ),
-        0.2.pw,
-        IconButton(
-          onPressed: () {
-            setState(() {
-              rate4 = !rate4;
-            });
-          },
-          icon: Icon(rate4 ? Icons.star : Icons.star_border_outlined,
-              color: ColorsBox.sunYellow),
-        ),
-        0.2.pw,
-        IconButton(
-          onPressed: () {
-            setState(() {
-              rate5 = !rate5;
-            });
-          },
-          icon: Icon(rate5 ? Icons.star : Icons.star_border_outlined,
-              color: ColorsBox.sunYellow),
-        ),
-        0.2.pw,
-        Text(
-          '(500)',
-          style: AppTextStyles.medium12().copyWith(color: ColorsBox.greyish),
-        )
-      ],
-    );
-  }
-}
-
-/// <---- favorite button ---->///
+/// Favorite Button
 class _FavoriteButton extends StatefulWidget {
   const _FavoriteButton();
 
@@ -184,6 +140,7 @@ class _FavoriteButton extends StatefulWidget {
 
 class _FavoriteButtonState extends State<_FavoriteButton> {
   bool _isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -200,7 +157,7 @@ class _FavoriteButtonState extends State<_FavoriteButton> {
         ),
         padding: const EdgeInsets.all(5),
         child: Icon(
-          _isFavorite ? Icons.favorite_border_outlined : Icons.favorite_rounded,
+          _isFavorite ? Icons.favorite_rounded : Icons.favorite_border_outlined,
           color: Colors.red,
           size: 16,
         ),

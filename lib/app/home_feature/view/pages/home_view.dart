@@ -6,6 +6,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class HomeViewArgs {
   //todo add any parameters you need
@@ -19,11 +20,68 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ProductCard> products = [
-      const ProductCard(),
-      const ProductCard(),
-      const ProductCard(),
-      const ProductCard(),
-      const ProductCard(),
+      const ProductCard(
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+      ),
+      const ProductCard(
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+      ),
+      const ProductCard(
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+      ),
+      const ProductCard(
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+      ),
+      const ProductCard(
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+      ),
+    ];
+    List<ProductCard> courses = [
+      const ProductCard(
+        isCourse: true,
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+        productOwner: 'Ziad tamer',
+      ),
+      const ProductCard(
+        isCourse: true,
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+        productOwner: 'Ziad tamer',
+      ),
+      const ProductCard(
+        isCourse: true,
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+        productOwner: 'Ziad tamer',
+      ),
+      const ProductCard(
+        isCourse: true,
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+        productOwner: 'Ziad tamer',
+      ),
+      const ProductCard(
+        isCourse: true,
+        productName: 'Product Name',
+        price: 1000,
+        imagePath: AppImageAssets.forgotPassImage,
+        productOwner: 'Ziad tamer',
+      ),
     ];
     return SingleChildScrollView(
       padding: const EdgeInsets.only(left: 9, right: 9, bottom: 80),
@@ -68,7 +126,7 @@ class HomeView extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: products.length,
                 itemBuilder: (context, index) => Row(
-                      children: [products[index]],
+                      children: [courses[index]],
                     )),
           ),
         ],
