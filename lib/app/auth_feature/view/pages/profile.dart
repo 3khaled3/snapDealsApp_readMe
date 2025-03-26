@@ -68,7 +68,9 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   leadingIcon: Icons.password_outlined,
                   title: 'Password  Manager',
-                  onTap: () {},
+                  onTap: () {
+                    CustomBottomSheet.showPasswordManagerSheet(context);
+                  },
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(
