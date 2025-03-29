@@ -8,7 +8,7 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 
-import 'login_view.dart';
+import 'auth_view/login_view.dart';
 
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({super.key});

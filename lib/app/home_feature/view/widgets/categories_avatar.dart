@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
+import 'package:snap_deals/app/home_feature/view/pages/products.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -48,7 +51,11 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                     });
                     return;
                   }
-                  print(" ${categories[index]}");
+                  if (categories[index] == "Courses") {
+                    GoRouter.of(context).push(CoursesView.routeName);
+                    return;
+                  }
+                  GoRouter.of(context).push(ProductsView.routeName);
                 },
                 child: SizedBox(
                   height: 60,
@@ -71,43 +78,5 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
         }),
       );
     });
-    // return Container(
-    //   height: 100,
-    //   width: double.infinity,
-    //   padding: const EdgeInsets.only(left: 35, right: 35),
-    //   child: ListView.builder(
-    //     scrollDirection: Axis.horizontal,
-    //     itemCount: 4,
-    //     itemBuilder: (context, index) {
-    //       return Row(
-    //         children: [
-    //           Column(
-    //             children: [
-    //               GestureDetector(
-    //                 onTap: () {},
-    //                 child: SizedBox(
-    //                   height: 60,
-    //                   width: 60,
-    //                   child: CircleAvatar(
-    //                     backgroundColor: ColorsBox.paleGrey,
-    //                     child: Icon(
-    //                       categoriesIcons[index],
-    //                       color: ColorsBox.brightBlue,
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ),
-    //               Text(
-    //                 categories[index],
-    //                 style: AppTextStyles.regular16(),
-    //               ),
-    //             ],
-    //           ),
-    //           20.pw,
-    //         ],
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }

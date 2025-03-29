@@ -6,11 +6,11 @@ import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/utils/validators.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/text_styles.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/themes/text_styles.dart';
 
-import '../widgets/custom_primary_button.dart';
-import '../widgets/custom_text_field.dart';
+import '../../widgets/custom_primary_button.dart';
+import '../../widgets/custom_text_field.dart';
 
 class RegisterViewArgs {
   //todo add any parameters you need

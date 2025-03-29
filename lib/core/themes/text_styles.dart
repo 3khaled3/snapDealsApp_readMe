@@ -65,6 +65,12 @@ class AppTextStyles {
         fontFamily: defaultFontFamily(),
         fontSize: 20,
       );
+
+  static TextStyle semiBold16() => TextStyle(
+        fontWeight: FontWeight.w600,
+        fontFamily: defaultFontFamily(),
+        fontSize: 16,
+      );
   static TextStyle semiBold12() => TextStyle(
         fontWeight: FontWeight.w600,
         fontFamily: defaultFontFamily(),

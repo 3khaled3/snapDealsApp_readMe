@@ -12,7 +12,7 @@ import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/utils/validators.dart';
-import '../widgets/custom_text_field.dart';
+import '../../widgets/custom_text_field.dart';
 import 'forgot_password_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 

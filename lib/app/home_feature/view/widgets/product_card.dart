@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/your_profile.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -10,7 +10,7 @@ class ProductCard extends StatelessWidget {
   final String productOwner;
   final String imagePath;
   final double price;
-  final bool isCourse;
+  final bool? isCourse;
   final double width;
   final double height;
 
@@ -20,7 +20,7 @@ class ProductCard extends StatelessWidget {
     required this.imagePath,
     this.productOwner = '',
     required this.price,
-    this.isCourse = false,
+    this.isCourse,
     this.width = 180,
     this.height = 280,
   });
@@ -62,7 +62,7 @@ class ProductCard extends StatelessWidget {
                     ),
 
                     /// Product Owner (if applicable)
-                    if (isCourse)
+                    if (isCourse!)
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 4),
                         child: Text(
@@ -72,10 +72,10 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
 
-                    isCourse ? const Spacer() : 17.ph,
+                    isCourse! ? const Spacer() : 17.ph,
 
                     /// Product Price
-                    isCourse
+                    isCourse!
                         ? Padding(
                             padding: const EdgeInsetsDirectional.symmetric(
                                 horizontal: 8),

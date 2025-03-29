@@ -24,26 +24,31 @@ class HomeView extends StatelessWidget {
         productName: 'Product Name',
         price: 1000,
         imagePath: AppImageAssets.forgotPassImage,
+        isCourse: false,
       ),
       const ProductCard(
         productName: 'Product Name',
         price: 1000,
         imagePath: AppImageAssets.forgotPassImage,
+        isCourse: false,
       ),
       const ProductCard(
         productName: 'Product Name',
         price: 1000,
         imagePath: AppImageAssets.forgotPassImage,
+        isCourse: false,
       ),
       const ProductCard(
         productName: 'Product Name',
         price: 1000,
         imagePath: AppImageAssets.forgotPassImage,
+        isCourse: false,
       ),
       const ProductCard(
         productName: 'Product Name',
         price: 1000,
         imagePath: AppImageAssets.forgotPassImage,
+        isCourse: false,
       ),
     ];
     List<ProductCard> courses = [

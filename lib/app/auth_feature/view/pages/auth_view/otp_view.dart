@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/reset_password_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/reset_password_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_otp_text_field.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/settings.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/your_profile.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';

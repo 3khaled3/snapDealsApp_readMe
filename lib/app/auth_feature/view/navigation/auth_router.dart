@@ -1,18 +1,18 @@
 //handle go router
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/forgot_password_view.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/login_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/otp_view.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/privacy_Policy.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/register_view.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/settings.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/otp_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/privacy_Policy.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/register_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/splash_screen.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/your_profile.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
 import 'package:snap_deals/app/home_feature/view_model/product_cubit/product_cubit.dart';
 
-import '../pages/reset_password_view.dart';
+import '../pages/auth_view/reset_password_view.dart';
 
 abstract class AuthRouter {
   static final List<GoRoute> routes = [
