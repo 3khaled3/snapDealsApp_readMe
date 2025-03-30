@@ -47,6 +47,7 @@ class ProfileView extends StatelessWidget {
             Column(
               children: [
                 CustomListTile(
+                  isAddView: false,
                   leadingIcon: Icons.person_2_outlined,
                   title: 'Your Profile',
                   onTap: () {
@@ -55,12 +56,14 @@ class ProfileView extends StatelessWidget {
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(
+                  isAddView: false,
                   leadingIcon: Icons.favorite_border_outlined,
                   title: 'Favorite & Saved searches',
                   onTap: () {},
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(
+                  isAddView: false,
                   leadingIcon: Icons.subdirectory_arrow_right_outlined,
                   title: 'About us',
                   onTap: () {
@@ -69,6 +72,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(
+                  isAddView: false,
                   leadingIcon: Icons.password_outlined,
                   title: 'Password  Manager',
                   onTap: () {
@@ -77,6 +81,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(
+                  isAddView: false,
                   leadingIcon: Icons.settings_outlined,
                   title: 'Settings',
                   onTap: () {
@@ -85,6 +90,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(
+                  isAddView: false,
                   leadingIcon: Icons.logout_outlined,
                   title: 'Log out',
                   onTap: () {

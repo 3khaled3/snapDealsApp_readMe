@@ -29,6 +29,11 @@ class AppTextStyles {
         fontFamily: defaultFontFamily(),
         fontSize: 24,
       );
+  static TextStyle bold18() => TextStyle(
+        fontWeight: FontWeight.w700,
+        fontFamily: defaultFontFamily(),
+        fontSize: 18,
+      );
 
   static TextStyle regular34() => TextStyle(
         fontWeight: FontWeight.w400,

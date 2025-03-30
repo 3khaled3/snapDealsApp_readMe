@@ -79,6 +79,13 @@
     "TermsAndConditionTitle5":"Shipping and Delivery*",
     "TermsAndConditionDiscription5":"We aim to ship your orders as quickly as possible. Delivery times may vary depending on location, shipping method, and product availability. We are not responsible for delays caused by third-party shipping carriers or force majeure events.",
     "TermsAndConditionTitle6":"Cancellation and Returns*",
-    "TermsAndConditionDiscription6":"Refer to our Cancellation Policy and Return Policy for information on how to cancel or return orders. You can find detailed guidelines on how to initiate a cancellation or return process on our platform."
-
+    "TermsAndConditionDiscription6":"Refer to our Cancellation Policy and Return Policy for information on how to cancel or return orders. You can find detailed guidelines on how to initiate a cancellation or return process on our platform.",
+    "addTitle":"What are you offering?",
+    "electronics":"Electronics",
+    "mobilesAndTablets":"Mobiles and Tablets",
+    "medicalTools":"Medical tools",
+    "drawingTools":"Drawing tools",
+    "engineeringTools":"Engineering tools",
+    "courses":"Courses",
+    "other":"Other"
 }

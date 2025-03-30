@@ -1,7 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/profile.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
+import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
@@ -44,7 +46,9 @@ class _MainHomeViewState extends State<MainHomeView> {
             color: ColorsBox.white,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).push(AddView.routeName);
+        },
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

@@ -689,6 +689,71 @@ class Tr {
       args: [],
     );
   }
+
+  /// `What are you offering?`
+  String get addTitle {
+    return Intl.message(
+      'What are you offering?',
+      name: 'addTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electronics`
+  String get electronics {
+    return Intl.message('Electronics', name: 'electronics', desc: '', args: []);
+  }
+
+  /// `Mobiles and Tablets`
+  String get mobilesAndTablets {
+    return Intl.message(
+      'Mobiles and Tablets',
+      name: 'mobilesAndTablets',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medical tools`
+  String get medicalTools {
+    return Intl.message(
+      'Medical tools',
+      name: 'medicalTools',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drawing tools`
+  String get drawingTools {
+    return Intl.message(
+      'Drawing tools',
+      name: 'drawingTools',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Engineering tools`
+  String get engineeringTools {
+    return Intl.message(
+      'Engineering tools',
+      name: 'engineeringTools',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Courses`
+  String get courses {
+    return Intl.message('Courses', name: 'courses', desc: '', args: []);
+  }
+
+  /// `Other`
+  String get other {
+    return Intl.message('Other', name: 'other', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

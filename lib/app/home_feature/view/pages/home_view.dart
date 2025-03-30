@@ -113,9 +113,9 @@ class HomeView extends StatelessWidget {
             height: 300,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: products.length,
+                itemCount: courses.length,
                 itemBuilder: (context, index) => Row(
-                      children: [products[index]],
+                      children: [courses[index]],
                     )),
           ),
           27.ph,
@@ -131,7 +131,7 @@ class HomeView extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: products.length,
                 itemBuilder: (context, index) => Row(
-                      children: [courses[index]],
+                      children: [products[index]],
                     )),
           ),
         ],

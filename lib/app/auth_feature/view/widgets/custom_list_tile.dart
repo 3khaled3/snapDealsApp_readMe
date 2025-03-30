@@ -6,12 +6,14 @@ class CustomListTile extends StatelessWidget {
   final IconData? leadingIcon;
   final String title;
   final VoidCallback onTap;
+  final bool? isAddView;
 
   const CustomListTile({
     super.key,
     this.leadingIcon,
     required this.title,
     required this.onTap,
+    this.isAddView,
   });
 
   @override
@@ -19,14 +21,26 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       leading: leadingIcon == null
           ? null
-          : Icon(
-              leadingIcon,
-              color: ColorsBox.brightBlue,
-              size: 30,
-            ),
+          : isAddView!
+              ? Container(
+                  height: 40,
+                  width: 40,
+                  decoration: const BoxDecoration(color: ColorsBox.brightBlue),
+                  child: Icon(
+                    leadingIcon,
+                    color: ColorsBox.white,
+                    size: 30,
+                  ),
+                )
+              : Icon(
+                  leadingIcon,
+                  color: ColorsBox.brightBlue,
+                  size: 30,
+                ),
       title: Text(
         title,
-        style: AppTextStyles.regular18(),
+        style: AppTextStyles.regular18()
+            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
       ),
       trailing: const Icon(
         Icons.keyboard_arrow_right,

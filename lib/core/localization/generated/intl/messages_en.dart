@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cancellation and Returns*",
     ),
     "Version": MessageLookupByLibrary.simpleMessage("Version"),
+    "addTitle": MessageLookupByLibrary.simpleMessage("What are you offering?"),
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
@@ -104,7 +105,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactNumber": MessageLookupByLibrary.simpleMessage(
       "this is the number for buyers contacts and other notification",
     ),
+    "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+    "drawingTools": MessageLookupByLibrary.simpleMessage("Drawing tools"),
+    "electronics": MessageLookupByLibrary.simpleMessage("Electronics"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+    "engineeringTools": MessageLookupByLibrary.simpleMessage(
+      "Engineering tools",
+    ),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
     "forgotPasswordButton": MessageLookupByLibrary.simpleMessage(
       "Forgot Password?",
@@ -128,6 +135,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "loginScreenLabel": MessageLookupByLibrary.simpleMessage("Welcome Back"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
+    "medicalTools": MessageLookupByLibrary.simpleMessage("Medical tools"),
+    "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(
+      "Mobiles and Tablets",
+    ),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage("New Password"),
     "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
     "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
@@ -150,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "onBoardingTitle": MessageLookupByLibrary.simpleMessage("Welcome To"),
     "orWord": MessageLookupByLibrary.simpleMessage("Or"),
+    "other": MessageLookupByLibrary.simpleMessage("Other"),
     "otpDescription": MessageLookupByLibrary.simpleMessage(
       "Enter the code sent to your email example@gmail.com.",
     ),

@@ -1,6 +1,7 @@
 //handle go router
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
 import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
@@ -89,6 +90,18 @@ abstract class HomeRouter {
             BlocProvider(create: (context) => ProductCubit()),
           ],
           child: CoursesView(args: args),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: AddView.routeName,
+      builder: (context, state) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ProductCubit()),
+          ],
+          child: const AddView(),
         );
       },
     ),
