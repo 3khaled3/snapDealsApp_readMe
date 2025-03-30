@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dart';
@@ -62,7 +63,9 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   leadingIcon: Icons.subdirectory_arrow_right_outlined,
                   title: 'About us',
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).push(AboutUsView.routeName);
+                  },
                 ),
                 spaceBetweenListTile(),
                 CustomListTile(

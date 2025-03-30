@@ -5,6 +5,7 @@ import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/otp_view.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/privacy_Policy.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/register_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dart';
@@ -69,6 +70,18 @@ abstract class AuthRouter {
             BlocProvider(create: (context) => ProductCubit()),
           ],
           child: const PrivacyPolicyView(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: AboutUsView.routeName,
+      builder: (context, state) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ProductCubit()),
+          ],
+          child: const AboutUsView(),
         );
       },
     ),
