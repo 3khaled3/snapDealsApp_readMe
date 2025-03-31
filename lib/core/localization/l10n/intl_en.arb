@@ -87,5 +87,18 @@
     "drawingTools":"Drawing tools",
     "engineeringTools":"Engineering tools",
     "courses":"Courses",
-    "other":"Other"
+    "other":"Other",
+    "adDetails":"Ad details",
+    "category":"Category*",
+    "addImages":"Add images",
+    "addImageDis":"5MB maximum file size accepted in the following formats : .jpg .jpeg png .gif",
+    "brand":"Brand *",
+    "brandHint":"Brand",
+    "condition":"Condition",
+    "used":"USED",
+    "newWord":"NEW",
+    "adTitle":"Ad title *",
+    "enterTitle":"Enter title",
+    "describtion":"Describtion *",
+    "describtionHint":"Describe the item you are selling"
 }

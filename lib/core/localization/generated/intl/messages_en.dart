@@ -91,8 +91,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cancellation and Returns*",
     ),
     "Version": MessageLookupByLibrary.simpleMessage("Version"),
+    "adDetails": MessageLookupByLibrary.simpleMessage("Ad details"),
+    "adTitle": MessageLookupByLibrary.simpleMessage("Ad title *"),
+    "addImageDis": MessageLookupByLibrary.simpleMessage(
+      "5MB maximum file size accepted in the following formats : .jpg .jpeg png .gif",
+    ),
+    "addImages": MessageLookupByLibrary.simpleMessage("Add images"),
     "addTitle": MessageLookupByLibrary.simpleMessage("What are you offering?"),
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
+    "brand": MessageLookupByLibrary.simpleMessage("Brand *"),
+    "brandHint": MessageLookupByLibrary.simpleMessage("Brand"),
+    "category": MessageLookupByLibrary.simpleMessage("Category*"),
+    "condition": MessageLookupByLibrary.simpleMessage("Condition"),
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
@@ -106,12 +116,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "this is the number for buyers contacts and other notification",
     ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+    "describtion": MessageLookupByLibrary.simpleMessage("Describtion *"),
+    "describtionHint": MessageLookupByLibrary.simpleMessage(
+      "Describe the item you are selling",
+    ),
     "drawingTools": MessageLookupByLibrary.simpleMessage("Drawing tools"),
     "electronics": MessageLookupByLibrary.simpleMessage("Electronics"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "engineeringTools": MessageLookupByLibrary.simpleMessage(
       "Engineering tools",
     ),
+    "enterTitle": MessageLookupByLibrary.simpleMessage("Enter title"),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
     "forgotPasswordButton": MessageLookupByLibrary.simpleMessage(
       "Forgot Password?",
@@ -140,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Mobiles and Tablets",
     ),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage("New Password"),
+    "newWord": MessageLookupByLibrary.simpleMessage("NEW"),
     "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
     "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
       "Discover innovative educational tools and specialized courses in one app.",
@@ -183,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("Send"),
+    "used": MessageLookupByLibrary.simpleMessage("USED"),
     "yourAddress": MessageLookupByLibrary.simpleMessage("Your Address"),
     "yourAge": MessageLookupByLibrary.simpleMessage("Your Age"),
     "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),

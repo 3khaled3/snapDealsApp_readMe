@@ -754,6 +754,86 @@ class Tr {
   String get other {
     return Intl.message('Other', name: 'other', desc: '', args: []);
   }
+
+  /// `Ad details`
+  String get adDetails {
+    return Intl.message('Ad details', name: 'adDetails', desc: '', args: []);
+  }
+
+  /// `Category*`
+  String get category {
+    return Intl.message('Category*', name: 'category', desc: '', args: []);
+  }
+
+  /// `Add images`
+  String get addImages {
+    return Intl.message('Add images', name: 'addImages', desc: '', args: []);
+  }
+
+  /// `5MB maximum file size accepted in the following formats : .jpg .jpeg png .gif`
+  String get addImageDis {
+    return Intl.message(
+      '5MB maximum file size accepted in the following formats : .jpg .jpeg png .gif',
+      name: 'addImageDis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Brand *`
+  String get brand {
+    return Intl.message('Brand *', name: 'brand', desc: '', args: []);
+  }
+
+  /// `Brand`
+  String get brandHint {
+    return Intl.message('Brand', name: 'brandHint', desc: '', args: []);
+  }
+
+  /// `Condition`
+  String get condition {
+    return Intl.message('Condition', name: 'condition', desc: '', args: []);
+  }
+
+  /// `USED`
+  String get used {
+    return Intl.message('USED', name: 'used', desc: '', args: []);
+  }
+
+  /// `NEW`
+  String get newWord {
+    return Intl.message('NEW', name: 'newWord', desc: '', args: []);
+  }
+
+  /// `Ad title *`
+  String get adTitle {
+    return Intl.message('Ad title *', name: 'adTitle', desc: '', args: []);
+  }
+
+  /// `Enter title`
+  String get enterTitle {
+    return Intl.message('Enter title', name: 'enterTitle', desc: '', args: []);
+  }
+
+  /// `Describtion *`
+  String get describtion {
+    return Intl.message(
+      'Describtion *',
+      name: 'describtion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe the item you are selling`
+  String get describtionHint {
+    return Intl.message(
+      'Describe the item you are selling',
+      name: 'describtionHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {
