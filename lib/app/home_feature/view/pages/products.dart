@@ -6,7 +6,11 @@ import 'package:snap_deals/app/home_feature/view/widgets/products_header.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 
-class ProductsViewArgs {}
+class ProductsViewArgs {
+  final String title;
+
+  ProductsViewArgs({required this.title});
+}
 
 class ProductsView extends StatelessWidget {
   const ProductsView({super.key, this.args});
@@ -21,8 +25,8 @@ class ProductsView extends StatelessWidget {
             const EdgeInsets.only(top: 60, left: 11, right: 11, bottom: 20),
         child: Column(
           children: [
-            const ProductsHeader(
-              title: 'Available Products',
+            ProductsHeader(
+              title: args!.title,
             ),
             17.ph,
             CustomTextFormField(

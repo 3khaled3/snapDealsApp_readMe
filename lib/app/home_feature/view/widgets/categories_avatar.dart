@@ -13,32 +13,47 @@ class CategoriesAvatar extends StatefulWidget {
 }
 
 class _CategoriesAvatarState extends State<CategoriesAvatar> {
+  bool isMore = false;
+
+  // Original categories and icons
+  final List<String> originalCategories = [
+    'Medical',
+    'Courses',
+    'Mobile&Tablets',
+    'More',
+    'Drawing tools',
+    'Engineering tools',
+    'less'
+  ];
+
+  final List<IconData> originalIcons = [
+    Icons.medical_services_outlined,
+    Icons.school_outlined,
+    Icons.phone_iphone_outlined,
+    Icons.apps_outlined,
+    Icons.school_outlined,
+    Icons.engineering_outlined,
+    Icons.apps_outlined
+  ];
+
+  // Mutable lists to change dynamically
+  List<String> categories = [];
+  List<IconData> categoriesIcons = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with original values
+    categories = List.from(originalCategories);
+    categoriesIcons = List.from(originalIcons);
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<String> categories = [
-      'Medical',
-      'Courses',
-      'Mobile',
-      'More',
-      'Mobile',
-      'Mobile',
-      'less'
-    ];
-
-    List<IconData> categoriesIcons = [
-      Icons.medical_services_outlined,
-      Icons.school_outlined,
-      Icons.school_outlined,
-      Icons.school_outlined,
-      Icons.school_outlined,
-      Icons.phone_iphone_outlined,
-      Icons.apps_outlined
-    ];
-    bool isMore = false;
     return StatefulBuilder(builder: (context, setState) {
       return Wrap(
         runSpacing: 20,
-        spacing: 30,
+        spacing: 15,
         children: List.generate(isMore ? categories.length : 4, (index) {
           return Column(
             children: [
@@ -48,14 +63,25 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                       categories[index] == "less") {
                     setState(() {
                       isMore = !isMore;
+                      if (categories[index] == "More") {
+                        // Change "More" to "Electronic" and update the icon
+                        categories[index] = "Electronic";
+                        categoriesIcons[index] = Icons.computer_outlined;
+                      } else if (categories[index] == "less") {
+                        // Restore to original categories and icons
+                        categories = List.from(originalCategories);
+                        categoriesIcons = List.from(originalIcons);
+                      }
                     });
                     return;
                   }
                   if (categories[index] == "Courses") {
-                    GoRouter.of(context).push(CoursesView.routeName);
+                    GoRouter.of(context).push(CoursesView.routeName,
+                        extra: CoursesViewArgs(title: categories[index]));
                     return;
                   }
-                  GoRouter.of(context).push(ProductsView.routeName);
+                  GoRouter.of(context).push(ProductsView.routeName,
+                      extra: ProductsViewArgs(title: categories[index]));
                 },
                 child: SizedBox(
                   height: 60,
