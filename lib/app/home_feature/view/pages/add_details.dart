@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_contanier.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_drop_down_button.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-class AddDetailsArgs {}
+class AddDetailsArgs {
+  final String title;
+  final IconData icon;
+
+  AddDetailsArgs({required this.title, required this.icon});
+}
 
 class AddDetailsView extends StatefulWidget {
-  const AddDetailsView({super.key, this.args});
+  const AddDetailsView({
+    super.key,
+    this.args,
+  });
   static const String routeName = '/add_route';
   final AddDetailsArgs? args;
 
@@ -50,15 +59,15 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                     width: 40,
                     decoration:
                         const BoxDecoration(color: ColorsBox.brightBlue),
-                    child: const Icon(
-                      Icons.computer,
+                    child: Icon(
+                      widget.args!.icon,
                       color: ColorsBox.white,
                       size: 30,
                     ),
                   ),
                   10.pw,
                   Text(
-                    context.tr.electronics,
+                    widget.args!.title,
                     style: AppTextStyles.semiBold12()
                         .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
                   ),
@@ -128,7 +137,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                     16.ph,
                     Text(
                       context.tr.addImageDis,
-                      style: AppTextStyles.regular12(),
+                      style: AppTextStyles.regular12()
+                          .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -137,14 +147,19 @@ class _AddDetailsViewState extends State<AddDetailsView> {
               23.ph,
               Text(
                 context.tr.brand,
-                style: AppTextStyles.semiBold12(),
+                style: AppTextStyles.semiBold12()
+                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),
               6.ph,
               CustomTextFormField(hintText: context.tr.brandHint),
+              widget.args!.title == context.tr.mobilesAndTablets
+                  ? _AddMobileDetails(context)
+                  : 0.ph,
               23.ph,
               Text(
                 context.tr.condition,
-                style: AppTextStyles.semiBold12(),
+                style: AppTextStyles.semiBold12()
+                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),
               6.ph,
               Row(
@@ -167,7 +182,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                     height: 30,
                     backgroundColor: ColorsBox.white,
                     text: context.tr.used,
-                    textStyle: AppTextStyles.regular12(),
+                    textStyle: AppTextStyles.regular12()
+                        .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
                     borderColor: Colors.black,
                     borderRadius: 10.0,
                     onTap: () {
@@ -179,14 +195,16 @@ class _AddDetailsViewState extends State<AddDetailsView> {
               23.ph,
               Text(
                 context.tr.adTitle,
-                style: AppTextStyles.semiBold12(),
+                style: AppTextStyles.semiBold12()
+                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),
               6.ph,
               CustomTextFormField(hintText: context.tr.enterTitle),
               23.ph,
               Text(
                 context.tr.describtion,
-                style: AppTextStyles.semiBold12(),
+                style: AppTextStyles.semiBold12()
+                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),
               6.ph,
               CustomTextFormField(
@@ -205,4 +223,36 @@ class _AddDetailsViewState extends State<AddDetailsView> {
       ),
     );
   }
+}
+
+_AddMobileDetails(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      23.ph,
+      Text(
+        context.tr.ramWord,
+        style: AppTextStyles.semiBold12()
+            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+      ),
+      6.ph,
+      const CustomDropDownButton(index: 1),
+      23.ph,
+      Text(
+        context.tr.storageWord,
+        style: AppTextStyles.semiBold12()
+            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+      ),
+      6.ph,
+      const CustomDropDownButton(index: 2),
+      23.ph,
+      Text(
+        context.tr.batteryCapacityWord,
+        style: AppTextStyles.semiBold12()
+            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+      ),
+      6.ph,
+      const CustomDropDownButton(index: 3),
+    ],
+  );
 }

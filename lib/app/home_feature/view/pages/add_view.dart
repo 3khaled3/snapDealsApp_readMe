@@ -26,8 +26,9 @@ class AddView extends StatelessWidget {
             CustomListTile(
               title: context.tr.electronics,
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                        title: context.tr.electronics, icon: Icons.computer));
               },
               leadingIcon: Icons.computer,
               isAddView: true,
@@ -36,8 +37,11 @@ class AddView extends StatelessWidget {
             CustomListTile(
               title: context.tr.mobilesAndTablets,
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                      title: context.tr.mobilesAndTablets,
+                      icon: Icons.phone_android,
+                    ));
               },
               leadingIcon: Icons.phone_android,
               isAddView: true,
@@ -46,8 +50,11 @@ class AddView extends StatelessWidget {
             CustomListTile(
               title: context.tr.medicalTools,
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                      title: context.tr.medicalTools,
+                      icon: Icons.school_outlined,
+                    ));
               },
               isAddView: true,
               leadingIcon: Icons.school_outlined,
@@ -56,8 +63,11 @@ class AddView extends StatelessWidget {
             CustomListTile(
               title: context.tr.drawingTools,
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                      icon: Icons.school_outlined,
+                      title: context.tr.drawingTools,
+                    ));
               },
               isAddView: true,
               leadingIcon: Icons.school_outlined,
@@ -66,8 +76,11 @@ class AddView extends StatelessWidget {
             CustomListTile(
               title: context.tr.engineeringTools,
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                      icon: Icons.school_outlined,
+                      title: context.tr.engineeringTools,
+                    ));
               },
               isAddView: true,
               leadingIcon: Icons.school_outlined,
@@ -76,8 +89,11 @@ class AddView extends StatelessWidget {
             CustomListTile(
               title: context.tr.courses,
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                      icon: Icons.school_outlined,
+                      title: context.tr.courses,
+                    ));
               },
               isAddView: true,
               leadingIcon: Icons.school_outlined,
@@ -100,8 +116,11 @@ class AddView extends StatelessWidget {
                 size: 25,
               ),
               onTap: () {
-                GoRouter.of(context)
-                    .push(AddDetailsView.routeName, extra: AddDetailsArgs());
+                GoRouter.of(context).push(AddDetailsView.routeName,
+                    extra: AddDetailsArgs(
+                      icon: Icons.school_outlined,
+                      title: context.tr.other,
+                    ));
               },
             )
           ],

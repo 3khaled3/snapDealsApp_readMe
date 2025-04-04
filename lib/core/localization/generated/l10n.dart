@@ -834,6 +834,31 @@ class Tr {
       args: [],
     );
   }
+
+  /// `RAM *`
+  String get ramWord {
+    return Intl.message('RAM *', name: 'ramWord', desc: '', args: []);
+  }
+
+  /// `Storage *`
+  String get storageWord {
+    return Intl.message('Storage *', name: 'storageWord', desc: '', args: []);
+  }
+
+  /// `Battery Capacity *`
+  String get batteryCapacityWord {
+    return Intl.message(
+      'Battery Capacity *',
+      name: 'batteryCapacityWord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose`
+  String get choose {
+    return Intl.message('Choose', name: 'choose', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

@@ -88,7 +88,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "*الإلغاء والإرجاع*",
     ),
     "Version": MessageLookupByLibrary.simpleMessage("النسخة"),
+    "adDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإعلان"),
+    "adTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان *"),
+    "addImageDis": MessageLookupByLibrary.simpleMessage(
+      "الحد الأقصى لحجم الملف 5 ميجابايت، ويُقبل في التنسيقات التالية: .jpg .jpeg .png .gif",
+    ),
+    "addImages": MessageLookupByLibrary.simpleMessage("إضافة صور"),
+    "addTitle": MessageLookupByLibrary.simpleMessage("ماذا تقدم؟"),
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
+    "brand": MessageLookupByLibrary.simpleMessage("العلامة التجارية *"),
+    "brandHint": MessageLookupByLibrary.simpleMessage("العلامة التجارية"),
+    "category": MessageLookupByLibrary.simpleMessage("الفئة*"),
+    "condition": MessageLookupByLibrary.simpleMessage("الحالة"),
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
     ),
@@ -101,7 +112,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactNumber": MessageLookupByLibrary.simpleMessage(
       "هذا هو الرقم لجهات اتصال المشترين والإشعارات الأخرى",
     ),
+    "courses": MessageLookupByLibrary.simpleMessage("دورات"),
+    "describtion": MessageLookupByLibrary.simpleMessage("الوصف *"),
+    "describtionHint": MessageLookupByLibrary.simpleMessage(
+      "صف العنصر الذي تبيعه",
+    ),
+    "drawingTools": MessageLookupByLibrary.simpleMessage("أدوات رسم"),
+    "electronics": MessageLookupByLibrary.simpleMessage("إلكترونيات"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "engineeringTools": MessageLookupByLibrary.simpleMessage("أدوات هندسية"),
+    "enterTitle": MessageLookupByLibrary.simpleMessage("أدخل العنوان"),
     "female": MessageLookupByLibrary.simpleMessage("أنثي"),
     "forgotPasswordButton": MessageLookupByLibrary.simpleMessage(
       "هل نسيت كلمة المرور؟",
@@ -123,9 +143,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "loginScreenLabel": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك"),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
+    "medicalTools": MessageLookupByLibrary.simpleMessage("أدوات طبية"),
+    "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(
+      "هواتف وأجهزة لوحية",
+    ),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الجديدة",
     ),
+    "newWord": MessageLookupByLibrary.simpleMessage("جديد"),
     "nextButton": MessageLookupByLibrary.simpleMessage("التالي"),
     "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
       "اكتشف أدوات تعليمية مبتكرة ودورات متخصصة في تطبيق واحد.",
@@ -147,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "onBoardingTitle": MessageLookupByLibrary.simpleMessage("مرحبًا بك في"),
     "orWord": MessageLookupByLibrary.simpleMessage("أو"),
+    "other": MessageLookupByLibrary.simpleMessage("أخرى"),
     "otpDescription": MessageLookupByLibrary.simpleMessage(
       "أدخل الرمز المرسل إلى بريدك الإلكتروني example@gmail.com.",
     ),
@@ -168,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "saveButton": MessageLookupByLibrary.simpleMessage("حفظ"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "used": MessageLookupByLibrary.simpleMessage("مستعمل"),
     "yourAddress": MessageLookupByLibrary.simpleMessage("عنوانك"),
     "yourAge": MessageLookupByLibrary.simpleMessage("السن"),
     "yourName": MessageLookupByLibrary.simpleMessage("أسمك"),

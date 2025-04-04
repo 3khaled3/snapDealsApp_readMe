@@ -100,5 +100,9 @@
     "adTitle":"Ad title *",
     "enterTitle":"Enter title",
     "describtion":"Describtion *",
-    "describtionHint":"Describe the item you are selling"
+    "describtionHint":"Describe the item you are selling",
+    "ramWord":"RAM *",
+    "storageWord":"Storage *",
+    "batteryCapacityWord":"Battery Capacity *",
+    "choose":"Choose"
 }
