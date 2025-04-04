@@ -53,11 +53,11 @@ class AddView extends StatelessWidget {
                 GoRouter.of(context).push(AddDetailsView.routeName,
                     extra: AddDetailsArgs(
                       title: context.tr.medicalTools,
-                      icon: Icons.school_outlined,
+                      icon: Icons.medical_services_outlined,
                     ));
               },
               isAddView: true,
-              leadingIcon: Icons.school_outlined,
+              leadingIcon: Icons.medical_services_outlined,
             ),
             15.ph,
             CustomListTile(
@@ -78,12 +78,12 @@ class AddView extends StatelessWidget {
               onTap: () {
                 GoRouter.of(context).push(AddDetailsView.routeName,
                     extra: AddDetailsArgs(
-                      icon: Icons.school_outlined,
+                      icon: Icons.engineering_outlined,
                       title: context.tr.engineeringTools,
                     ));
               },
               isAddView: true,
-              leadingIcon: Icons.school_outlined,
+              leadingIcon: Icons.engineering_outlined,
             ),
             15.ph,
             CustomListTile(
@@ -118,7 +118,6 @@ class AddView extends StatelessWidget {
               onTap: () {
                 GoRouter.of(context).push(AddDetailsView.routeName,
                     extra: AddDetailsArgs(
-                      icon: Icons.school_outlined,
                       title: context.tr.other,
                     ));
               },

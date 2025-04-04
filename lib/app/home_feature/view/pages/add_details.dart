@@ -11,9 +11,9 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AddDetailsArgs {
   final String title;
-  final IconData icon;
+  IconData? icon;
 
-  AddDetailsArgs({required this.title, required this.icon});
+  AddDetailsArgs({required this.title, this.icon});
 }
 
 class AddDetailsView extends StatefulWidget {
