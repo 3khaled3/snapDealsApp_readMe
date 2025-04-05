@@ -29,6 +29,11 @@ class AppTextStyles {
         fontFamily: defaultFontFamily(),
         fontSize: 24,
       );
+  static TextStyle bold28() => TextStyle(
+        fontWeight: FontWeight.w700,
+        fontFamily: defaultFontFamily(),
+        fontSize: 28,
+      );
   static TextStyle bold18() => TextStyle(
         fontWeight: FontWeight.w700,
         fontFamily: defaultFontFamily(),
@@ -70,11 +75,20 @@ class AppTextStyles {
         fontFamily: defaultFontFamily(),
         fontSize: 20,
       );
-
+  static TextStyle semiBold18() => TextStyle(
+        fontWeight: FontWeight.w600,
+        fontFamily: defaultFontFamily(),
+        fontSize: 18,
+      );
   static TextStyle semiBold16() => TextStyle(
         fontWeight: FontWeight.w600,
         fontFamily: defaultFontFamily(),
         fontSize: 16,
+      );
+  static TextStyle semiBold14() => TextStyle(
+        fontWeight: FontWeight.w600,
+        fontFamily: defaultFontFamily(),
+        fontSize: 14,
       );
   static TextStyle semiBold12() => TextStyle(
         fontWeight: FontWeight.w600,
@@ -122,6 +136,12 @@ class AppTextStyles {
         fontWeight: FontWeight.w700,
         fontFamily: defaultFontFamily(),
         fontSize: 12,
+      );
+
+  static TextStyle bold14() => TextStyle(
+        fontWeight: FontWeight.w700,
+        fontFamily: defaultFontFamily(),
+        fontSize: 14,
       );
 
   static TextStyle medium12() => TextStyle(

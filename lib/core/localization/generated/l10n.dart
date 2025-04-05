@@ -135,10 +135,10 @@ class Tr {
     return Intl.message('Login', name: 'loginButton', desc: '', args: []);
   }
 
-  /// `Create an account`
+  /// `Don't have an account?`
   String get registerLabel {
     return Intl.message(
-      'Create an account',
+      'Don\'t have an account?',
       name: 'registerLabel',
       desc: '',
       args: [],
@@ -858,6 +858,23 @@ class Tr {
   /// `Choose`
   String get choose {
     return Intl.message('Choose', name: 'choose', desc: '', args: []);
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message('Skip', name: 'skip', desc: '', args: []);
+  }
+
+  // skipped getter for the 'noHaveAccount ' key
+
+  /// `Create an account`
+  String get createAccount {
+    return Intl.message(
+      'Create an account',
+      name: 'createAccount',
+      desc: '',
+      args: [],
+    );
   }
 }
 

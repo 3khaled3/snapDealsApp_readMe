@@ -19,121 +19,134 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductCard> products = [
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-    ];
-    List<ProductCard> courses = [
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-    ];
+    // List<ProductCard> products = [
+    //   const
+    //   const ProductCard(
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     isCourse: false,
+    //   ),
+    //   const ProductCard(
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     isCourse: false,
+    //   ),
+    //   const ProductCard(
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     isCourse: false,
+    //   ),
+    //   const ProductCard(
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     isCourse: false,
+    //   ),
+    // ];
+    // List<ProductCard> courses = [
+
+    //   const ProductCard(
+    //     isCourse: true,
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     productOwner: 'Ziad tamer',
+    //   ),
+    //   const ProductCard(
+    //     isCourse: true,
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     productOwner: 'Ziad tamer',
+    //   ),
+    //   const ProductCard(
+    //     isCourse: true,
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     productOwner: 'Ziad tamer',
+    //   ),
+    //   const ProductCard(
+    //     isCourse: true,
+    //     productName: 'Product Name',
+    //     price: 1000,
+    //     imagePath: AppImageAssets.forgotPassImage,
+    //     productOwner: 'Ziad tamer',
+    //   ),
+    // ];
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(left: 9, right: 9, bottom: 80),
+      padding: const EdgeInsets.only(left: 9, right: 9, bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          55.ph,
+          28.ph,
           const HomeAppBar('User name'),
-          27.ph,
+          28.ph,
           const Center(child: CategoriesAvatar()),
-          18.ph,
+          24.ph,
+
           CustomTextFormField(
             hintText: context.tr.hintSearch,
             suffixIcon: Icons.search,
           ),
-          26.ph,
+          24.ph,
+
           Text(
             context.tr.popularCourse,
             style: AppTextStyles.medium20()
                 .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
           ),
-          23.ph,
+          16.ph,
           SizedBox(
             height: 300,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: courses.length,
-                itemBuilder: (context, index) => Row(
-                      children: [courses[index]],
-                    )),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(
+                    10,
+                    (index) => const ProductCard(
+                          isCourse: true,
+                          productName: 'Product Name',
+                          price: 1000,
+                          imagePath: AppImageAssets.forgotPassImage,
+                          productOwner: 'Ziad tamer',
+                        )),
+              ),
+            ),
           ),
-          27.ph,
+          24.ph,
           Text(
             context.tr.popularProduct,
             style: AppTextStyles.medium20()
                 .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
           ),
-          23.ph,
+          16.ph,
           SizedBox(
             height: 300,
-            child: ListView.builder(
+            child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                itemCount: products.length,
-                itemBuilder: (context, index) => Row(
-                      children: [products[index]],
-                    )),
+                child: Row(
+                  children: List.generate(
+                    10,
+                    (index) => const ProductCard(
+                      productName: 'Product Name',
+                      price: 1000,
+                      imagePath: AppImageAssets.forgotPassImage,
+                      isCourse: false,
+                    ),
+                  ),
+                )),
           ),
+          // child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: 5,
+          //     itemBuilder: (context, index) => Row(
+          //           children: [products[index]],
+          //         )),
+          // ),
         ],
       ),
     );

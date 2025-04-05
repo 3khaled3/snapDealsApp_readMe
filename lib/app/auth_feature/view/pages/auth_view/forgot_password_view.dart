@@ -30,9 +30,12 @@ class ForgetPasswordView extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                height: 216,
+                height: MediaQuery.sizeOf(context).height * .56,
                 width: MediaQuery.sizeOf(context).width,
-                padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.sizeOf(context).height * .08,
+                    left: 28,
+                    right: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -49,8 +52,9 @@ class ForgetPasswordView extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 167, bottom: 8),
-                padding: const EdgeInsets.only(left: 28, right: 29),
+                margin: EdgeInsets.only(
+                    top: MediaQuery.sizeOf(context).height * .18, bottom: 8),
+                padding: const EdgeInsets.only(left: 28, right: 28),
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -82,7 +86,7 @@ class ForgetPasswordView extends StatelessWidget {
                       style: AppTextStyles.regular16(),
                       textAlign: TextAlign.center,
                     ),
-                    49.4.ph,
+                    49.ph,
                     CustomTextFormField(
                       hintText: context.tr.hintEmail,
                       labelText: context.tr.emailLabel,
@@ -92,7 +96,7 @@ class ForgetPasswordView extends StatelessWidget {
                         email = value;
                       },
                     ),
-                    216.6.ph,
+                    49.ph,
                     Row(
                       children: [
                         OutlinedButton(

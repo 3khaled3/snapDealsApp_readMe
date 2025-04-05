@@ -19,7 +19,7 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
   final List<String> originalCategories = [
     'Medical',
     'Courses',
-    'Mobile&Tablets',
+    'Mobile & Tablets',
     'More',
     'Drawing tools',
     'Engineering tools',
@@ -55,51 +55,58 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
         runSpacing: 20,
         spacing: 15,
         children: List.generate(isMore ? categories.length : 4, (index) {
-          return Column(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (categories[index] == "More" ||
-                      categories[index] == "less") {
-                    setState(() {
-                      isMore = !isMore;
-                      if (categories[index] == "More") {
-                        // Change "More" to "Electronic" and update the icon
-                        categories[index] = "Electronic";
-                        categoriesIcons[index] = Icons.computer_outlined;
-                      } else if (categories[index] == "less") {
-                        // Restore to original categories and icons
-                        categories = List.from(originalCategories);
-                        categoriesIcons = List.from(originalIcons);
-                      }
-                    });
-                    return;
-                  }
-                  if (categories[index] == "Courses") {
-                    GoRouter.of(context).push(CoursesView.routeName,
-                        extra: CoursesViewArgs(title: categories[index]));
-                    return;
-                  }
-                  GoRouter.of(context).push(ProductsView.routeName,
-                      extra: ProductsViewArgs(title: categories[index]));
-                },
-                child: SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: CircleAvatar(
-                    backgroundColor: ColorsBox.paleGrey,
-                    child: Icon(
-                      categoriesIcons[index],
-                      color: ColorsBox.brightBlue,
+          return SizedBox(
+            width: 80,
+            // height: 150,
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (categories[index] == "More" ||
+                        categories[index] == "less") {
+                      setState(() {
+                        isMore = !isMore;
+                        if (categories[index] == "More") {
+                          // Change "More" to "Electronic" and update the icon
+                          categories[index] = "Electronic";
+                          categoriesIcons[index] = Icons.computer_outlined;
+                        } else if (categories[index] == "less") {
+                          // Restore to original categories and icons
+                          categories = List.from(originalCategories);
+                          categoriesIcons = List.from(originalIcons);
+                        }
+                      });
+                      return;
+                    }
+                    if (categories[index] == "Courses") {
+                      GoRouter.of(context).push(CoursesView.routeName,
+                          extra: CoursesViewArgs(title: categories[index]));
+                      return;
+                    }
+                    GoRouter.of(context).push(ProductsView.routeName,
+                        extra: ProductsViewArgs(title: categories[index]));
+                  },
+                  child: SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: CircleAvatar(
+                      backgroundColor: ColorsBox.paleGrey,
+                      child: Icon(
+                        categoriesIcons[index],
+                        color: ColorsBox.brightBlue,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Text(
-                categories[index],
-                style: AppTextStyles.regular16(),
-              ),
-            ],
+                Text(
+                  categories[index],
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.regular16(),
+                ),
+              ],
+            ),
           );
         }),
       );

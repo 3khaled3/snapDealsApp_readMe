@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/on_board.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -36,9 +35,9 @@ class ChatView extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    GoRouter.of(context).push(
-                      OnBoardScreen.routeName,
-                    );
+                    // GoRouter.of(context).push(
+                    //   OnBoardScreen.routeName,
+                    // );
                   },
                   icon: const Icon(Icons.arrow_back_ios))
             ],
