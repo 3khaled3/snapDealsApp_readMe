@@ -24,6 +24,7 @@ class ForgetPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsBox.white,
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
@@ -46,7 +47,7 @@ class ForgetPasswordView extends StatelessWidget {
                 ),
                 child: Text(
                   context.tr.appName,
-                  style: AppTextStyles.bold42().copyWith(
+                  style: AppTextStyles.bold34().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
                 ),

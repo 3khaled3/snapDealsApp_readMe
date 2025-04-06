@@ -44,34 +44,43 @@ class _MainHomeViewState extends State<MainHomeView> {
           children: _views,
         ),
       ),
+      floatingActionButton: _buildBottomAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        backgroundColor: ColorsBox.brightBlue,
-        child: const Icon(
-          Icons.add,
-          size: 30,
-          color: Colors.white,
-        ),
-        onPressed: () => context.push(AddView.routeName),
-      ),
-      bottomNavigationBar: _buildBottomAppBar(),
     );
   }
 
   BottomAppBar _buildBottomAppBar() {
     return BottomAppBar(
+      elevation: 10,
       shape: const CircularNotchedRectangle(),
-      notchMargin: 12,
-      color: ColorsBox.brightBlue,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+      // notchMargin: 10,
+      color: Colors.transparent,
+      child: Container(
+        height: 75,
+        decoration: BoxDecoration(
+          color: ColorsBox.brightBlue,
+          borderRadius: BorderRadius.circular(40),
+          boxShadow: [
+            BoxShadow(
+              color: ColorsBox.black.withOpacity(0.1),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildNavItem(0, Icons.home_outlined, Icons.home),
             _buildNavItem(1, Icons.chat_outlined, Icons.chat),
-            const SizedBox(width: 50),
+            FloatingActionButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(99999)),
+              backgroundColor: const Color.fromARGB(255, 0, 69, 165),
+              elevation: 6,
+              child: const Icon(Icons.add, color: ColorsBox.white, size: 30),
+              onPressed: () => context.push(AddView.routeName),
+            ),
             _buildNavItem(2, EvaIcons.heartOutline, EvaIcons.heart),
             _buildNavItem(3, Icons.person_outline, Icons.person),
           ],
@@ -81,15 +90,26 @@ class _MainHomeViewState extends State<MainHomeView> {
   }
 
   Widget _buildNavItem(int index, IconData outlineIcon, IconData filledIcon) {
-    return IconButton(
-      icon: Icon(
-        _currentIndex == index ? filledIcon : outlineIcon,
-        size: 40,
-        color: _currentIndex == index
-            ? ColorsBox.white
-            : ColorsBox.white.withOpacity(0.6),
+    final bool isActive = _currentIndex == index;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(9999),
+      splashColor: ColorsBox.white.withOpacity(0.2),
+      onTap: () => _onItemTapped(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color:
+              isActive ? ColorsBox.white.withOpacity(0.1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(9999),
+        ),
+        child: Icon(
+          isActive ? filledIcon : outlineIcon,
+          size: 28,
+          color: ColorsBox.white.withOpacity(isActive ? 1 : 0.6),
+        ),
       ),
-      onPressed: () => _onItemTapped(index),
     );
   }
 }

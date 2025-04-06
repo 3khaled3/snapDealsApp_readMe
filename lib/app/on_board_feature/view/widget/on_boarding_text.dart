@@ -15,33 +15,37 @@ class _OnBoardingText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Spacer(),
-          Text(
-            title,
-            style: AppTextStyles.bold28().copyWith(
-              color: ColorsBox.brightBlue,
+          Spacer(flex: 1),
+          FittedBox(
+            child: Text(
+              title,
+              style: AppTextStyles.bold28().copyWith(
+                color: ColorsBox.brightBlue,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
           16.ph,
 
           // Subtitle
-          Text(
-            subtitle,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: AppTextStyles.semiBold18().copyWith(
-              color: ColorsBox.brightBlue,
+          FittedBox(
+            child: Text(
+              subtitle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: AppTextStyles.semiBold18().copyWith(
+                color: ColorsBox.brightBlue,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
           16.ph,
 
           // Description
           Expanded(
-            flex: 5,
+            flex: 9,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -56,7 +60,6 @@ class _OnBoardingText extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
         ],
       ),
     );

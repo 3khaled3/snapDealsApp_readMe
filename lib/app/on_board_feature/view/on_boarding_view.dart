@@ -67,37 +67,42 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 ),
               ),
             ),
-            const Spacer(),
-            Image.asset(
-              AppImageAssets.onboardingImage,
-              width: MediaQuery.sizeOf(context).width * 0.7,
-              height: MediaQuery.sizeOf(context).width * 0.7,
-              fit: BoxFit.contain,
+
+            Expanded(
+              flex: 1,
+              child: Image.asset(
+                AppImageAssets.onboardingImage,
+                fit: BoxFit.contain,
+              ),
             ),
 
             // Page view for onboarding screens
             Expanded(
-              flex: 5,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: onboardingData.length,
-                onPageChanged: (int page) {
-                  setState(() {
-                    _currentPage = page;
-                  });
-                },
-                itemBuilder: (_, index) {
-                  return _OnBoardingText(
-                    title: onboardingData[index]['title']!,
-                    subtitle: onboardingData[index]['subtitle']!,
-                    description: onboardingData[index]['description']!,
-                  );
-                },
+              flex: 2,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: onboardingData.length,
+                      onPageChanged: (int page) {
+                        setState(() {
+                          _currentPage = page;
+                        });
+                      },
+                      itemBuilder: (_, index) {
+                        return _OnBoardingText(
+                          title: onboardingData[index]['title']!,
+                          subtitle: onboardingData[index]['subtitle']!,
+                          description: onboardingData[index]['description']!,
+                        );
+                      },
+                    ),
+                  ),
+                  _PageIndicator(currentPage: _currentPage),
+                ],
               ),
             ),
-
-            // Page indicator
-            _PageIndicator(currentPage: _currentPage),
 
             // Next button
             Padding(

@@ -35,8 +35,9 @@ class _RegisterViewState extends State<RegisterView> {
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final separator = (MediaQuery.sizeOf(context).height * .036).ph;
+    final separator = (16).ph;
     return Scaffold(
+      backgroundColor: ColorsBox.white,
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
@@ -58,7 +59,7 @@ class _RegisterViewState extends State<RegisterView> {
               ),
               child: Text(
                 context.tr.appName,
-                style: AppTextStyles.bold42().copyWith(
+                style: AppTextStyles.bold34().copyWith(
                     fontFamily: AppTextStyles.fontFamilyLora,
                     color: ColorsBox.white),
               ),
@@ -66,7 +67,7 @@ class _RegisterViewState extends State<RegisterView> {
             SafeArea(
               child: Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.sizeOf(context).height * .11, bottom: 8),
+                    top: MediaQuery.sizeOf(context).height * .1, bottom: 8),
                 padding: const EdgeInsets.only(left: 28, right: 29),
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -79,7 +80,7 @@ class _RegisterViewState extends State<RegisterView> {
                   children: [
                     separator,
                     Text(context.tr.createAccount,
-                        style: AppTextStyles.semiBold30().copyWith(
+                        style: AppTextStyles.semiBold24().copyWith(
                             fontFamily: AppTextStyles.fontFamilyLora)),
                     separator,
                     CustomTextFormField(

@@ -35,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsBox.white,
       body: SingleChildScrollView(
         child: SizedBox(
           // height: MediaQuery.sizeOf(context).height,
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: Text(
                     context.tr.appName,
-                    style: AppTextStyles.bold42().copyWith(
+                    style: AppTextStyles.bold34().copyWith(
                         fontFamily: AppTextStyles.fontFamilyLora,
                         color: ColorsBox.white),
                   ),
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       30.ph,
 
                       Text(context.tr.loginScreenLabel,
-                          style: AppTextStyles.semiBold30().copyWith(
+                          style: AppTextStyles.semiBold24().copyWith(
                               fontFamily: AppTextStyles.fontFamilyLora)),
                       30.ph,
                       Text(
