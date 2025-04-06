@@ -104,5 +104,12 @@
     "ramWord":"RAM *",
     "storageWord":"Storage *",
     "batteryCapacityWord":"Battery Capacity *",
-    "choose":"Choose"
+    "choose":"Choose",
+    "price":"Price *",
+    "priceHint":"Enter price",
+    "location":"Location *",
+    "locationHint":"Choose location",
+    "details":"Details",
+    "describtionWord":"Describtion"
+    
 }

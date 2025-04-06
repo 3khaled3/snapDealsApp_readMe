@@ -1,7 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -49,7 +48,14 @@ class _YourProfileViewState extends State<YourProfileView> {
             24.ph,
             _buildContactSection(context),
             57.ph,
-            _buildActionButtons(context),
+            CustomButtonRow(
+              saveButtonText: context.tr.saveButton,
+              onSave: () {
+                if (formKey.currentState?.validate() ?? false) {
+                  // Handle save action
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -176,33 +182,6 @@ class _YourProfileViewState extends State<YourProfileView> {
         ),
         8.ph,
         Text(context.tr.contactEmail, style: AppTextStyles.regular12()),
-      ],
-    );
-  }
-
-  Widget _buildActionButtons(BuildContext context) {
-    return Row(
-      children: [
-        OutlinedButton(
-          onPressed: () => GoRouter.of(context).pop(),
-          style: OutlinedButton.styleFrom(
-            padding: const EdgeInsets.all(20),
-            shape: const CircleBorder(),
-            fixedSize: const Size(55, 55),
-          ),
-          child: const Icon(Icons.arrow_back_ios, color: ColorsBox.brightBlue),
-        ),
-        30.pw,
-        Expanded(
-          child: CustomPrimaryButton(
-            title: context.tr.saveButton,
-            onTap: () {
-              if (formKey.currentState?.validate() ?? false) {
-                // Handle save action
-              }
-            },
-          ),
-        ),
       ],
     );
   }

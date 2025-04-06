@@ -12,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
   final Function(String)? onSaved;
   final String? Function(String?)? validator;
   final bool isPassword;
+  final bool? isPrice;
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? height;
 
@@ -27,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isPassword = false,
     this.keyboardType,
     this.height,
+    this.isPrice,
   });
 
   @override
@@ -51,12 +53,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 AppTextStyles.regular16().copyWith(color: ColorsBox.greyish),
             hintText: widget.hintText,
             labelText: widget.labelText,
-            prefixIcon: widget.prefixIcon != null
-                ? Icon(
-                    widget.prefixIcon,
-                    color: Colors.blue,
+            prefixIcon: widget.isPrice == true
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 13, right: 8),
+                    child: Text(
+                      'EGP',
+                      style: AppTextStyles.semiBold16()
+                          .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                    ),
                   )
-                : null,
+                : widget.prefixIcon != null
+                    ? Icon(
+                        widget.prefixIcon,
+                        color: Colors.blue,
+                      )
+                    : null,
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(

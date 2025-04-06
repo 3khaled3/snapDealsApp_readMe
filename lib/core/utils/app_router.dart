@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/navigation/auth_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/splash_screen.dart';
 import 'package:snap_deals/app/home_feature/view/navigation/home_router.dart';
+import 'package:snap_deals/app/product_feature/view/navigation/product_router.dart';
 
 abstract class AppRouter {
   static final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
@@ -16,6 +17,7 @@ abstract class AppRouter {
       routes: [
         ...HomeRouter.routes,
         ...AuthRouter.routes,
+        ...ProductRouter.routes,
       ],
     );
     return _goRouter as GoRouter;

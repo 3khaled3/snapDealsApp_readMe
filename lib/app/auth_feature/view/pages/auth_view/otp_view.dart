@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/reset_password_view.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_otp_text_field.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -106,41 +106,19 @@ class OtpView extends StatelessWidget {
                       ),
                     ),
                     281.ph,
-                    Row(
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            GoRouter.of(context).pop();
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 26, vertical: 20),
-                            shape: const CircleBorder(),
-                            fixedSize: const Size(66, 66),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: ColorsBox.brightBlue,
-                          ),
-                        ),
-                        10.pw,
-                        Expanded(
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: CustomPrimaryButton(
-                              title: context.tr.nextButton,
-                              onTap: () {
-                                if (formKey.currentState?.validate() ?? false) {
-                                  // loginCubit.loginWithEmail(email, password);
-                                  GoRouter.of(context).push(
-                                      ResetPasswordView.routeName,
-                                      extra: ResetPasswordViewArgs());
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+                    CustomButtonRow(
+                      saveButtonText: context.tr.nextButton,
+                      onSave: () {
+                        () {
+                          // TODO navigate to reset password screen
+                          if (formKey.currentState?.validate() ?? false) {
+                            // loginCubit.loginWithEmail(email, password);
+                            GoRouter.of(context).push(
+                                ResetPasswordView.routeName,
+                                extra: ResetPasswordViewArgs());
+                          }
+                        };
+                      },
                     ),
                   ],
                 ),

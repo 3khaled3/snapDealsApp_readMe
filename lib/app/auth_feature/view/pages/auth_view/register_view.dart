@@ -1,6 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/utils/validators.dart';
@@ -9,7 +9,6 @@ import 'package:snap_deals/core/extensions/context_extension.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 
-import '../../widgets/custom_primary_button.dart';
 import '../../widgets/custom_text_field.dart';
 
 class RegisterViewArgs {
@@ -178,38 +177,13 @@ class _RegisterViewState extends State<RegisterView> {
                         }),
                   ),
                   22.6.ph,
-                  Row(
-                    children: [
-                      OutlinedButton(
-                        onPressed: () {
-                          GoRouter.of(context).pop();
-                        },
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 26, vertical: 20),
-                          shape: const CircleBorder(),
-                          fixedSize: const Size(66, 66),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: ColorsBox.brightBlue,
-                        ),
-                      ),
-                      10.pw,
-                      Expanded(
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: CustomPrimaryButton(
-                            title: context.tr.registerButton,
-                            onTap: () {
-                              if (formKey.currentState?.validate() ?? false) {
-                                // loginCubit.loginWithEmail(email, password);
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+                  CustomButtonRow(
+                    saveButtonText: context.tr.registerButton,
+                    onSave: () {
+                      if (formKey.currentState?.validate() ?? false) {
+                        // Handle save action
+                      }
+                    },
                   ),
                   16.ph,
                   Padding(

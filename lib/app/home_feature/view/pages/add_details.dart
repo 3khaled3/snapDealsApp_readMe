@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_add_details_title.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_add_image.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_add_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_contanier.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_drop_down_button.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.dart';
@@ -11,7 +14,7 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AddDetailsArgs {
   final String title;
-  IconData? icon;
+  final IconData? icon;
 
   AddDetailsArgs({required this.title, this.icon});
 }
@@ -46,112 +49,17 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                 color: Colors.black,
               ),
               15.ph,
-              Text(
-                context.tr.category,
-                style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-              ),
-              7.ph,
-              Row(
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration:
-                        const BoxDecoration(color: ColorsBox.brightBlue),
-                    child: Icon(
-                      widget.args!.icon,
-                      color: ColorsBox.white,
-                      size: 30,
-                    ),
-                  ),
-                  10.pw,
-                  Text(
-                    widget.args!.title,
-                    style: AppTextStyles.semiBold12()
-                        .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                  ),
-                ],
+              CustomAddDetailsTitle(
+                title: widget.args!.title,
+                icon: widget.args!.icon,
               ),
               23.ph,
-              Container(
-                height: 190,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(5)),
-                child: Column(
-                  children: [
-                    20.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 33,
-                          width: 33,
-                          decoration: BoxDecoration(border: Border.all()),
-                          child: const Icon(
-                            Icons.home,
-                            color: ColorsBox.brightBlue,
-                            size: 26,
-                          ),
-                        ),
-                        6.pw,
-                        Container(
-                          height: 42,
-                          width: 42,
-                          decoration: BoxDecoration(border: Border.all()),
-                          child: const Icon(
-                            Icons.pedal_bike,
-                            color: ColorsBox.brightBlue,
-                            size: 26,
-                          ),
-                        ),
-                        6.pw,
-                        Container(
-                          height: 33,
-                          width: 33,
-                          decoration: BoxDecoration(border: Border.all()),
-                          child: const Icon(
-                            Icons.home,
-                            color: ColorsBox.brightBlue,
-                            size: 26,
-                          ),
-                        ),
-                      ],
-                    ),
-                    15.ph,
-                    InkWell(
-                      onTap: () {},
-                      child: CustomContainer(
-                        width: 120,
-                        height: 50,
-                        text: context.tr.addImages,
-                        textStyle: AppTextStyles.medium14()
-                            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                        borderColor: ColorsBox.brightBlue,
-                        borderRadius: 5.0,
-                        onTap: () {},
-                      ),
-                    ),
-                    16.ph,
-                    Text(
-                      context.tr.addImageDis,
-                      style: AppTextStyles.regular12()
-                          .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
+              const CustomAddImage(),
               23.ph,
-              Text(
-                context.tr.brand,
-                style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+              CustomAddTextField(
+                title: context.tr.brand,
+                hint: context.tr.brandHint,
               ),
-              6.ph,
-              CustomTextFormField(hintText: context.tr.brandHint),
               widget.args!.title == context.tr.mobilesAndTablets
                   ? _AddMobileDetails(context)
                   : 0.ph,
@@ -193,13 +101,10 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                 ],
               ),
               23.ph,
-              Text(
-                context.tr.adTitle,
-                style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+              CustomAddTextField(
+                title: context.tr.adTitle,
+                hint: context.tr.enterTitle,
               ),
-              6.ph,
-              CustomTextFormField(hintText: context.tr.enterTitle),
               23.ph,
               Text(
                 context.tr.describtion,
@@ -214,6 +119,17 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                   left: 10,
                   right: 10,
                 ),
+              ),
+              23.ph,
+              CustomAddTextField(
+                title: context.tr.location,
+                hint: context.tr.locationHint,
+              ),
+              23.ph,
+              CustomAddTextField(
+                title: context.tr.price,
+                hint: context.tr.priceHint,
+                isPrice: true,
               ),
               7.ph,
               CustomPrimaryButton(title: context.tr.nextButton, onTap: () {})

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -31,7 +31,8 @@ class ProductCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(YourProfileView.routeName);
+            GoRouter.of(context).push(ProductDetailsView.routeName,
+                extra: ProductDetailsArgs());
           },
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 10),

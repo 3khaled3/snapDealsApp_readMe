@@ -859,6 +859,46 @@ class Tr {
   String get choose {
     return Intl.message('Choose', name: 'choose', desc: '', args: []);
   }
+
+  /// `Price *`
+  String get price {
+    return Intl.message('Price *', name: 'price', desc: '', args: []);
+  }
+
+  /// `Enter price`
+  String get priceHint {
+    return Intl.message('Enter price', name: 'priceHint', desc: '', args: []);
+  }
+
+  /// `Location *`
+  String get location {
+    return Intl.message('Location *', name: 'location', desc: '', args: []);
+  }
+
+  /// `Choose location`
+  String get locationHint {
+    return Intl.message(
+      'Choose location',
+      name: 'locationHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message('Details', name: 'details', desc: '', args: []);
+  }
+
+  /// `Describtion`
+  String get describtionWord {
+    return Intl.message(
+      'Describtion',
+      name: 'describtionWord',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

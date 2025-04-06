@@ -124,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "Describe the item you are selling",
     ),
+    "describtionWord": MessageLookupByLibrary.simpleMessage("Describtion"),
+    "details": MessageLookupByLibrary.simpleMessage("Details"),
     "drawingTools": MessageLookupByLibrary.simpleMessage("Drawing tools"),
     "electronics": MessageLookupByLibrary.simpleMessage("Electronics"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
@@ -148,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Good Morning"),
     "lang": MessageLookupByLibrary.simpleMessage("en"),
+    "location": MessageLookupByLibrary.simpleMessage("Location *"),
+    "locationHint": MessageLookupByLibrary.simpleMessage("Choose location"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "Please enter your email to log in",
@@ -191,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordLoginLabel": MessageLookupByLibrary.simpleMessage("Password"),
     "popularCourse": MessageLookupByLibrary.simpleMessage("Popular Course"),
     "popularProduct": MessageLookupByLibrary.simpleMessage("Popular Product"),
+    "price": MessageLookupByLibrary.simpleMessage("Price *"),
+    "priceHint": MessageLookupByLibrary.simpleMessage("Enter price"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "ramWord": MessageLookupByLibrary.simpleMessage("RAM *"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Continue"),
