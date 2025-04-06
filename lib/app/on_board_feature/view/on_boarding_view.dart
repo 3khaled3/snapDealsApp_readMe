@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
+import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
-part 'widget/page_indicator.dart';
+
 part 'widget/on_boarding_text.dart';
 
 class OnBoardScreen extends StatefulWidget {
@@ -99,7 +100,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                       },
                     ),
                   ),
-                  _PageIndicator(currentPage: _currentPage),
+                  PageIndicator(currentPage: _currentPage, pageLength: 3),
                 ],
               ),
             ),

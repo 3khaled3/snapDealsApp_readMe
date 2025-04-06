@@ -28,35 +28,32 @@ class _MainHomeViewState extends State<MainHomeView> {
     ProfileView(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    print('MainHomeView build called with index: $_currentIndex');
     return Scaffold(
       extendBody: true,
       body: SafeArea(
-        child: IndexedStack(
-          index: _currentIndex,
-          children: _views,
-        ),
+        child: _views[_currentIndex],
+        // IndexedStack(
+        //   index: _currentIndex,
+        //   children:,
+        // ),
       ),
       floatingActionButton: _buildBottomAppBar(),
+      // bottomNavigationBar: _buildBottomAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  BottomAppBar _buildBottomAppBar() {
-    return BottomAppBar(
-      elevation: 10,
-      shape: const CircularNotchedRectangle(),
-      // notchMargin: 10,
-      color: Colors.transparent,
+  _buildBottomAppBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.transparent,
+      ),
+      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
       child: Container(
-        height: 75,
         decoration: BoxDecoration(
           color: ColorsBox.brightBlue,
           borderRadius: BorderRadius.circular(40),
@@ -68,6 +65,7 @@ class _MainHomeViewState extends State<MainHomeView> {
             ),
           ],
         ),
+        padding: const EdgeInsets.all(4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -95,10 +93,16 @@ class _MainHomeViewState extends State<MainHomeView> {
     return InkWell(
       borderRadius: BorderRadius.circular(9999),
       splashColor: ColorsBox.white.withOpacity(0.2),
-      onTap: () => _onItemTapped(index),
+      onTap: () {
+        print('Tapped on index: $index');
+        setState(() {
+          _currentIndex = index;
+          print('Current index: $_currentIndex');
+        });
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           color:
               isActive ? ColorsBox.white.withOpacity(0.1) : Colors.transparent,

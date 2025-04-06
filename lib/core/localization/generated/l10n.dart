@@ -865,8 +865,6 @@ class Tr {
     return Intl.message('Skip', name: 'skip', desc: '', args: []);
   }
 
-  // skipped getter for the 'noHaveAccount ' key
-
   /// `Create an account`
   String get createAccount {
     return Intl.message(

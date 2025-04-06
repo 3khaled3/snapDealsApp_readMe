@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_button.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
@@ -43,10 +44,9 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
               ),
             ),
             8.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:
-                  List.generate(images.length, (index) => buildDot(index)),
+            PageIndicator(
+              currentPage: _currentIndex,
+              pageLength: images.length,
             ),
           ],
         ),

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:snap_deals/app/auth_feature/view/widgets/build_register_text.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
-import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';

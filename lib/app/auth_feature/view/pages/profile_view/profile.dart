@@ -57,13 +57,6 @@ class ProfileView extends StatelessWidget {
                 spaceBetweenListTile(),
                 CustomListTile(
                   isAddView: false,
-                  leadingIcon: Icons.favorite_border_outlined,
-                  title: 'Favorite & Saved searches',
-                  onTap: () {},
-                ),
-                spaceBetweenListTile(),
-                CustomListTile(
-                  isAddView: false,
                   leadingIcon: Icons.subdirectory_arrow_right_outlined,
                   title: 'About us',
                   onTap: () {
