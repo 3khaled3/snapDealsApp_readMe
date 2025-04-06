@@ -113,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذا هو الرقم لجهات اتصال المشترين والإشعارات الأخرى",
     ),
     "courses": MessageLookupByLibrary.simpleMessage("دورات"),
+    "createAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "describtion": MessageLookupByLibrary.simpleMessage("الوصف *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "صف العنصر الذي تبيعه",
@@ -182,7 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "popularProduct": MessageLookupByLibrary.simpleMessage("أشهر المنتاجات"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
     "registerButton": MessageLookupByLibrary.simpleMessage("متابعة"),
-    "registerLabel": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
+    "registerLabel": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "resendCodeButton": MessageLookupByLibrary.simpleMessage(
       "إعادة إرسال الرمز",
     ),
@@ -194,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "saveButton": MessageLookupByLibrary.simpleMessage("حفظ"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
     "used": MessageLookupByLibrary.simpleMessage("مستعمل"),
     "yourAddress": MessageLookupByLibrary.simpleMessage("عنوانك"),
     "yourAge": MessageLookupByLibrary.simpleMessage("السن"),

@@ -120,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "this is the number for buyers contacts and other notification",
     ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+    "createAccount": MessageLookupByLibrary.simpleMessage("Create an account"),
     "describtion": MessageLookupByLibrary.simpleMessage("Describtion *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "Describe the item you are selling",
@@ -200,7 +201,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "ramWord": MessageLookupByLibrary.simpleMessage("RAM *"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Continue"),
-    "registerLabel": MessageLookupByLibrary.simpleMessage("Create an account"),
+    "registerLabel": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account?",
+    ),
     "resendCodeButton": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPasswordButton": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
@@ -210,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("Send"),
+    "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "storageWord": MessageLookupByLibrary.simpleMessage("Storage *"),
     "used": MessageLookupByLibrary.simpleMessage("USED"),
     "yourAddress": MessageLookupByLibrary.simpleMessage("Your Address"),

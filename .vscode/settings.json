@@ -1,3 +1,7 @@
 {
-    "cmake.sourceDirectory": "D:/graduation_project/snapDealsApp/linux"
+    "cmake.sourceDirectory": "D:/graduation_project/snapDealsApp/linux",
+    "flutterTools.displayGetxContextMenu": false,
+    "flutterTools.displayMobxContextMenu": false,
+    "flutterTools.displayRiverpodContextMenu": false,
+    "flutterTools.displayModularContextMenu": false
 }

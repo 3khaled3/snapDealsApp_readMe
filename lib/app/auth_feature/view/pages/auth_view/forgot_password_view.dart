@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/otp_view.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -24,15 +24,19 @@ class ForgetPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsBox.white,
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
           child: Stack(
             children: [
               Container(
-                height: 216,
+                height: MediaQuery.sizeOf(context).height * .56,
                 width: MediaQuery.sizeOf(context).width,
-                padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.sizeOf(context).height * .08,
+                    left: 28,
+                    right: 28),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -43,14 +47,15 @@ class ForgetPasswordView extends StatelessWidget {
                 ),
                 child: Text(
                   context.tr.appName,
-                  style: AppTextStyles.bold42().copyWith(
+                  style: AppTextStyles.bold34().copyWith(
                       fontFamily: AppTextStyles.fontFamilyLora,
                       color: ColorsBox.white),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 167, bottom: 8),
-                padding: const EdgeInsets.only(left: 28, right: 29),
+                margin: EdgeInsets.only(
+                    top: MediaQuery.sizeOf(context).height * .18, bottom: 8),
+                padding: const EdgeInsets.only(left: 28, right: 28),
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -82,7 +87,7 @@ class ForgetPasswordView extends StatelessWidget {
                       style: AppTextStyles.regular16(),
                       textAlign: TextAlign.center,
                     ),
-                    49.4.ph,
+                    49.ph,
                     CustomTextFormField(
                       hintText: context.tr.hintEmail,
                       labelText: context.tr.emailLabel,
@@ -91,6 +96,42 @@ class ForgetPasswordView extends StatelessWidget {
                       onChanged: (value) {
                         email = value;
                       },
+                    ),
+                    49.ph,
+                    Row(
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            GoRouter.of(context).pop();
+                          },
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 26, vertical: 20),
+                            shape: const CircleBorder(),
+                            fixedSize: const Size(66, 66),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: ColorsBox.brightBlue,
+                          ),
+                        ),
+                        10.pw,
+                        Expanded(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: CustomPrimaryButton(
+                              title: context.tr.sendButtonLabel,
+                              onTap: () {
+                                if (formKey.currentState?.validate() ?? false) {
+                                  // loginCubit.loginWithEmail(email, password);
+                                  GoRouter.of(context).push(OtpView.routeName,
+                                      extra: OtpViewArgs());
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     216.6.ph,
                     CustomButtonRow(

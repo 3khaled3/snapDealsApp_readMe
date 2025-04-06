@@ -35,159 +35,154 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsBox.white,
       body: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          child: Stack(
-            children: [
-              Container(
-                height: 216,
-                width: MediaQuery.sizeOf(context).width,
-                padding: const EdgeInsets.only(top: 82, left: 28, right: 28),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      AppImageAssets.authImage,
+        child: SizedBox(
+          // height: MediaQuery.sizeOf(context).height,
+          child: Form(
+            key: formKey,
+            child: Stack(
+              children: [
+                Container(
+                  height: MediaQuery.sizeOf(context).height * .56,
+                  width: MediaQuery.sizeOf(context).width,
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.sizeOf(context).height * .08,
+                      left: 28,
+                      right: 28),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        AppImageAssets.authImage,
+                      ),
                     ),
                   ),
+                  child: Text(
+                    context.tr.appName,
+                    style: AppTextStyles.bold34().copyWith(
+                        fontFamily: AppTextStyles.fontFamilyLora,
+                        color: ColorsBox.white),
+                  ),
                 ),
-                child: Text(
-                  context.tr.appName,
-                  style: AppTextStyles.bold42().copyWith(
-                      fontFamily: AppTextStyles.fontFamilyLora,
-                      color: ColorsBox.white),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 167, bottom: 8),
-                padding: const EdgeInsets.only(left: 28, right: 29),
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(55),
-                        topRight: Radius.circular(55))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    33.ph,
-                    Text(context.tr.loginScreenLabel,
-                        style: AppTextStyles.semiBold30().copyWith(
-                            fontFamily: AppTextStyles.fontFamilyLora)),
-                    42.ph,
-                    Text(
-                      context.tr.loginLabel,
-                      style: AppTextStyles.regular16(),
-                    ),
-                    71.ph,
-                    CustomTextFormField(
-                      hintText: context.tr.hintEmail,
-                      labelText: context.tr.emailLabel,
-                      prefixIcon: EvaIcons.emailOutline,
-                      validator: Validators.validateEmail,
-                      onChanged: (value) {
-                        email = value;
-                      },
-                    ),
-                    28.ph,
-                    CustomTextFormField(
-                      hintText: context.tr.hintPassword,
-                      labelText: context.tr.passwordLoginLabel,
-                      prefixIcon: EvaIcons.lockOutline,
-                      isPassword: true,
-                      validator: Validators.validatePassword,
-                      onChanged: (value) {
-                        password = value;
-                      },
-                    ),
-                    26.ph,
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          GoRouter.of(context).push(
-                              ForgetPasswordView.routeName,
-                              extra: ForgetPasswordViewArgs());
+                Container(
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.sizeOf(context).height * .18, bottom: 8),
+                  padding: const EdgeInsets.only(left: 28, right: 28),
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(55),
+                          topRight: Radius.circular(55))),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 33.ph,
+                      30.ph,
+
+                      Text(context.tr.loginScreenLabel,
+                          style: AppTextStyles.semiBold24().copyWith(
+                              fontFamily: AppTextStyles.fontFamilyLora)),
+                      30.ph,
+                      Text(
+                        context.tr.loginLabel,
+                        style: AppTextStyles.regular16(),
+                      ),
+                      18.ph,
+                      CustomTextFormField(
+                        hintText: context.tr.hintEmail,
+                        labelText: context.tr.emailLabel,
+                        prefixIcon: EvaIcons.emailOutline,
+                        validator: Validators.validateEmail,
+                        onChanged: (value) {
+                          email = value;
                         },
-                        child: Text(
-                          context.tr.forgotPasswordButton,
-                          style: AppTextStyles.medium14().copyWith(
-                            color: ColorsBox.brightBlue,
+                      ),
+                      28.ph,
+                      CustomTextFormField(
+                        hintText: context.tr.hintPassword,
+                        labelText: context.tr.passwordLoginLabel,
+                        prefixIcon: EvaIcons.lockOutline,
+                        isPassword: true,
+                        validator: Validators.validatePassword,
+                        onChanged: (value) {
+                          password = value;
+                        },
+                      ),
+                      18.ph,
+                      Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).push(
+                                ForgetPasswordView.routeName,
+                                extra: ForgetPasswordViewArgs());
+                          },
+                          child: Text(
+                            context.tr.forgotPasswordButton,
+                            style: AppTextStyles.medium14().copyWith(
+                              color: ColorsBox.brightBlue,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    26.ph,
-                    SizedBox(
-                      width: double.infinity,
-                      child: CustomPrimaryButton(
-                        title: context.tr.loginButton,
-                        onTap: () {
-                          if (formKey.currentState?.validate() ?? false) {
-                            // loginCubit.loginWithEmail(email, password);
-                          }
-                        },
+                      18.ph,
+                      SizedBox(
+                        width: double.infinity,
+                        child: CustomPrimaryButton(
+                          title: context.tr.loginButton,
+                          onTap: () {
+                            if (formKey.currentState?.validate() ?? false) {
+                              // loginCubit.loginWithEmail(email, password);
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                    26.ph,
-                    const BuildRegisterText(),
-                    58.ph,
-                    Padding(
-                      padding: const EdgeInsets.only(left: 80, right: 80),
-                      child: Row(
+                      26.ph,
+                      Center(
+                        child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width * .85,
+                            child: const FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: BuildRegisterText())),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 80, right: 80),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Expanded(
+                                child: Divider(
+                              thickness: 2,
+                              color: Colors.black,
+                            )),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: Text(
+                                context.tr.orWord,
+                                style: AppTextStyles.regular16(),
+                              ),
+                            ),
+                            const Expanded(
+                                child: Divider(
+                              thickness: 2,
+                              color: Colors.black,
+                            )),
+                          ],
+                        ),
+                      ),
+                      13.ph,
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Expanded(
-                              child: Divider(
-                            thickness: 2,
-                            color: Colors.black,
-                          )),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              context.tr.orWord,
-                              style: AppTextStyles.regular16(),
-                            ),
-                          ),
-                          const Expanded(
-                              child: Divider(
-                            thickness: 2,
-                            color: Colors.black,
-                          )),
-                        ],
-                      ),
-                    ),
-                    13.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        66.pw,
-                        OutlinedButton(
-                          onPressed: () {
-                            GoRouter.of(context).push(MainHomeView.routeName,
-                                extra: MainHomeViewArgs());
-                            // Handle login
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            backgroundColor: Colors.white,
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 12,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.apple,
-                            color: Colors.black,
-                            size: 32,
-                          ),
-                        ),
-                        13.pw,
-                        OutlinedButton(
+                          // 66.pw,
+                          OutlinedButton(
                             onPressed: () {
+                              GoRouter.of(context).push(MainHomeView.routeName,
+                                  extra: MainHomeViewArgs());
                               // Handle login
                             },
                             style: OutlinedButton.styleFrom(
@@ -201,40 +196,62 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             child: const Icon(
-                              EvaIcons.google,
-                              color: Colors.red,
+                              Icons.apple,
+                              color: Colors.black,
                               size: 32,
-                            )),
-                        13.pw,
-                        OutlinedButton(
-                          onPressed: () {
-                            GoRouter.of(context).push(HomeView.routeName,
-                                extra: HomeViewArgs());
-                            // Handle login
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            backgroundColor: Colors.white,
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 12,
                             ),
                           ),
-                          child: const Icon(
-                            Icons.facebook,
-                            color: Colors.blue,
-                            size: 30,
+                          13.pw,
+                          OutlinedButton(
+                              onPressed: () {
+                                // Handle login
+                              },
+                              style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                backgroundColor: Colors.white,
+                                elevation: 0,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                              ),
+                              child: const Icon(
+                                EvaIcons.google,
+                                color: Colors.red,
+                                size: 32,
+                              )),
+                          13.pw,
+                          OutlinedButton(
+                            onPressed: () {
+                              // GoRouter.of(context).push(HomeView.routeName,
+                              //     extra: HomeViewArgs());
+                              // Handle login
+                            },
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              backgroundColor: Colors.white,
+                              elevation: 0,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.facebook,
+                              color: Colors.blue,
+                              size: 30,
+                            ),
                           ),
-                        ),
-                        66.pw,
-                      ],
-                    ),
-                  ],
+                          // 66.pw,
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

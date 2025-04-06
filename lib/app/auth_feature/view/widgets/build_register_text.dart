@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/register_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -13,10 +14,9 @@ class BuildRegisterText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "new to ?",
-          style: AppTextStyles.light16().copyWith(
-            color: ColorsBox.black,
-          ),
+          context.tr.registerLabel,
+          style:
+              AppTextStyles.semiBold14().copyWith(color: ColorsBox.slateGrey),
         ),
         TextButton(
           onPressed: () {
@@ -24,8 +24,8 @@ class BuildRegisterText extends StatelessWidget {
                 .push(RegisterView.routeName, extra: RegisterViewArgs());
           },
           child: Text(
-            context.tr.registerLabel,
-            style: AppTextStyles.medium16().copyWith(
+            context.tr.createAccount,
+            style: AppTextStyles.bold14().copyWith(
                 color: ColorsBox.brightBlue,
                 fontFamily: AppTextStyles.fontFamilyLora),
           ),
