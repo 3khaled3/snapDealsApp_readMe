@@ -51,6 +51,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 AppTextStyles.regular16().copyWith(color: ColorsBox.black),
             helperStyle:
                 AppTextStyles.regular16().copyWith(color: ColorsBox.greyish),
+            hintStyle:                AppTextStyles.regular16().copyWith(color: ColorsBox.greyish),
             hintText: widget.hintText,
             labelText: widget.labelText,
             prefixIcon: widget.isPrice == true

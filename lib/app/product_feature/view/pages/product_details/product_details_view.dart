@@ -15,6 +15,7 @@ class ProductDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF9FAFB),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -31,9 +32,8 @@ class ProductDetailsView extends StatelessWidget {
                   location: 'Zagazig, Sharqia',
                   date: '20/11/2024',
                 ),
-                15.ph,
-                _spaceBetweenSections(),
-                15.ph,
+
+                18.ph,
                 const CustomDetailsGrid(
                   details: {
                     'Condition': 'New',
@@ -43,16 +43,14 @@ class ProductDetailsView extends StatelessWidget {
                     'Color': 'Black',
                   },
                 ),
-                15.ph,
-                _spaceBetweenSections(),
-                15.ph,
+
+                18.ph,
                 const DescribtionSection(
                   description:
                       '【Complete and Professional Art Drawing Supplies Pencils Set with Sketch Pad】, 15 graphite sketch pencils for drawing . 3 black and 3 white, charcoal pencils, 3 graphite and 3 charcoal sticks, 4 willow charcoal, 3 blending stumps',
                 ),
-                15.ph,
-                _spaceBetweenSections(),
-                15.ph,
+
+                18.ph,
                 const ContactSection(name: 'Ziad Tamer')
               ],
             )

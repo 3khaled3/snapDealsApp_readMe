@@ -16,21 +16,38 @@ class CustomButtonRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        OutlinedButton(
-          onPressed: () => GoRouter.of(context).pop(),
-          style: OutlinedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 20),
-            shape: const CircleBorder(),
-            fixedSize: const Size(66, 66),
-          ),
-          child: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorsBox.brightBlue,
-            size: 25,
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(999999),
+            onTap: () => GoRouter.of(context).pop(),
+            // style: OutlinedButton.styleFrom(
+            //   shape: const CircleBorder(),
+            //   // fixedSize: const Size(66, 66),
+            // ),
+            child: Ink(
+              decoration: BoxDecoration(
+                color: ColorsBox.white,
+                borderRadius: BorderRadius.circular(999999),
+                border: Border.all(color: ColorsBox.greyish, width: 1),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Container(
+                // color: Colors.red,
+                padding: const EdgeInsetsDirectional.only(
+                    start: 8, top: 4, bottom: 4),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: ColorsBox.brightBlue,
+                  // size: 25,
+                ),
+              ),
+            ),
           ),
         ),
-        const SizedBox(width: 30),
+        const SizedBox(width: 14),
         Expanded(
           child: CustomPrimaryButton(
             title: saveButtonText,

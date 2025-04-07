@@ -15,7 +15,7 @@ String defaultFontFamily() {
 class AppTextStyles {
   // Font families
   static const String fontFamilyMontserrat = "Montserrat";
-  static const String fontFamilyLora = "Lora";
+  static String fontFamilyLora = Tr.current.lang != Langs.ar.lang ?"Lora":"NotoKufiArabic";
   static const String fontFamilyNotoKufiArabic = "NotoKufiArabic";
 
   // Text styles with dynamic sizes using RM.map

@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           email = value;
                         },
                       ),
-                      28.ph,
+                      16.ph,
                       CustomTextFormField(
                         hintText: context.tr.hintPassword,
                         labelText: context.tr.passwordLoginLabel,
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           password = value;
                         },
                       ),
-                      18.ph,
+                      16.ph,
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: TextButton(
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      18.ph,
+                      16.ph,
                       SizedBox(
                         width: double.infinity,
                         child: CustomPrimaryButton(
@@ -138,15 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                       ),
-                      26.ph,
+                      18.ph,
                       Center(
-                        child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width * .85,
-                            child: const FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: BuildRegisterText())),
+                        child: BuildRegisterText(),
                       ),
-
+                      18.ph,
                       Padding(
                         padding: const EdgeInsets.only(left: 80, right: 80),
                         child: Row(
