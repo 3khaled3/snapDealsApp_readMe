@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           locale: state.locale,
           supportedLocales: Tr.delegate.supportedLocales,
           theme: ThemeData(
+              scaffoldBackgroundColor: Color(0xFFF9FAFB),
             fontFamily: state.locale == const Locale('en')
                 ? AppTextStyles.fontFamilyNotoKufiArabic
                 : AppTextStyles.fontFamilyMontserrat,

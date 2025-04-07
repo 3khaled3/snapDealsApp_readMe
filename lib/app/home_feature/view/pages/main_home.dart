@@ -33,6 +33,7 @@ class _MainHomeViewState extends State<MainHomeView> {
     print('MainHomeView build called with index: $_currentIndex');
     return Scaffold(
       extendBody: true,
+      backgroundColor: Color(0xffF9FAFB),
       body: SafeArea(
         child: _views[_currentIndex],
         // IndexedStack(
