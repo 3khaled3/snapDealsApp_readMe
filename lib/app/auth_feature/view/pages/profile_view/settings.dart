@@ -81,7 +81,10 @@ class _SettingsViewState extends State<SettingsView> {
                       children: [
                         ListTile(
                           title: Text(context.tr.Arabic,
-                              style: AppTextStyles.regular18()),
+                              style: AppTextStyles.regular18().copyWith(
+                                fontFamily:
+                                    AppTextStyles.fontFamilyNotoKufiArabic,
+                              )),
                           trailing: Icon(
                             Icons.settings_outlined,
                             color: context.tr.lang == "ar"

@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "CancelationPolicyDiscription6": MessageLookupByLibrary.simpleMessage(
       "لإلغاء طلبك، يرجى التواصل معنا عبر [البريد الإلكتروني أو رقم الهاتف]، أو من خلال التطبيق مباشرة.",
     ),
+    "ChatWord": MessageLookupByLibrary.simpleMessage("دردشة"),
     "Language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "Name": MessageLookupByLibrary.simpleMessage("ألاسم"),
     "Number": MessageLookupByLibrary.simpleMessage("الرقم"),
@@ -88,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "*الإلغاء والإرجاع*",
     ),
     "Version": MessageLookupByLibrary.simpleMessage("النسخة"),
+    "aboutUs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
     "adDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإعلان"),
     "adTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان *"),
     "addImageDis": MessageLookupByLibrary.simpleMessage(
@@ -98,7 +100,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
     "brand": MessageLookupByLibrary.simpleMessage("العلامة التجارية *"),
     "brandHint": MessageLookupByLibrary.simpleMessage("العلامة التجارية"),
+    "callWord": MessageLookupByLibrary.simpleMessage("اتصال"),
+    "cancelWord": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "category": MessageLookupByLibrary.simpleMessage("الفئة*"),
+    "choose": MessageLookupByLibrary.simpleMessage("أختر"),
     "condition": MessageLookupByLibrary.simpleMessage("الحالة"),
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
@@ -114,15 +119,21 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "courses": MessageLookupByLibrary.simpleMessage("دورات"),
     "createAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
+    "currentPassword": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور الحالية",
+    ),
     "describtion": MessageLookupByLibrary.simpleMessage("الوصف *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "صف العنصر الذي تبيعه",
     ),
+    "describtionWord": MessageLookupByLibrary.simpleMessage("الوصف"),
+    "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
     "drawingTools": MessageLookupByLibrary.simpleMessage("أدوات رسم"),
     "electronics": MessageLookupByLibrary.simpleMessage("إلكترونيات"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "engineeringTools": MessageLookupByLibrary.simpleMessage("أدوات هندسية"),
     "enterTitle": MessageLookupByLibrary.simpleMessage("أدخل العنوان"),
+    "favoriteView": MessageLookupByLibrary.simpleMessage("عرض المفضلة"),
     "female": MessageLookupByLibrary.simpleMessage("أنثي"),
     "forgotPasswordButton": MessageLookupByLibrary.simpleMessage(
       "هل نسيت كلمة المرور؟",
@@ -138,6 +149,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintSearch": MessageLookupByLibrary.simpleMessage("ما الذي تبحث عنه؟"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("صباح الخير"),
     "lang": MessageLookupByLibrary.simpleMessage("ar"),
+    "less": MessageLookupByLibrary.simpleMessage("أقل"),
+    "location": MessageLookupByLibrary.simpleMessage("الموقع *"),
+    "locationHint": MessageLookupByLibrary.simpleMessage("اختر الموقع"),
+    "logOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "logOutButtonLabel": MessageLookupByLibrary.simpleMessage(
+      "نعم، تسجيل الخروج",
+    ),
+    "logOutHint": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    ),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال بريدك الإلكتروني لتسجيل الدخول",
@@ -148,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(
       "هواتف وأجهزة لوحية",
     ),
+    "more": MessageLookupByLibrary.simpleMessage("أكثر"),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الجديدة",
     ),
@@ -178,9 +200,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "أدخل الرمز المرسل إلى بريدك الإلكتروني example@gmail.com.",
     ),
     "otpScreenLabel": MessageLookupByLibrary.simpleMessage("إدخال رمز التحقق"),
+    "ownerInformation": MessageLookupByLibrary.simpleMessage(
+      "التواصول مع المالك",
+    ),
     "passwordLoginLabel": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordManager": MessageLookupByLibrary.simpleMessage(
+      "مدير كلمات المرور",
+    ),
     "popularCourse": MessageLookupByLibrary.simpleMessage("أشهر الكورسات"),
     "popularProduct": MessageLookupByLibrary.simpleMessage("أشهر المنتاجات"),
+    "price": MessageLookupByLibrary.simpleMessage("السعر *"),
+    "priceHint": MessageLookupByLibrary.simpleMessage("أدخل السعر"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
     "registerButton": MessageLookupByLibrary.simpleMessage("متابعة"),
     "registerLabel": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
@@ -201,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "yourAge": MessageLookupByLibrary.simpleMessage("السن"),
     "yourName": MessageLookupByLibrary.simpleMessage("أسمك"),
     "yourNumber": MessageLookupByLibrary.simpleMessage("رقمك"),
+    "yourProfile": MessageLookupByLibrary.simpleMessage("ملفك الشخصي"),
     "yourProfileLabel": MessageLookupByLibrary.simpleMessage(
       "المعلومات الاساسيه",
     ),

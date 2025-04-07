@@ -5,6 +5,7 @@ import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dar
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -29,8 +30,8 @@ class ProfileView extends StatelessWidget {
           children: [
             80.ph,
             const SizedBox(
-              height: 80,
-              width: 80,
+              height: 100,
+              width: 100,
               child: CircleAvatar(
                 backgroundImage: AssetImage(
                   AppImageAssets.profileImage,
@@ -49,7 +50,7 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   isAddView: false,
                   leadingIcon: Icons.person_2_outlined,
-                  title: 'Your Profile',
+                  title: context.tr.yourProfile,
                   onTap: () {
                     GoRouter.of(context).push(YourProfileView.routeName);
                   },
@@ -58,7 +59,7 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   isAddView: false,
                   leadingIcon: Icons.subdirectory_arrow_right_outlined,
-                  title: 'About us',
+                  title: context.tr.aboutUs,
                   onTap: () {
                     GoRouter.of(context).push(AboutUsView.routeName);
                   },
@@ -67,7 +68,7 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   isAddView: false,
                   leadingIcon: Icons.password_outlined,
-                  title: 'Password  Manager',
+                  title: context.tr.passwordManager,
                   onTap: () {
                     CustomBottomSheet.showPasswordManagerSheet(context);
                   },
@@ -76,7 +77,7 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   isAddView: false,
                   leadingIcon: Icons.settings_outlined,
-                  title: 'Settings',
+                  title: context.tr.Settings,
                   onTap: () {
                     GoRouter.of(context).push(SettingsView.routeName);
                   },
@@ -85,7 +86,7 @@ class ProfileView extends StatelessWidget {
                 CustomListTile(
                   isAddView: false,
                   leadingIcon: Icons.logout_outlined,
-                  title: 'Log out',
+                  title: context.tr.logOut,
                   onTap: () {
                     CustomBottomSheet.showLogoutSheet(context);
                   },

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
 import 'package:snap_deals/app/home_feature/view/pages/products.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -17,13 +19,13 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
 
   // Original categories and icons
   final List<String> originalCategories = [
-    'Medical',
-    'Courses',
-    'Mobile & Tablets',
-    'More',
-    'Drawing tools',
-    'Engineering tools',
-    'less'
+    Tr.current.medicalTools,
+    Tr.current.courses,
+    Tr.current.mobilesAndTablets,
+    Tr.current.more,
+    Tr.current.drawingTools,
+    Tr.current.engineeringTools,
+    Tr.current.less
   ];
 
   final List<IconData> originalIcons = [
@@ -62,15 +64,15 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (categories[index] == "More" ||
-                        categories[index] == "less") {
+                    if (categories[index] == context.tr.more ||
+                        categories[index] == context.tr.less) {
                       setState(() {
                         isMore = !isMore;
-                        if (categories[index] == "More") {
+                        if (categories[index] == context.tr.more) {
                           // Change "More" to "Electronic" and update the icon
-                          categories[index] = "Electronic";
+                          categories[index] = context.tr.electronics;
                           categoriesIcons[index] = Icons.computer_outlined;
-                        } else if (categories[index] == "less") {
+                        } else if (categories[index] == context.tr.less) {
                           // Restore to original categories and icons
                           categories = List.from(originalCategories);
                           categoriesIcons = List.from(originalIcons);
@@ -78,7 +80,7 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                       });
                       return;
                     }
-                    if (categories[index] == "Courses") {
+                    if (categories[index] == context.tr.courses) {
                       GoRouter.of(context).push(CoursesView.routeName,
                           extra: CoursesViewArgs(title: categories[index]));
                       return;

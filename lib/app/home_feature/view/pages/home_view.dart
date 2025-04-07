@@ -83,7 +83,7 @@ class HomeView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           28.ph,
-          const HomeAppBar('User name'),
+          const HomeAppBar('Ziad Tamer'),
           28.ph,
           const Center(child: CategoriesAvatar()),
           24.ph,

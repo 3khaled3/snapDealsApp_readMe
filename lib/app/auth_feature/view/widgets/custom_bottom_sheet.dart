@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password_view.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -31,34 +33,35 @@ class CustomBottomSheet {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 36),
+            36.ph,
             Text(
-              'Log out',
+              context.tr.logOut,
               style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
             ),
-            const SizedBox(height: 28),
+            28.ph,
             Text(
-              'Are you sure you want to log out?',
+              context.tr.logOutHint,
               style:
                   AppTextStyles.medium18().copyWith(color: ColorsBox.greyish),
             ),
-            const SizedBox(height: 47),
+            47.ph,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildButton(
-                    text: 'Cancel',
+                    text: context.tr.cancelWord,
                     textColor: ColorsBox.brightBlue,
                     borderColor: ColorsBox.brightBlue,
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => GoRouter.of(context).pop(),
                   ),
                   _buildButton(
-                    text: 'Yes, Logout',
+                    text: context.tr.logOutButtonLabel,
                     textColor: ColorsBox.white,
                     backgroundColor: ColorsBox.brightBlue,
-                    onTap: () {},
+                    onTap: () =>
+                        GoRouter.of(context).push(LoginScreen.routeName),
                   ),
                 ],
               ),
@@ -79,8 +82,8 @@ class CustomBottomSheet {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 135,
-        height: 50,
+        width: 150,
+        height: 60,
         decoration: BoxDecoration(
           color: backgroundColor ?? Colors.transparent,
           borderRadius: BorderRadius.circular(55),
@@ -88,6 +91,7 @@ class CustomBottomSheet {
         ),
         child: Center(
           child: Text(
+            textAlign: TextAlign.center,
             text,
             style: AppTextStyles.medium18().copyWith(color: textColor),
           ),
@@ -121,13 +125,13 @@ class CustomBottomSheet {
           children: [
             23.ph,
             Text(
-              'Password Manager',
+              context.tr.passwordManager,
               style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
             ),
             25.ph,
-            const CustomTextFormField(
-              hintText: "Current Password",
-              labelText: "Current Password",
+            CustomTextFormField(
+              hintText: context.tr.currentPassword,
+              labelText: context.tr.currentPassword,
               isPassword: true,
               validator: Validators.validatePassword,
             ),
@@ -147,40 +151,14 @@ class CustomBottomSheet {
               ),
             ),
             25.ph,
-            Row(
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 26, vertical: 20),
-                    shape: const CircleBorder(),
-                    fixedSize: const Size(66, 66),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_back_ios,
-                    color: ColorsBox.brightBlue,
-                    size: 26,
-                  ),
-                ),
-                10.pw,
-                Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: CustomPrimaryButton(
-                      title: context.tr.nextButton,
-                      onTap: () {
-                        if (formKey.currentState?.validate() ?? false) {
-                          // loginCubit.loginWithEmail(email, password);
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            CustomButtonRow(
+              saveButtonText: context.tr.nextButton,
+              onSave: () {
+                if (formKey.currentState?.validate() ?? false) {
+                  GoRouter.of(context).push(MainHomeView.routeName);
+                }
+              },
+            )
           ],
         ),
       ),

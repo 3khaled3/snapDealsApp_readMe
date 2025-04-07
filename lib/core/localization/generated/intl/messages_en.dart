@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "CancelationPolicyDiscription6": MessageLookupByLibrary.simpleMessage(
       "To cancel your order, please contact us at [email address or phone number], or through the app directly.",
     ),
+    "ChatWord": MessageLookupByLibrary.simpleMessage("Chat"),
     "English": MessageLookupByLibrary.simpleMessage("English"),
     "Language": MessageLookupByLibrary.simpleMessage("Language"),
     "Name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -91,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cancellation and Returns*",
     ),
     "Version": MessageLookupByLibrary.simpleMessage("Version"),
+    "aboutUs": MessageLookupByLibrary.simpleMessage("About us"),
     "adDetails": MessageLookupByLibrary.simpleMessage("Ad details"),
     "adTitle": MessageLookupByLibrary.simpleMessage("Ad title *"),
     "addImageDis": MessageLookupByLibrary.simpleMessage(
@@ -104,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "brand": MessageLookupByLibrary.simpleMessage("Brand *"),
     "brandHint": MessageLookupByLibrary.simpleMessage("Brand"),
+    "callWord": MessageLookupByLibrary.simpleMessage("Call"),
+    "cancelWord": MessageLookupByLibrary.simpleMessage("Cancel"),
     "category": MessageLookupByLibrary.simpleMessage("Category*"),
     "choose": MessageLookupByLibrary.simpleMessage("Choose"),
     "condition": MessageLookupByLibrary.simpleMessage("Condition"),
@@ -121,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
     "createAccount": MessageLookupByLibrary.simpleMessage("Create an account"),
+    "currentPassword": MessageLookupByLibrary.simpleMessage("Current Password"),
     "describtion": MessageLookupByLibrary.simpleMessage("Describtion *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "Describe the item you are selling",
@@ -134,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Engineering tools",
     ),
     "enterTitle": MessageLookupByLibrary.simpleMessage("Enter title"),
+    "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite View"),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
     "forgotPasswordButton": MessageLookupByLibrary.simpleMessage(
       "Forgot Password?",
@@ -151,8 +157,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Good Morning"),
     "lang": MessageLookupByLibrary.simpleMessage("en"),
+    "less": MessageLookupByLibrary.simpleMessage("Less"),
     "location": MessageLookupByLibrary.simpleMessage("Location *"),
     "locationHint": MessageLookupByLibrary.simpleMessage("Choose location"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
+    "logOutButtonLabel": MessageLookupByLibrary.simpleMessage("Yes, Logout"),
+    "logOutHint": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to log out?",
+    ),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "Please enter your email to log in",
@@ -163,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(
       "Mobiles and Tablets",
     ),
+    "more": MessageLookupByLibrary.simpleMessage("More"),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage("New Password"),
     "newWord": MessageLookupByLibrary.simpleMessage("NEW"),
     "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
@@ -193,7 +206,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpScreenLabel": MessageLookupByLibrary.simpleMessage(
       "Enter Verification Code",
     ),
+    "ownerInformation": MessageLookupByLibrary.simpleMessage(
+      "Contact with the owner",
+    ),
     "passwordLoginLabel": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordManager": MessageLookupByLibrary.simpleMessage(
+      "Password  Manager",
+    ),
     "popularCourse": MessageLookupByLibrary.simpleMessage("Popular Course"),
     "popularProduct": MessageLookupByLibrary.simpleMessage("Popular Product"),
     "price": MessageLookupByLibrary.simpleMessage("Price *"),
@@ -220,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "yourAge": MessageLookupByLibrary.simpleMessage("Your Age"),
     "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),
     "yourNumber": MessageLookupByLibrary.simpleMessage("Your Number"),
+    "yourProfile": MessageLookupByLibrary.simpleMessage("Your Profile"),
     "yourProfileLabel": MessageLookupByLibrary.simpleMessage(
       "Basic information",
     ),

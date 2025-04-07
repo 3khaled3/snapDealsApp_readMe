@@ -4,12 +4,11 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart'
 import 'package:snap_deals/app/home_feature/view/widgets/custom_add_details_title.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_add_image.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_add_text_field.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/custom_contanier.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_drop_down_button.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_tobic.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AddDetailsArgs {
@@ -64,43 +63,6 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                   ? _AddMobileDetails(context)
                   : 0.ph,
               23.ph,
-              Text(
-                context.tr.condition,
-                style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-              ),
-              6.ph,
-              Row(
-                children: [
-                  CustomContainer(
-                    width: 55,
-                    height: 30,
-                    backgroundColor: ColorsBox.white,
-                    text: context.tr.newWord,
-                    textStyle: AppTextStyles.regular12(),
-                    borderColor: Colors.black,
-                    borderRadius: 10.0,
-                    onTap: () {
-                      // TODO change background color
-                    },
-                  ),
-                  12.pw,
-                  CustomContainer(
-                    width: 55,
-                    height: 30,
-                    backgroundColor: ColorsBox.white,
-                    text: context.tr.used,
-                    textStyle: AppTextStyles.regular12()
-                        .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                    borderColor: Colors.black,
-                    borderRadius: 10.0,
-                    onTap: () {
-                      // TODO change background color
-                    },
-                  ),
-                ],
-              ),
-              23.ph,
               CustomAddTextField(
                 title: context.tr.adTitle,
                 hint: context.tr.enterTitle,
@@ -120,6 +82,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                   right: 10,
                 ),
               ),
+              const CustomTobic(),
               23.ph,
               CustomAddTextField(
                 title: context.tr.location,

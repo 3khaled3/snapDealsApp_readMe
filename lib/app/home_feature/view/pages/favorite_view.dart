@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
@@ -87,7 +88,7 @@ class FavoriteView extends StatelessWidget {
         children: [
           Center(
               child: Text(
-            'Favorite View',
+            context.tr.favoriteView,
             style: AppTextStyles.semiBold20()
                 .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
           )),

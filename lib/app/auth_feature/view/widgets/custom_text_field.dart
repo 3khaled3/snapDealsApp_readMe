@@ -4,7 +4,7 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import '../../../../core/themes/app_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final String hintText;
+  final String? hintText;
   final String? labelText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
@@ -18,7 +18,7 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField({
     super.key,
-    required this.hintText,
+    this.hintText,
     this.labelText,
     this.prefixIcon,
     this.suffixIcon,

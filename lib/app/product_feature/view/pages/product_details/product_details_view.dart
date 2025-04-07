@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_image_slider.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/describtion_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/details_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/main_details_section.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
 
 class ProductDetailsArgs {}
 
@@ -25,47 +24,36 @@ class ProductDetailsView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MainDetailsSection(),
-                15.ph,
-                const Padding(
-                  padding: EdgeInsets.only(right: 35, left: 35),
-                  child: Divider(
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
+                const MainDetailsSection(
+                  price: 'EGP 53,000',
+                  brand: 'Samsung',
+                  title: 'Samsung Galaxy S24 Ultra',
+                  location: 'Zagazig, Sharqia',
+                  date: '20/11/2024',
                 ),
-
-                const DetailsSection(
+                15.ph,
+                _spaceBetweenSections(),
+                15.ph,
+                const CustomDetailsGrid(
                   details: {
                     'Condition': 'New',
                     'Style': 'S 24 ultra',
                     'Storage': '256 GB',
                     'RAM': '8 GB',
+                    'Color': 'Black',
                   },
                 ),
                 15.ph,
-                const Padding(
-                  padding: EdgeInsets.only(right: 35, left: 35),
-                  child: Divider(
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
+                _spaceBetweenSections(),
+                15.ph,
+                const DescribtionSection(
+                  description:
+                      '【Complete and Professional Art Drawing Supplies Pencils Set with Sketch Pad】, 15 graphite sketch pencils for drawing . 3 black and 3 white, charcoal pencils, 3 graphite and 3 charcoal sticks, 4 willow charcoal, 3 blending stumps',
                 ),
                 15.ph,
-                Text(
-                  context.tr.describtionWord,
-                  style: AppTextStyles.medium20().copyWith(
-                    fontFamily: AppTextStyles.fontFamilyLora,
-                    color: ColorsBox.brightBlue,
-                  ),
-                ),
+                _spaceBetweenSections(),
                 15.ph,
-                Text(
-                  '【Complete and Professional Art Drawing Supplies Pencils Set with Sketch Pad】, 15 graphite sketch pencils for drawing . 3 black and 3 white, harcoal pencils, 3 graphite and 3 charcoal sticks, 4 willow charcoal, 3 blending stumps',
-                  style: AppTextStyles.regular16()
-                      .copyWith(color: ColorsBox.black),
-                ),
-                //TODO: Add row button to chat with seller
+                const ContactSection(name: 'Ziad Tamer')
               ],
             )
           ],
@@ -73,4 +61,14 @@ class ProductDetailsView extends StatelessWidget {
       ),
     );
   }
+}
+
+_spaceBetweenSections() {
+  return const Padding(
+    padding: EdgeInsets.only(right: 35, left: 35),
+    child: Divider(
+      thickness: 1,
+      color: Colors.black,
+    ),
+  );
 }

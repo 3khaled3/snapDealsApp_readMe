@@ -914,6 +914,111 @@ class Tr {
       args: [],
     );
   }
+
+  /// `Contact with the owner`
+  String get ownerInformation {
+    return Intl.message(
+      'Contact with the owner',
+      name: 'ownerInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Call`
+  String get callWord {
+    return Intl.message('Call', name: 'callWord', desc: '', args: []);
+  }
+
+  /// `Chat`
+  String get ChatWord {
+    return Intl.message('Chat', name: 'ChatWord', desc: '', args: []);
+  }
+
+  /// `Your Profile`
+  String get yourProfile {
+    return Intl.message(
+      'Your Profile',
+      name: 'yourProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About us`
+  String get aboutUs {
+    return Intl.message('About us', name: 'aboutUs', desc: '', args: []);
+  }
+
+  /// `Password  Manager`
+  String get passwordManager {
+    return Intl.message(
+      'Password  Manager',
+      name: 'passwordManager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message('Log out', name: 'logOut', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to log out?`
+  String get logOutHint {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'logOutHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancelWord {
+    return Intl.message('Cancel', name: 'cancelWord', desc: '', args: []);
+  }
+
+  /// `Yes, Logout`
+  String get logOutButtonLabel {
+    return Intl.message(
+      'Yes, Logout',
+      name: 'logOutButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Password`
+  String get currentPassword {
+    return Intl.message(
+      'Current Password',
+      name: 'currentPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite View`
+  String get favoriteView {
+    return Intl.message(
+      'Favorite View',
+      name: 'favoriteView',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message('More', name: 'more', desc: '', args: []);
+  }
+
+  /// `Less`
+  String get less {
+    return Intl.message('Less', name: 'less', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

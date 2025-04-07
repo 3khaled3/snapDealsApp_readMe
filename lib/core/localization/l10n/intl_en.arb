@@ -102,11 +102,24 @@
     "choose": "Choose",
     "skip": "Skip",
     "createAccount": "Create an account",
-"price":"Price *",
+    "price":"Price *",
     "priceHint":"Enter price",
     "location":"Location *",
     "locationHint":"Choose location",
     "details":"Details",
-    "describtionWord":"Describtion"
-
+    "describtionWord":"Describtion",
+    "ownerInformation":"Contact with the owner",
+    "callWord":"Call",
+    "ChatWord":"Chat",
+    "yourProfile":"Your Profile",
+    "aboutUs":"About us",
+    "passwordManager" :"Password  Manager",
+    "logOut":"Log out",
+    "logOutHint":"Are you sure you want to log out?",
+    "cancelWord":"Cancel",
+    "logOutButtonLabel":"Yes, Logout",
+    "currentPassword":"Current Password",
+    "favoriteView":"Favorite View",
+    "more":"More",
+    "less":"Less"
 }
