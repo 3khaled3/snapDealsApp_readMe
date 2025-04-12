@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -31,8 +32,13 @@ class ProductCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(ProductDetailsView.routeName,
-                extra: ProductDetailsArgs());
+            if (isCourse == true) {
+              GoRouter.of(context).push(CourseDetailsView.routeName,
+                  extra: CourseDetailsViewArgs());
+            } else {
+              GoRouter.of(context).push(ProductDetailsView.routeName,
+                  extra: ProductDetailsArgs());
+            }
           },
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -51,7 +57,16 @@ class ProductCard extends StatelessWidget {
                   children: [
                     /// Product Image
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        if (isCourse == true) {
+                          GoRouter.of(context).push(CourseDetailsView.routeName,
+                              extra: CourseDetailsViewArgs());
+                        } else {
+                          GoRouter.of(context).push(
+                              ProductDetailsView.routeName,
+                              extra: ProductDetailsArgs());
+                        }
+                      },
                       child: _ProductImage(imagePath: imagePath),
                     ),
 

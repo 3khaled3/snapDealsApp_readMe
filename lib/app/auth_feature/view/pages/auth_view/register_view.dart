@@ -1,6 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
@@ -10,7 +9,6 @@ import 'package:snap_deals/core/extensions/context_extension.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 
-import '../../widgets/custom_primary_button.dart';
 import '../../widgets/custom_text_field.dart';
 
 class RegisterViewArgs {

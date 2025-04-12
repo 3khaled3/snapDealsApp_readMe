@@ -32,7 +32,6 @@ class ProductDetailsView extends StatelessWidget {
                   location: 'Zagazig, Sharqia',
                   date: '20/11/2024',
                 ),
-
                 18.ph,
                 const CustomDetailsGrid(
                   details: {
@@ -43,13 +42,11 @@ class ProductDetailsView extends StatelessWidget {
                     'Color': 'Black',
                   },
                 ),
-
                 18.ph,
                 const DescribtionSection(
                   description:
                       '【Complete and Professional Art Drawing Supplies Pencils Set with Sketch Pad】, 15 graphite sketch pencils for drawing . 3 black and 3 white, charcoal pencils, 3 graphite and 3 charcoal sticks, 4 willow charcoal, 3 blending stumps',
                 ),
-
                 18.ph,
                 const ContactSection(name: 'Ziad Tamer')
               ],
@@ -59,14 +56,4 @@ class ProductDetailsView extends StatelessWidget {
       ),
     );
   }
-}
-
-_spaceBetweenSections() {
-  return const Padding(
-    padding: EdgeInsets.only(right: 35, left: 35),
-    child: Divider(
-      thickness: 1,
-      color: Colors.black,
-    ),
-  );
 }
