@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_button.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
@@ -51,8 +52,9 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
           ],
         ),
         Container(
-          padding: const EdgeInsets.only(top: 15, left: 15),
-          alignment: Alignment.topLeft,
+          padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          alignment:
+              context.tr.lang == "ar" ? Alignment.topRight : Alignment.topLeft,
           child: const CustomButton(),
         ),
       ],
