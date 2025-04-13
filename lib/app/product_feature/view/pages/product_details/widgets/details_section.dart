@@ -60,7 +60,7 @@ class CustomDetailsGrid extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    6.ph,
+                    4.ph,
                     Text(
                       entry.value,
                       style: const TextStyle(
