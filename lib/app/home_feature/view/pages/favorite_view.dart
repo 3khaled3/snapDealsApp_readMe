@@ -2,111 +2,72 @@ import 'package:flutter/material.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class FavoriteViewArgs {}
 
 class FavoriteView extends StatelessWidget {
   const FavoriteView({this.args, super.key});
   final FavoriteViewArgs? args;
+
   static const String routeName = '/favorite_route';
 
   @override
   Widget build(BuildContext context) {
-    List<ProductCard> products = [
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        isCourse: false,
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-      const ProductCard(
-        isCourse: true,
-        productName: 'Product Name',
-        price: 1000,
-        imagePath: AppImageAssets.forgotPassImage,
-        productOwner: 'Ziad tamer',
-      ),
-    ];
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.only(top: 71, bottom: 80, left: 15, right: 15),
-      child: Column(
-        children: [
-          Center(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            16.ph,
+            Center(
               child: Text(
-            context.tr.favoriteView,
-            style: AppTextStyles.semiBold20()
-                .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-          )),
-          30.ph,
-          SizedBox(
-              height: 700,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:
-                      2, // Adjust for the number of columns you want
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.7, // Adjust based on the design
+                context.tr.favoriteView,
+                style: AppTextStyles.semiBold20().copyWith(
+                  fontFamily: AppTextStyles.fontFamilyLora,
                 ),
-                itemCount: products.length,
-                itemBuilder: (context, index) => products[index],
-              )),
-        ],
+              ),
+            ),
+            16.ph,
+            Divider(
+              color: ColorsBox.greyishTwo,
+              height: 1,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /// Title
+
+                    /// Grid View of Products
+                    Expanded(
+                      child: GridView.builder(
+                        padding: const EdgeInsets.only(bottom: 80),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 0,
+                          childAspectRatio: 0.66,
+                        ),
+                        itemCount: 7,
+                        itemBuilder: (context, index) => const ProductCard(
+                          productName: 'Noise Cancelling Headphones',
+                          price: 950,
+                          productOwner: "sam sam sam sam sam sam sam ",
+                          imagePath:
+                              "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

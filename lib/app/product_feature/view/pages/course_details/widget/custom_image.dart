@@ -1,36 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_button.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
-class CustomImage extends StatelessWidget {
-  const CustomImage({super.key});
+class CustomImage extends StatefulWidget {
+  const CustomImage({
+    super.key,
+  });
 
+  @override
+  State<CustomImage> createState() => _CustomImageState();
+}
+
+class _CustomImageState extends State<CustomImage> {
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          height: MediaQuery.sizeOf(context).height * .56,
-          width: MediaQuery.sizeOf(context).width,
-          padding: EdgeInsets.only(
-              top: MediaQuery.sizeOf(context).height * .08,
-              left: 28,
-              right: 28),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(AppImageAssets.courseImage),
+        Positioned(
+          child: SizedBox(
+              height: 300,
+              child: Image.asset(
+                AppImageAssets.courseImage,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              )),
+        ),
+        SafeArea(
+          child: ElevatedButton(
+            style: const ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(
+                Color.fromARGB(109, 0, 0, 0),
+              ),
+              shape: WidgetStatePropertyAll(
+                CircleBorder(),
+              ),
+              elevation: WidgetStatePropertyAll(0),
+              overlayColor:
+                  WidgetStatePropertyAll(Color.fromARGB(65, 253, 159, 27)),
+            ),
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: ColorsBox.white,
             ),
           ),
         ),
-        Container(
-          padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
-          alignment:
-              context.tr.lang == "ar" ? Alignment.topRight : Alignment.topLeft,
-          child: const CustomButton(),
+        Positioned.fill(
+          bottom: 0,
+          top: 260,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              DotsBuilder(
+                images: ["0"],
+                currentPage: currentPage,
+              ),
+              const Spacer(),
+            ],
+          ),
         ),
       ],
+    );
+  }
+}
+
+class DotsBuilder extends StatelessWidget {
+  const DotsBuilder(
+      {super.key, required this.images, required this.currentPage});
+  final List<String> images;
+  final int currentPage;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List.generate(
+        images.isEmpty ? 1 : images.length,
+        (index) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Container(
+            decoration: BoxDecoration(
+              color: currentPage == index ? ColorsBox.brightBlue : Colors.grey,
+              borderRadius: BorderRadius.circular(999),
+            ),
+            width: currentPage == index ? 30 : 10,
+            height: 10,
+          ),
+        ),
+      ),
     );
   }
 }

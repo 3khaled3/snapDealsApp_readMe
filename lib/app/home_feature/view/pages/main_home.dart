@@ -1,11 +1,14 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/profile.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/login_dialog.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 
 class MainHomeViewArgs {}
@@ -27,12 +30,28 @@ class _MainHomeViewState extends State<MainHomeView> {
     FavoriteView(),
     ProfileView(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    customAppDialog(
+        context: context,
+        title: Tr.current.login_prompt,
+        supTitle: Tr.current.login_message,
+        buttonTitle: Tr.current.login,
+        cancelButtonTitle: Tr.current.continue_as_guest,
+        onPressed: () {
+          GoRouter.of(context)
+              .push(LoginScreen.routeName, extra: LoginViewArgs());
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     print('MainHomeView build called with index: $_currentIndex');
     return Scaffold(
       extendBody: true,
+      resizeToAvoidBottomInset: false,
+
       backgroundColor: Color(0xffF9FAFB),
       body: SafeArea(
         child: _views[_currentIndex],

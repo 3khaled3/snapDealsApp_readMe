@@ -7,6 +7,7 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dar
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
@@ -23,78 +24,70 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: ColorsBox.paleGrey,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   title: Text(
+      //     context.tr.yourProfile,
+      //     style: AppTextStyles.semiBold20().copyWith(
+      //       fontFamily: AppTextStyles.fontFamilyLora,
+      //       color: ColorsBox.black,
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(right: 15, left: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            80.ph,
-            const SizedBox(
-              height: 100,
-              width: 100,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(
-                  AppImageAssets.profileImage,
-                ),
-              ),
+            const CircleAvatar(
+              radius: 50,
+              backgroundImage: AssetImage(AppImageAssets.profileImage),
             ),
             12.ph,
             Text(
               "Ziad Tamer",
-              style: AppTextStyles.semiBold24()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+              style: AppTextStyles.semiBold24().copyWith(
+                fontFamily: AppTextStyles.fontFamilyLora,
+              ),
             ),
-            27.ph,
+            30.ph,
+
+            /// Profile Options List
             Column(
               children: [
                 CustomListTile(
-                  isAddView: false,
                   leadingIcon: Icons.person_2_outlined,
                   title: context.tr.yourProfile,
-                  onTap: () {
-                    GoRouter.of(context).push(YourProfileView.routeName);
-                  },
+                  onTap: () =>
+                      GoRouter.of(context).push(YourProfileView.routeName),
                 ),
-                spaceBetweenListTile(),
+                12.ph,
                 CustomListTile(
-                  isAddView: false,
                   leadingIcon: Icons.subdirectory_arrow_right_outlined,
                   title: context.tr.aboutUs,
-                  onTap: () {
-                    GoRouter.of(context).push(AboutUsView.routeName);
-                  },
+                  onTap: () => GoRouter.of(context).push(AboutUsView.routeName),
                 ),
-                spaceBetweenListTile(),
+                12.ph,
                 CustomListTile(
-                  isAddView: false,
                   leadingIcon: Icons.password_outlined,
                   title: context.tr.passwordManager,
-                  onTap: () {
-                    CustomBottomSheet.showPasswordManagerSheet(context);
-                  },
+                  onTap: () =>
+                      CustomBottomSheet.showPasswordManagerSheet(context),
                 ),
-                spaceBetweenListTile(),
+                12.ph,
                 CustomListTile(
-                  isAddView: false,
                   leadingIcon: Icons.settings_outlined,
                   title: context.tr.Settings,
-                  onTap: () {
-                    GoRouter.of(context).push(SettingsView.routeName);
-                  },
+                  onTap: () =>
+                      GoRouter.of(context).push(SettingsView.routeName),
                 ),
-                spaceBetweenListTile(),
+                12.ph,
                 CustomListTile(
-                  isAddView: false,
                   leadingIcon: Icons.logout_outlined,
                   title: context.tr.logOut,
-                  onTap: () {
-                    CustomBottomSheet.showLogoutSheet(context);
-                  },
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 2,
-                  color: Colors.grey.shade300,
+                  onTap: () => CustomBottomSheet.showLogoutSheet(context),
                 ),
               ],
             ),

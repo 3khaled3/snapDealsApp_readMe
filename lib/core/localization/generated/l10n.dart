@@ -1019,6 +1019,41 @@ class Tr {
   String get less {
     return Intl.message('Less', name: 'less', desc: '', args: []);
   }
+
+  /// `Do you want to log in?`
+  String get login_prompt {
+    return Intl.message(
+      'Do you want to log in?',
+      name: 'login_prompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must log in to continue accessing all services.`
+  String get login_message {
+    return Intl.message(
+      'You must log in to continue accessing all services.',
+      name: 'login_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue as Guest`
+  String get continue_as_guest {
+    return Intl.message(
+      'Continue as Guest',
+      name: 'continue_as_guest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

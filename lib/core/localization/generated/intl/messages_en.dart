@@ -123,6 +123,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactNumber": MessageLookupByLibrary.simpleMessage(
       "this is the number for buyers contacts and other notification",
     ),
+    "continue_as_guest": MessageLookupByLibrary.simpleMessage(
+      "Continue as Guest",
+    ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
     "createAccount": MessageLookupByLibrary.simpleMessage("Create an account"),
     "currentPassword": MessageLookupByLibrary.simpleMessage("Current Password"),
@@ -165,11 +168,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "logOutHint": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
+    "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "Please enter your email to log in",
     ),
     "loginScreenLabel": MessageLookupByLibrary.simpleMessage("Welcome Back"),
+    "login_message": MessageLookupByLibrary.simpleMessage(
+      "You must log in to continue accessing all services.",
+    ),
+    "login_prompt": MessageLookupByLibrary.simpleMessage(
+      "Do you want to log in?",
+    ),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "medicalTools": MessageLookupByLibrary.simpleMessage("Medical tools"),
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(

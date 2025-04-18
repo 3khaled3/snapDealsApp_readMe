@@ -9,39 +9,37 @@ class AboutCourseSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.42,
-      width: double.infinity,
-      child: ListView(
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DescSection(),
-              SizedBox(height: 20),
-              InstructorDetails(),
-              SizedBox(height: 20),
-              Text(
-                'Info',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 10),
-              Wrap(
-                spacing: 40,
-                runSpacing: 15,
-                children: [
-                  InfoItem(title: "Students", value: "15,231"),
-                  InfoItem(title: "Language", value: "English"),
-                  InfoItem(title: "Last update", value: "Feb 2, 2024"),
-                  InfoItem(title: "Subtitle", value: "English and 2 more"),
-                  InfoItem(title: "Level", value: "Beginner"),
-                  InfoItem(title: "Access", value: "Mobile, Desktop"),
-                ],
-              ),
-            ],
-          ),
-          15.ph,
-        ],
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const DescSection(),
+            20.ph,
+            const InstructorDetails(),
+            20.ph,
+            const Text(
+              'Info',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            10.ph,
+            const Wrap(
+              spacing: 40,
+              runSpacing: 15,
+              children: [
+                InfoItem(title: "Students", value: "15,231"),
+                InfoItem(title: "Language", value: "English"),
+                InfoItem(title: "Last update", value: "Feb 2, 2024"),
+                InfoItem(title: "Subtitle", value: "English and 2 more"),
+                InfoItem(title: "Level", value: "Beginner"),
+                InfoItem(title: "Access", value: "Mobile, Desktop"),
+              ],
+            ),
+            15.ph,
+          ],
+        ),
       ),
     );
   }

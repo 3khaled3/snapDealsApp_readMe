@@ -10,34 +10,60 @@ class ReviewsSetion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CustomReviewContainer> reviews = [
-      const CustomReviewContainer(imagePath: AppImageAssets.profileImage, name: "reda ahmed", time: '8 month age', comment: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(imagePath: AppImageAssets.profileImage, name: "ziad tamer", time: '5 month age', comment: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(imagePath: AppImageAssets.profileImage, name: "khaled tarek", time: '12 days age', comment: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(imagePath: AppImageAssets.profileImage, name: "ahmed mohamed", time: '10 hours age', comment: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(imagePath: AppImageAssets.profileImage, name: "reda ahmed", time: '2 days age', comment: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(imagePath: AppImageAssets.profileImage, name: "reda ahmed", time: '2 month age', comment: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
+      const CustomReviewContainer(
+          imagePath: AppImageAssets.profileImage,
+          name: "reda ahmed",
+          time: '8 month age',
+          comment:
+              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
+      const CustomReviewContainer(
+          imagePath: AppImageAssets.profileImage,
+          name: "ziad tamer",
+          time: '5 month age',
+          comment:
+              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
+      const CustomReviewContainer(
+          imagePath: AppImageAssets.profileImage,
+          name: "khaled tarek",
+          time: '12 days age',
+          comment:
+              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
+      const CustomReviewContainer(
+          imagePath: AppImageAssets.profileImage,
+          name: "ahmed mohamed",
+          time: '10 hours age',
+          comment:
+              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
+      const CustomReviewContainer(
+          imagePath: AppImageAssets.profileImage,
+          name: "reda ahmed",
+          time: '2 days age',
+          comment:
+              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
+      const CustomReviewContainer(
+          imagePath: AppImageAssets.profileImage,
+          name: "reda ahmed",
+          time: '2 month age',
+          comment:
+              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         9.ph,
         Text('Reviews (${reviews.length})', style: AppTextStyles.semiBold20()),
-        
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.36,
-          width: double.infinity,
-          child: ListView.builder(
-              itemCount: reviews.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    
-                    reviews[index],
-                    15.ph,
-                  ],
-                );
-              }),
-        ),
+        ListView.builder(
+            itemCount: reviews.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  reviews[index],
+                  15.ph,
+                ],
+              );
+            }),
       ],
     );
   }

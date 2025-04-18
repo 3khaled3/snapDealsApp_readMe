@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-class ProductCard extends StatelessWidget {
-  final String productName;
-  final String productOwner;
+class CourseCard extends StatelessWidget {
+  final String courseName;
+  final String courseOwner;
   final String imagePath;
   final double price;
 
-  const ProductCard({
+  const CourseCard({
     super.key,
-    required this.productName,
+    required this.courseName,
     required this.imagePath,
-    this.productOwner = '',
+    this.courseOwner = '',
     required this.price,
   });
 
@@ -25,8 +25,8 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         GoRouter.of(context).push(
-          ProductDetailsView.routeName,
-          extra: ProductDetailsArgs(),
+          CourseDetailsView.routeName,
+          extra: CourseDetailsViewArgs(),
         );
       },
       child: Card(
@@ -51,7 +51,7 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    /// Product Image
+                    /// course Image
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: CachedNetworkImage(
@@ -73,19 +73,19 @@ class ProductCard extends StatelessWidget {
                     ),
                     0.ph,
 
-                    /// Product Name
+                    /// course Name
                     Text(
-                      productName,
+                      courseName,
                       style: AppTextStyles.medium14(),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
 
-                    /// Product Owner (for courses)
+                    /// course Owner (for courses)
                     // if (isCourse == true) ...[
 
                     Text(
-                      productOwner,
+                      courseOwner,
                       style: AppTextStyles.semiBold12()
                           .copyWith(color: ColorsBox.greyish),
                       maxLines: 1,
@@ -121,7 +121,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     0.ph,
 
-                    /// Product Price
+                    /// course Price
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Align(

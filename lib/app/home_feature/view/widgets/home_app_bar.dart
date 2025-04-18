@@ -6,71 +6,90 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar(
-    this.name, {
-    super.key,
-  });
+  const HomeAppBar(this.name, {super.key});
   final String name;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        28.pw,
-
-        /// <---- user image ---->///
-        InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(99999),
-          child: const SizedBox(
-            height: 40,
-            width: 40,
-            child: CircleAvatar(
-              backgroundImage: AssetImage(
-                AppImageAssets.profileImage,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          /// User Image
+          InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(99999),
+            splashColor: ColorsBox.brightBlue.withOpacity(0.2),
+            child: Container(
+              height: 48,
+              width: 48,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: const CircleAvatar(
+                backgroundImage: AssetImage(AppImageAssets.profileImage),
               ),
             ),
           ),
-        ),
 
-        10.pw,
+          16.pw,
 
-        ///<----- user name ----->///
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              context.tr.homeTitle,
-              style:
-                  AppTextStyles.regular16().copyWith(color: ColorsBox.blueGrey),
-            ),
-            Text(
-              name,
-              style: AppTextStyles.semiBold20(),
-            ),
-          ],
-        ),
-        const Spacer(),
+          /// User Info
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                context.tr.homeTitle,
+                style: AppTextStyles.regular16().copyWith(
+                  color: ColorsBox.blueGrey,
+                ),
+              ),
+              2.ph,
+              Text(
+                name,
+                style: AppTextStyles.semiBold20(),
+              ),
+            ],
+          ),
 
-        /// <---- notification button ---->///
-        InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(200),
-          child: Ink(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: ColorsBox.white,
-              borderRadius: BorderRadius.circular(200),
-            ),
-            child: const Icon(
-              Icons.notifications_outlined,
-              color: ColorsBox.brightBlue,
+          const Spacer(),
+
+          /// Notification Icon
+          InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(20),
+            splashColor: ColorsBox.brightBlue.withOpacity(0.1),
+            child: Ink(
+              height: 44,
+              width: 44,
+              decoration: BoxDecoration(
+                color: ColorsBox.white,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.notifications_outlined,
+                color: ColorsBox.brightBlue,
+                size: 24,
+              ),
             ),
           ),
-        ),
-        40.pw,
-      ],
+        ],
+      ),
     );
   }
 }

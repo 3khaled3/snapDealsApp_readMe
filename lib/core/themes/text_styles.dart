@@ -15,7 +15,8 @@ String defaultFontFamily() {
 class AppTextStyles {
   // Font families
   static const String fontFamilyMontserrat = "Montserrat";
-  static String fontFamilyLora = Tr.current.lang != Langs.ar.lang ?"Lora":"NotoKufiArabic";
+  static String fontFamilyLora =
+      Tr.current.lang != Langs.ar.lang ? "Lora" : "NotoKufiArabic";
   static const String fontFamilyNotoKufiArabic = "NotoKufiArabic";
 
   // Text styles with dynamic sizes using RM.map
@@ -24,7 +25,7 @@ class AppTextStyles {
         fontFamily: defaultFontFamily(),
         fontSize: 42,
       );
-      static TextStyle bold34() => TextStyle(
+  static TextStyle bold34() => TextStyle(
         fontWeight: FontWeight.w700,
         fontFamily: defaultFontFamily(),
         fontSize: 34,
@@ -33,6 +34,16 @@ class AppTextStyles {
         fontWeight: FontWeight.w700,
         fontFamily: defaultFontFamily(),
         fontSize: 24,
+      );
+  static TextStyle bold20() => TextStyle(
+        fontWeight: FontWeight.w700,
+        fontFamily: defaultFontFamily(),
+        fontSize: 20,
+      );
+  static TextStyle bold16() => TextStyle(
+        fontWeight: FontWeight.w700,
+        fontFamily: defaultFontFamily(),
+        fontSize: 16,
       );
   static TextStyle bold28() => TextStyle(
         fontWeight: FontWeight.w700,

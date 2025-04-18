@@ -117,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactNumber": MessageLookupByLibrary.simpleMessage(
       "هذا هو الرقم لجهات اتصال المشترين والإشعارات الأخرى",
     ),
+    "continue_as_guest": MessageLookupByLibrary.simpleMessage("متابعة كزائر"),
     "courses": MessageLookupByLibrary.simpleMessage("دورات"),
     "createAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "currentPassword": MessageLookupByLibrary.simpleMessage(
@@ -159,11 +160,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "logOutHint": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     ),
+    "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال بريدك الإلكتروني لتسجيل الدخول",
     ),
     "loginScreenLabel": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك"),
+    "login_message": MessageLookupByLibrary.simpleMessage(
+      "يجب عليك تسجيل الدخول للمتابعة على جميع الخدمات.",
+    ),
+    "login_prompt": MessageLookupByLibrary.simpleMessage(
+      "هل تريد تسجيل الدخول؟",
+    ),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
     "medicalTools": MessageLookupByLibrary.simpleMessage("أدوات طبية"),
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(
