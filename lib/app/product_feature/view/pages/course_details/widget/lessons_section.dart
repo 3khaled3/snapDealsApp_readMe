@@ -35,41 +35,39 @@ class LessonsSection extends StatelessWidget {
                         onTap: () {},
                         borderRadius:
                             const BorderRadius.all(Radius.circular(40)),
-                        child: Expanded(
-                          child: Ink(
-                            height: 70,
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 45,
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.blue),
-                                    color: Colors.blueAccent,
-                                    borderRadius: BorderRadius.circular(999999),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '${index + 1}',
-                                      style: AppTextStyles.regular16()
-                                          .copyWith(color: Colors.purple),
-                                    ),
+                        child: Ink(
+                          height: 70,
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 45,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blue),
+                                  color: Colors.blueAccent,
+                                  borderRadius: BorderRadius.circular(999999),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: AppTextStyles.regular16()
+                                        .copyWith(color: Colors.purple),
                                   ),
                                 ),
-                                30.pw,
-                                Text(
-                                  lessons[index],
-                                  style: AppTextStyles.regular16()
-                                      .copyWith(color: Colors.black),
-                                )
-                              ],
-                            ),
+                              ),
+                              30.pw,
+                              Text(
+                                lessons[index],
+                                style: AppTextStyles.regular16()
+                                    .copyWith(color: Colors.black),
+                              )
+                            ],
                           ),
                         ),
                       ),

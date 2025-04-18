@@ -1,0 +1,2 @@
+D:/final_project/snapDealsApp/android/app/.cxx/RelWithDebInfo/6m4r2y1m/x86_64/CMakeFiles/edit_cache.dir
+D:/final_project/snapDealsApp/android/app/.cxx/RelWithDebInfo/6m4r2y1m/x86_64/CMakeFiles/rebuild_cache.dir

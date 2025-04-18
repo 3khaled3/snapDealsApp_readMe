@@ -3,6 +3,7 @@ import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/contact_and_price.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/custom_image.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/lessons_section.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/reviews_setion.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -30,7 +31,7 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
   final List<Widget> tabContents = [
     const AboutCourseSection(),
     const LessonsSection(),
-    Text('Reviews Content', style: AppTextStyles.regular16()),
+    const ReviewsSetion(),
   ];
 
   @override

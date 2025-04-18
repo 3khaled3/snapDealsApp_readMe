@@ -1,7 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
