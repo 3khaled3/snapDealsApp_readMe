@@ -7,47 +7,70 @@ class ContactAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Text(
-              'Total Price',
-              style:
-                  AppTextStyles.regular16().copyWith(color: ColorsBox.blueGrey),
-            ),
-            Text(
-              '3000 EGP ',
-              style: AppTextStyles.regular16()
-                  .copyWith(color: ColorsBox.brightBlue),
-            ),
-          ],
-        ),
-        const Spacer(),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {},
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            child: Ink(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              width: 200,
-              decoration: BoxDecoration(
-                color: ColorsBox.brightBlue,
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                border: Border.all(color: ColorsBox.brightBlue),
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: ColorsBox.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Price Section
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Total Price',
+                style: AppTextStyles.regular14().copyWith(
+                  color: ColorsBox.blueGrey,
+                ),
               ),
-              child: Center(
-                child: Text('Chat now',
-                    style: AppTextStyles.semiBold18().copyWith(
-                      // fontFamily: AppTextStyles.fontFamilyLora,
-                      color: ColorsBox.white,
-                    )),
+              const SizedBox(height: 4),
+              Text(
+                '3000 EGP',
+                style: AppTextStyles.bold18().copyWith(
+                  color: ColorsBox.brightBlue,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(flex: 1),
+
+          // Chat Button
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsBox.brightBlue,
+                  foregroundColor: ColorsBox.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  elevation: 2,
+                ),
+                child: Text(
+                  'Chat now',
+                  style: AppTextStyles.semiBold16().copyWith(
+                    color: ColorsBox.white,
+                  ),
+                ),
               ),
             ),
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

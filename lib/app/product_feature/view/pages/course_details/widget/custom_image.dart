@@ -44,9 +44,14 @@ class _CustomImageState extends State<CustomImage> {
             onPressed: () {
               GoRouter.of(context).pop();
             },
-            child: const Icon(
-              Icons.arrow_back,
-              color: ColorsBox.white,
+            child: Container(
+              // color: Colors.red,
+              padding:
+                  const EdgeInsetsDirectional.only(start: 8, top: 4, bottom: 4),
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: ColorsBox.white,
+              ),
             ),
           ),
         ),

@@ -147,6 +147,11 @@ class AppTextStyles {
         fontFamily: defaultFontFamily(),
         fontSize: 16,
       );
+  static TextStyle regular14() => TextStyle(
+        fontWeight: FontWeight.w400,
+        fontFamily: defaultFontFamily(),
+        fontSize: 14,
+      );
 
   static TextStyle bold12() => TextStyle(
         fontWeight: FontWeight.w700,

@@ -109,66 +109,76 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
                     ),
                   ],
                 ),
-                30.ph,
+                10.ph,
               ],
             ),
           ),
         ),
-        SliverAppBar(
-          titleSpacing: 2,
-          leadingWidth: 0,
-          pinned: true,
-          leading: const SizedBox.shrink(),
-          backgroundColor: const Color(0xFFF9FAFB),
-          foregroundColor: const Color(0xFFF9FAFB),
-          title: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey, width: 0.5),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(tabs.length, (index) {
-                final isSelected = selectedIndex == index;
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      12.ph,
-                      Text(
-                        tabs[index],
-                        style: AppTextStyles.semiBold16().copyWith(
-                          color:
-                              isSelected ? ColorsBox.brightBlue : Colors.black,
-                        ),
-                      ),
-                      8.ph,
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        height: 3,
-                        width: isSelected ? 45 : 0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border(
-                            bottom: BorderSide(
+        MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          removeBottom: true,
+          child: SliverAppBar(
+            titleSpacing: 2,
+            leadingWidth: 0,
+            pinned: true,
+            leading: const SizedBox.shrink(),
+            backgroundColor: const Color(0xFFF9FAFB),
+            foregroundColor: const Color(0xFFF9FAFB),
+            title: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey, width: 0.5),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(tabs.length, (index) {
+                    final isSelected = selectedIndex == index;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          12.ph,
+                          Text(
+                            tabs[index],
+                            style: AppTextStyles.semiBold16().copyWith(
                               color: isSelected
-                                  ? ColorsBox.black
-                                  : Colors.transparent,
-                              width: 3,
+                                  ? ColorsBox.brightBlue
+                                  : Colors.black,
                             ),
                           ),
-                        ),
+                          8.ph,
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 250),
+                            height: 3,
+                            width: isSelected ? 45 : 0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: isSelected
+                                      ? ColorsBox.black
+                                      : Colors.transparent,
+                                  width: 3,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              }),
+                    );
+                  }),
+                ),
+              ),
             ),
           ),
         ),

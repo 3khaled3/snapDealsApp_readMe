@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
           18.ph,
           const Center(child: CategoriesAvatar()),
           18.ph,
-          // ProductsRow(),
+          ProductsRow(),
           CustomTextFormField(
             hintText: context.tr.hintSearch,
             suffixIcon: Icons.search,
@@ -115,7 +115,7 @@ class _ProductsRowState extends State<ProductsRow> {
   Future<void> fetchProducts() async {
     final response = await http.get(
       Uri.parse(
-        'https://g-project-git-zuheir-zuheirs-projects.vercel.app/api/v1/products',
+        'https://g-project-git-zuheir-zuheirs-projects.vercel.app//api/v1/products?limit=2000',
       ),
       headers: {
         'Content-Type': 'application/json',
