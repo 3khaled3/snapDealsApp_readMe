@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       18.ph,
-                      Center(
+                      const Center(
                         child: BuildRegisterText(),
                       ),
                       18.ph,
@@ -242,6 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           // 66.pw,
                         ],
                       ),
+            
                     ],
                   ),
                 ),

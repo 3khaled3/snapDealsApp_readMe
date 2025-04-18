@@ -20,26 +20,24 @@ class CustomPrimaryButton extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        child: Expanded(
-          child: Ink(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: isWhite == true ? ColorsBox.white : ColorsBox.brightBlue,
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: isWhite == true
-                  ? Border.all(color: ColorsBox.slateGrey)
-                  : Border.all(color: ColorsBox.brightBlue),
-            ),
-            child: Center(
-              child: Text(title,
-                  style: AppTextStyles.semiBold18().copyWith(
-                    // fontFamily: AppTextStyles.fontFamilyLora,
-                    color: isWhite == true
-                        ? ColorsBox.brightBlue
-                        : ColorsBox.white,
-                  )),
-            ),
+        child: Ink(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: isWhite == true ? ColorsBox.white : ColorsBox.brightBlue,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: isWhite == true
+                ? Border.all(color: ColorsBox.slateGrey)
+                : Border.all(color: ColorsBox.brightBlue),
+          ),
+          child: Center(
+            child: Text(title,
+                style: AppTextStyles.semiBold18().copyWith(
+                  // fontFamily: AppTextStyles.fontFamilyLora,
+                  color: isWhite == true
+                      ? ColorsBox.brightBlue
+                      : ColorsBox.white,
+                )),
           ),
         ),
       ),
