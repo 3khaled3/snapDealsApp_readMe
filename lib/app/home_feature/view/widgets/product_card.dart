@@ -5,6 +5,7 @@ import 'package:snap_deals/app/product_feature/view/pages/product_details/produc
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class ProductCard extends StatelessWidget {
   final String productName;
@@ -67,8 +68,10 @@ class ProductCard extends StatelessWidget {
                               child:
                                   CircularProgressIndicator(strokeWidth: 1.5)),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => Image.asset(
+                          AppImageAssets.onboardingImage,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     0.ph,

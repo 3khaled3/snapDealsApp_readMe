@@ -33,7 +33,6 @@ class HomeView extends StatelessWidget {
           18.ph,
           const Center(child: CategoriesAvatar()),
           18.ph,
-          ProductsRow(),
           CustomTextFormField(
             hintText: context.tr.hintSearch,
             suffixIcon: Icons.search,
@@ -73,20 +72,23 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(
             height: 275,
-            child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                    10,
-                    (index) => const ProductCard(
-                      productName: 'Product Name',
-                      price: 1000,
-                      productOwner: "Ziad tamer",
-                      imagePath:
-                          "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
-                    ),
-                  ),
-                )),
+            child: ProductsRow(),
+            // SingleChildScrollView(
+            //     scrollDirection: Axis.horizontal,
+            //     child:
+            // Row(
+            //   children: List.generate(
+            //     10,
+            //     (index) => const ProductCard(
+            //       productName: 'Product Name',
+            //       price: 1000,
+            //       productOwner: "Ziad tamer",
+            //       imagePath:
+            //           "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
+            //     ),
+            //   ),
+            // )
+            // ),
           ),
           16.ph,
         ],
@@ -143,13 +145,13 @@ class _ProductsRowState extends State<ProductsRow> {
         children: products.map((product) {
           String imageUrl = product['images'].isNotEmpty
               ? "https://g-project-git-zuheir-zuheirs-projects.vercel.app/products/${product['images'][0]}"
-              : "https://via.placeholder.com/150"; // Fallback image
+              : "https://via.placeholder.com/150"; 
 
-          return CourseCard(
-            courseName: product['title'],
+          return ProductCard(
+            productName: product['title'],
             price: double.tryParse(product['price'].toString()) ?? 0.0,
             imagePath: imageUrl,
-            courseOwner: " product['category']['name']",
+            productOwner: product['category']['name'],
           );
         }).toList(),
       ),
