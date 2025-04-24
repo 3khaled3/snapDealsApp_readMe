@@ -126,5 +126,9 @@
     "login_prompt": "Do you want to log in?",
     "login_message": "You must log in to continue accessing all services.",
     "continue_as_guest": "Continue as Guest",
-    "login": "Login"
+    "login": "Login",
+    "loginError": "please inter a valid email and password",
+    "loginSuccess": "Login Success",
+    "logout_success": "logout success",
+    "logout_error": "logout error"
 }

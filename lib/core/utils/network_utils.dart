@@ -7,7 +7,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'failure_model.dart';
 
-class NetworkUtils {
+class FirebaseUtils {
   // Firebase instances
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;

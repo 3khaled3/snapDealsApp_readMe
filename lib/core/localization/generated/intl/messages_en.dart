@@ -170,16 +170,22 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
+    "loginError": MessageLookupByLibrary.simpleMessage(
+      "please inter a valid email and password",
+    ),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "Please enter your email to log in",
     ),
     "loginScreenLabel": MessageLookupByLibrary.simpleMessage("Welcome Back"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
     "login_message": MessageLookupByLibrary.simpleMessage(
       "You must log in to continue accessing all services.",
     ),
     "login_prompt": MessageLookupByLibrary.simpleMessage(
       "Do you want to log in?",
     ),
+    "logout_error": MessageLookupByLibrary.simpleMessage("logout error"),
+    "logout_success": MessageLookupByLibrary.simpleMessage("logout success"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "medicalTools": MessageLookupByLibrary.simpleMessage("Medical tools"),
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(

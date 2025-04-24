@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/on_board_feature/view/on_boarding_view.dart';
@@ -43,31 +44,19 @@ class _SplashScreenState extends State<SplashScreen> {
         final password = HiveHelper.instance.getItem("password");
 
         if (email != null && password != null) {
-          // print("password😭😭😭😭 :$password");
-          // ProfileCubit.instance
-          //     .loginAgain(email: email, password: password)
-          //     .then(
-          //   (value) async {
-          //     await NotificationService.instance.getDeviceToken();
-          //     if (mounted) {
-          //       if (ProfileCubit.instance.state.profile.userType ==
-          //           UserType.support) {
-          //         context.go(HomeSupportView.route);
-          //       } else {
-          //         context.go(BottomNavBarView.route);
-          //       }
-          //     }
-          //   },
-          // );
+          ProfileCubit.instance
+              .loginUser(email: email, password: password)
+              .then((value) async {
+            // await NotificationService.instance.getDeviceToken();
+            if (mounted) {
+              GoRouter.of(context).pushReplacement(MainHomeView.routeName,
+                  extra: MainHomeViewArgs());
+            }
+          });
         } else {
           if (mounted) {
-            // if (ProfileCubit.instance.state.profile.userType ==
-            //     UserType.support) {
             GoRouter.of(context).pushReplacement(MainHomeView.routeName,
                 extra: MainHomeViewArgs());
-            // } else {
-            //   context.go(BottomNavBarView.route);
-            // }
           }
         }
       }

@@ -1,5 +1,5 @@
 {
-    "// flutter pub run intl_utils:generate":"generator",
+    "// flutter pub run intl_utils:generate": "generator",
     "lang": "ar",
     "appName": "SnapDeals",
     "loginScreenLabel": "مرحبًا بعودتك",
@@ -122,5 +122,9 @@
     "login_prompt": "هل تريد تسجيل الدخول؟",
     "login_message": "يجب عليك تسجيل الدخول للمتابعة على جميع الخدمات.",
     "continue_as_guest": "متابعة كزائر",
-    "login": "تسجيل الدخول"
+    "login": "تسجيل الدخول",
+    "loginError": "يرجى ادخال بريد الكتروني صحيح وكلمة المرور",
+    "loginSuccess": "تسجيل الدخول بنجاح",
+    "logout_success": "تم تسجيل الخروج بنجاح",
+    "logout_error": "خطأ في تسجيل الخروج"
 }

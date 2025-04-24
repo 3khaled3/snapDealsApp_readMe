@@ -15,6 +15,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool? isPrice;
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? height;
+  final TextEditingController? controller;
 
   const CustomTextFormField({
     super.key,
@@ -29,6 +30,7 @@ class CustomTextFormField extends StatefulWidget {
     this.keyboardType,
     this.height,
     this.isPrice,
+    this.controller,
   });
 
   @override
@@ -45,13 +47,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         return TextFormField(
           keyboardType: widget.keyboardType ?? TextInputType.text,
           obscureText: obscureText,
+          controller: widget.controller,
           decoration: InputDecoration(
             contentPadding: widget.height,
             labelStyle:
                 AppTextStyles.regular16().copyWith(color: ColorsBox.black),
             helperStyle:
                 AppTextStyles.regular16().copyWith(color: ColorsBox.greyish),
-            hintStyle:                AppTextStyles.regular16().copyWith(color: ColorsBox.greyish),
+            hintStyle:
+                AppTextStyles.regular16().copyWith(color: ColorsBox.greyish),
             hintText: widget.hintText,
             labelText: widget.labelText,
             prefixIcon: widget.isPrice == true
@@ -95,7 +99,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           onSaved: widget.onSaved != null
               ? (value) => widget.onSaved!(value!)
               : null,
-          validator: (value) => widget.validator!(value),
+          validator: widget.validator,
         );
       },
     );

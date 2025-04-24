@@ -162,15 +162,23 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "loginError": MessageLookupByLibrary.simpleMessage(
+      "يرجى ادخال بريد الكتروني صحيح وكلمة المرور",
+    ),
     "loginLabel": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال بريدك الإلكتروني لتسجيل الدخول",
     ),
     "loginScreenLabel": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage("تسجيل الدخول بنجاح"),
     "login_message": MessageLookupByLibrary.simpleMessage(
       "يجب عليك تسجيل الدخول للمتابعة على جميع الخدمات.",
     ),
     "login_prompt": MessageLookupByLibrary.simpleMessage(
       "هل تريد تسجيل الدخول؟",
+    ),
+    "logout_error": MessageLookupByLibrary.simpleMessage("خطأ في تسجيل الخروج"),
+    "logout_success": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الخروج بنجاح",
     ),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
     "medicalTools": MessageLookupByLibrary.simpleMessage("أدوات طبية"),

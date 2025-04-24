@@ -72,23 +72,22 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(
             height: 275,
-            child: ProductsRow(),
-            // SingleChildScrollView(
-            //     scrollDirection: Axis.horizontal,
-            //     child:
-            // Row(
-            //   children: List.generate(
-            //     10,
-            //     (index) => const ProductCard(
-            //       productName: 'Product Name',
-            //       price: 1000,
-            //       productOwner: "Ziad tamer",
-            //       imagePath:
-            //           "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
-            //     ),
-            //   ),
-            // )
-            // ),
+            child:
+                // ProductsRow(),
+                SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                        10,
+                        (index) => const ProductCard(
+                          productName: 'Product Name',
+                          price: 1000,
+                          productOwner: "Ziad tamer",
+                          imagePath:
+                              "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
+                        ),
+                      ),
+                    )),
           ),
           16.ph,
         ],
@@ -98,63 +97,63 @@ class HomeView extends StatelessWidget {
 }
 
 // Main Widget
-class ProductsRow extends StatefulWidget {
-  const ProductsRow({Key? key}) : super(key: key);
+// class ProductsRow extends StatefulWidget {
+//   const ProductsRow({Key? key}) : super(key: key);
 
-  @override
-  createState() => _ProductsRowState();
-}
+//   @override
+//   createState() => _ProductsRowState();
+// }
 
-class _ProductsRowState extends State<ProductsRow> {
-  List<dynamic> products = [];
+// class _ProductsRowState extends State<ProductsRow> {
+//   List<dynamic> products = [];
 
-  @override
-  void initState() {
-    super.initState();
-    fetchProducts();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     fetchProducts();
+//   }
 
-  Future<void> fetchProducts() async {
-    final response = await http.get(
-      Uri.parse(
-        'https://g-project-git-zuheir-zuheirs-projects.vercel.app//api/v1/products?limit=2000',
-      ),
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie':
-            '_vercel_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJieXBhc3MiOiJHNkhiNWtaa0xQSzNsQ2NuVlZZdmY1U3J4SmpsN3dhcyIsImF1ZCI6ImctcHJvamVjdC1naXQtenVoZWlyLXp1aGVpcnMtcHJvamVjdHMudmVyY2VsLmFwcCIsImlhdCI6MTc0NDQ1ODk3MCwic3ViIjoicHJvdGVjdGlvbi1ieXBhc3MtdXJsIn0.7su_cSpr5AXRhQWL8E3Al32SJfQAwllkubF3z__Td54',
-      },
-    );
+//   Future<void> fetchProducts() async {
+//     final response = await http.get(
+//       Uri.parse(
+//         'https://g-project-git-zuheir-zuheirs-projects.vercel.app//api/v1/products?limit=2000',
+//       ),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Cookie':
+//             '_vercel_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJieXBhc3MiOiJHNkhiNWtaa0xQSzNsQ2NuVlZZdmY1U3J4SmpsN3dhcyIsImF1ZCI6ImctcHJvamVjdC1naXQtenVoZWlyLXp1aGVpcnMtcHJvamVjdHMudmVyY2VsLmFwcCIsImlhdCI6MTc0NDQ1ODk3MCwic3ViIjoicHJvdGVjdGlvbi1ieXBhc3MtdXJsIn0.7su_cSpr5AXRhQWL8E3Al32SJfQAwllkubF3z__Td54',
+//       },
+//     );
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      setState(() {
-        products = data['data'];
-      });
-    } else {
-      print(
-          '❌ Failed to load products ${response.statusCode} /// ${response.body}');
-    }
-  }
+//     if (response.statusCode == 200) {
+//       final data = jsonDecode(response.body);
+//       setState(() {
+//         products = data['data'];
+//       });
+//     } else {
+//       print(
+//           '❌ Failed to load products ${response.statusCode} /// ${response.body}');
+//     }
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: products.map((product) {
-          String imageUrl = product['images'].isNotEmpty
-              ? "https://g-project-git-zuheir-zuheirs-projects.vercel.app/products/${product['images'][0]}"
-              : "https://via.placeholder.com/150"; 
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         children: products.map((product) {
+//           String imageUrl = product['images'].isNotEmpty
+//               ? "https://g-project-git-zuheir-zuheirs-projects.vercel.app/products/${product['images'][0]}"
+//               : "https://via.placeholder.com/150";
 
-          return ProductCard(
-            productName: product['title'],
-            price: double.tryParse(product['price'].toString()) ?? 0.0,
-            imagePath: imageUrl,
-            productOwner: product['category']['name'],
-          );
-        }).toList(),
-      ),
-    );
-  }
-}
+//           return ProductCard(
+//             productName: product['title'],
+//             price: double.tryParse(product['price'].toString()) ?? 0.0,
+//             imagePath: imageUrl,
+//             productOwner: "product['category']['name']",
+//           );
+//         }).toList(),
+//       ),
+//     );
+//   }
+// }

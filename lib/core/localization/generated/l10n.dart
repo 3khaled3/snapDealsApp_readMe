@@ -55,6 +55,8 @@ class Tr {
     return Localizations.of<Tr>(context, Tr);
   }
 
+  // skipped getter for the '// flutter pub run intl_utils:generate' key
+
   /// `en`
   String get lang {
     return Intl.message('en', name: 'lang', desc: '', args: []);
@@ -1053,6 +1055,46 @@ class Tr {
   /// `Login`
   String get login {
     return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
+
+  /// `please inter a valid email and password`
+  String get loginError {
+    return Intl.message(
+      'please inter a valid email and password',
+      name: 'loginError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login Success`
+  String get loginSuccess {
+    return Intl.message(
+      'Login Success',
+      name: 'loginSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `logout success`
+  String get logout_success {
+    return Intl.message(
+      'logout success',
+      name: 'logout_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `logout error`
+  String get logout_error {
+    return Intl.message(
+      'logout error',
+      name: 'logout_error',
+      desc: '',
+      args: [],
+    );
   }
 }
 

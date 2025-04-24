@@ -1,6 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/profile.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
@@ -33,16 +35,18 @@ class _MainHomeViewState extends State<MainHomeView> {
   @override
   void initState() {
     super.initState();
-    customAppDialog(
-        context: context,
-        title: Tr.current.login_prompt,
-        supTitle: Tr.current.login_message,
-        buttonTitle: Tr.current.login,
-        cancelButtonTitle: Tr.current.continue_as_guest,
-        onPressed: () {
-          GoRouter.of(context)
-              .push(LoginScreen.routeName, extra: LoginViewArgs());
-        });
+    if (ProfileCubit.instance.state.profile.role == Role.unregistered) {
+      customAppDialog(
+          context: context,
+          title: Tr.current.login_prompt,
+          supTitle: Tr.current.login_message,
+          buttonTitle: Tr.current.login,
+          cancelButtonTitle: Tr.current.continue_as_guest,
+          onPressed: () {
+            GoRouter.of(context)
+                .push(LoginScreen.routeName, extra: LoginViewArgs());
+          });
+    }
   }
 
   @override
@@ -97,7 +101,16 @@ class _MainHomeViewState extends State<MainHomeView> {
               backgroundColor: const Color.fromARGB(255, 0, 69, 165),
               elevation: 6,
               child: const Icon(Icons.add, color: ColorsBox.white, size: 30),
-              onPressed: () => context.push(AddView.routeName),
+              onPressed: () {
+                if (ProfileCubit.instance.state.profile.role ==
+                    Role.unregistered) {
+                  GoRouter.of(context)
+                      .push(LoginScreen.routeName, extra: LoginViewArgs());
+
+                  return;
+                }
+                context.push(AddView.routeName);
+              },
             ),
             _buildNavItem(2, EvaIcons.heartOutline, EvaIcons.heart),
             _buildNavItem(3, Icons.person_outline, Icons.person),
@@ -115,6 +128,12 @@ class _MainHomeViewState extends State<MainHomeView> {
       splashColor: ColorsBox.white.withOpacity(0.2),
       onTap: () {
         print('Tapped on index: $index');
+        if (index != 0 &&
+            ProfileCubit.instance.state.profile.role == Role.unregistered) {
+          GoRouter.of(context)
+              .push(LoginScreen.routeName, extra: LoginViewArgs());
+          return;
+        }
         setState(() {
           _currentIndex = index;
           print('Current index: $_currentIndex');

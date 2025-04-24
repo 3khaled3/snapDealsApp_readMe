@@ -1,7 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 
 import 'package:snap_deals/app/auth_feature/view/widgets/build_register_text.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
@@ -31,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String? email;
   String? password;
   final formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       18.ph,
                       CustomTextFormField(
                         hintText: context.tr.hintEmail,
+                        controller: emailController,
                         labelText: context.tr.emailLabel,
                         prefixIcon: EvaIcons.emailOutline,
                         validator: Validators.validateEmail,
@@ -101,10 +106,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       16.ph,
                       CustomTextFormField(
                         hintText: context.tr.hintPassword,
+                        controller: passwordController,
                         labelText: context.tr.passwordLoginLabel,
                         prefixIcon: EvaIcons.lockOutline,
                         isPassword: true,
-                        validator: Validators.validatePassword,
+                        // validator: Validators.validatePassword,
                         onChanged: (value) {
                           password = value;
                         },
@@ -129,13 +135,37 @@ class _LoginScreenState extends State<LoginScreen> {
                       16.ph,
                       SizedBox(
                         width: double.infinity,
-                        child: CustomPrimaryButton(
-                          title: context.tr.loginButton,
-                          onTap: () {
-                            if (formKey.currentState?.validate() ?? false) {
-                              // loginCubit.loginWithEmail(email, password);
+                        child: BlocListener<ProfileCubit, ProfileStates>(
+                          bloc: ProfileCubit.instance,
+                          listener: (context, state) {
+                            if (state is ProfileSuccess) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                context.showSuccessSnackBar(
+                                  message: context.tr.loginSuccess,
+                                );
+                                GoRouter.of(context).pushReplacement(
+                                    MainHomeView.routeName,
+                                    extra: MainHomeViewArgs());
+                              });
+                            } else if (state is ProfileError) {
+                              context.showErrorSnackBar(
+                                message: context.tr.loginError,
+                              );
+                              Navigator.of(context).pop();
+                            } else if (state is ProfileLoading) {
+                              context.showLoadingDialog();
                             }
                           },
+                          child: CustomPrimaryButton(
+                            title: context.tr.loginButton,
+                            onTap: () async {
+                              if (formKey.currentState?.validate() ?? false) {
+                                await ProfileCubit.instance.loginUser(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                              }
+                            },
+                          ),
                         ),
                       ),
                       18.ph,
@@ -242,7 +272,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           // 66.pw,
                         ],
                       ),
-            
                     ],
                   ),
                 ),
