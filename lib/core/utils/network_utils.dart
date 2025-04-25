@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:dartz/dartz.dart'; // For Either
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dartz/dartz.dart'; 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -28,6 +29,15 @@ class FirebaseUtils {
     }
   }
 
+  static Future<bool> isOnline() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult.isNotEmpty &&
+        connectivityResult.any((result) => result != ConnectivityResult.none);
+  }
+
+  static Stream<List<ConnectivityResult>> get onConnectivityChanged {
+    return Connectivity().onConnectivityChanged;
+  }
   // --------------------- Firebase Authentication ---------------------
 
   /// Sign in with email and password

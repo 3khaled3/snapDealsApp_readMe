@@ -17,4 +17,5 @@ class AppImageAssets {
   static const String medical2Image = '$imagePath/medical2.jpg';
   static const String phoneImage = '$imagePath/phone.jpg';
   static const String phone2Image = '$imagePath/phone2.jpg';
+  static const String defaultProfile = "assets/svg/defaultProfile.svg";
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928099065303",
+    "project_id": "chat-ac40f",
+    "storage_bucket": "chat-ac40f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928099065303:android:bbe9a049f4b39e6006ff92",
+        "android_client_info": {
+          "package_name": "com.example.snap_deals"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDoGJSZUZ9LFjiigKcjzaoYvLyX6O-LVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
