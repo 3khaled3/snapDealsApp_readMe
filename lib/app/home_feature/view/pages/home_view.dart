@@ -1,7 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
+import 'package:snap_deals/app/chat_feature/data/repositories/chat_room_repository.dart';
+import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
@@ -9,7 +14,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-
+import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 
 class HomeViewArgs {
@@ -45,6 +50,53 @@ class HomeView extends StatelessWidget {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
             ),
           ),
+          IconButton(onPressed: () async {
+            print(
+                        "id0 ProfileCubit : ${ProfileCubit.instance.state.profile.id}");
+                    
+                    final chatRooms = await ChatRoomRepository()
+                        .getSpecificChatRooms("0000");
+                    chatRooms.fold((left) {
+                      final id = const Uuid().v4();
+
+                      ChatRoom chatRoom = ChatRoom(
+                        id: id,
+                        members: [
+                          ProfileCubit.instance.state.profile.id,
+                          "0000"
+                        ],
+                        unreadMessagesCount: {},
+                        lastMessageId: "muck",
+                        lastMessageContent: "muck",
+                        lastMessageSender: "muck",
+                        lastMessageTimestamp: 0,
+                      );
+                      GoRouter.of(context)
+                          .push(ChatView.route, extra: chatRoom);
+                    }, (right) {
+                      print("right: $right");
+                      if (right.isEmpty) {
+                        final id = const Uuid().v4();
+                        ChatRoom chatRoom = ChatRoom(
+                          id: id,
+                          members: [
+                            ProfileCubit.instance.state.profile.id,
+                            "0000"
+                          ],
+                          unreadMessagesCount: {},
+                          lastMessageId: "muck",
+                          lastMessageContent: "muck",
+                          lastMessageSender: "muck",
+                          lastMessageTimestamp: 0,
+                        );
+                        GoRouter.of(context)
+                            .push(ChatView.route, extra: chatRoom);
+                      } else {
+                        GoRouter.of(context)
+                            .push(ChatView.route, extra: right.first);
+                      }
+                    });
+          }, icon: const Icon(Icons.add)),
           SizedBox(
             height: 275,
             child: SingleChildScrollView(

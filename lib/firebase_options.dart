@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -49,37 +46,49 @@ class DefaultFirebaseOptions {
     messagingSenderId: '34923241454',
     projectId: 'eco4u-d794c',
     authDomain: 'eco4u-d794c.firebaseapp.com',
+    databaseURL: 'https://eco4u-d794c-default-rtdb.firebaseio.com',
     storageBucket: 'eco4u-d794c.appspot.com',
     measurementId: 'G-NZR92YESWG',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAfMQPugacdwRphUoW3ApOv6FTnSeP7GDk',
-    appId: '1:34923241454:android:f71afae6d6e23e571bb8ff',
+    appId: '1:34923241454:android:c39fd122c11bc0931bb8ff',
     messagingSenderId: '34923241454',
     projectId: 'eco4u-d794c',
+    databaseURL: 'https://eco4u-d794c-default-rtdb.firebaseio.com',
     storageBucket: 'eco4u-d794c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyChDfCubeNxtWTc1nnjc4e0vtWl6fqoTAM',
-    appId: '1:34923241454:ios:b1a59749601eeed71bb8ff',
+    appId: '1:34923241454:ios:b5a4206248dc0ffa1bb8ff',
     messagingSenderId: '34923241454',
     projectId: 'eco4u-d794c',
+    databaseURL: 'https://eco4u-d794c-default-rtdb.firebaseio.com',
     storageBucket: 'eco4u-d794c.appspot.com',
-    iosClientId:
-        '34923241454-o3am6luh514uehjb2hjjhso9ve485ft7.apps.googleusercontent.com',
-    iosBundleId: 'com.example.foryou',
+    iosBundleId: 'com.example.snapDeals',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyChDfCubeNxtWTc1nnjc4e0vtWl6fqoTAM',
-    appId: '1:34923241454:ios:c35b6c3262cb4e8a1bb8ff',
+    appId: '1:34923241454:ios:b5a4206248dc0ffa1bb8ff',
     messagingSenderId: '34923241454',
     projectId: 'eco4u-d794c',
+    databaseURL: 'https://eco4u-d794c-default-rtdb.firebaseio.com',
     storageBucket: 'eco4u-d794c.appspot.com',
-    iosClientId:
-        '34923241454-t5vmkc06ge7idkrvrfc3t7ikrjrnu1l1.apps.googleusercontent.com',
-    iosBundleId: 'com.example.foryou.RunnerTests',
+    iosBundleId: 'com.example.snapDeals',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBptt16hin1mgpWJDV928p5ZsF2jisEIfo',
+    appId: '1:34923241454:web:8670933e3390b65d1bb8ff',
+    messagingSenderId: '34923241454',
+    projectId: 'eco4u-d794c',
+    authDomain: 'eco4u-d794c.firebaseapp.com',
+    databaseURL: 'https://eco4u-d794c-default-rtdb.firebaseio.com',
+    storageBucket: 'eco4u-d794c.appspot.com',
+    measurementId: 'G-5Y5F044MF2',
+  );
+
 }

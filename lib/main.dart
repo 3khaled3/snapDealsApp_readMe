@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,32 +17,72 @@ import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+
 Future<void> main() async {
+  // Initialize binding first and only once
   WidgetsFlutterBinding.ensureInitialized();
 
-  await HiveHelper.instance.init('myBox');
-WidgetsFlutterBinding.ensureInitialized();
-  await HiveHelper.instance.init('myBox');
+  // Handle zone errors properly
+  runZonedGuarded(() async {
+    // Initialize Firebase first
+    await _initializeFirebase();
 
+    // Then initialize other services in parallel
+    await Future.wait([
+      _initializeHive(),
+      _initializeSupabase(),
+    ]);
+
+    // Run app in the same zone
+    _runApp();
+  }, (error, stack) => debugPrint('Initialization error: $error'));
+}
+
+void _runApp() {
+  runApp(
+    BlocProvider(
+      create: (context) => LangCubit(),
+      child: DevicePreview(
+        enabled: false,
+        builder: (context) => const MyApp(),
+      ),
+    ),
+  );
+}
+
+Future<void> _initializeFirebase() async {
+  try {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      debugPrint('Firebase initialized successfully');
+    } else {
+      debugPrint('Firebase already initialized - using existing instance');
+    }
+  } catch (e) {
+    debugPrint('Firebase initialization error: $e');
+    if (e.toString().contains('duplicate-app')) {
+      final app = Firebase.app();
+      debugPrint('Using existing Firebase app: ${app.name}');
+    }
+  }
+}
+
+Future<void> _initializeHive() async {
+  await HiveHelper.instance.init('myBox');
   Hive.registerAdapter(ChatRoomAdapter());
   Hive.registerAdapter(MessageModelAdapter());
   Hive.registerAdapter(MessageTypeAdapter());
   Hive.registerAdapter(MessageStatusAdapter());
-
   await Hive.openBox<ChatRoom>('chatRooms');
-  
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+}
+
+Future<void> _initializeSupabase() async {
   await Supabase.initialize(
     url: 'https://frsafocyzvvgdzgwjzil.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyc2Fmb2N5enZ2Z2R6Z3dqemlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgzNTgyMDksImV4cCI6MjA1MzkzNDIwOX0.T2Hl3vwYd-RgmxMzVSFnJZwOIlaYYdQ_qiWYGZDG474',
+    anonKey: 'your-key-here',
   );
-  runApp(BlocProvider(
-    create: (context) => LangCubit(),
-    child: DevicePreview(enabled: false, builder: (context) => const MyApp()),
-  ));
 }
 
 class MyApp extends StatelessWidget {

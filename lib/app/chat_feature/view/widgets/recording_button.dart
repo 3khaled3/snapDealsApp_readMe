@@ -76,15 +76,15 @@ class _RecordingButtonState extends State<RecordingButton>
     }
     await _audioRecorder
         .setSubscriptionDuration(const Duration(milliseconds: 500));
-    _recorderSubscription = _audioRecorder.onProgress!.listen((event) {
-      // Update recording duration and decibels
-      setState(() {
-        _recordingDuration = event.duration;
-        _currentDecibels =
-            double.parse((event.decibels ?? 0.0).toStringAsFixed(2));
-        decibels.add(_currentDecibels);
-      });
-    });
+    // _recorderSubscription = _audioRecorder.onProgress!.listen((event) {
+    //   // Update recording duration and decibels
+    //   setState(() {
+    //     _recordingDuration = event.duration;
+    //     _currentDecibels =
+    //         double.parse((event.decibels ?? 0.0).toStringAsFixed(2));
+    //     decibels.add(_currentDecibels);
+    //   });
+    // });
   }
 
   void _onToggle() {

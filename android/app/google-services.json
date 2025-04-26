@@ -1,13 +1,33 @@
 {
   "project_info": {
-    "project_number": "928099065303",
-    "project_id": "chat-ac40f",
-    "storage_bucket": "chat-ac40f.firebasestorage.app"
+    "project_number": "34923241454",
+    "firebase_url": "https://eco4u-d794c-default-rtdb.firebaseio.com",
+    "project_id": "eco4u-d794c",
+    "storage_bucket": "eco4u-d794c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:928099065303:android:bbe9a049f4b39e6006ff92",
+        "mobilesdk_app_id": "1:34923241454:android:f71afae6d6e23e571bb8ff",
+        "android_client_info": {
+          "package_name": "com.example.foryou"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfMQPugacdwRphUoW3ApOv6FTnSeP7GDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34923241454:android:c39fd122c11bc0931bb8ff",
         "android_client_info": {
           "package_name": "com.example.snap_deals"
         }
@@ -15,7 +35,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDDoGJSZUZ9LFjiigKcjzaoYvLyX6O-LVU"
+          "current_key": "AIzaSyAfMQPugacdwRphUoW3ApOv6FTnSeP7GDk"
         }
       ],
       "services": {

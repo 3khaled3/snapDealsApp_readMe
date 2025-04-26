@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -197,39 +198,55 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       // Store the initial message in Hive with 'uploading' status
       final uploadingMessage =
           message.copyWith(status: MessageStatus.attachmentUploading);
+      print("Uploading attachment...1");
       await _messageBox.put(message.id, uploadingMessage);
+      print("Uploading attachment...2");
 
       final isOnline = await FirebaseUtils.isOnline();
+      print("Uploading attachment...3");
       if (!isOnline) {
+      print("Uploading attachment...4");
         print("No internet. Upload postponed.");
         final failedMessage = message.copyWith(status: MessageStatus.failed);
         await _messageBox.put(failedMessage.id, failedMessage);
+      print("Uploading attachment...5");
         _failedAttachmentUploads.add(failedMessage); // Track failed upload
+      print("Uploading attachment...6");
         return;
       }
+      print("Uploading attachment...7");
 
       final downloadURL = await _uploadAttachment(message);
+      print("Uploading attachment...8");
       if (downloadURL == null) {
+      print("Uploading attachment...9");
         throw Exception("Failed to upload attachment");
       }
 
       // Update the message with the file URL and 'sent' status
       final sentMessage =
           message.copyWith(content: downloadURL, status: MessageStatus.sent);
+      print("Uploading attachment...10");
 
       await _messageBox.put(sentMessage.id, sentMessage);
+      print("Uploading attachment...1001");
       await sendMassageToFireStore(
           chatRoomId: chatRoomId, updatedMessage: sentMessage);
+      print("Uploading attachment...1002");
       try {
+      print("Uploading attachment...1003");
         await updateChatRoomWithLastMessage(
             currentChatRoom: chatRoom, message: message);
+      print("Uploading attachment...1004");
       } catch (e) {
         print("😭😭😭😭😭😭😭Error updating chat room: $e");
       }
+      print("Uploading attachment...10055");
 
       // Remove from failed uploads if successful
       if (_failedAttachmentUploads.contains(message)) {
         _failedAttachmentUploads.remove(message);
+      print("Uploading attachment...10056");
       }
     } catch (e) {
       print("🚨 Error uploading attachment: $e");
@@ -254,31 +271,61 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       return null;
     }
 
-    final String fileName = "${message.id}/${file.path.split('/').last}";
-    const String bucketName = "khaled";
+    // final String fileName = "${message.id}/${file.path.split('/').last}";
+    // const String bucketName = "khaled";
 
-    print("📂 Uploading file: $fileName to bucket: $bucketName");
+    // print("📂 Uploading file: $fileName to bucket: $bucketName");
 
-    try {
-      // Upload file
-      await supabase.storage.from(bucketName).upload(fileName, file);
-      print("✅ Upload successful!");
+    // try {
+    //   print("📤 Uploading file...1");
+    //   // Upload file
+    //   await supabase.storage.from(bucketName).upload(fileName, file);
+    //   print("📤 Uploading file...2");
+    //   print("✅ Upload successful!");
 
-      // Get public URL
-      final String downloadURL =
-          supabase.storage.from(bucketName).getPublicUrl(fileName);
-      print("🔗 File accessible at: $downloadURL");
+    //   // Get public URL
+    //   final String downloadURL =
+    //       supabase.storage.from(bucketName).getPublicUrl(fileName);
+    //   print("📤 Uploading file...3");
+    //   print("🔗 File accessible at: $downloadURL");
 
-      return downloadURL;
-    } catch (e) {
-      print("🚨 Upload failed: $e");
+    //   return downloadURL;
+    // } catch (e) {
+    //   print("🚨 Upload failed: $e");
 
-      final failedMessage = message.copyWith(status: MessageStatus.failed);
-      await _messageBox.put(failedMessage.id, failedMessage);
-      _failedAttachmentUploads.add(failedMessage);
+    //   final failedMessage = message.copyWith(status: MessageStatus.failed);
+    //   await _messageBox.put(failedMessage.id, failedMessage);
+    //   _failedAttachmentUploads.add(failedMessage);
 
-      return null;
-    }
+    //   return null;
+    // }
+      final Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child("chatAttachments/${message.id}/${file.path.split('/').last}");
+
+    final UploadTask uploadTask = storageReference.putFile(file);
+
+    uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+      double progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      final updatedMessage =
+          message.copyWith(progress: progress.toStringAsFixed(2).toString());
+      _messageBox.put(updatedMessage.id, updatedMessage);
+      print("Upload progress: ${progress.toStringAsFixed(2)}%");
+    });
+
+
+
+    await uploadTask;
+
+
+
+    // Get the download URL
+    final String downloadURL = await storageReference.getDownloadURL();
+    print("Upload successful! Download URL: $downloadURL");
+    return downloadURL;
+
+
+
   }
 
   @override
