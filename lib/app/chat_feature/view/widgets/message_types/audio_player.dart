@@ -41,7 +41,7 @@ class __PlayerWidgetState extends State<_PlayerWidget> {
       children: [
         _buildPlayPauseButton(),
         SizedBox(
-          width: MediaQuery.sizeOf(context).width * .3,
+          width: MediaQuery.sizeOf(context).width * .25,
           // fit: BoxFit.scaleDown,
           child: _buildPlayBar(),
         ),
@@ -118,16 +118,26 @@ class __PlayerWidgetState extends State<_PlayerWidget> {
         await _myPlayer.stopPlayer();
       });
 
-  Future<void> start() async => await _myPlayer.startPlayer(
-      fromURI: widget.url,
-      codec: Codec.aacADTS,
-      whenFinished: () {
-        if (mounted) {
-          setState(() {
-            _localController.add(PlaybackDisposition.zero());
-          });
-        }
-      });
+  Future<void> start() async {
+    try {
+      print('Starting player with URL: ${widget.url}');
+      await _myPlayer.startPlayer(
+        fromURI: widget.url,
+        codec: Codec.aacADTS,
+        whenFinished: () {
+          if (mounted) {
+            setState(() {
+              _localController.add(PlaybackDisposition.zero());
+            });
+          }
+        },
+      );
+      print('Player started successfully');
+    } catch (e) {
+      print('😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫  Error starting player: $e');
+      await _myPlayer.stopPlayer();
+    }
+  }
 
   buttonClick() async {
     if (_myPlayer.isPaused) {
@@ -146,15 +156,20 @@ class __PlayerWidgetState extends State<_PlayerWidget> {
   }
 
   void setupPlayer() async {
-    await _myPlayer.openPlayer();
-    _sliderPosition.position = const Duration(seconds: 0);
-    _sliderPosition.maxPosition = const Duration(seconds: 0);
-    _myPlayer.onProgress!.listen((disposition) {
-      if (mounted) {
-        _localController.add(disposition);
-      }
-    });
-    _myPlayer.setSubscriptionDuration(const Duration(milliseconds: 100));
+    try {
+      await _myPlayer.openPlayer();
+      print('Player opened successfully');
+      _sliderPosition.position = const Duration(seconds: 0);
+      _sliderPosition.maxPosition = const Duration(seconds: 0);
+      _myPlayer.onProgress!.listen((disposition) {
+        if (mounted) {
+          _localController.add(disposition);
+        }
+      });
+      _myPlayer.setSubscriptionDuration(const Duration(milliseconds: 100));
+    } catch (e) {
+      print('😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫 Error opening player: $e');
+    }
   }
 }
 
