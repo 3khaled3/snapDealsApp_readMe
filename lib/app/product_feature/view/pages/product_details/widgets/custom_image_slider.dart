@@ -1,25 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
-import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_button.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class CustomImageSlider extends StatefulWidget {
-  const CustomImageSlider({super.key});
-
+  const CustomImageSlider({super.key, required this.images});
+  final List<String> images;
   @override
-  _CustomImageSliderState createState() => _CustomImageSliderState();
+  createState() => _CustomImageSliderState();
 }
 
 class _CustomImageSliderState extends State<CustomImageSlider> {
   int _currentIndex = 0;
-  final List<String> images = [
-    AppImageAssets.profileImage,
-    AppImageAssets.forgotPassImage,
-    AppImageAssets.forgotPassImage,
-    AppImageAssets.authImage
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +23,25 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
             SizedBox(
               height: 300,
               child: PageView.builder(
-                itemCount: images.length,
+                itemCount: widget.images.length,
                 onPageChanged: (index) {
                   setState(() {
                     _currentIndex = index;
                   });
                 },
                 itemBuilder: (context, index) {
-                  return Image.asset(
-                    images[index],
+                  return CachedNetworkImage(
+                    imageUrl: widget.images[index],
                     fit: BoxFit.cover,
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        color: Colors.white,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   );
                 },
               ),
@@ -47,16 +49,30 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
             8.ph,
             PageIndicator(
               currentPage: _currentIndex,
-              pageLength: images.length,
+              pageLength: widget.images.length,
             ),
           ],
         ),
-        Container(
-          padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-          alignment:
-              context.tr.lang == "ar" ? Alignment.topRight : Alignment.topLeft,
-          child: const CustomButton(),
-        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color.fromARGB(109, 0, 0, 0),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back_ios,
+                  color: Colors.white, size: 20),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              padding: const EdgeInsetsDirectional.only(start: 8),
+              constraints: const BoxConstraints(),
+            ),
+          ),
+        )
       ],
     );
   }

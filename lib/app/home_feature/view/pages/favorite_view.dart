@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -53,12 +54,21 @@ class FavoriteView extends StatelessWidget {
                           childAspectRatio: 0.66,
                         ),
                         itemCount: 7,
-                        itemBuilder: (context, index) => const ProductCard(
-                          productName: 'Noise Cancelling Headphones',
-                          price: 950,
-                          productOwner: "sam sam sam sam sam sam sam ",
-                          imagePath:
-                              "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
+                        itemBuilder: (context, index) => ProductCard(
+                          product: ProductModel(
+                              id: '',
+                              title: '',
+                              price: 0,
+                              images: [],
+                              location: " ص",
+                              user: '',
+                              category: Category(id: '', name: ''),
+                              visit: 0,
+                              details: {},
+                              createdAt: DateTime.now(),
+                              updatedAt: DateTime.now(),
+                              description: '',
+                              slug: ""),
                         ),
                       ),
                     ),

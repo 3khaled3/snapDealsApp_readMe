@@ -7,10 +7,7 @@ abstract class ProductRouter {
     GoRoute(
       path: ProductDetailsView.routeName,
       builder: (context, state) {
-        ProductDetailsArgs? args;
-        if (state.extra != null) {
-          args = state.extra as ProductDetailsArgs;
-        }
+        ProductDetailsArgs args = state.extra as ProductDetailsArgs;
 
         return ProductDetailsView(args: args);
       },

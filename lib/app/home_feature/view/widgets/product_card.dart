@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductCard extends StatelessWidget {
-  final String productName;
-  final String productOwner;
-  final String imagePath;
-  final double price;
-
   const ProductCard({
     super.key,
-    required this.productName,
-    required this.imagePath,
-    this.productOwner = '',
-    required this.price,
+    required this.product,
   });
-
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final String productName = product.title;
+    final double price = product.price;
+    final String productOwner = product.user;
+    final String imagePath =
+        product.images.isNotEmpty ? product.images.first : "";
+
     return GestureDetector(
       onTap: () {
         GoRouter.of(context).push(
           ProductDetailsView.routeName,
-          extra: ProductDetailsArgs(),
+          extra: ProductDetailsArgs(product: product),
         );
       },
       child: Card(
@@ -60,13 +60,14 @@ class ProductCard extends StatelessWidget {
                         height: 140,
                         width: double.infinity,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => Container(
-                          height: 140,
-                          width: double.infinity,
-                          color: Colors.grey.withOpacity(0.1),
-                          child: const Center(
-                              child:
-                                  CircularProgressIndicator(strokeWidth: 1.5)),
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            height: 140,
+                            width: double.infinity,
+                            color: Colors.grey.withOpacity(0.1),
+                          ),
                         ),
                         errorWidget: (context, url, error) => Image.asset(
                           AppImageAssets.onboardingImage,
@@ -93,34 +94,6 @@ class ProductCard extends StatelessWidget {
                           .copyWith(color: ColorsBox.greyish),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ),
-                    // ],
-                    // 6.ph,
-
-                    /// Rating Row
-                    Row(
-                      children: [
-                        ...List.generate(5, (index) {
-                          return Icon(
-                            index < 4 ? Icons.star : Icons.star_half,
-                            size: 16,
-                            color: Colors.amber,
-                          );
-                        }),
-                        6.pw,
-                        Expanded(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              '4.5 (12000)',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.regular12()
-                                  .copyWith(color: ColorsBox.greyish),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                     0.ph,
 

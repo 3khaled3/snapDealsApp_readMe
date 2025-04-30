@@ -6,7 +6,7 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 
 class MainDetailsSection extends StatelessWidget {
   final String price;
-  final String brand;
+  // final String brand;
   final String title;
   final String location;
   final String date;
@@ -14,7 +14,7 @@ class MainDetailsSection extends StatelessWidget {
   const MainDetailsSection({
     super.key,
     required this.price,
-    required this.brand,
+    // required this.brand,
     required this.title,
     required this.location,
     required this.date,
@@ -40,14 +40,14 @@ class MainDetailsSection extends StatelessWidget {
                   color: ColorsBox.brightBlue,
                 ),
               ),
-              const Spacer(),
-              Text(
-                '${context.tr.brandHint} : $brand',
-                style: AppTextStyles.medium20().copyWith(
-                  fontFamily: AppTextStyles.fontFamilyLora,
-                  color: ColorsBox.brightBlue,
-                ),
-              ),
+              // const Spacer(),
+              // Text(
+              //   '${context.tr.brandHint} : $brand',
+              //   style: AppTextStyles.medium20().copyWith(
+              //     fontFamily: AppTextStyles.fontFamilyLora,
+              //     color: ColorsBox.brightBlue,
+              //   ),
+              // ),
             ],
           ),
           15.ph,

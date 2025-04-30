@@ -4,10 +4,10 @@ import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-class DescribtionSection extends StatelessWidget {
+class DescriptionSection extends StatelessWidget {
   final String description;
 
-  const DescribtionSection({
+  const DescriptionSection({
     super.key,
     required this.description,
   });
@@ -15,6 +15,7 @@ class DescribtionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -34,6 +35,7 @@ class DescribtionSection extends StatelessWidget {
           15.ph,
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(10),

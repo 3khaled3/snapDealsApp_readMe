@@ -3,6 +3,7 @@ class ProductModel {
   final String title;
   final String user;
   final String slug;
+  final String location;
   final String description;
   final double price;
   final List<String> images;
@@ -16,6 +17,7 @@ class ProductModel {
     required this.id,
     required this.title,
     required this.user,
+    required this.location,
     required this.slug,
     required this.description,
     required this.price,
@@ -33,10 +35,13 @@ class ProductModel {
       title: json['title'],
       user: json['user'],
       slug: json['slug'],
+      location: json['location'] ?? " location",
       description: json['description'],
       price: (json['price'] as num).toDouble(),
       images: List<String>.from(json['images']),
-      category: Category.fromJson(json['category']),
+      // category: Category.fromJson(json['category']),
+      category: Category(
+          id: "json['category']['_id']", name: "json['category']['name']"),
       visit: json['visit'],
       details: Map<String, dynamic>.from(json['details']),
       createdAt: DateTime.parse(json['createdAt']),
@@ -50,6 +55,7 @@ class ProductModel {
       'title': title,
       'user': user,
       'slug': slug,
+      'location': location,
       'description': description,
       'price': price,
       'images': images,
@@ -66,6 +72,7 @@ class ProductModel {
     String? title,
     String? user,
     String? slug,
+    String? location,
     String? description,
     double? price,
     List<String>? images,
@@ -79,6 +86,7 @@ class ProductModel {
       id: id ?? this.id,
       title: title ?? this.title,
       user: user ?? this.user,
+      location: location ?? this.location,
       slug: slug ?? this.slug,
       description: description ?? this.description,
       price: price ?? this.price,

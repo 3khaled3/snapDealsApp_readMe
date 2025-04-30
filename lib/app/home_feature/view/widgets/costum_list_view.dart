@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/custom_products_card.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class ProductList extends StatelessWidget {
@@ -41,11 +42,21 @@ class ProductList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 15),
-          child: CustomProductCard(
-            title: products[index]['title']!,
-            price: products[index]['price']!,
-            imagePath: products[index]['imageUrl']!,
-            isCourse: false,
+          child: ProductCard(
+            product: ProductModel(
+                id: '',
+                title: '',
+                location: " ص",
+                price: 0,
+                images: [],
+                user: '',
+                category: Category(id: '', name: ''),
+                visit: 0,
+                details: {},
+                createdAt: DateTime.now(),
+                updatedAt: DateTime.now(),
+                description: '',
+                slug: ""),
           ),
         );
       },
@@ -97,12 +108,21 @@ class CourseList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 15),
-          child: CustomProductCard(
-            title: courses[index]['title']!,
-            price: courses[index]['price']!,
-            imagePath: courses[index]['imageUrl']!,
-            owner: courses[index]['owner']!,
-            isCourse: true,
+          child: ProductCard(
+            product: ProductModel(
+                id: '',
+                title: '',
+                price: 0,
+                location: " ص",
+                images: [],
+                user: '',
+                category: Category(id: '', name: ''),
+                visit: 0,
+                details: {},
+                createdAt: DateTime.now(),
+                updatedAt: DateTime.now(),
+                description: '',
+                slug: ""),
           ),
         );
       },

@@ -10,6 +10,7 @@ import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/popular_product_builder.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -50,70 +51,64 @@ class HomeView extends StatelessWidget {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
             ),
           ),
-          IconButton(onPressed: () async {
-            print(
-                        "id0 ProfileCubit : ${ProfileCubit.instance.state.profile.id}");
-                    
-                    final chatRooms = await ChatRoomRepository()
-                        .getSpecificChatRooms("0000");
-                    chatRooms.fold((left) {
-                      final id = const Uuid().v4();
+          IconButton(
+              onPressed: () async {
+                print(
+                    "id0 ProfileCubit : ${ProfileCubit.instance.state.profile.id}");
 
-                      ChatRoom chatRoom = ChatRoom(
-                        id: id,
-                        members: [
-                          ProfileCubit.instance.state.profile.id,
-                          "0000"
-                        ],
-                        unreadMessagesCount: {},
-                        lastMessageId: "muck",
-                        lastMessageContent: "muck",
-                        lastMessageSender: "muck",
-                        lastMessageTimestamp: 0,
-                      );
-                      GoRouter.of(context)
-                          .push(ChatView.route, extra: chatRoom);
-                    }, (right) {
-                      print("right: $right");
-                      if (right.isEmpty) {
-                        final id = const Uuid().v4();
-                        ChatRoom chatRoom = ChatRoom(
-                          id: id,
-                          members: [
-                            ProfileCubit.instance.state.profile.id,
-                            "0000"
-                          ],
-                          unreadMessagesCount: {},
-                          lastMessageId: "muck",
-                          lastMessageContent: "muck",
-                          lastMessageSender: "muck",
-                          lastMessageTimestamp: 0,
-                        );
-                        GoRouter.of(context)
-                            .push(ChatView.route, extra: chatRoom);
-                      } else {
-                        GoRouter.of(context)
-                            .push(ChatView.route, extra: right.first);
-                      }
-                    });
-          }, icon: const Icon(Icons.add)),
-          SizedBox(
-            height: 275,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                    10,
-                    (index) => const CourseCard(
-                          courseName: 'Course Name ',
-                          price: 1000,
-                          imagePath:
-                              "https://appmaster.io/api/_files/hRaLG2N4DVjRZJQzCpN2zJ/download/",
-                          courseOwner: 'Ziad tamer',
-                        )),
-              ),
-            ),
-          ),
+                final chatRooms =
+                    await ChatRoomRepository().getSpecificChatRooms("0000");
+                chatRooms.fold((left) {
+                  final id = const Uuid().v4();
+
+                  ChatRoom chatRoom = ChatRoom(
+                    id: id,
+                    members: [ProfileCubit.instance.state.profile.id, "0000"],
+                    unreadMessagesCount: {},
+                    lastMessageId: "muck",
+                    lastMessageContent: "muck",
+                    lastMessageSender: "muck",
+                    lastMessageTimestamp: 0,
+                  );
+                  GoRouter.of(context).push(ChatView.route, extra: chatRoom);
+                }, (right) {
+                  print("right: $right");
+                  if (right.isEmpty) {
+                    final id = const Uuid().v4();
+                    ChatRoom chatRoom = ChatRoom(
+                      id: id,
+                      members: [ProfileCubit.instance.state.profile.id, "0000"],
+                      unreadMessagesCount: {},
+                      lastMessageId: "muck",
+                      lastMessageContent: "muck",
+                      lastMessageSender: "muck",
+                      lastMessageTimestamp: 0,
+                    );
+                    GoRouter.of(context).push(ChatView.route, extra: chatRoom);
+                  } else {
+                    GoRouter.of(context)
+                        .push(ChatView.route, extra: right.first);
+                  }
+                });
+              },
+              icon: const Icon(Icons.add)),
+          // SizedBox(
+          //   height: 275,
+          //   child: SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Row(
+          //       children: List.generate(
+          //           10,
+          //           (index) => const CourseCard(
+          //                 courseName: 'Course Name ',
+          //                 price: 1000,
+          //                 imagePath:
+          //                     "https://appmaster.io/api/_files/hRaLG2N4DVjRZJQzCpN2zJ/download/",
+          //                 courseOwner: 'Ziad tamer',
+          //               )),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             child: Text(
@@ -122,90 +117,10 @@ class HomeView extends StatelessWidget {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
             ),
           ),
-          SizedBox(
-            height: 275,
-            child:
-                // ProductsRow(),
-                SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                        10,
-                        (index) => const ProductCard(
-                          productName: 'Product Name',
-                          price: 1000,
-                          productOwner: "Ziad tamer",
-                          imagePath:
-                              "https://www.onlineprinters.co.uk/magazine/wp-content/uploads/2019/06/image-to-pdf.jpg",
-                        ),
-                      ),
-                    )),
-          ),
+          const PopularProductBuilder(),
           16.ph,
         ],
       ),
     );
   }
 }
-
-// Main Widget
-// class ProductsRow extends StatefulWidget {
-//   const ProductsRow({Key? key}) : super(key: key);
-
-//   @override
-//   createState() => _ProductsRowState();
-// }
-
-// class _ProductsRowState extends State<ProductsRow> {
-//   List<dynamic> products = [];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     fetchProducts();
-//   }
-
-//   Future<void> fetchProducts() async {
-//     final response = await http.get(
-//       Uri.parse(
-//         'https://g-project-git-zuheir-zuheirs-projects.vercel.app//api/v1/products?limit=2000',
-//       ),
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Cookie':
-//             '_vercel_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJieXBhc3MiOiJHNkhiNWtaa0xQSzNsQ2NuVlZZdmY1U3J4SmpsN3dhcyIsImF1ZCI6ImctcHJvamVjdC1naXQtenVoZWlyLXp1aGVpcnMtcHJvamVjdHMudmVyY2VsLmFwcCIsImlhdCI6MTc0NDQ1ODk3MCwic3ViIjoicHJvdGVjdGlvbi1ieXBhc3MtdXJsIn0.7su_cSpr5AXRhQWL8E3Al32SJfQAwllkubF3z__Td54',
-//       },
-//     );
-
-//     if (response.statusCode == 200) {
-//       final data = jsonDecode(response.body);
-//       setState(() {
-//         products = data['data'];
-//       });
-//     } else {
-//       print(
-//           '❌ Failed to load products ${response.statusCode} /// ${response.body}');
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       child: Row(
-//         children: products.map((product) {
-//           String imageUrl = product['images'].isNotEmpty
-//               ? "https://g-project-git-zuheir-zuheirs-projects.vercel.app/products/${product['images'][0]}"
-//               : "https://via.placeholder.com/150";
-
-//           return ProductCard(
-//             productName: product['title'],
-//             price: double.tryParse(product['price'].toString()) ?? 0.0,
-//             imagePath: imageUrl,
-//             productOwner: "product['category']['name']",
-//           );
-//         }).toList(),
-//       ),
-//     );
-//   }
-// }
