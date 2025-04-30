@@ -1,106 +1,127 @@
 class ProductModel {
   final String id;
-  final String userId;
-  final String categoryId;
-  final String brand;
   final String title;
+  final String user;
+  final String slug;
   final String description;
   final double price;
-  final List<String> imageUrl;
-  // final int quantity;
-  final double? rate;
-  final double? discount;
+  final List<String> images;
+  final Category category;
+  final int visit;
+  final Map<String, dynamic> details;
   final DateTime createdAt;
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
 
   ProductModel({
     required this.id,
-    required this.userId,
-    required this.categoryId,
-    required this.brand,
     required this.title,
+    required this.user,
+    required this.slug,
     required this.description,
     required this.price,
-    required this.imageUrl,
-    // required this.quantity,
-    this.rate,
-    this.discount,
+    required this.images,
+    required this.category,
+    required this.visit,
+    required this.details,
     required this.createdAt,
-    this.updatedAt,
+    required this.updatedAt,
   });
 
-  // Convert to JSON
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'userId': userId,
-      'categoryId': categoryId,
-      'brand': brand,
-      'title': title,
-      'description': description,
-      'price': price,
-      'imageUrl': imageUrl,
-      // // 'quantity': quantity,
-      'rate': rate,
-      'discount': discount,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
-    };
-  }
-
-  // Create from JSON
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'] as String,
-      userId: json['userId'] as String,
-      categoryId: json['categoryId'] as String,
-      brand: json['brand'] as String,
-      title: json['title'] as String,
-      description: json['description'] as String,
+      id: json['_id'],
+      title: json['title'],
+      user: json['user'],
+      slug: json['slug'],
+      description: json['description'],
       price: (json['price'] as num).toDouble(),
-      imageUrl: List<String>.from(json['imageUrl'] as List),
-      // // quantity: json['quantity'] as int,
-      rate: json['rate'] != null ? (json['rate'] as num).toDouble() : null,
-      discount: json['discount'] != null
-          ? (json['discount'] as num).toDouble()
-          : null,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'] as String)
-          : null,
+      images: List<String>.from(json['images']),
+      category: Category.fromJson(json['category']),
+      visit: json['visit'],
+      details: Map<String, dynamic>.from(json['details']),
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 
-  // Copy with
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'title': title,
+      'user': user,
+      'slug': slug,
+      'description': description,
+      'price': price,
+      'images': images,
+      'category': category.toJson(),
+      'visit': visit,
+      'details': details,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
   ProductModel copyWith({
     String? id,
-    String? userId,
-    String? categoryId,
-    String? brand,
     String? title,
+    String? user,
+    String? slug,
     String? description,
     double? price,
-    List<String>? imageUrl,
-    // int? quantity,
-    double? rate,
-    double? discount,
+    List<String>? images,
+    Category? category,
+    int? visit,
+    Map<String, dynamic>? details,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
     return ProductModel(
       id: id ?? this.id,
-      userId: userId ?? this.userId,
-      categoryId: categoryId ?? this.categoryId,
-      brand: brand ?? this.brand,
       title: title ?? this.title,
+      user: user ?? this.user,
+      slug: slug ?? this.slug,
       description: description ?? this.description,
       price: price ?? this.price,
-      imageUrl: imageUrl ?? this.imageUrl,
-      // // // quantity: quantity ?? this.quantity,
-      rate: rate ?? this.rate,
-      discount: discount ?? this.discount,
+      images: images ?? this.images,
+      category: category ?? this.category,
+      visit: visit ?? this.visit,
+      details: details ?? this.details,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+}
+
+class Category {
+  final String id;
+  final String name;
+
+  Category({
+    required this.id,
+    required this.name,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['_id'],
+      name: json['name'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+    };
+  }
+
+  Category copyWith({
+    String? id,
+    String? name,
+  }) {
+    return Category(
+      id: id ?? this.id,
+      name: name ?? this.name,
     );
   }
 }

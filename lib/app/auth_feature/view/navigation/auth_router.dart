@@ -10,7 +10,6 @@ import 'package:snap_deals/app/auth_feature/view/pages/auth_view/register_view.d
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/splash_screen.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
-import 'package:snap_deals/app/home_feature/view_model/product_cubit/product_cubit.dart';
 import 'package:snap_deals/app/on_board_feature/view/on_boarding_view.dart';
 
 import '../pages/auth_view/reset_password_view.dart';
@@ -33,46 +32,26 @@ abstract class AuthRouter {
     GoRoute(
       path: YourProfileView.routeName,
       builder: (context, state) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: const YourProfileView(),
-        );
+        return const YourProfileView();
       },
     ),
     GoRoute(
       path: SettingsView.routeName,
       builder: (context, state) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: const SettingsView(),
-        );
+        return const SettingsView();
       },
     ),
     GoRoute(
       path: PrivacyPolicyView.routeName,
       builder: (context, state) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: const PrivacyPolicyView(),
-        );
+        return const PrivacyPolicyView();
       },
     ),
 
     GoRoute(
       path: AboutUsView.routeName,
       builder: (context, state) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: const AboutUsView(),
-        );
+        return const AboutUsView();
       },
     ),
 
@@ -84,12 +63,7 @@ abstract class AuthRouter {
           args = state.extra as LoginViewArgs;
         }
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: LoginScreen(args),
-        );
+        return LoginScreen(args);
       },
     ),
     GoRoute(
@@ -99,12 +73,7 @@ abstract class AuthRouter {
 
         args = state.extra as ForgetPasswordViewArgs;
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: ForgetPasswordView(args),
-        );
+        return ForgetPasswordView(args);
       },
     ),
     GoRoute(
@@ -115,12 +84,7 @@ abstract class AuthRouter {
           args = state.extra as RegisterViewArgs;
         }
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: RegisterView(args!),
-        );
+        return RegisterView(args!);
       },
     ),
     GoRoute(
@@ -131,12 +95,7 @@ abstract class AuthRouter {
           args = state.extra as ResetPasswordViewArgs;
         }
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: ResetPasswordView(args!),
-        );
+        return ResetPasswordView(args!);
       },
     ),
     GoRoute(
@@ -147,12 +106,7 @@ abstract class AuthRouter {
           args = state.extra as OtpViewArgs;
         }
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => ProductCubit()),
-          ],
-          child: OtpView(args!),
-        );
+        return OtpView(args!);
       },
     ),
     //add any other routes in same feature
