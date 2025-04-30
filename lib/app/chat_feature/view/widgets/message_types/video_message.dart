@@ -28,24 +28,23 @@ class VideoMessageBubble extends StatelessWidget {
   Future<File?> _generateThumbnail(String videoUrl) async {
     try {
       final cacheDir = await getTemporaryDirectory();
-      final thumbnailPath = '${cacheDir.path}/${Uri.decodeComponent(
-        Uri.parse(message.content).pathSegments.last,
-      )}.jpg';
+      final videoName =
+          Uri.decodeComponent(Uri.parse(videoUrl).pathSegments.last);
+      final thumbnailPath = '${cacheDir.path}/$videoName.jpg';
 
-      if (await File(thumbnailPath).exists()) {
-        // Use cached thumbnail
-        return File(thumbnailPath);
-      }
+      final thumbnailFile = File(thumbnailPath);
+      if (await thumbnailFile.exists()) return thumbnailFile;
 
-      // Generate new thumbnail
       final thumbnail = await VideoThumbnail.thumbnailFile(
         video: videoUrl,
         thumbnailPath: thumbnailPath,
         imageFormat: ImageFormat.JPEG,
+        timeMs: 1000,
+        maxHeight: 300,
         quality: 25,
       );
-
-      return thumbnail != null ? File(thumbnail.path) : null;
+      print(" type is ${thumbnail.runtimeType}");
+      return File(thumbnail.path);
     } catch (e) {
       debugPrint('Error generating thumbnail: $e');
       return null;

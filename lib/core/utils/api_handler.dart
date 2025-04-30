@@ -364,6 +364,7 @@ abstract class HttpHelper {
         print("Custom Token: $customToken");
         // Perform the request with the token
         http.Response response = await requestFunction(customToken);
+        print("🫡🫡🫡🫡🫡🫡🫡 Response : ${response.body}");
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           // Use utf8.decode to properly handle special characters in the response
@@ -375,14 +376,14 @@ abstract class HttpHelper {
           return Right(jsonDecode(decodedBody));
         } else if (response.statusCode == 400 || response.statusCode == 401) {
           String? message =
-              jsonDecode(utf8.decode(response.bodyBytes))['message'];
+              jsonDecode(utf8.decode(response.bodyBytes))['msg'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.invalidData,
               message: message));
         } else {
           String? message =
-              jsonDecode(utf8.decode(response.bodyBytes))['message'];
+              jsonDecode(utf8.decode(response.bodyBytes))['msg'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.failure, message: message));

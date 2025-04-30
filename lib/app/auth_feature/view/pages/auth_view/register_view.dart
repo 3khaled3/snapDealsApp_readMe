@@ -1,6 +1,10 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
+import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/utils/validators.dart';
@@ -24,13 +28,10 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  String? name;
-  String? email;
-  String? password;
-  String? number;
-  String? address;
-  String gender = 'male';
-  String? age;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -86,10 +87,8 @@ class _RegisterViewState extends State<RegisterView> {
                       hintText: context.tr.yourName,
                       labelText: context.tr.Name,
                       prefixIcon: EvaIcons.person,
-                      validator: Validators.validateEmail,
-                      onChanged: (value) {
-                        name = value;
-                      },
+                      // validator: Validators.validateEmail,
+                      controller: nameController,
                     ),
                     separator,
                     CustomTextFormField(
@@ -97,9 +96,7 @@ class _RegisterViewState extends State<RegisterView> {
                       labelText: context.tr.emailLabel,
                       prefixIcon: EvaIcons.emailOutline,
                       validator: Validators.validateEmail,
-                      onChanged: (value) {
-                        email = value;
-                      },
+                      controller: emailController,
                     ),
                     separator,
                     CustomTextFormField(
@@ -107,93 +104,53 @@ class _RegisterViewState extends State<RegisterView> {
                       labelText: context.tr.passwordLoginLabel,
                       prefixIcon: EvaIcons.lockOutline,
                       isPassword: true,
-                      validator: Validators.validatePassword,
-                      onChanged: (value) {
-                        password = value;
-                      },
+                      // validator: Validators.validatePassword,
+                      controller: passwordController,
                     ),
                     separator,
                     CustomTextFormField(
                       hintText: context.tr.yourNumber,
                       labelText: context.tr.Number,
                       prefixIcon: EvaIcons.hashOutline,
-                      validator: Validators.validateNumber,
+                      // validator: Validators.validateNumber,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        number = value;
-                      },
+                      controller: phoneController,
                     ),
-                    // 34.4.ph,
-                    // CustomTextFormField(
-                    //   hintText: context.tr.yourAge,
-                    //   labelText: context.tr.Age,
-                    //   prefixIcon: EvaIcons.calendarOutline,
-                    //   validator: Validators.validateAge,
-                    //   keyboardType: TextInputType.number,
-                    //   onChanged: (value) {
-                    //     age = value;
-                    //   },
-                    // ),
-                    separator,
-                    CustomTextFormField(
-                      hintText: context.tr.yourAddress,
-                      labelText: context.tr.Address,
-                      prefixIcon: EvaIcons.pinOutline,
-                      validator: Validators.validateAddress,
-                      onChanged: (value) {
-                        address = value;
-                      },
-                    ),
-                    // 32.1.ph,
-                    // Container(
-                    //   padding: const EdgeInsets.only(
-                    //     left: 22,
-                    //     right: 22,
-                    //   ),
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //       color: ColorsBox.paleGrey,
-                    //     ),
-                    //     borderRadius: BorderRadius.circular(16),
-                    //   ),
-                    //   child: DropdownButton<String>(
-                    //       items: [
-                    //         DropdownMenuItem<String>(
-                    //             value: 'male', child: Text(context.tr.male)),
-                    //         DropdownMenuItem<String>(
-                    //             value: 'female', child: Text(context.tr.female))
-                    //       ],
-                    //       value: gender,
-                    //       underline: Container(
-                    //         color: Colors.white,
-                    //       ),
-                    //       menuWidth: 373,
-                    //       isExpanded: true,
-                    //       style: AppTextStyles.regular16()
-                    //           .copyWith(color: ColorsBox.slateGrey),
-                    //       icon: Icon(
-                    //         gender == 'male'
-                    //             ? Icons.male_outlined
-                    //             : Icons.female_outlined,
-                    //         color: ColorsBox.brightBlue,
-                    //       ),
-                    //       onChanged: (String? value) {
-                    //         setState(() {
-                    //           gender = value!;
-                    //         });
-                    //       }),
-                    // ),
                     separator,
 
-                    CustomButtonRow(
-                      saveButtonText: context.tr.registerButton,
-                      onSave: () {
-                        if (formKey.currentState?.validate() ?? false) {
-                          // loginCubit.loginWithEmail(email, password);
-                          // GoRouter.of(context)
-                          //     .push(OtpView.routeName, extra: OtpViewArgs());
+                    BlocListener<ProfileCubit, ProfileStates>(
+                      bloc: ProfileCubit.instance,
+                      listener: (context, state) {
+                        if (state is ProfileSuccess) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            context.showSuccessSnackBar(
+                              message: context.tr.loginSuccess,
+                            );
+                            GoRouter.of(context).pushReplacement(
+                                MainHomeView.routeName,
+                                extra: MainHomeViewArgs());
+                          });
+                        } else if (state is ProfileError) {
+                          context.showErrorSnackBar(
+                            message: context.tr.loginError,
+                          );
+                          Navigator.of(context).pop();
+                        } else if (state is ProfileLoading) {
+                          context.showLoadingDialog();
                         }
                       },
+                      child: CustomButtonRow(
+                        saveButtonText: context.tr.registerButton,
+                        onSave: () async {
+                          if (formKey.currentState?.validate() ?? false) {
+                            await ProfileCubit.instance.registerUser(
+                                email: emailController.text,
+                                password: passwordController.text,
+                                name: nameController.text,
+                                phone: phoneController.text);
+                          }
+                        },
+                      ),
                     ),
                     // Spacer(),
 

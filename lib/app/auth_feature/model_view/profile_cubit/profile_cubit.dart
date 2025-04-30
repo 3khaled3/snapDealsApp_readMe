@@ -19,12 +19,13 @@ class ProfileCubit extends Cubit<ProfileStates> {
     required String name,
     required String email,
     required String password,
+    String? phone,
   }) async {
     emit(ProfileLoading(state.profile));
     // make request
     Either<FailureModel, Map<String, dynamic>> result = await AuthRepositoryImpl
         .instance
-        .signup(name: name, email: email, password: password);
+        .signup(name: name, email: email, password: password, phone: phone);
 
     result.fold(
       (left) {

@@ -15,18 +15,25 @@ class AuthRepositoryImpl implements AuthRepository {
     required String name,
     required String email,
     required String password,
+    String? phone,
   }) async {
     return await HttpHelper.handleRequest(
-      (token) => HttpHelper.postData(
-        linkUrl: ApiEndpoints.signup,
-        data: {
+      (token) {
+        Map<String, dynamic> data = {
           "name": name,
           "email": email,
           "password": password,
-          "passwordConfirm": password
-        },
-        token: token,
-      ),
+          "passwordConfirm": password,
+        };
+        if (phone != null) data.addAll({"phone": phone});
+        print(data);
+        print(ApiEndpoints.signup);
+        return HttpHelper.postData(
+          linkUrl: ApiEndpoints.signup,
+          data: data,
+          token: token,
+        );
+      },
     );
   }
 
