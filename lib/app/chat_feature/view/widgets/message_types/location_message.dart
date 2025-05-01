@@ -93,7 +93,8 @@ class LocationMessageBubble extends StatelessWidget {
             maxHeight: MediaQuery.of(context).size.width * .3,
           ),
           decoration: BoxDecoration(
-            color: isSender ? ColorsBox.mainColor : ColorsBox.greyReceivedMessage,
+            color:
+                isSender ? ColorsBox.mainColor : ColorsBox.greyReceivedMessage,
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

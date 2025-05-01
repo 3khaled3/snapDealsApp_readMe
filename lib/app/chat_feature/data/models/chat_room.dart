@@ -18,7 +18,7 @@ class ChatRoom {
   @HiveField(5)
   final String lastMessageSender;
   @HiveField(6)
-  final int lastMessageTimestamp; 
+  final int lastMessageTimestamp;
 
   ChatRoom({
     required this.id,

@@ -3,7 +3,6 @@ import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-
 class CustomProgressIndicator extends StatelessWidget {
   const CustomProgressIndicator({super.key, required this.value});
   final String value;

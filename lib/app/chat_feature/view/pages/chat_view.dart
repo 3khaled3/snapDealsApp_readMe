@@ -35,7 +35,6 @@ class _ChatViewState extends State<ChatView> {
     // requestPermissions();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

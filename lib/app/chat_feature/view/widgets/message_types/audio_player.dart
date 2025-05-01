@@ -134,7 +134,8 @@ class __PlayerWidgetState extends State<_PlayerWidget> {
       );
       print('Player started successfully');
     } catch (e) {
-      print('😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫  Error starting player: $e');
+      print(
+          '😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫  Error starting player: $e');
       await _myPlayer.stopPlayer();
     }
   }
@@ -168,7 +169,8 @@ class __PlayerWidgetState extends State<_PlayerWidget> {
       });
       _myPlayer.setSubscriptionDuration(const Duration(milliseconds: 100));
     } catch (e) {
-      print('😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫 Error opening player: $e');
+      print(
+          '😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫 Error opening player: $e');
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/admin_feature/view/navigation/admin_router.dart';
 import 'package:snap_deals/app/auth_feature/view/navigation/auth_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/splash_screen.dart';
 import 'package:snap_deals/app/chat_feature/view/navigation/chat_router.dart';
@@ -20,6 +21,7 @@ abstract class AppRouter {
         ...AuthRouter.routes,
         ...ProductRouter.routes,
         ...ChatRouter.routes,
+        ...AdminRouter.routes,
       ],
     );
     return _goRouter as GoRouter;

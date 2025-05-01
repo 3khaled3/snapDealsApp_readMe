@@ -1,8 +1,8 @@
-
 import 'package:snap_deals/core/utils/api_endpoints.dart';
 import 'package:snap_deals/core/utils/api_handler.dart';
 import 'package:dartz/dartz.dart';
 part 'auth_repository.dart';
+
 abstract class AuthRepository {
   Future<Either<FailureModel, Map<String, dynamic>>> signup({
     required String name,

@@ -130,5 +130,18 @@
     "loginError": "please inter a valid email and password",
     "loginSuccess": "Login Success",
     "logout_success": "logout success",
-    "logout_error": "logout error"
+    "logout_error": "logout error",
+    "add_category": "Add Category",
+    "add_category_hint": "Add Category Name",
+    "add_category_success": "Category added successfully",
+    "add_category_error": "Error adding category",
+    "delete_category": "Delete Category",
+    "delete_category_hint": "Are you sure you want to delete this category?",
+    "delete_category_success": "Category deleted successfully",
+    "delete_category_error": "Error deleting category",
+    "update_category": "Update Category",
+    "update_category_hint": "Update Category Name",
+    "update_category_success": "Category updated successfully",
+    "update_category_error": "Error updating category",
+    "deleteWord": "Delete"
 }

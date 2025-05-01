@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/admin_feature/view/pages/edit_category.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
 import 'package:snap_deals/app/home_feature/view/pages/products.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
@@ -66,27 +70,36 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                   onTap: () {
                     if (categories[index] == context.tr.more ||
                         categories[index] == context.tr.less) {
-                      setState(() {
-                        isMore = !isMore;
+                      if (ProfileCubit.instance.state.profile.role ==
+                          Role.admin) {
                         if (categories[index] == context.tr.more) {
-                          // Change "More" to "Electronic" and update the icon
-                          categories[index] = context.tr.electronics;
-                          categoriesIcons[index] = Icons.computer_outlined;
-                        } else if (categories[index] == context.tr.less) {
-                          // Restore to original categories and icons
-                          categories = List.from(originalCategories);
-                          categoriesIcons = List.from(originalIcons);
+                          GoRouter.of(context).push(EditCategory.routeName,
+                              extra: EditCategoryArgs());
                         }
-                      });
-                      return;
-                    }
-                    if (categories[index] == context.tr.courses) {
+                      } else {
+                        setState(() {
+                          isMore = !isMore;
+                          if (categories[index] == context.tr.more) {
+                            // Change "More" to "Electronic" and update the icon
+                            categories[index] = context.tr.electronics;
+                            categoriesIcons[index] = Icons.computer_outlined;
+                          } else if (categories[index] == context.tr.less) {
+                            // Restore to original categories and icons
+                            categories = List.from(originalCategories);
+                            categoriesIcons = List.from(originalIcons);
+                          }
+                        });
+                        return;
+                      }
+                    } else if (categories[index] == context.tr.courses) {
                       GoRouter.of(context).push(CoursesView.routeName,
                           extra: CoursesViewArgs(title: categories[index]));
                       return;
+                    } else if (categories[index] != context.tr.more ||
+                        categories[index] != context.tr.less) {
+                      GoRouter.of(context).push(ProductsView.routeName,
+                          extra: ProductsViewArgs(title: categories[index]));
                     }
-                    GoRouter.of(context).push(ProductsView.routeName,
-                        extra: ProductsViewArgs(title: categories[index]));
                   },
                   child: SizedBox(
                     height: 60,

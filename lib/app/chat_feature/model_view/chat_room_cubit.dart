@@ -19,7 +19,7 @@ class ChatRoomCubit extends Cubit<List<ChatRoom>> {
   // Initialize Hive and listen for changes
   Future<void> _initHive() async {
     try {
-      _chatRoomBox =  Hive.box<ChatRoom>('chatRooms');
+      _chatRoomBox = Hive.box<ChatRoom>('chatRooms');
       _hiveListener = _updateStateFromHive;
       _chatRoomBox.listenable().addListener(_hiveListener);
       _updateStateFromHive();

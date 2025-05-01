@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
@@ -50,13 +52,13 @@ class CustomBottomSheet {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildButton(
+                  buildButton(
                     text: context.tr.cancelWord,
                     textColor: ColorsBox.brightBlue,
                     borderColor: ColorsBox.brightBlue,
                     onTap: () => GoRouter.of(context).pop(),
                   ),
-                  _buildButton(
+                  buildButton(
                     text: context.tr.logOutButtonLabel,
                     textColor: ColorsBox.white,
                     backgroundColor: ColorsBox.brightBlue,
@@ -72,7 +74,7 @@ class CustomBottomSheet {
     );
   }
 
-  static Widget _buildButton({
+  static Widget buildButton({
     required String text,
     required Color textColor,
     Color? backgroundColor,
@@ -99,6 +101,7 @@ class CustomBottomSheet {
       ),
     );
   }
+
 
   static void showPasswordManagerSheet(BuildContext context) {
     final formKey = GlobalKey<FormState>();

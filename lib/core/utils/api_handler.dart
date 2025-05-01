@@ -375,15 +375,13 @@ abstract class HttpHelper {
 
           return Right(jsonDecode(decodedBody));
         } else if (response.statusCode == 400 || response.statusCode == 401) {
-          String? message =
-              jsonDecode(utf8.decode(response.bodyBytes))['msg'];
+          String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.invalidData,
               message: message));
         } else {
-          String? message =
-              jsonDecode(utf8.decode(response.bodyBytes))['msg'];
+          String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.failure, message: message));

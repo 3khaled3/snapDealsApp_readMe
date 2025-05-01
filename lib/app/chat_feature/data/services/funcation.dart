@@ -7,7 +7,6 @@ import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
 // import 'package:snap_deals/app/notification/data/notification_services.dart';
 // import 'package:snap_deals/app/notification/data/send_push_notification.dart';
 
-
 Future<void> updateChatRoomWithLastMessage(
     {required ChatRoom currentChatRoom, required MessageModel message}) async {
   final Box<ChatRoom> chatRoom0 = Hive.box<ChatRoom>('chatRooms');

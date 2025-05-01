@@ -28,10 +28,9 @@ class Tr {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<Tr> load(Locale locale) {
-    final name =
-        (locale.countryCode?.isEmpty ?? false)
-            ? locale.languageCode
-            : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1095,6 +1094,131 @@ class Tr {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Add Category`
+  String get add_category {
+    return Intl.message(
+      'Add Category',
+      name: 'add_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Category Name`
+  String get add_category_hint {
+    return Intl.message(
+      'Add Category Name',
+      name: 'add_category_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category added successfully`
+  String get add_category_success {
+    return Intl.message(
+      'Category added successfully',
+      name: 'add_category_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error adding category`
+  String get add_category_error {
+    return Intl.message(
+      'Error adding category',
+      name: 'add_category_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Category`
+  String get delete_category {
+    return Intl.message(
+      'Delete Category',
+      name: 'delete_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this category?`
+  String get delete_category_hint {
+    return Intl.message(
+      'Are you sure you want to delete this category?',
+      name: 'delete_category_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category deleted successfully`
+  String get delete_category_success {
+    return Intl.message(
+      'Category deleted successfully',
+      name: 'delete_category_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting category`
+  String get delete_category_error {
+    return Intl.message(
+      'Error deleting category',
+      name: 'delete_category_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Category`
+  String get update_category {
+    return Intl.message(
+      'Update Category',
+      name: 'update_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Category Name`
+  String get update_category_hint {
+    return Intl.message(
+      'Update Category Name',
+      name: 'update_category_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category updated successfully`
+  String get update_category_success {
+    return Intl.message(
+      'Category updated successfully',
+      name: 'update_category_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating category`
+  String get update_category_error {
+    return Intl.message(
+      'Error updating category',
+      name: 'update_category_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get deleteWord {
+    return Intl.message('Delete', name: 'deleteWord', desc: '', args: []);
   }
 }
 

@@ -83,7 +83,8 @@ class TextMessageBubble extends StatelessWidget {
             minWidth: MediaQuery.of(context).size.width * .1,
           ),
           decoration: BoxDecoration(
-            color: isSender ? ColorsBox.mainColor : ColorsBox.greyReceivedMessage,
+            color:
+                isSender ? ColorsBox.mainColor : ColorsBox.greyReceivedMessage,
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

@@ -10,5 +10,4 @@ extension WidgetExtensions on Widget {
       child: this,
     );
   }
-  
 }

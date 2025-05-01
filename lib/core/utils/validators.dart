@@ -8,6 +8,13 @@ class Validators {
     return null;
   }
 
+  static String? validateCategoryName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a category name';
+    }
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';

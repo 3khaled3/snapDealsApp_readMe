@@ -205,13 +205,13 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       final isOnline = await FirebaseUtils.isOnline();
       print("Uploading attachment...3");
       if (!isOnline) {
-      print("Uploading attachment...4");
+        print("Uploading attachment...4");
         print("No internet. Upload postponed.");
         final failedMessage = message.copyWith(status: MessageStatus.failed);
         await _messageBox.put(failedMessage.id, failedMessage);
-      print("Uploading attachment...5");
+        print("Uploading attachment...5");
         _failedAttachmentUploads.add(failedMessage); // Track failed upload
-      print("Uploading attachment...6");
+        print("Uploading attachment...6");
         return;
       }
       print("Uploading attachment...7");
@@ -219,7 +219,7 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       final downloadURL = await _uploadAttachment(message);
       print("Uploading attachment...8");
       if (downloadURL == null) {
-      print("Uploading attachment...9");
+        print("Uploading attachment...9");
         throw Exception("Failed to upload attachment");
       }
 
@@ -234,10 +234,10 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
           chatRoomId: chatRoomId, updatedMessage: sentMessage);
       print("Uploading attachment...1002");
       try {
-      print("Uploading attachment...1003");
+        print("Uploading attachment...1003");
         await updateChatRoomWithLastMessage(
             currentChatRoom: chatRoom, message: message);
-      print("Uploading attachment...1004");
+        print("Uploading attachment...1004");
       } catch (e) {
         print("😭😭😭😭😭😭😭Error updating chat room: $e");
       }
@@ -246,7 +246,7 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       // Remove from failed uploads if successful
       if (_failedAttachmentUploads.contains(message)) {
         _failedAttachmentUploads.remove(message);
-      print("Uploading attachment...10056");
+        print("Uploading attachment...10056");
       }
     } catch (e) {
       print("🚨 Error uploading attachment: $e");
@@ -299,7 +299,7 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
 
     //   return null;
     // }
-      final Reference storageReference = FirebaseStorage.instance
+    final Reference storageReference = FirebaseStorage.instance
         .ref()
         .child("chatAttachments/${message.id}/${file.path.split('/').last}");
 
@@ -313,19 +313,12 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       print("Upload progress: ${progress.toStringAsFixed(2)}%");
     });
 
-
-
     await uploadTask;
-
-
 
     // Get the download URL
     final String downloadURL = await storageReference.getDownloadURL();
     print("Upload successful! Download URL: $downloadURL");
     return downloadURL;
-
-
-
   }
 
   @override
