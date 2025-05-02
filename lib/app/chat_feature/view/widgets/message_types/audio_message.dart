@@ -2,20 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+// import 'package:flutter_sound/flutter_sound.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/uploading_message.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/message_types/progress_indicator.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
-import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_sound/public/flutter_sound_player.dart';
 import 'package:intl/intl.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'dart:async';
 
 part 'audio_player.dart';
 
@@ -60,7 +59,7 @@ class AudioMessageBubble extends StatelessWidget {
           stateIcon = const Icon(
             Icons.done_all,
             size: 18,
-            color: ColorsBox.mainColor,
+            color: Color(0xff69BFFF),
           );
           break;
         case MessageStatus.failed:

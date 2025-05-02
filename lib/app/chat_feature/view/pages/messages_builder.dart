@@ -1,8 +1,8 @@
 part of 'chat_view.dart';
 
 class MessagesBuilder extends StatefulWidget {
-  const MessagesBuilder({super.key});
-
+  const MessagesBuilder({super.key, required this.chatRoomId});
+  final String chatRoomId;
   @override
   State<MessagesBuilder> createState() => _MessagesBuilderState();
 }
@@ -70,11 +70,15 @@ class _MessagesBuilderState extends State<MessagesBuilder>
 
         /// Scroll to the last message
         //* used delay to wait for the widget to be built
-        Future.delayed(const Duration(milliseconds: 50), (() {
+        Future.delayed(const Duration(milliseconds: 300), (() {
           if (keys.isNotEmpty && keys.last.currentContext != null) {
             Scrollable.ensureVisible(keys.last.currentContext!);
           }
         }));
+        BlocProvider.of<ChatMessagesCubit>(context)
+            .chatService
+            .updateMessagesToSeen(
+                roomId: widget.chatRoomId, localMessages: newMessages);
       },
       child: ValueListenableBuilder(
         valueListenable: reversedMessages,

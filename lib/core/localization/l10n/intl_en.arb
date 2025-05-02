@@ -130,5 +130,12 @@
     "loginError": "please inter a valid email and password",
     "loginSuccess": "Login Success",
     "logout_success": "logout success",
-    "logout_error": "logout error"
+    "logout_error": "logout error",
+    "Image": "Image",
+    "Video": "Video",
+    "Audio": "Audio",
+    "Files": "Files",
+    "Location": "Location",
+    "Text": "Text",
+    "noChatsAvailable" : "No chats available"
 }

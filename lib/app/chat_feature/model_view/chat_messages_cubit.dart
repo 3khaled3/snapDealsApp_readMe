@@ -2,32 +2,49 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
+import 'package:snap_deals/core/utils/network_utils.dart';
+import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
 import 'package:snap_deals/app/chat_feature/data/models/uploading_message.dart';
 import 'package:snap_deals/app/chat_feature/data/repositories/chat_room_repository.dart';
-import 'package:snap_deals/app/chat_feature/data/services/funcation.dart';
-import 'package:snap_deals/core/utils/network_utils.dart';
+import 'package:snap_deals/app/chat_feature/data/services/chat_service.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ChatMessagesCubit extends Cubit<List<MessageModel>> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late Box<MessageModel> _messageBox;
   final List<MessageModel> fieldMessages = [];
   final List<UploadingMessage> _failedAttachmentUploads = [];
   ChatRoom chatRoom;
+  final Partner partner;
+  final ChatConfig chatConfig;
+  late DatabaseReference dbRef;
   StreamSubscription<QuerySnapshot>? _messagesSubscription;
   late final VoidCallback _onBoxChange;
   late String chatRoomId;
+  late ChatService chatService;
 
-  ChatMessagesCubit({required this.chatRoom}) : super([]) {
+  ChatMessagesCubit({
+    required this.chatRoom,
+    required this.partner,
+    required this.chatConfig,
+  }) : super([]) {
+    chatService = ChatService(chatConfig: chatConfig);
     chatRoomId = chatRoom.id;
+    dbRef = FirebaseDatabase.instance
+        .ref()
+        .child(chatConfig.chatMessagesCollection)
+        .child(chatRoomId);
     print('object ${chatRoom.id}');
     _initHive().then((_) {
       _listenToMessages(chatRoomId);
@@ -48,8 +65,10 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
                 status: MessageStatus.sent,
                 timestamp: DateTime.now().millisecondsSinceEpoch);
 
-            final future = sendMassageToFireStore(
-                chatRoomId: chatRoomId, updatedMessage: updatedMessage);
+            final future = chatService.sendMassageToFireStore(
+                partner: partner,
+                chatRoomId: chatRoomId,
+                updatedMessage: updatedMessage);
             final future2 = _messageBox.put(message.id, updatedMessage);
 
             futures.add(future);
@@ -57,7 +76,7 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
           }
           await Future.wait(futures);
           try {
-            await updateChatRoomWithLastMessage(
+            await chatService.updateChatRoomWithLastMessage(
                 currentChatRoom: chatRoom, message: fieldMessages.last);
           } catch (e) {
             print("😭😭😭😭😭😭😭Error updating chat room: $e");
@@ -85,7 +104,12 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
 
   // Initialize Hive and listen for changes
   Future<void> _initHive() async {
-    _messageBox = await Hive.openBox<MessageModel>('messages');
+    if (!Hive.isBoxOpen(chatConfig.chatMessagesCollection)) {
+      _messageBox =
+          await Hive.openBox<MessageModel>(chatConfig.chatMessagesCollection);
+    } else {
+      _messageBox = Hive.box<MessageModel>(chatConfig.chatMessagesCollection);
+    }
     _onBoxChange = () => loadCachedMessages();
     final failedMessages = _messageBox.values
         .where((e) => e.chatRoomId == chatRoom.id)
@@ -135,28 +159,34 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
 
   // Listen to Firestore for real-time messages
   void _listenToMessages(String chatRoomId) {
-    updateChatRoomUnReadCounter(chatRoomId: chatRoomId);
+    chatService.updateChatRoomUnReadCounter(chatRoomId: chatRoomId);
+    dbRef.onChildAdded.listen((event) async {
+      if (event.snapshot.value != null) {
+        final safeMap = deepConvert(event.snapshot.value);
+        final message = MessageModel.fromMap(safeMap);
 
-    _messagesSubscription = _firestore
-        .collection('chatRooms')
-        .doc(chatRoomId)
-        .collection('messages')
-        .orderBy('timestamp', descending: false)
-        .snapshots()
-        .listen((snapshot) async {
-      for (final doc in snapshot.docs) {
-        final message = MessageModel.fromMap(doc.data());
-
+        // Store message in Hive for local cache
         await _messageBox.put(message.id, message);
       }
     }, onError: (error) {
-      print("😭😭😭😭😭😭😭Error fetching messages: $error");
+      print("😭 Error fetching messages from Realtime Database: $error");
+    });
+    dbRef.onChildChanged.listen((event) async {
+      if (event.snapshot.value != null) {
+        final safeMap = deepConvert(event.snapshot.value);
+        final message = MessageModel.fromMap(safeMap);
+
+        // Store message in Hive for local cache
+        await _messageBox.put(message.id, message);
+      }
+    }, onError: (error) {
+      print("😭 Error fetching messages from Realtime Database: $error");
     });
   }
 
   // Send a new message
   Future<void> sendMessage(MessageModel message) async {
-    await firstMessage(chatRoom, _messageBox);
+    await firstMessage(chatRoom, _messageBox, chatConfig);
 
     try {
       // Cache the message in Hive
@@ -164,14 +194,20 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       final isOnline = await FirebaseUtils.isOnline();
       if (isOnline) {
         final updatedMessage = message.copyWith(status: MessageStatus.sent);
-
+        print(" updatedMessage:Send 😁😁😁😁😁😁😁😁😁😁😁");
         // Send the message to Firestore
-        await sendMassageToFireStore(
-            chatRoomId: chatRoomId, updatedMessage: updatedMessage);
+        await chatService.sendMassageToFireStore(
+            partner: partner,
+            chatRoomId: chatRoomId,
+            updatedMessage: updatedMessage);
+        print(" updatedMessage:Send 😁😁😁😁😁😁😁😁😁😁😁2");
         // Update the chat room with the last message
         try {
-          await updateChatRoomWithLastMessage(
+
+          await chatService.updateChatRoomWithLastMessage(
               currentChatRoom: chatRoom, message: message);
+                print(" updatedMessage:Send 😁😁😁😁😁😁😁😁😁😁😁3");
+
         } catch (e) {
           print("😭😭😭😭😭😭😭Error updating chat room: $e");
         }
@@ -191,62 +227,48 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
 
   // Upload an attachment
   Future<void> uploadAttachment(UploadingMessage message) async {
-    await firstMessage(chatRoom, _messageBox);
+    await firstMessage(chatRoom, _messageBox, chatConfig);
     try {
       print("Uploading attachment...");
 
       // Store the initial message in Hive with 'uploading' status
       final uploadingMessage =
           message.copyWith(status: MessageStatus.attachmentUploading);
-      print("Uploading attachment...1");
       await _messageBox.put(message.id, uploadingMessage);
-      print("Uploading attachment...2");
 
       final isOnline = await FirebaseUtils.isOnline();
-      print("Uploading attachment...3");
       if (!isOnline) {
-      print("Uploading attachment...4");
         print("No internet. Upload postponed.");
         final failedMessage = message.copyWith(status: MessageStatus.failed);
         await _messageBox.put(failedMessage.id, failedMessage);
-      print("Uploading attachment...5");
         _failedAttachmentUploads.add(failedMessage); // Track failed upload
-      print("Uploading attachment...6");
         return;
       }
-      print("Uploading attachment...7");
 
       final downloadURL = await _uploadAttachment(message);
-      print("Uploading attachment...8");
       if (downloadURL == null) {
-      print("Uploading attachment...9");
         throw Exception("Failed to upload attachment");
       }
 
       // Update the message with the file URL and 'sent' status
       final sentMessage =
           message.copyWith(content: downloadURL, status: MessageStatus.sent);
-      print("Uploading attachment...10");
 
       await _messageBox.put(sentMessage.id, sentMessage);
-      print("Uploading attachment...1001");
-      await sendMassageToFireStore(
-          chatRoomId: chatRoomId, updatedMessage: sentMessage);
-      print("Uploading attachment...1002");
+      await chatService.sendMassageToFireStore(
+          partner: partner,
+          chatRoomId: chatRoomId,
+          updatedMessage: sentMessage);
       try {
-      print("Uploading attachment...1003");
-        await updateChatRoomWithLastMessage(
+        await chatService.updateChatRoomWithLastMessage(
             currentChatRoom: chatRoom, message: message);
-      print("Uploading attachment...1004");
       } catch (e) {
         print("😭😭😭😭😭😭😭Error updating chat room: $e");
       }
-      print("Uploading attachment...10055");
 
       // Remove from failed uploads if successful
       if (_failedAttachmentUploads.contains(message)) {
         _failedAttachmentUploads.remove(message);
-      print("Uploading attachment...10056");
       }
     } catch (e) {
       print("🚨 Error uploading attachment: $e");
@@ -270,6 +292,7 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       _failedAttachmentUploads.add(failedMessage);
       return null;
     }
+    //todo! use supabase
 
     // final String fileName = "${message.id}/${file.path.split('/').last}";
     // const String bucketName = "khaled";
@@ -277,16 +300,13 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
     // print("📂 Uploading file: $fileName to bucket: $bucketName");
 
     // try {
-    //   print("📤 Uploading file...1");
     //   // Upload file
     //   await supabase.storage.from(bucketName).upload(fileName, file);
-    //   print("📤 Uploading file...2");
     //   print("✅ Upload successful!");
 
     //   // Get public URL
     //   final String downloadURL =
     //       supabase.storage.from(bucketName).getPublicUrl(fileName);
-    //   print("📤 Uploading file...3");
     //   print("🔗 File accessible at: $downloadURL");
 
     //   return downloadURL;
@@ -299,7 +319,8 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
 
     //   return null;
     // }
-      final Reference storageReference = FirebaseStorage.instance
+    //todo! use fire base
+    final Reference storageReference = FirebaseStorage.instance
         .ref()
         .child("chatAttachments/${message.id}/${file.path.split('/').last}");
 
@@ -313,36 +334,39 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
       print("Upload progress: ${progress.toStringAsFixed(2)}%");
     });
 
-
-
     await uploadTask;
-
-
 
     // Get the download URL
     final String downloadURL = await storageReference.getDownloadURL();
     print("Upload successful! Download URL: $downloadURL");
     return downloadURL;
-
-
-
   }
 
   @override
   Future<void> close() async {
-    _messagesSubscription?.cancel();
-    _messageBox.listenable().removeListener(_onBoxChange);
+    try {
+      // Cancel Firestore subscription
+      await _messagesSubscription?.cancel();
+
+      // Remove Hive listener
+      _messageBox.listenable().removeListener(_onBoxChange);
+
+      // Cancel network connectivity listener
+      await FirebaseUtils.onConnectivityChanged
+          .drain(); // Ensures no pending events
+    } catch (e) {
+      print("🚨 Error during cleanup: $e");
+    }
+
     return super.close();
   }
 }
 
-Future firstMessage(ChatRoom chatRoom, Box<MessageModel> _messageBox) async {
-  print("right 11");
+Future firstMessage(ChatRoom chatRoom, Box<MessageModel> _messageBox,
+    ChatConfig chatConfig) async {
+  // TODO check if chat room exists in firestore if not create it
   final messages = _messageBox.values.where((e) => e.chatRoomId == chatRoom.id);
   if (messages.isEmpty) {
-    print("right 222");
-    await ChatRoomRepository().setChatRooms(chatRoom);
-    print("right 333");
+    await ChatRoomRepository(chatConfig: chatConfig).setChatRooms(chatRoom);
   }
-  print("right 444");
 }

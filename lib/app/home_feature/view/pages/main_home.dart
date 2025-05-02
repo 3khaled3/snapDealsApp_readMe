@@ -12,6 +12,7 @@ import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/chat_wrapper.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/login_dialog.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -31,10 +32,7 @@ class _MainHomeViewState extends State<MainHomeView> {
   int _currentIndex = 0;
   final List<Widget> _views = [
     HomeView(),
-    BlocProvider.value(
-      value: ChatRoomCubit(),
-      child: const ChatTicketsView(),
-    ),
+    ChatWrapper(),
     FavoriteView(),
     ProfileView(),
   ];

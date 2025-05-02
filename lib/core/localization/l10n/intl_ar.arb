@@ -126,5 +126,12 @@
     "loginError": "يرجى ادخال بريد الكتروني صحيح وكلمة المرور",
     "loginSuccess": "تسجيل الدخول بنجاح",
     "logout_success": "تم تسجيل الخروج بنجاح",
-    "logout_error": "خطأ في تسجيل الخروج"
+    "logout_error": "خطأ في تسجيل الخروج",
+    "Image": "صورة",
+    "Video": "فيديو",
+    "Audio": "صوت",
+    "Files": "ملفات",
+    "Location": "موقع",
+    "Text": "نص",
+    "noChatsAvailable" : "لا يوجد دردشات متاحة"
 }

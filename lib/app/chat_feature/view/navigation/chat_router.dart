@@ -1,7 +1,7 @@
 //handle go router
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
+import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/chat_feature/model_view/chat_messages_cubit.dart';
 import 'package:snap_deals/app/chat_feature/model_view/chat_room_cubit.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_tickets_view.dart';
@@ -12,17 +12,23 @@ abstract class ChatRouter {
     GoRoute(
         path: ChatView.route,
         builder: (context, state) {
-          final chatRoom = state.extra as ChatRoom;
+          final args = state.extra as ChatViewArgs;
           return BlocProvider.value(
-            value: ChatMessagesCubit(chatRoom: chatRoom),
-            child: ChatView(chatRoom: chatRoom),
+            value: ChatMessagesCubit(
+                chatConfig: ChatConfig.fromType(args.chatType),
+                chatRoom: args.chatRoom,
+                partner: args.partner),
+            child: ChatView(args: args),
           );
         }),
     GoRoute(
         path: ChatTicketsView.routeName,
-        builder: (context, state) => BlocProvider.value(
-              value: ChatRoomCubit(),
-              child: const ChatTicketsView(),
-            )),
+        builder: (context, state) {
+          final args = state.extra as ChatConfig;
+          return BlocProvider(
+            create: (context) => ChatRoomCubit(chatConfig: args),
+            child: ChatTicketsView(chatConfig: args),
+          );
+        }),
   ];
 }

@@ -1096,6 +1096,46 @@ class Tr {
       args: [],
     );
   }
+
+  /// `Image`
+  String get Image {
+    return Intl.message('Image', name: 'Image', desc: '', args: []);
+  }
+
+  /// `Video`
+  String get Video {
+    return Intl.message('Video', name: 'Video', desc: '', args: []);
+  }
+
+  /// `Audio`
+  String get Audio {
+    return Intl.message('Audio', name: 'Audio', desc: '', args: []);
+  }
+
+  /// `Files`
+  String get Files {
+    return Intl.message('Files', name: 'Files', desc: '', args: []);
+  }
+
+  /// `Location`
+  String get Location {
+    return Intl.message('Location', name: 'Location', desc: '', args: []);
+  }
+
+  /// `Text`
+  String get Text {
+    return Intl.message('Text', name: 'Text', desc: '', args: []);
+  }
+
+  /// `No chats available`
+  String get noChatsAvailable {
+    return Intl.message(
+      'No chats available',
+      name: 'noChatsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

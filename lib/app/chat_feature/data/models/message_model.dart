@@ -42,7 +42,7 @@ class MessageModel extends Equatable {
       id: data['id'],
       senderId: data['senderId'] ?? '',
       content: data['content'] ?? '',
-      timestamp: (data['timestamp'] as Timestamp?)?.millisecondsSinceEpoch ?? 0,
+      timestamp: data['timestamp'] ?? 0,
       type: MessageType.values.firstWhere(
           (e) => e.toString().split('.').last == (data['type'] ?? 'text'),
           orElse: () => MessageType.text),
@@ -59,7 +59,7 @@ class MessageModel extends Equatable {
       "id": id,
       "senderId": senderId,
       "content": content,
-      "timestamp": Timestamp.fromMillisecondsSinceEpoch(timestamp),
+      "timestamp": timestamp,
       "type": type.toString().split('.').last,
       "status": status.toString().split('.').last,
       "replyToMessageId": replyToMessageId,
@@ -99,4 +99,46 @@ class MessageModel extends Equatable {
         replyToMessageId,
         chatRoomId
       ];
+}
+
+dynamic deepConvert(dynamic value) {
+  if (value is Map) {
+    return value.map((key, val) {
+      if (key is! String) {
+        throw ArgumentError(
+            'Map key must be a string, but found ${key.runtimeType}');
+      }
+      return MapEntry(key, deepConvert(val));
+    });
+  } else if (value is List) {
+    bool hasDoubleValues =
+        value.any((item) => item is double); // Check if any item is a double
+    final values = hasDoubleValues ? <double>[] : <int>[];
+    List dynamicValues = value.map((item) {
+      if (item is num) {
+        if (!hasDoubleValues) {
+          values.add(item.toInt());
+          return item.toInt(); // Convert numbers to double
+        } else {
+          values.add(item.toDouble());
+          return item.toDouble(); // Convert numbers to double
+        }
+      }
+      return deepConvert(item); // Recursively handle nested structures
+    }).toList();
+    if (values.isNotEmpty) {
+      return values;
+    } else {
+      return dynamicValues;
+    }
+  } else if (value is num) {
+    if (value is int) {
+      print("1111111num2 : $value");
+      return value.toInt(); // Convert numeric values to double
+    }
+
+    return value.toDouble();
+  } else {
+    return value; // Return the value unchanged if it's not a list, map, or numeric
+  }
 }

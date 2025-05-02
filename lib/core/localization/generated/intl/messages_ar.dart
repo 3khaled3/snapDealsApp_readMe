@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Address": MessageLookupByLibrary.simpleMessage("العنوان"),
     "Age": MessageLookupByLibrary.simpleMessage("السن"),
     "Arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "Audio": MessageLookupByLibrary.simpleMessage("صوت"),
     "CancelationPolicy": MessageLookupByLibrary.simpleMessage("سياسة الإلغاء"),
     "CancelationPolicyDiscription1": MessageLookupByLibrary.simpleMessage(
       "*الإلغاء قبل الشحن:*",
@@ -45,7 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "لإلغاء طلبك، يرجى التواصل معنا عبر [البريد الإلكتروني أو رقم الهاتف]، أو من خلال التطبيق مباشرة.",
     ),
     "ChatWord": MessageLookupByLibrary.simpleMessage("دردشة"),
+    "Files": MessageLookupByLibrary.simpleMessage("ملفات"),
+    "Image": MessageLookupByLibrary.simpleMessage("صورة"),
     "Language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "Location": MessageLookupByLibrary.simpleMessage("موقع"),
     "Name": MessageLookupByLibrary.simpleMessage("ألاسم"),
     "Number": MessageLookupByLibrary.simpleMessage("الرقم"),
     "Settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
@@ -88,7 +92,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "TermsAndConditionTitle6": MessageLookupByLibrary.simpleMessage(
       "*الإلغاء والإرجاع*",
     ),
+    "Text": MessageLookupByLibrary.simpleMessage("نص"),
     "Version": MessageLookupByLibrary.simpleMessage("النسخة"),
+    "Video": MessageLookupByLibrary.simpleMessage("فيديو"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
     "adDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإعلان"),
     "adTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان *"),
@@ -191,6 +197,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "newWord": MessageLookupByLibrary.simpleMessage("جديد"),
     "nextButton": MessageLookupByLibrary.simpleMessage("التالي"),
+    "noChatsAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد دردشات متاحة",
+    ),
     "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
       "اكتشف أدوات تعليمية مبتكرة ودورات متخصصة في تطبيق واحد.",
     ),
