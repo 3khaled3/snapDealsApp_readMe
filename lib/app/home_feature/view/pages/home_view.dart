@@ -51,47 +51,6 @@ class HomeView extends StatelessWidget {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
             ),
           ),
-          IconButton(
-              onPressed: () async {
-                print(
-                    "id0 ProfileCubit : ${ProfileCubit.instance.state.profile.id}");
-
-                final chatRooms =
-                    await ChatRoomRepository().getSpecificChatRooms("0000");
-                chatRooms.fold((left) {
-                  final id = const Uuid().v4();
-
-                  ChatRoom chatRoom = ChatRoom(
-                    id: id,
-                    members: [ProfileCubit.instance.state.profile.id, "0000"],
-                    unreadMessagesCount: {},
-                    lastMessageId: "muck",
-                    lastMessageContent: "muck",
-                    lastMessageSender: "muck",
-                    lastMessageTimestamp: 0,
-                  );
-                  GoRouter.of(context).push(ChatView.route, extra: chatRoom);
-                }, (right) {
-                  print("right: $right");
-                  if (right.isEmpty) {
-                    final id = const Uuid().v4();
-                    ChatRoom chatRoom = ChatRoom(
-                      id: id,
-                      members: [ProfileCubit.instance.state.profile.id, "0000"],
-                      unreadMessagesCount: {},
-                      lastMessageId: "muck",
-                      lastMessageContent: "muck",
-                      lastMessageSender: "muck",
-                      lastMessageTimestamp: 0,
-                    );
-                    GoRouter.of(context).push(ChatView.route, extra: chatRoom);
-                  } else {
-                    GoRouter.of(context)
-                        .push(ChatView.route, extra: right.first);
-                  }
-                });
-              },
-              icon: const Icon(Icons.add)),
           // SizedBox(
           //   height: 275,
           //   child: SingleChildScrollView(

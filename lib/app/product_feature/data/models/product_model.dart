@@ -1,7 +1,7 @@
 class ProductModel {
   final String id;
   final String title;
-  final String user;
+  final Partner user;
   final String slug;
   final String location;
   final String description;
@@ -33,7 +33,7 @@ class ProductModel {
     return ProductModel(
       id: json['_id'],
       title: json['title'],
-      user: json['user'],
+      user: Partner.fromJson(json['user']),
       slug: json['slug'],
       location: json['location'] ?? " location",
       description: json['description'],
@@ -53,7 +53,7 @@ class ProductModel {
     return {
       '_id': id,
       'title': title,
-      'user': user,
+      'user': user.toJson(),
       'slug': slug,
       'location': location,
       'description': description,
@@ -70,7 +70,6 @@ class ProductModel {
   ProductModel copyWith({
     String? id,
     String? title,
-    String? user,
     String? slug,
     String? location,
     String? description,
@@ -85,7 +84,7 @@ class ProductModel {
     return ProductModel(
       id: id ?? this.id,
       title: title ?? this.title,
-      user: user ?? this.user,
+      user: user,
       location: location ?? this.location,
       slug: slug ?? this.slug,
       description: description ?? this.description,
@@ -131,5 +130,39 @@ class Category {
       id: id ?? this.id,
       name: name ?? this.name,
     );
+  }
+}
+
+class Partner {
+  final String id;
+  final String name;
+  final String phone;
+  final String profileImg;
+
+  Partner({
+    required this.id,
+    required this.name,
+    required this.phone,
+    required this.profileImg,
+  });
+
+  // From JSON
+  factory Partner.fromJson(Map<String, dynamic> json) {
+    return Partner(
+      id: json['_id'],
+      name: json['name'],
+      phone: json['phone'],
+      profileImg: json['profileImg'],
+    );
+  }
+
+  // To JSON
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'phone': phone,
+      'profileImg': profileImg,
+    };
   }
 }

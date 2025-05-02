@@ -45,7 +45,8 @@ abstract class HttpHelper {
     required String? token,
   }) async {
     var headers = {
-      if (token != null) 'Authorization': token,
+      if (token != null) 'Authorization': 'Bearer $token',
+
       'accept': 'application/json',
       'Content-Type': 'application/json',
     };
@@ -65,7 +66,8 @@ abstract class HttpHelper {
     required String? token,
   }) async {
     var headers = {
-      if (token != null) 'Authorization': token,
+      if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'Accept': 'application/json',
     };
 
@@ -81,7 +83,8 @@ abstract class HttpHelper {
     required String? token,
   }) async {
     var headers = {
-      if (token != null) 'Authorization': token,
+      if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'accept': 'application/json',
       'Content-Type': 'application/json'
     };
@@ -99,7 +102,8 @@ abstract class HttpHelper {
     required String? token,
   }) async {
     var headers = {
-      if (token != null) 'Authorization': token,
+      if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
@@ -119,7 +123,8 @@ abstract class HttpHelper {
     required String? token,
   }) async {
     var headers = {
-      if (token != null) 'Authorization': token,
+      if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'Accept': 'application/json',
     };
 
@@ -375,15 +380,13 @@ abstract class HttpHelper {
 
           return Right(jsonDecode(decodedBody));
         } else if (response.statusCode == 400 || response.statusCode == 401) {
-          String? message =
-              jsonDecode(utf8.decode(response.bodyBytes))['msg'];
+          String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.invalidData,
               message: message));
         } else {
-          String? message =
-              jsonDecode(utf8.decode(response.bodyBytes))['msg'];
+          String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.failure, message: message));

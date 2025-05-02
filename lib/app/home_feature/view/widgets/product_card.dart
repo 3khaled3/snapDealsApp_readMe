@@ -19,7 +19,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final String productName = product.title;
     final double price = product.price;
-    final String productOwner = product.user;
+    final Partner productOwner = product.user;
     final String imagePath =
         product.images.isNotEmpty ? product.images.first : "";
 
@@ -89,7 +89,7 @@ class ProductCard extends StatelessWidget {
                     // if (isCourse == true) ...[
 
                     Text(
-                      productOwner,
+                      productOwner.name,
                       style: AppTextStyles.semiBold12()
                           .copyWith(color: ColorsBox.greyish),
                       maxLines: 1,

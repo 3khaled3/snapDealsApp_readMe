@@ -47,7 +47,7 @@ class ProductDetailsView extends StatelessWidget {
                 if (product.description.isNotEmpty)
                   DescriptionSection(description: product.description),
                 18.ph,
-                ContactSection(name: product.user)
+                ContactSection(user: product.user)
               ],
             )
           ],
