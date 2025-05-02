@@ -136,13 +136,13 @@ class Category {
 class Partner {
   final String id;
   final String name;
-  final String phone;
+  final String? phone;
   final String profileImg;
 
   Partner({
     required this.id,
     required this.name,
-    required this.phone,
+    this.phone,
     required this.profileImg,
   });
 
