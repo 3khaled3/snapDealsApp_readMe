@@ -54,8 +54,9 @@ class CourseModel {
         images: List<String>.from(json['images']),
         price: json['price'],
         category: Category.fromJson(json['category']),
-        lessonModels: List<LessonModel>.from(
-            json['lessonModels'].map((x) => LessonModel.fromJson(x))),
+        lessonModels: [],
+        //  List<LessonModel>.from(
+        //     json['lessonModels'].map((x) => LessonModel.fromJson(x))),
         instructor: Instructor.fromJson(json['instructor']),
         location: json['location'],
         ratingsAverage: (json['ratingsAverage'] ?? 0).toDouble(),

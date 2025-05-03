@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CourseCard extends StatelessWidget {
-  final String courseName;
-  final String courseOwner;
-  final String imagePath;
-  final double price;
+  final CourseModel course;
 
   const CourseCard({
     super.key,
-    required this.courseName,
-    required this.imagePath,
-    this.courseOwner = '',
-    required this.price,
+    required this.course,
   });
 
   @override
@@ -55,7 +50,8 @@ class CourseCard extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: CachedNetworkImage(
-                        imageUrl: imagePath,
+                        imageUrl:
+                            course.images.isEmpty ? '' : course.images.first,
                         height: 140,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -75,7 +71,7 @@ class CourseCard extends StatelessWidget {
 
                     /// course Name
                     Text(
-                      courseName,
+                      course.title,
                       style: AppTextStyles.medium14(),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -85,7 +81,7 @@ class CourseCard extends StatelessWidget {
                     // if (isCourse == true) ...[
 
                     Text(
-                      courseOwner,
+                      course.instructor.name,
                       style: AppTextStyles.semiBold12()
                           .copyWith(color: ColorsBox.greyish),
                       maxLines: 1,
@@ -99,7 +95,9 @@ class CourseCard extends StatelessWidget {
                       children: [
                         ...List.generate(5, (index) {
                           return Icon(
-                            index < 4 ? Icons.star : Icons.star_half,
+                            index < course.ratingsAverage
+                                ? Icons.star
+                                : Icons.star_half,
                             size: 16,
                             color: Colors.amber,
                           );
@@ -109,7 +107,7 @@ class CourseCard extends StatelessWidget {
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '4.5 (12000)',
+                              course.ratingsQuantity.toString(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.regular12()
@@ -127,7 +125,7 @@ class CourseCard extends StatelessWidget {
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          '\$${(price).toStringAsFixed(2)}',
+                          '\$${(course.price).toStringAsFixed(2)}',
                           maxLines: 1,
                           style: AppTextStyles.semiBold14().copyWith(
                             color: ColorsBox.brightBlue,

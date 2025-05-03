@@ -10,6 +10,7 @@ import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/popular_course_builder.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/popular_product_builder.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
@@ -51,6 +52,7 @@ class HomeView extends StatelessWidget {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
             ),
           ),
+          const PopularCourseBuilder(),
           // SizedBox(
           //   height: 275,
           //   child: SingleChildScrollView(
