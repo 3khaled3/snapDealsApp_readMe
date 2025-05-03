@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/Course_card.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/get_all_course_cubit/get_all_courses_cubit.dart';
 
@@ -86,14 +87,13 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
         },
         builder: (context, state) {
           if (state is GetAllCoursesLoading && page == 1) {
-            return const Center(child: CircularProgressIndicator());
-            // return SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: Row(
-            //     children:
-            //         List.generate(2, (index) => const ShimmerCourseCard()),
-            //   ),
-            // );
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children:
+                    List.generate(2, (index) => const ShimmerProductCard()),
+              ),
+            );
           } else if (state is GetAllCoursesError && page == 1) {
             return Center(
               child: Column(
@@ -119,11 +119,10 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                         (Course) => CourseCard(course: Course),
                       ),
                       if (_isLoading)
-                        const Center(child: CircularProgressIndicator()),
-                      // Row(
-                      //   children: List.generate(
-                      //       2, (index) => const ShimmerCourseCard()),
-                      // ),
+                        Row(
+                          children: List.generate(
+                              2, (index) => const ShimmerProductCard()),
+                        ),
                       if (!_hasMore && _Courses.isNotEmpty)
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
