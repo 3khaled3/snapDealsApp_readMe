@@ -90,6 +90,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Version": MessageLookupByLibrary.simpleMessage("النسخة"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
+    "accessUsers": MessageLookupByLibrary.simpleMessage(
+      "الوصول إلى المستخدمين",
+    ),
     "adDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإعلان"),
     "adTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان *"),
     "addImageDis": MessageLookupByLibrary.simpleMessage(
@@ -128,10 +131,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذا هو الرقم لجهات اتصال المشترين والإشعارات الأخرى",
     ),
     "continue_as_guest": MessageLookupByLibrary.simpleMessage("متابعة كزائر"),
+    "copyTextError": MessageLookupByLibrary.simpleMessage("خطأ في نسخ النص"),
+    "copyTextSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم نسخ النص بنجاح",
+    ),
     "courses": MessageLookupByLibrary.simpleMessage("دورات"),
     "createAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "currentPassword": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الحالية",
+    ),
+    "deleteUser": MessageLookupByLibrary.simpleMessage("حذف المستخدم"),
+    "deleteUserHint": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد حذف هذا المستخدم؟",
     ),
     "deleteWord": MessageLookupByLibrary.simpleMessage("حذف"),
     "delete_category": MessageLookupByLibrary.simpleMessage("حذف الفئة"),

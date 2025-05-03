@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:snap_deals/app/admin_feature/data/repositories/i_edit_category_repository.dart';
+import 'package:snap_deals/app/admin_feature/data/repositories/edit_category_repo/i_edit_category_repository.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 
 part 'edit_category_state.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/admin_feature/model_view/access_user_cubit/access_user_cubit.dart';
 import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
@@ -91,6 +92,38 @@ static void deleteCategory(BuildContext context, String categoryId) {
             onPressed: () async {
               await cubit.deleteCategory(categoryId);
               cubit.getAllCategoryData();
+              Navigator.pop(dialogContext);
+            },
+            child: Text(
+              context.tr.deleteWord,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+static void deleteUser(BuildContext context, String userId) {
+  final cubit = BlocProvider.of<AccessUserCubit>(context); // ✅ خد نفس الCubit
+
+  showDialog(
+    context: context,
+    builder: (dialogContext) => BlocProvider.value(
+      value: cubit,
+      child: AlertDialog(
+        title: Text(context.tr.deleteUser),
+        content: Text(context.tr.deleteUserHint),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(context.tr.cancelWord),
+          ),
+          TextButton(
+            onPressed: () async {
+              await cubit.deleteUser(userId);
+              cubit.getAllUsersData(limit: 5.toString(), page: 1.toString());
               Navigator.pop(dialogContext);
             },
             child: Text(

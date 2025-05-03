@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Version": MessageLookupByLibrary.simpleMessage("Version"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("About us"),
+    "accessUsers": MessageLookupByLibrary.simpleMessage("Access Users"),
     "adDetails": MessageLookupByLibrary.simpleMessage("Ad details"),
     "adTitle": MessageLookupByLibrary.simpleMessage("Ad title *"),
     "addImageDis": MessageLookupByLibrary.simpleMessage(
@@ -136,9 +137,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "continue_as_guest": MessageLookupByLibrary.simpleMessage(
       "Continue as Guest",
     ),
+    "copyTextError": MessageLookupByLibrary.simpleMessage("Error copying text"),
+    "copyTextSuccess": MessageLookupByLibrary.simpleMessage(
+      "Text copied to clipboard",
+    ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
     "createAccount": MessageLookupByLibrary.simpleMessage("Create an account"),
     "currentPassword": MessageLookupByLibrary.simpleMessage("Current Password"),
+    "deleteUser": MessageLookupByLibrary.simpleMessage("Delete User"),
+    "deleteUserHint": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this user?",
+    ),
     "deleteWord": MessageLookupByLibrary.simpleMessage("Delete"),
     "delete_category": MessageLookupByLibrary.simpleMessage("Delete Category"),
     "delete_category_error": MessageLookupByLibrary.simpleMessage(

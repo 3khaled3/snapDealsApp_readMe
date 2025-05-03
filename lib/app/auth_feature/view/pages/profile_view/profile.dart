@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/admin_feature/view/pages/access_users.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
@@ -89,6 +92,14 @@ class ProfileView extends StatelessWidget {
                   title: context.tr.logOut,
                   onTap: () => CustomBottomSheet.showLogoutSheet(context),
                 ),
+                ProfileCubit.instance.state.profile.role == Role.admin
+                    ? CustomListTile(
+                        leadingIcon: Icons.person_search_rounded,
+                        title: context.tr.accessUsers,
+                        onTap: () =>
+                            GoRouter.of(context).push(AccessUsers.routeName),
+                      )
+                    : Container(),
               ],
             ),
           ],

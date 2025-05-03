@@ -143,5 +143,10 @@
     "update_category_hint": "Update Category Name",
     "update_category_success": "Category updated successfully",
     "update_category_error": "Error updating category",
-    "deleteWord": "Delete"
+    "deleteWord": "Delete",
+    "accessUsers": "Access Users",
+    "copyTextSuccess": "Text copied to clipboard",
+    "copyTextError": "Error copying text",
+    "deleteUser": "Delete User",
+    "deleteUserHint": "Are you sure you want to delete this user?"
 }

@@ -107,12 +107,12 @@ void showAddCategory(BuildContext context) {
               if (state is AddCategorySuccess) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("تمت الإضافة بنجاح")),
+                   SnackBar(content: Text(context.tr.add_category_success)),
                 );
                 cubit.getAllCategoryData(); // ✅ إعادة تحميل البيانات
               } else if (state is AddCategoryError) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("حدث خطأ أثناء الإضافة")),
+                   SnackBar(content: Text(context.tr.add_category_error)),
                 );
               }
             },

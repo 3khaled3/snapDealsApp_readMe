@@ -1221,6 +1221,51 @@ class Tr {
   String get deleteWord {
     return Intl.message('Delete', name: 'deleteWord', desc: '', args: []);
   }
+
+  /// `Access Users`
+  String get accessUsers {
+    return Intl.message(
+      'Access Users',
+      name: 'accessUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text copied to clipboard`
+  String get copyTextSuccess {
+    return Intl.message(
+      'Text copied to clipboard',
+      name: 'copyTextSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error copying text`
+  String get copyTextError {
+    return Intl.message(
+      'Error copying text',
+      name: 'copyTextError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete User`
+  String get deleteUser {
+    return Intl.message('Delete User', name: 'deleteUser', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to delete this user?`
+  String get deleteUserHint {
+    return Intl.message(
+      'Are you sure you want to delete this user?',
+      name: 'deleteUserHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {
