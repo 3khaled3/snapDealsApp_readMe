@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
@@ -57,29 +58,7 @@ class ContactSection extends StatelessWidget {
                     child: CustomPrimaryButton(
                       title: context.tr.ChatWord,
                       onTap: () async {
-                        WidgetsBinding.instance.addPostFrameCallback((_) async {
-                          final chatRooms = await ChatRoomRepository(
-                                  chatConfig:
-                                      ChatConfig.fromType(ChatType.free))
-                              .getSpecificChatRooms(user.id);
-                          Navigator.of(context).pop();
-                          chatRooms.fold(
-                            (left) {
-                              _createAndNavigateToChat(context, user);
-                            },
-                            (right) {
-                              if (right.isEmpty) {
-                                _createAndNavigateToChat(context, user);
-                              } else {
-                                GoRouter.of(context).push(ChatView.route,
-                                    extra: ChatViewArgs(
-                                        chatType: ChatType.free,
-                                        chatRoom: right.first,
-                                        partner: user));
-                              }
-                            },
-                          );
-                        });
+                        startChat(context, user);
                       },
                       isWhite: true,
                     ),
@@ -92,6 +71,35 @@ class ContactSection extends StatelessWidget {
       ],
     );
   }
+}
+
+void startChat(BuildContext context, Partner user) async {
+  if (ProfileCubit.instance.state.profile.role == Role.unregistered) {
+    GoRouter.of(context).push(LoginScreen.routeName, extra: LoginViewArgs());
+    return;
+  }
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    final chatRooms =
+        await ChatRoomRepository(chatConfig: ChatConfig.fromType(ChatType.free))
+            .getSpecificChatRooms(user.id);
+    Navigator.of(context).pop();
+    chatRooms.fold(
+      (left) {
+        _createAndNavigateToChat(context, user);
+      },
+      (right) {
+        if (right.isEmpty) {
+          _createAndNavigateToChat(context, user);
+        } else {
+          GoRouter.of(context).push(ChatView.route,
+              extra: ChatViewArgs(
+                  chatType: ChatType.free,
+                  chatRoom: right.first,
+                  partner: user));
+        }
+      },
+    );
+  });
 }
 
 void _createAndNavigateToChat(BuildContext context, Partner user) {

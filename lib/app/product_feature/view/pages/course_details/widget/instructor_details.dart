@@ -1,12 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class InstructorDetails extends StatelessWidget {
-  const InstructorDetails({super.key});
-
+  const InstructorDetails({super.key, required this.instructor});
+  final Instructor instructor;
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -16,20 +19,37 @@ class InstructorDetails extends StatelessWidget {
         SizedBox(height: 10),
         Row(
           children: [
-            CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage(AppImageAssets.profileImage),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(1000),
+              child: CachedNetworkImage(
+                imageUrl: instructor.profileImg,
+                placeholder: (context, url) => SvgPicture.asset(
+                  AppImageAssets.defaultProfile,
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.cover,
+                ),
+                errorWidget: (context, url, error) => SvgPicture.asset(
+                  AppImageAssets.defaultProfile,
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.cover,
+                ),
+                height: 40,
+                width: 40,
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Reda Ahmed",
+                  instructor.name,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Design Instructor",
+                  instructor.phone ?? '',
                   style: TextStyle(color: Colors.grey),
                 ),
               ],

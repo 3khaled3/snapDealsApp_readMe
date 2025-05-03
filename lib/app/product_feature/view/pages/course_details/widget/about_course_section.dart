@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 
 class AboutCourseSection extends StatelessWidget {
-  const AboutCourseSection({super.key});
+  final CourseModel course;
+
+  const AboutCourseSection({super.key, required this.course});
 
   @override
   Widget build(BuildContext context) {
+    final entries = course.details.entries.toList();
+
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.42,
       width: double.infinity,
       child: ListView(
+        padding: const EdgeInsets.all(0),
+        physics: const NeverScrollableScrollPhysics(),
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DescSection(),
-              SizedBox(height: 20),
-              InstructorDetails(),
-              SizedBox(height: 20),
-              Text(
+              DescSection(description: course.description),
+              const SizedBox(height: 20),
+              InstructorDetails(instructor: course.instructor),
+              const SizedBox(height: 20),
+              const Text(
                 'Info',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Wrap(
                 spacing: 40,
                 runSpacing: 15,
                 children: [
-                  InfoItem(title: "Students", value: "15,231"),
-                  InfoItem(title: "Language", value: "English"),
-                  InfoItem(title: "Last update", value: "Feb 2, 2024"),
-                  InfoItem(title: "Subtitle", value: "English and 2 more"),
-                  InfoItem(title: "Level", value: "Beginner"),
-                  InfoItem(title: "Access", value: "Mobile, Desktop"),
+                  InfoItem(
+                      title: "Language", value: course.language ?? "Unknown"),
+                  ...entries.map((e) => InfoItem(title: e.key, value: e.value))
                 ],
               ),
             ],

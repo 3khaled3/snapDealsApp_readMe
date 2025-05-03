@@ -5,8 +5,8 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class ReviewsSetion extends StatelessWidget {
-  const ReviewsSetion({super.key});
-
+  const ReviewsSetion({super.key, required this.reviews});
+  final List reviews;
   @override
   Widget build(BuildContext context) {
     List<CustomReviewContainer> reviews = [

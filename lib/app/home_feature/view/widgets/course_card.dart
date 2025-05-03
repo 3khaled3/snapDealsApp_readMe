@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -21,7 +22,7 @@ class CourseCard extends StatelessWidget {
       onTap: () {
         GoRouter.of(context).push(
           CourseDetailsView.routeName,
-          extra: CourseDetailsViewArgs(),
+          extra: CourseDetailsViewArgs(course: course),
         );
       },
       child: Card(
@@ -55,13 +56,14 @@ class CourseCard extends StatelessWidget {
                         height: 140,
                         width: double.infinity,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => Container(
-                          height: 140,
-                          width: double.infinity,
-                          color: Colors.grey.withOpacity(0.1),
-                          child: const Center(
-                              child:
-                                  CircularProgressIndicator(strokeWidth: 1.5)),
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            height: 140,
+                            width: double.infinity,
+                            color: Colors.grey.withOpacity(0.1),
+                          ),
                         ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
