@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/app/admin_feature/view/widgets/custom_copy_button.dart';
 
 class ShimmerUserCard extends StatelessWidget {
   const ShimmerUserCard({super.key});
@@ -23,75 +26,76 @@ class ShimmerUserCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  // ID placeholder
                   Container(
-                    height: 20,
                     width: 100,
+                    height: 16,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  const Icon(Icons.copy, color: Colors.white),
+                  8.pw,
+                  const CustomCopyButton(textToCopy: ''), // Placeholder
                   const Spacer(),
-                  const Icon(Icons.delete, color: Colors.white),
+                  IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.white),
+                    onPressed: () {}, // لا تفعل شيء أثناء الـ Shimmer
+                  ),
                 ],
               ),
-              const SizedBox(height: 8),
+              8.ph,
               Row(
                 children: [
-                  // Image placeholder
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
+                  const CircleAvatar(
                     radius: 37,
+                    backgroundColor: Colors.white,
                   ),
-                  const SizedBox(width: 20),
+                  20.pw,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Container(
-                            height: 16,
                             width: 120,
+                            height: 16,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          const Icon(Icons.copy, color: Colors.white),
+                          8.pw,
+                          const CustomCopyButton(textToCopy: ''),
                         ],
                       ),
-                      const SizedBox(height: 7),
+                      7.ph,
                       Row(
                         children: [
                           Container(
+                            width: 190,
                             height: 14,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                          8.pw,
+                          const CustomCopyButton(textToCopy: ''),
+                        ],
+                      ),
+                      7.ph,
+                      Row(
+                        children: [
+                          Container(
                             width: 160,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          const Icon(Icons.copy, color: Colors.white),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                      Row(
-                        children: [
-                          Container(
                             height: 14,
-                            width: 140,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          const Icon(Icons.copy, color: Colors.white),
+                          8.pw,
+                          const CustomCopyButton(textToCopy: ''),
                         ],
                       ),
                     ],

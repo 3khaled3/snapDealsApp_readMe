@@ -4,10 +4,12 @@ import 'package:snap_deals/app/admin_feature/model_view/access_user_cubit/access
 import 'package:snap_deals/app/admin_feature/view/widgets/shimmer_user_card.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/user_card.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
+
 
 class UserBuilder extends StatefulWidget {
-  const UserBuilder({super.key});
+  final AccessUserCubit accessUserCubit;
+
+  const UserBuilder({super.key, required this.accessUserCubit});
 
   @override
   State<UserBuilder> createState() => _UserBuilderState();
@@ -15,7 +17,8 @@ class UserBuilder extends StatefulWidget {
 
 class _UserBuilderState extends State<UserBuilder> {
   final ScrollController _scrollController = ScrollController();
-  final AccessUserCubit accessUserCubit = AccessUserCubit();
+
+  late AccessUserCubit accessUserCubit;
 
   int page = 1;
   final int limit = 5;
@@ -26,7 +29,8 @@ class _UserBuilderState extends State<UserBuilder> {
   @override
   void initState() {
     super.initState();
-    _loadInitialProducts();
+    accessUserCubit = widget.accessUserCubit;
+    _loadInitialUsers();
     _scrollController.addListener(_onScroll);
   }
 
@@ -37,11 +41,8 @@ class _UserBuilderState extends State<UserBuilder> {
     super.dispose();
   }
 
-  void _loadInitialProducts() {
-    accessUserCubit.getAllUsersData(
-      page: page.toString(),
-      limit: limit.toString(),
-    );
+  void _loadInitialUsers() {
+    accessUserCubit.getAllUsersData(page: page.toString(), limit: limit.toString());
   }
 
   void _onScroll() {
@@ -49,137 +50,116 @@ class _UserBuilderState extends State<UserBuilder> {
             _scrollController.position.maxScrollExtent - 200 &&
         !_isLoading &&
         _hasMore) {
-      _loadMoreProducts();
+      _loadMoreUsers();
     }
   }
 
-  void _loadMoreProducts() {
+  void _loadMoreUsers() {
     setState(() => _isLoading = true);
     page++;
-    accessUserCubit.getAllUsersData(
-      page: page.toString(),
-      limit: limit.toString(),
-    );
+    accessUserCubit.getAllUsersData(page: page.toString(), limit: limit.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 275,
-      child: BlocConsumer<AccessUserCubit, AccessUserState>(
-        bloc: accessUserCubit,
-        listener: (context, state) {
-          if (state is GetAllUsersSuccess) {
-            _isLoading = false;
-
-            if (page == 1) {
-              _users = state.users;
-            } else {
-              _users.addAll(state.users);
-            }
-
-            if (state.users.length < limit) {
-              _hasMore = false;
-            }
-          } else if (state is GetAllUsersError) {
-            _isLoading = false;
-            page--;
+    return BlocConsumer<AccessUserCubit, AccessUserState>(
+      bloc: accessUserCubit,
+      listener: (context, state) {
+        if (state is GetAllUsersSuccess) {
+          _isLoading = false;
+          if (page == 1) {
+            _users = state.users;
+          } else {
+            _users.addAll(state.users);
           }
-        },
-        builder: (context, state) {
-  // ✅ عرض المستخدم المحدد فقط إذا تم البحث بالـ ID
-  if (state is GetSpecificUserSuccess) {
-    final user = state.user;
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-         UserCard(uesrs: user),
-          const SizedBox(height: 16),
-          TextButton(
-            onPressed: () {
-              page = 1;
-              _users.clear();
-              _hasMore = true;
-              _isLoading = false;
-              accessUserCubit.getAllUsersData(
-                page: page.toString(),
-                limit: limit.toString(),
-              );
-            },
-            child: const Text("عرض جميع المستخدمين"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // 👇 باقي الحالات كما هي (قائمة المستخدمين، shimmer، إلخ)
-  if (state is GetAllUsersLoading && page == 1) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Row(
-        children: List.generate(5, (index) => const ShimmerUserCard()),
-      ),
-    );
-  } else if (state is GetAllUsersError && page == 1) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text("Error loading products"),
-          ElevatedButton(
-            onPressed: _loadInitialProducts,
-            child: const Text("Retry"),
-          ),
-        ],
-      ),
-    );
-  } else {
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          controller: _scrollController,
-          child: Row(
-            children: [
-              ..._users.map(
-                (user) => UserCard(uesrs: user)
-              ),
-              if (_isLoading)
-                Row(
-                  children:
-                      List.generate(5, (index) => const ShimmerProductCard()),
+          if (state.users.length < limit) _hasMore = false;
+        } else if (state is GetAllUsersError) {
+          _isLoading = false;
+          page--;
+        }
+      },
+      builder: (context, state) {
+        if (state is GetSpecificUserSuccess) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                UserCard(uesrs: state.user),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () {
+                    page = 1;
+                    _users.clear();
+                    _hasMore = true;
+                    _isLoading = false;
+                    accessUserCubit.getAllUsersData(
+                      page: page.toString(),
+                      limit: limit.toString(),
+                    );
+                  },
+                  child: const Text("عرض جميع المستخدمين"),
                 ),
-              if (!_hasMore && _users.isNotEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Center(child: Text("No more users")),
+              ],
+            ),
+          );
+        }
+
+        if (state is GetAllUsersLoading && page == 1) {
+          return Column(
+            children: List.generate(2, (index) => const ShimmerUserCard()),
+          );
+        } else if (state is GetAllUsersError && page == 1) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Error loading users"),
+                ElevatedButton(
+                  onPressed: _loadInitialUsers,
+                  child: const Text("Retry"),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    ..._users.map((user) => UserCard(uesrs: user)),
+                    if (_isLoading)
+                      Column(
+                        children: List.generate(2, (_) => const ShimmerUserCard()),
+                      ),
+                    if (!_hasMore && _users.isNotEmpty)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Center(child: Text("No more users")),
+                      ),
+                  ],
+                ),
+              ),
+              if (state is GetAllUsersError && page > 1)
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: _loadMoreUsers,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: Colors.red.withOpacity(0.7),
+                      child: const Text(
+                        "Error loading more. Tap to retry",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
             ],
-          ),
-        ),
-        if (state is GetAllUsersError && page > 1)
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: GestureDetector(
-              onTap: _loadMoreProducts,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.red.withOpacity(0.7),
-                child: const Text(
-                  "Error loading more. Tap to retry",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
-}
-),
+          );
+        }
+      },
     );
   }
 }

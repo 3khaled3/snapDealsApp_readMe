@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/custom_copy_button.dart';
@@ -5,6 +7,7 @@ import 'package:snap_deals/app/admin_feature/view/widgets/custom_dialog.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({super.key, required this.uesrs});
@@ -31,7 +34,8 @@ class UserCard extends StatelessWidget {
             Row(
               
               children: [
-                Text('ID: $userId', style: AppTextStyles.bold22(),),
+                Text('ID: $userId', style: AppTextStyles.bold12(), maxLines: 1,
+                      overflow: TextOverflow.ellipsis,),
                 8.pw,
                CustomCopyButton(
                           textToCopy: userId,
@@ -48,17 +52,20 @@ class UserCard extends StatelessWidget {
             8.ph,
             Row(
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(useerimage),
-                  radius: 37,
-                ),
+              CircleAvatar(
+  radius: 37,
+  backgroundImage: buildUserImage(useerimage),
+),
+
+
                 20.pw,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(userName, style: AppTextStyles.bold16(),),
+                        Text(userName, style: AppTextStyles.bold16(), maxLines: 1,
+                      overflow: TextOverflow.ellipsis,),
                         8.pw,
                         CustomCopyButton(
                           textToCopy: userName,
@@ -68,7 +75,11 @@ class UserCard extends StatelessWidget {
                     7.ph,
                     Row(
                       children: [
-                        Text(userEmail, style: AppTextStyles.semiBold14(),),
+                        SizedBox(
+                          width: 190,
+                          child: Text(userEmail, style: AppTextStyles.semiBold14(), maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,),
+                        ),
                         8.pw,
                         CustomCopyButton(
                           textToCopy: userEmail,
@@ -78,7 +89,8 @@ class UserCard extends StatelessWidget {
                     7.ph,
                     Row(
                       children: [
-                        Text(userPhoneNumber, style: AppTextStyles.semiBold14(),),
+                        Text(userPhoneNumber, style: AppTextStyles.semiBold14(), maxLines: 1,
+                      overflow: TextOverflow.ellipsis,),
                         8.pw,
                         CustomCopyButton(
                           textToCopy: userPhoneNumber,
@@ -95,3 +107,17 @@ class UserCard extends StatelessWidget {
     );
   }
 }
+
+ImageProvider buildUserImage(String? imageUrl) {
+  if (imageUrl == null || imageUrl.isEmpty) {
+    return const AssetImage(AppImageAssets.profileImage);
+  } else if (imageUrl.startsWith('http')) {
+    return NetworkImage(imageUrl);
+  } else if (imageUrl.startsWith('file://')) {
+    final correctedPath = imageUrl.replaceFirst('file://', '');
+    return FileImage(File(correctedPath));
+  } else {
+    return const AssetImage(AppImageAssets.profileImage);
+  }
+}
+

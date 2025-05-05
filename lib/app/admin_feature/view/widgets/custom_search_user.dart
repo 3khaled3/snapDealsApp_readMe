@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class SearchUserByIdWidget extends StatefulWidget {
   final Future<void> Function(String userId) onSearch;
+  final VoidCallback onClearSearch;
 
-  const SearchUserByIdWidget({super.key, required this.onSearch});
+  const SearchUserByIdWidget({
+    super.key,
+    required this.onSearch,
+    required this.onClearSearch,
+  });
 
   @override
   State<SearchUserByIdWidget> createState() => _SearchUserByIdWidgetState();
@@ -22,18 +27,32 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
     setState(() => _isLoading = false);
   }
 
+  void _handleClearSearch() {
+    _controller.clear();
+    widget.onClearSearch();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        TextField(
-          controller: _controller,
-          decoration: const InputDecoration(
-            labelText: 'Enter User ID',
-            border: OutlineInputBorder(),
+        Expanded(
+          child: TextField(
+            controller: _controller,
+            decoration: InputDecoration(
+              labelText: 'Enter User ID',
+              border: const OutlineInputBorder(),
+              suffixIcon: _controller.text.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: _handleClearSearch,
+                    )
+                  : null,
+            ),
+            onChanged: (_) => setState(() {}), // لتحديث زر المسح تلقائيًا
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(width: 12),
         ElevatedButton.icon(
           onPressed: _isLoading ? null : _handleSearch,
           icon: _isLoading
