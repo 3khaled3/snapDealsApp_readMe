@@ -112,6 +112,18 @@ class AuthRepositoryImpl implements AuthRepository {
     );
   }
 
+  // Implementing method to get logged-in user data
+  @override
+  Future<Either<FailureModel, Map<String, dynamic>>>
+      getSpecificUserData(id) async {
+    return await HttpHelper.handleRequest(
+      (authToken) => HttpHelper.getData(
+        linkUrl: ApiEndpoints.userById(id),
+        token: authToken,
+      ),
+    );
+  }
+
   // Implementing method to update user password
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> updateUserPassword(

@@ -5,7 +5,6 @@ import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/uploading_message.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/message_types/progress_indicator.dart';
@@ -74,7 +73,7 @@ class FileMessageBubble extends StatelessWidget {
           break;
         case MessageStatus.read:
           stateIcon =
-              const Icon(Icons.done_all, size: 18, color: ColorsBox.mainColor);
+              const Icon(Icons.done_all, size: 18, color: Color(0xff69BFFF));
           break;
         case MessageStatus.failed:
           stateIcon = const Icon(Icons.error, size: 18, color: ColorsBox.red);
@@ -120,12 +119,17 @@ class FileMessageBubble extends StatelessWidget {
                       color: isSender ? Colors.white : ColorsBox.mainColor,
                       size: 24),
                   8.pw,
-                  Text(
-                    fileName,
-                    style: AppTextStyles.regular16().copyWith(
-                        color: isSender ? Colors.white : ColorsBox.mainColor),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Container(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.sizeOf(context).width * 0.4,
+                        minWidth: MediaQuery.sizeOf(context).width * 0.2),
+                    child: Text(
+                      fileName,
+                      style: AppTextStyles.regular16().copyWith(
+                          color: isSender ? Colors.white : ColorsBox.mainColor),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   // if (!isSender)
                   IconButton(

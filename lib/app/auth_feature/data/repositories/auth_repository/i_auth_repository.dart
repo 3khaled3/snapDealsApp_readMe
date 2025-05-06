@@ -25,6 +25,8 @@ abstract class AuthRepository {
   });
   // Method to get logged-in user data
   Future<Either<FailureModel, Map<String, dynamic>>> getUserData();
+  Future<Either<FailureModel, Map<String, dynamic>>> getSpecificUserData(
+      String id);
 
   // Method to update user password
   Future<Either<FailureModel, Map<String, dynamic>>> updateUserPassword({

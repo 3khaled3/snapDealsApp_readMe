@@ -10,6 +10,7 @@ import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/popular_course_builder.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/popular_product_builder.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
@@ -35,7 +36,7 @@ class HomeView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           18.ph,
-          const HomeAppBar('Ziad Tamer'),
+          HomeAppBar(ProfileCubit.instance.state.profile.name),
           18.ph,
           const Center(child: CategoriesAvatar()),
           18.ph,
@@ -51,47 +52,7 @@ class HomeView extends StatelessWidget {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
             ),
           ),
-          IconButton(
-              onPressed: () async {
-                print(
-                    "id0 ProfileCubit : ${ProfileCubit.instance.state.profile.id}");
-
-                final chatRooms =
-                    await ChatRoomRepository().getSpecificChatRooms("0000");
-                chatRooms.fold((left) {
-                  final id = const Uuid().v4();
-
-                  ChatRoom chatRoom = ChatRoom(
-                    id: id,
-                    members: [ProfileCubit.instance.state.profile.id, "0000"],
-                    unreadMessagesCount: {},
-                    lastMessageId: "muck",
-                    lastMessageContent: "muck",
-                    lastMessageSender: "muck",
-                    lastMessageTimestamp: 0,
-                  );
-                  GoRouter.of(context).push(ChatView.route, extra: chatRoom);
-                }, (right) {
-                  print("right: $right");
-                  if (right.isEmpty) {
-                    final id = const Uuid().v4();
-                    ChatRoom chatRoom = ChatRoom(
-                      id: id,
-                      members: [ProfileCubit.instance.state.profile.id, "0000"],
-                      unreadMessagesCount: {},
-                      lastMessageId: "muck",
-                      lastMessageContent: "muck",
-                      lastMessageSender: "muck",
-                      lastMessageTimestamp: 0,
-                    );
-                    GoRouter.of(context).push(ChatView.route, extra: chatRoom);
-                  } else {
-                    GoRouter.of(context)
-                        .push(ChatView.route, extra: right.first);
-                  }
-                });
-              },
-              icon: const Icon(Icons.add)),
+          const PopularCourseBuilder(),
           // SizedBox(
           //   height: 275,
           //   child: SingleChildScrollView(

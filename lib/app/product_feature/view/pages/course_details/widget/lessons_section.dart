@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class LessonsSection extends StatelessWidget {
   const LessonsSection({
     super.key,
+    required this.lessons,
   });
 
+  final List<LessonModel> lessons;
   @override
   Widget build(BuildContext context) {
     List<String> lessons = [

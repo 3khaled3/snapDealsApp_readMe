@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/about_course_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/contact_and_price.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/custom_image.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/lessons_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/reviews_setion.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_image_slider.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-class CourseDetailsViewArgs {}
+class CourseDetailsViewArgs {
+  final CourseModel course;
+
+  CourseDetailsViewArgs({required this.course});
+}
 
 class CourseDetailsView extends StatefulWidget {
   const CourseDetailsView({super.key, this.args});
@@ -31,11 +37,13 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
       ),
     );
 
+    final course = widget.args!.course;
+
     return Scaffold(
       body: Column(
         children: [
-          const Expanded(child: CourseDetailsBody()),
-          const ContactAndPrice(),
+          Expanded(child: CourseDetailsBody(course: course)),
+          ContactAndPrice(courseModel: course),
         ],
       ),
     );
@@ -43,7 +51,9 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
 }
 
 class CourseDetailsBody extends StatefulWidget {
-  const CourseDetailsBody({super.key});
+  final CourseModel course;
+
+  const CourseDetailsBody({super.key, required this.course});
 
   @override
   State<CourseDetailsBody> createState() => _CourseDetailsBodyState();
@@ -53,60 +63,54 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
   int selectedIndex = 0;
 
   final List<String> tabs = ['About', 'Lessons', 'Reviews'];
-  final List<Widget> tabContents = [
-    const AboutCourseSection(),
-    const LessonsSection(),
-    const ReviewsSetion(),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final course = widget.course;
+
+    final List<Widget> tabContents = [
+      AboutCourseSection(course: course),
+      LessonsSection(lessons: course.lessonModels),
+      ReviewsSetion(reviews: course.reviews),
+    ];
+
     return CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(child: CustomImage()),
-
+        SliverToBoxAdapter(
+          // child: CustomImage(imageUrl: course.images.first),
+          child: CustomImageSlider(images: course.images),
+        ),
         SliverToBoxAdapter(
           child: Container(
-            margin: EdgeInsets.only(
-              // top: MediaQuery.sizeOf(context).height * .28,
-              bottom: 8,
-            ),
+            margin: const EdgeInsets.only(bottom: 8),
             padding: const EdgeInsets.symmetric(horizontal: 28),
-            decoration: const BoxDecoration(
-              // color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(55),
-                topRight: Radius.circular(55),
-              ),
-            ),
             child: Column(
               children: [
                 30.ph,
                 Text(
-                  'UI/UX Basics , For Beginners',
+                  course.title,
                   style: AppTextStyles.medium20().copyWith(
                     fontFamily: AppTextStyles.fontFamilyLora,
                   ),
                   textAlign: TextAlign.center,
                 ),
                 20.ph,
-
-                /// Course Info Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _iconText(
                       icon: Icons.person_2_outlined,
-                      text: 'Ziad tamer',
+                      text: course.instructor.name ?? 'N/A',
                     ),
                     _iconText(
                       icon: Icons.play_circle_outline,
-                      text: '22 lessons',
+                      text: '${course.lessonModels.length} lessons',
                     ),
-                    _iconText(
-                      icon: Icons.military_tech_outlined,
-                      text: 'Certificate',
-                    ),
+                    if (course.certificate)
+                      _iconText(
+                        icon: Icons.military_tech_outlined,
+                        text: 'Certificate',
+                      ),
                   ],
                 ),
                 10.ph,
@@ -119,12 +123,14 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
           removeTop: true,
           removeBottom: true,
           child: SliverAppBar(
-            titleSpacing: 2,
-            leadingWidth: 0,
+            elevation: 0,
+            titleSpacing: 0,
+            floating: true,
+            shadowColor: Colors.transparent,
             pinned: true,
+            leadingWidth: 0,
             leading: const SizedBox.shrink(),
             backgroundColor: const Color(0xFFF9FAFB),
-            foregroundColor: const Color(0xFFF9FAFB),
             title: MediaQuery.removePadding(
               context: context,
               removeTop: true,
@@ -166,7 +172,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
                               border: Border(
                                 bottom: BorderSide(
                                   color: isSelected
-                                      ? ColorsBox.black
+                                      ? ColorsBox.mainColor
                                       : Colors.transparent,
                                   width: 3,
                                 ),
@@ -182,14 +188,10 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
             ),
           ),
         ),
-
-        /// Tab Bar
         SliverToBoxAdapter(
           child: Column(
             children: [
               20.ph,
-
-              /// Tab Content wrapped in SingleChildScrollView
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 child: Container(

@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Address": MessageLookupByLibrary.simpleMessage("Address"),
     "Age": MessageLookupByLibrary.simpleMessage("Age"),
     "Arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "Audio": MessageLookupByLibrary.simpleMessage("Audio"),
     "CancelationPolicy": MessageLookupByLibrary.simpleMessage(
       "Cancelation Policy",
     ),
@@ -48,7 +49,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ChatWord": MessageLookupByLibrary.simpleMessage("Chat"),
     "English": MessageLookupByLibrary.simpleMessage("English"),
+    "Files": MessageLookupByLibrary.simpleMessage("Files"),
+    "Image": MessageLookupByLibrary.simpleMessage("Image"),
     "Language": MessageLookupByLibrary.simpleMessage("Language"),
+    "Location": MessageLookupByLibrary.simpleMessage("Location"),
     "Name": MessageLookupByLibrary.simpleMessage("Name"),
     "Number": MessageLookupByLibrary.simpleMessage("Number"),
     "Settings": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -91,7 +95,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "TermsAndConditionTitle6": MessageLookupByLibrary.simpleMessage(
       "Cancellation and Returns*",
     ),
+    "Text": MessageLookupByLibrary.simpleMessage("Text"),
     "Version": MessageLookupByLibrary.simpleMessage("Version"),
+    "Video": MessageLookupByLibrary.simpleMessage("Video"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("About us"),
     "accessUsers": MessageLookupByLibrary.simpleMessage("Access Users"),
     "adDetails": MessageLookupByLibrary.simpleMessage("Ad details"),
@@ -225,6 +231,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage("New Password"),
     "newWord": MessageLookupByLibrary.simpleMessage("NEW"),
     "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+    "noChatsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No chats available",
+    ),
     "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
       "Discover innovative educational tools and specialized courses in one app.",
     ),

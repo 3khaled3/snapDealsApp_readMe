@@ -1,51 +1,58 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
-import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
-import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
-import 'package:snap_deals/app/chat_feature/data/models/uploading_message.dart';
 import 'package:snap_deals/app/chat_feature/model_view/chat_messages_cubit.dart';
-import 'package:snap_deals/app/chat_feature/view/widgets/chat_icon_button.dart';
+import 'package:snap_deals/app/chat_feature/model_view/send_bar_helper.dart';
+import 'package:snap_deals/app/chat_feature/view/widgets/chat_view_app_bar.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/message_bubble.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/recording_button.dart';
-import 'package:snap_deals/app/chat_feature/data/services/determine_position.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 
+import '../../data/models/chat_config.dart';
 part 'send_bar_widget.dart';
 part 'messages_builder.dart';
 
-class ChatView extends StatefulWidget {
+class ChatViewArgs {
   final ChatRoom chatRoom;
+  final Partner partner;
+  final ChatType chatType;
 
-  const ChatView({super.key, required this.chatRoom});
-  static String route = "/ChatView";
-
-  @override
-  _ChatViewState createState() => _ChatViewState();
+  ChatViewArgs(
+      {required this.chatRoom, required this.partner, required this.chatType});
 }
 
-class _ChatViewState extends State<ChatView> {
-  @override
-  void initState() {
-    super.initState();
-    // requestPermissions();
-  }
+class ChatView extends StatelessWidget {
+  final ChatViewArgs args;
+  const ChatView({super.key, required this.args});
+  static String route = "/ChatView";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Chat Room')),
-      body: Column(
-        children: [
-          Expanded(child: MessagesBuilder()),
-          SendBar(chatRoomId: widget.chatRoom.id),
-        ],
+      body: Material(
+        color: const Color(0xff0052cc),
+        child: SafeArea(
+          child: Column(
+            children: [
+              ChatViewAppBar(partner: args.partner),
+              Expanded(
+                child: Material(
+                  color: const Color(0xFFF9FAFB),
+                  child: Column(
+                    children: [
+                      Expanded(
+                          child: MessagesBuilder(chatRoomId: args.chatRoom.id)),
+                      SendBar(chatRoomId: args.chatRoom.id),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-//todo remove permission from here

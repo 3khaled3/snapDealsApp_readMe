@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class ContactAndPrice extends StatelessWidget {
-  const ContactAndPrice({super.key});
-
+  const ContactAndPrice({super.key, required this.courseModel});
+  final CourseModel courseModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +38,7 @@ class ContactAndPrice extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                '3000 EGP',
+                '${courseModel.price} EGP',
                 style: AppTextStyles.bold18().copyWith(
                   color: ColorsBox.brightBlue,
                 ),
@@ -50,7 +53,16 @@ class ContactAndPrice extends StatelessWidget {
             child: SizedBox(
               height: 48,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  startChat(
+                      context,
+                      Partner(
+                          id: courseModel.instructor.id,
+                          name: courseModel.instructor.name,
+                          profileImg: courseModel.instructor.profileImg,
+                          phone: courseModel.instructor.phone,
+                          ));
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsBox.brightBlue,
                   foregroundColor: ColorsBox.white,

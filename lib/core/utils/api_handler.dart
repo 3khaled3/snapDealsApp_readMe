@@ -45,7 +45,8 @@ abstract class HttpHelper {
     required String? token,
   }) async {
     var headers = {
-      if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+      if (token != null) 'Authorization': 'Bearer $token',
+
       'accept': 'application/json',
       'Content-Type': 'application/json',
     };
@@ -66,6 +67,7 @@ abstract class HttpHelper {
   }) async {
     var headers = {
       if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'Accept': 'application/json',
     };
 
@@ -82,6 +84,7 @@ abstract class HttpHelper {
   }) async {
     var headers = {
       if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'accept': 'application/json',
       'Content-Type': 'application/json'
     };
@@ -100,6 +103,7 @@ abstract class HttpHelper {
   }) async {
     var headers = {
       if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
@@ -120,6 +124,7 @@ abstract class HttpHelper {
   }) async {
     var headers = {
       if (token != null) 'Authorization': 'Bearer $token', // Bearer scheme
+
       'Accept': 'application/json',
     };
 

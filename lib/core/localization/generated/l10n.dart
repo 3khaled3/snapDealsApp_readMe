@@ -1097,171 +1097,41 @@ class Tr {
     );
   }
 
-  /// `Add Category`
-  String get add_category {
+  /// `Image`
+  String get Image {
+    return Intl.message('Image', name: 'Image', desc: '', args: []);
+  }
+
+  /// `Video`
+  String get Video {
+    return Intl.message('Video', name: 'Video', desc: '', args: []);
+  }
+
+  /// `Audio`
+  String get Audio {
+    return Intl.message('Audio', name: 'Audio', desc: '', args: []);
+  }
+
+  /// `Files`
+  String get Files {
+    return Intl.message('Files', name: 'Files', desc: '', args: []);
+  }
+
+  /// `Location`
+  String get Location {
+    return Intl.message('Location', name: 'Location', desc: '', args: []);
+  }
+
+  /// `Text`
+  String get Text {
+    return Intl.message('Text', name: 'Text', desc: '', args: []);
+  }
+
+  /// `No chats available`
+  String get noChatsAvailable {
     return Intl.message(
-      'Add Category',
-      name: 'add_category',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add Category Name`
-  String get add_category_hint {
-    return Intl.message(
-      'Add Category Name',
-      name: 'add_category_hint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category added successfully`
-  String get add_category_success {
-    return Intl.message(
-      'Category added successfully',
-      name: 'add_category_success',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Error adding category`
-  String get add_category_error {
-    return Intl.message(
-      'Error adding category',
-      name: 'add_category_error',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete Category`
-  String get delete_category {
-    return Intl.message(
-      'Delete Category',
-      name: 'delete_category',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Are you sure you want to delete this category?`
-  String get delete_category_hint {
-    return Intl.message(
-      'Are you sure you want to delete this category?',
-      name: 'delete_category_hint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category deleted successfully`
-  String get delete_category_success {
-    return Intl.message(
-      'Category deleted successfully',
-      name: 'delete_category_success',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Error deleting category`
-  String get delete_category_error {
-    return Intl.message(
-      'Error deleting category',
-      name: 'delete_category_error',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Update Category`
-  String get update_category {
-    return Intl.message(
-      'Update Category',
-      name: 'update_category',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Update Category Name`
-  String get update_category_hint {
-    return Intl.message(
-      'Update Category Name',
-      name: 'update_category_hint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category updated successfully`
-  String get update_category_success {
-    return Intl.message(
-      'Category updated successfully',
-      name: 'update_category_success',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Error updating category`
-  String get update_category_error {
-    return Intl.message(
-      'Error updating category',
-      name: 'update_category_error',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete`
-  String get deleteWord {
-    return Intl.message('Delete', name: 'deleteWord', desc: '', args: []);
-  }
-
-  /// `Access Users`
-  String get accessUsers {
-    return Intl.message(
-      'Access Users',
-      name: 'accessUsers',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Text copied to clipboard`
-  String get copyTextSuccess {
-    return Intl.message(
-      'Text copied to clipboard',
-      name: 'copyTextSuccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Error copying text`
-  String get copyTextError {
-    return Intl.message(
-      'Error copying text',
-      name: 'copyTextError',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete User`
-  String get deleteUser {
-    return Intl.message('Delete User', name: 'deleteUser', desc: '', args: []);
-  }
-
-  /// `Are you sure you want to delete this user?`
-  String get deleteUserHint {
-    return Intl.message(
-      'Are you sure you want to delete this user?',
-      name: 'deleteUserHint',
+      'No chats available',
+      name: 'noChatsAvailable',
       desc: '',
       args: [],
     );

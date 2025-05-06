@@ -61,7 +61,11 @@ class FavoriteView extends StatelessWidget {
                               price: 0,
                               images: [],
                               location: " ص",
-                              user: '',
+                              user: Partner(
+                                  id: '',
+                                  name: " name",
+                                  phone: " phone",
+                                  profileImg: " profileImg"),
                               category: Category(id: '', name: ''),
                               visit: 0,
                               details: {},

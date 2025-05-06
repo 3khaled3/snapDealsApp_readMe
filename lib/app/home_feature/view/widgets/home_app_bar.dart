@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -54,7 +56,9 @@ class HomeAppBar extends StatelessWidget {
               ),
               2.ph,
               Text(
-                name,
+                ProfileCubit.instance.state.profile.role == Role.unregistered
+                    ? "welcome"
+                    : name,
                 style: AppTextStyles.semiBold20(),
               ),
             ],

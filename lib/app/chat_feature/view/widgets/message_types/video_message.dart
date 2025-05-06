@@ -10,7 +10,6 @@ import 'package:snap_deals/app/chat_feature/view/widgets/message_types/progress_
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-
 import 'package:get_thumbnail_video/video_thumbnail.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,30 +23,39 @@ class VideoMessageBubble extends StatelessWidget {
     super.key,
     required this.message,
   });
-
   Future<File?> _generateThumbnail(String videoUrl) async {
     try {
       final cacheDir = await getTemporaryDirectory();
-      final videoName =
-          Uri.decodeComponent(Uri.parse(videoUrl).pathSegments.last);
-      final thumbnailPath = '${cacheDir.path}/$videoName.jpg';
+      final thumbnailPath = '${cacheDir.path}/${Uri.decodeComponent(
+        Uri.parse(videoUrl).pathSegments.last,
+      )}.jpg';
 
-      final thumbnailFile = File(thumbnailPath);
-      if (await thumbnailFile.exists()) return thumbnailFile;
+      // If thumbnail already exists, use it
+      if (await File(thumbnailPath).exists()) {
+        return File(thumbnailPath);
+      }
 
+      // Check if the URL or file path is valid
+      if (videoUrl.isEmpty) {
+        throw Exception("Video URL is empty");
+      }
+
+      // Generate new thumbnail if it doesn't exist
       final thumbnail = await VideoThumbnail.thumbnailFile(
         video: videoUrl,
         thumbnailPath: thumbnailPath,
         imageFormat: ImageFormat.JPEG,
-        timeMs: 1000,
-        maxHeight: 300,
         quality: 25,
       );
-      print(" type is ${thumbnail.runtimeType}");
+
+      if (thumbnail == null) {
+        throw Exception("Failed to generate thumbnail");
+      }
+
       return File(thumbnail.path);
     } catch (e) {
       debugPrint('Error generating thumbnail: $e');
-      return null;
+      return null; // Return null in case of error
     }
   }
 
@@ -87,7 +95,7 @@ class VideoMessageBubble extends StatelessWidget {
           stateIcon = const Icon(
             Icons.done_all,
             size: 18,
-            color: ColorsBox.mainColor,
+            color: Color(0xff69BFFF),
           );
           break;
         case MessageStatus.failed:

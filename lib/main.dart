@@ -10,6 +10,7 @@ import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
+import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/app_router.dart';
@@ -80,11 +81,18 @@ Future<void> _initializeFirebase() async {
 
 Future<void> _initializeHive() async {
   await HiveHelper.instance.init('myBox');
+
   Hive.registerAdapter(ChatRoomAdapter());
   Hive.registerAdapter(MessageModelAdapter());
   Hive.registerAdapter(MessageTypeAdapter());
   Hive.registerAdapter(MessageStatusAdapter());
-  await Hive.openBox<ChatRoom>('chatRooms');
+
+  await Future.wait([
+    Hive.openBox<MessageModel>(Constants.freeChatMessages),
+    Hive.openBox<ChatRoom>(Constants.freeChatRooms),
+    Hive.openBox<MessageModel>(Constants.supportChatMessages),
+    Hive.openBox<ChatRoom>(Constants.supportChatRooms),
+  ]);
 }
 
 Future<void> _initializeSupabase() async {

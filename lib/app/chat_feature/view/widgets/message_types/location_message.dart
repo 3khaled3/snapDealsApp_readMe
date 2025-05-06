@@ -4,7 +4,6 @@ import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/uploading_message.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/message_types/progress_indicator.dart';
@@ -54,7 +53,7 @@ class LocationMessageBubble extends StatelessWidget {
           stateIcon = const Icon(
             Icons.done_all,
             size: 18,
-            color: ColorsBox.mainColor,
+            color: Color(0xff69BFFF),
           );
           break;
         case MessageStatus.failed:
