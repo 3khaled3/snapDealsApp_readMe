@@ -96,9 +96,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "Version": MessageLookupByLibrary.simpleMessage("النسخة"),
     "Video": MessageLookupByLibrary.simpleMessage("فيديو"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
-    "accessUsers": MessageLookupByLibrary.simpleMessage(
-      "الوصول إلى المستخدمين",
-    ),
     "adDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإعلان"),
     "adTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان *"),
     "addImageDis": MessageLookupByLibrary.simpleMessage(
@@ -106,16 +103,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addImages": MessageLookupByLibrary.simpleMessage("إضافة صور"),
     "addTitle": MessageLookupByLibrary.simpleMessage("ماذا تقدم؟"),
-    "add_category": MessageLookupByLibrary.simpleMessage("إضافة فئة"),
-    "add_category_error": MessageLookupByLibrary.simpleMessage(
-      "خطأ في إضافة الفئة",
-    ),
-    "add_category_hint": MessageLookupByLibrary.simpleMessage(
-      "إضافة اسم الفئة",
-    ),
-    "add_category_success": MessageLookupByLibrary.simpleMessage(
-      "تمت إضافة الفئة بنجاح",
-    ),
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
     "brand": MessageLookupByLibrary.simpleMessage("العلامة التجارية *"),
     "brandHint": MessageLookupByLibrary.simpleMessage("العلامة التجارية"),
@@ -137,29 +124,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذا هو الرقم لجهات اتصال المشترين والإشعارات الأخرى",
     ),
     "continue_as_guest": MessageLookupByLibrary.simpleMessage("متابعة كزائر"),
-    "copyTextError": MessageLookupByLibrary.simpleMessage("خطأ في نسخ النص"),
-    "copyTextSuccess": MessageLookupByLibrary.simpleMessage(
-      "تم نسخ النص بنجاح",
-    ),
     "courses": MessageLookupByLibrary.simpleMessage("دورات"),
     "createAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "currentPassword": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الحالية",
-    ),
-    "deleteUser": MessageLookupByLibrary.simpleMessage("حذف المستخدم"),
-    "deleteUserHint": MessageLookupByLibrary.simpleMessage(
-      "هل أنت متأكد أنك تريد حذف هذا المستخدم؟",
-    ),
-    "deleteWord": MessageLookupByLibrary.simpleMessage("حذف"),
-    "delete_category": MessageLookupByLibrary.simpleMessage("حذف الفئة"),
-    "delete_category_error": MessageLookupByLibrary.simpleMessage(
-      "خطأ في حذف الفئة",
-    ),
-    "delete_category_hint": MessageLookupByLibrary.simpleMessage(
-      "هل أنت متأكد أنك تريد حذف هذه الفئة؟",
-    ),
-    "delete_category_success": MessageLookupByLibrary.simpleMessage(
-      "تم حذف الفئة بنجاح",
     ),
     "describtion": MessageLookupByLibrary.simpleMessage("الوصف *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
@@ -283,16 +251,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveButton": MessageLookupByLibrary.simpleMessage("حفظ"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("إرسال"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
-    "update_category": MessageLookupByLibrary.simpleMessage("تحديث الفئة"),
-    "update_category_error": MessageLookupByLibrary.simpleMessage(
-      "خطأ في تحديث الفئة",
-    ),
-    "update_category_hint": MessageLookupByLibrary.simpleMessage(
-      "تحديث اسم الفئة",
-    ),
-    "update_category_success": MessageLookupByLibrary.simpleMessage(
-      "تم تحديث الفئة بنجاح",
-    ),
     "used": MessageLookupByLibrary.simpleMessage("مستعمل"),
     "yourAddress": MessageLookupByLibrary.simpleMessage("عنوانك"),
     "yourAge": MessageLookupByLibrary.simpleMessage("السن"),

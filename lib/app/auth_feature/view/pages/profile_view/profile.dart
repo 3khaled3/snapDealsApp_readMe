@@ -92,6 +92,7 @@ class ProfileView extends StatelessWidget {
                   title: context.tr.logOut,
                   onTap: () => CustomBottomSheet.showLogoutSheet(context),
                 ),
+                12.ph,
                 ProfileCubit.instance.state.profile.role == Role.admin
                     ? CustomListTile(
                         leadingIcon: Icons.person_search_rounded,

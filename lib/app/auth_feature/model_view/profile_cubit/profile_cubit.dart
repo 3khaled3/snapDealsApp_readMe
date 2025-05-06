@@ -121,7 +121,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
   //   );
   // }
 
-  void changePassword({required String newPassword}) async {
+ changePassword({required String newPassword}) async {
     emit(ProfileLoading(state.profile));
 
     final result = await AuthRepositoryImpl.instance

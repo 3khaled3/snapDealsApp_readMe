@@ -6,6 +6,7 @@ import 'package:snap_deals/app/admin_feature/view/widgets/custom_copy_button.dar
 import 'package:snap_deals/app/admin_feature/view/widgets/custom_dialog.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
@@ -20,6 +21,7 @@ class UserCard extends StatelessWidget {
   final String userPhoneNumber =uesrs.phone ?? "No Phone Number";
   final String useerimage = uesrs.profileImg ?? "";
     return Card(
+      color: ColorsBox.white,
        elevation: 4,
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: Colors.grey, width: 0.5),

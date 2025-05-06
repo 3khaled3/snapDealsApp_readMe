@@ -42,7 +42,12 @@ class CourseCard extends StatelessWidget {
                 border: Border.all(color: ColorsBox.greyish.withOpacity(0.4)),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                  top: 8,
+                  
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
