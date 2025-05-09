@@ -103,12 +103,30 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addImages": MessageLookupByLibrary.simpleMessage("إضافة صور"),
     "addTitle": MessageLookupByLibrary.simpleMessage("ماذا تقدم؟"),
+    "add_product_error": MessageLookupByLibrary.simpleMessage(
+      "خطأ في إضافة المنتج",
+    ),
+    "add_product_success": MessageLookupByLibrary.simpleMessage(
+      "تم إضافة المنتج بنجاح",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
     "brand": MessageLookupByLibrary.simpleMessage("العلامة التجارية *"),
     "brandHint": MessageLookupByLibrary.simpleMessage("العلامة التجارية"),
     "callWord": MessageLookupByLibrary.simpleMessage("اتصال"),
     "cancelWord": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "category": MessageLookupByLibrary.simpleMessage("الفئة*"),
+    "change_password": MessageLookupByLibrary.simpleMessage(
+      "تغيير كلمة المرور",
+    ),
+    "change_password_error": MessageLookupByLibrary.simpleMessage(
+      "خطاء في تغيير كلمة المرور",
+    ),
+    "change_password_hint": MessageLookupByLibrary.simpleMessage(
+      "تغيير كلمة المرور",
+    ),
+    "change_password_success": MessageLookupByLibrary.simpleMessage(
+      "تم تغيير كلمة المرور بنجاح",
+    ),
     "choose": MessageLookupByLibrary.simpleMessage("أختر"),
     "condition": MessageLookupByLibrary.simpleMessage("الحالة"),
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
@@ -248,10 +266,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordDescription": MessageLookupByLibrary.simpleMessage(
       "قم بتعيين كلمة مرور جديدة للوصول إلى حسابك.",
     ),
+    "reset_password_error": MessageLookupByLibrary.simpleMessage(
+      "خطأ في إعادة تعيين كلمة المرور",
+    ),
+    "reset_password_success": MessageLookupByLibrary.simpleMessage(
+      "تم إعادة تعيين كلمة المرور بنجاح",
+    ),
     "saveButton": MessageLookupByLibrary.simpleMessage("حفظ"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "send_otp_error": MessageLookupByLibrary.simpleMessage(
+      "خطأ في إرسال الرمز",
+    ),
+    "send_otp_success": MessageLookupByLibrary.simpleMessage(
+      "تم إرسال الرمز بنجاح",
+    ),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
     "used": MessageLookupByLibrary.simpleMessage("مستعمل"),
+    "verify_otp_error": MessageLookupByLibrary.simpleMessage(
+      "خطأ في التحقق من الرمز",
+    ),
+    "verify_otp_success": MessageLookupByLibrary.simpleMessage(
+      "تم التحقق من الرمز بنجاح",
+    ),
     "yourAddress": MessageLookupByLibrary.simpleMessage("عنوانك"),
     "yourAge": MessageLookupByLibrary.simpleMessage("السن"),
     "yourName": MessageLookupByLibrary.simpleMessage("أسمك"),

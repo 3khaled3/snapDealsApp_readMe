@@ -1,5 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/model_view/forget_password_cubit/forget_password_cubit.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -12,6 +16,9 @@ import 'package:snap_deals/core/extensions/context_extension.dart';
 
 class ResetPasswordViewArgs {
   //todo add any parameters you need
+  final String email;
+
+  ResetPasswordViewArgs({required this.email});
 }
 
 // ignore: must_be_immutable
@@ -22,7 +29,8 @@ class ResetPasswordView extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   String? newPassword1;
   String? newPassword2;
-
+  TextEditingController newPassword1Controller = TextEditingController();
+  TextEditingController newPassword2Controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +97,7 @@ class ResetPasswordView extends StatelessWidget {
                       hintText: context.tr.hintPassword,
                       labelText: context.tr.newPasswordLabel,
                       prefixIcon: EvaIcons.lockOutline,
+                      controller: newPassword1Controller,
                       isPassword: true,
                       validator: Validators.validatePassword,
                       onChanged: (value) {
@@ -100,6 +109,7 @@ class ResetPasswordView extends StatelessWidget {
                       hintText: context.tr.hintPassword,
                       labelText: context.tr.confirmPasswordLabel,
                       prefixIcon: EvaIcons.lockOutline,
+                      controller: newPassword2Controller,
                       isPassword: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -114,13 +124,45 @@ class ResetPasswordView extends StatelessWidget {
                       },
                     ),
                     114.ph,
-                    CustomButtonRow(
-                      saveButtonText: context.tr.resetPasswordButton,
-                      onSave: () {
-                        if (formKey.currentState?.validate() ?? false) {
-                          // Handle save action
-                        }
-                      },
+                    SizedBox(
+                      width: double.infinity,
+                      child: BlocListener<ForgetPasswordCubit,
+                          ForgetPasswordState>(
+                        // bloc: forgetPasswordCubit,
+                        listener: (context, state) {
+                          if (state is SavePasswordSuccess) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              context.showSuccessSnackBar(
+                                message: context.tr.reset_password_success,
+                              );
+                              GoRouter.of(context).pushReplacement(
+                                  LoginScreen.routeName,
+                                  extra: LoginViewArgs());
+                            });
+                          } else if (state is SavePasswordError) {
+                            context.showErrorSnackBar(
+                              message: context.tr.reset_password_error,
+                            );
+                            Navigator.of(context).pop();
+                          } else if (state is SavePasswordLoading) {
+                            context.showLoadingDialog();
+                          }
+                        },
+                        child: CustomButtonRow(
+                          saveButtonText: context.tr.resetPasswordButton,
+                          onSave: () async {
+                            if (formKey.currentState?.validate() ?? false) {
+                              await BlocProvider.of<ForgetPasswordCubit>(
+                                      context)
+                                  .newPassword(
+                                email: args!.email,
+                                newPassword: newPassword1Controller.text,
+                              );
+                              print(newPassword1Controller.text);
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),

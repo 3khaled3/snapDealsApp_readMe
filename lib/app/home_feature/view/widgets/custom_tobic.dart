@@ -8,23 +8,26 @@ class CustomTobic extends StatefulWidget {
   const CustomTobic({super.key});
 
   @override
-  State<CustomTobic> createState() => _CustomTobicState();
+  State<CustomTobic> createState() => CustomTobicState();
 }
 
-class _CustomTobicState extends State<CustomTobic> {
+class CustomTobicState extends State<CustomTobic> {
   final _formKey = GlobalKey<FormState>();
 
-  final List<Map<String, String?>> _topics = [];
+  final List<Map<String, TextEditingController>> _controllersList = [];
 
   void _addNewTopic() {
     setState(() {
-      _topics.add({"label": ""});
+      _controllersList.add({
+        'label': TextEditingController(),
+        'description': TextEditingController(),
+      });
     });
   }
 
   void _removeTopic(int index) {
     setState(() {
-      _topics.removeAt(index);
+      _controllersList.removeAt(index);
     });
   }
 
@@ -50,6 +53,24 @@ class _CustomTobicState extends State<CustomTobic> {
     return null;
   }
 
+  /// ✅ هذه الدالة ترجع البيانات على شكل Map<String, dynamic>
+  Map<String, dynamic> getTopicsMap() {
+  final Map<String, String> topicsData = {};
+
+  for (var ctrls in _controllersList) {
+    final label = ctrls['label']?.text ?? '';
+    final desc = ctrls['description']?.text ?? '';
+    if (label.isNotEmpty) {
+      topicsData[label] = desc;
+    }
+  }
+
+  return {
+    'topics': topicsData,
+  };
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -57,40 +78,36 @@ class _CustomTobicState extends State<CustomTobic> {
       child: Column(
         children: [
           ListView.builder(
-            itemCount: _topics.length,
+            itemCount: _controllersList.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              final currentIndex = index;
+              final controllers = _controllersList[index];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Label field
                   Row(
                     children: [
-                      IntrinsicWidth(
+                      Expanded(
                         child: TextFormField(
                           decoration: _bottomBorderDecoration('Label *'),
                           validator: _requiredValidator,
-                          onChanged: (value) {
-                            _topics[index]['label'] = value;
-                          },
+                          controller: controllers['label'],
                         ),
                       ),
                       const Spacer(),
                       IconButton(
-                        onPressed: () => _removeTopic(currentIndex),
-                        icon:
-                            const Icon(Icons.delete_outline, color: Colors.red),
+                        onPressed: () => _removeTopic(index),
+                        icon: const Icon(Icons.delete_outline, color: Colors.red),
                       ),
                     ],
                   ),
                   10.ph,
-                  // Value field
                   CustomTextFormField(
-                    hintText: 'Enter describtion',
+                    hintText: 'Enter description',
                     isPrice: false,
                     validator: _requiredValidator,
+                    controller: controllers['description'],
                   ),
                   23.ph,
                 ],
@@ -100,26 +117,20 @@ class _CustomTobicState extends State<CustomTobic> {
           Row(
             children: [
               Text(
-                'Tobic *',
+                'Topic *',
                 style: AppTextStyles.semiBold12()
                     .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),
               const Spacer(),
               OutlinedButton(
-                onPressed: () {
-                  _addNewTopic();
-                },
+                onPressed: _addNewTopic,
                 style: OutlinedButton.styleFrom(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                    shape: const CircleBorder(),
-                    fixedSize: const Size(25, 25),
-                    backgroundColor: ColorsBox.slateGrey),
-                child: const Icon(
-                  Icons.add,
-                  color: ColorsBox.black,
-                  size: 30,
+                  padding: const EdgeInsets.all(4),
+                  shape: const CircleBorder(),
+                  fixedSize: const Size(25, 25),
+                  backgroundColor: ColorsBox.slateGrey,
                 ),
+                child: const Icon(Icons.add, color: ColorsBox.black, size: 30),
               ),
             ],
           ),

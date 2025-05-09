@@ -10,15 +10,15 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       ForgetPasswordRepoImpl();
 
   newPassword({required String email, required String newPassword}) async {
-    emit(ForgetPasswordLoading());
+    emit(SavePasswordLoading());
     final result = await _forgetPasswordRepoImpl.newPassword(
         email: email, newPassword: newPassword);
     result.fold(
       (left) {
-        emit(ForgetPasswordError(left.message ?? "Error updating password"));
+        emit(SavePasswordError(left.message ?? "Error updating password"));
       },
       (right) {
-        emit(const ForgetPasswordSuccess("Password updated successfully"));
+        emit(const SavePasswordSuccess("Password updated successfully"));
       },
     );
   }

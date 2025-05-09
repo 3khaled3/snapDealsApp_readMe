@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -13,116 +14,54 @@ class AddView extends StatelessWidget {
   static const String routeName = '/add_details_route';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 70, right: 20, left: 20),
-        child: Column(
-          children: [
-            CustomHeaderAddView(title: context.tr.addTitle, icon: Icons.close),
-            const Divider(
-              thickness: 1,
-              color: Colors.black,
-            ),
-            CustomListTile(
-              title: context.tr.electronics,
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                        title: context.tr.electronics, icon: Icons.computer));
-              },
-              leadingIcon: Icons.computer,
-              isAddView: true,
-            ),
-            15.ph,
-            CustomListTile(
-              title: context.tr.mobilesAndTablets,
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                      title: context.tr.mobilesAndTablets,
-                      icon: Icons.phone_android,
-                    ));
-              },
-              leadingIcon: Icons.phone_android,
-              isAddView: true,
-            ),
-            15.ph,
-            CustomListTile(
-              title: context.tr.medicalTools,
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                      title: context.tr.medicalTools,
-                      icon: Icons.medical_services_outlined,
-                    ));
-              },
-              isAddView: true,
-              leadingIcon: Icons.medical_services_outlined,
-            ),
-            15.ph,
-            CustomListTile(
-              title: context.tr.drawingTools,
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                      icon: Icons.school_outlined,
-                      title: context.tr.drawingTools,
-                    ));
-              },
-              isAddView: true,
-              leadingIcon: Icons.school_outlined,
-            ),
-            15.ph,
-            CustomListTile(
-              title: context.tr.engineeringTools,
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                      icon: Icons.engineering_outlined,
-                      title: context.tr.engineeringTools,
-                    ));
-              },
-              isAddView: true,
-              leadingIcon: Icons.engineering_outlined,
-            ),
-            15.ph,
-            CustomListTile(
-              title: context.tr.courses,
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                      icon: Icons.school_outlined,
-                      title: context.tr.courses,
-                    ));
-              },
-              isAddView: true,
-              leadingIcon: Icons.school_outlined,
-            ),
-            15.ph,
-            ListTile(
-              leading: Container(
-                height: 40,
-                width: 40,
-                decoration: const BoxDecoration(color: ColorsBox.brightBlue),
-              ),
-              title: Text(
-                context.tr.other,
-                style: AppTextStyles.regular18()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-              ),
-              trailing: const Icon(
-                Icons.keyboard_arrow_right,
-                color: ColorsBox.brightBlue,
-                size: 25,
-              ),
-              onTap: () {
-                GoRouter.of(context).push(AddDetailsView.routeName,
-                    extra: AddDetailsArgs(
-                      title: context.tr.other,
-                    ));
-              },
-            )
-          ],
+    return BlocProvider(
+      create: (_) => EditCategoryCubit()..getAllCategoryData(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            context.tr.addTitle,
+            style: AppTextStyles.bold24(),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+        ),
+        body: BlocBuilder<EditCategoryCubit, EditCategoryState>(
+          builder: (context, state) {
+            if (state is GetCategoriesLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is GetCategoriesSuccess) {
+              final categories = state.categories;
+              return ListView.builder(
+                padding: const EdgeInsets.all(16.0),
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  final category = categories[index];
+                  return Column(
+                    children: [
+                      CustomListTile(
+                        title: category.name,
+                        onTap: () {
+                          GoRouter.of(context).push(AddDetailsView.routeName,
+                              extra: AddDetailsArgs(category));
+                        },
+                        leadingIcon: Icons.category,
+                        isAddView: true,
+                      ),
+                      15.ph,
+                    ],
+                  );
+                },
+              );
+            } else if (state is GetCategoriesError) {
+              return const Center(child: Text("حدث خطأ أثناء تحميل البيانات."));
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
         ),
       ),
     );

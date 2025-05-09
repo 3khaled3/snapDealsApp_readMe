@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 
 class CustomOtpTextFormField extends StatefulWidget {
   final Function(String)? onSaved;
+  final TextEditingController? controller;
 
-  CustomOtpTextFormField({Key? key, this.onSaved}) : super(key: key);
+  const CustomOtpTextFormField({super.key, this.onSaved, this.controller});
 
   @override
   State<CustomOtpTextFormField> createState() => _CustomTextFormFieldState();
@@ -26,14 +27,16 @@ class _CustomTextFormFieldState extends State<CustomOtpTextFormField> {
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(1)
             ],
+            controller: widget.controller,
             onChanged: (value) {
+              widget.onSaved!(value);
               if (value.length == 1) {
                 FocusScope.of(context).nextFocus();
               }
             },
-            onSaved: widget.onSaved != null
-                ? (value) => widget.onSaved!(value!)
-                : null,
+            // onSaved: widget.onSaved != null
+            //     ? (value) => widget.onSaved!(value!)
+            //     : null,
           ),
         );
       },

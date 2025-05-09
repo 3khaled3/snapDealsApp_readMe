@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ProductModel {
   final String id;
   final String title;
@@ -67,6 +69,26 @@ class ProductModel {
     };
   }
 
+// تأكد أنك مستورد مكتبة JSON
+
+Map<String, dynamic>createProductJson() {
+  return {
+    'title': title,
+    'user': user.id,
+    'slug': slug,
+    'location': location,
+    'description': description,
+    'price': price,
+    'images': images,
+    'category': category.id,
+    'visit': visit,
+    'details': jsonEncode(details), // ✅ تحويل details إلى JSON String
+    'createdAt': createdAt.toIso8601String(),
+    'updatedAt': updatedAt.toIso8601String(),
+  };
+}
+
+
   ProductModel copyWith({
     String? id,
     String? title,
@@ -100,11 +122,11 @@ class ProductModel {
 }
 
 class Category {
-  final String id;
+  final String? id;
   final String name;
 
   Category({
-    required this.id,
+     this.id,
     required this.name,
   });
 
@@ -137,13 +159,13 @@ class Partner {
   final String id;
   final String name;
   final String? phone;
-  final String profileImg;
+  final String? profileImg;
 
   Partner({
     required this.id,
     required this.name,
     this.phone,
-    required this.profileImg,
+     this.profileImg,
   });
 
   // From JSON

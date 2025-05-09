@@ -5,7 +5,7 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepository {
   Future<Either<FailureModel, Map<String, dynamic>>> newPassword(
       {required String email, required String newPassword}) {
     return HttpHelper.handleRequest(
-      (token) => HttpHelper.postData(
+      (token) => HttpHelper.putData(
         linkUrl: ApiEndpoints.resetPassword,
         data: {
           "email": email,

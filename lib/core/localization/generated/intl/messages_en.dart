@@ -117,6 +117,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_category_success": MessageLookupByLibrary.simpleMessage(
       "Category added successfully",
     ),
+    "add_product_error": MessageLookupByLibrary.simpleMessage(
+      "Error adding product",
+    ),
+    "add_product_success": MessageLookupByLibrary.simpleMessage(
+      "Product added successfully",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
     "batteryCapacityWord": MessageLookupByLibrary.simpleMessage(
       "Battery Capacity *",
@@ -126,6 +132,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "callWord": MessageLookupByLibrary.simpleMessage("Call"),
     "cancelWord": MessageLookupByLibrary.simpleMessage("Cancel"),
     "category": MessageLookupByLibrary.simpleMessage("Category*"),
+    "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "change_password_error": MessageLookupByLibrary.simpleMessage(
+      "Error changing password",
+    ),
+    "change_password_hint": MessageLookupByLibrary.simpleMessage(
+      "Enter new password",
+    ),
+    "change_password_success": MessageLookupByLibrary.simpleMessage(
+      "Password changed successfully",
+    ),
     "choose": MessageLookupByLibrary.simpleMessage("Choose"),
     "condition": MessageLookupByLibrary.simpleMessage("Condition"),
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
@@ -285,8 +301,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordDescription": MessageLookupByLibrary.simpleMessage(
       "Set a new password to access your account.",
     ),
+    "reset_password_error": MessageLookupByLibrary.simpleMessage(
+      "Error resetting password",
+    ),
+    "reset_password_success": MessageLookupByLibrary.simpleMessage(
+      "Password reset successfully",
+    ),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("Send"),
+    "send_otp_error": MessageLookupByLibrary.simpleMessage("Error sending OTP"),
+    "send_otp_success": MessageLookupByLibrary.simpleMessage(
+      "OTP sent successfully",
+    ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "storageWord": MessageLookupByLibrary.simpleMessage("Storage *"),
     "update_category": MessageLookupByLibrary.simpleMessage("Update Category"),
@@ -300,6 +326,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Category updated successfully",
     ),
     "used": MessageLookupByLibrary.simpleMessage("USED"),
+    "verify_otp_error": MessageLookupByLibrary.simpleMessage(
+      "Error verifying OTP",
+    ),
+    "verify_otp_success": MessageLookupByLibrary.simpleMessage(
+      "OTP verified successfully",
+    ),
     "yourAddress": MessageLookupByLibrary.simpleMessage("Your Address"),
     "yourAge": MessageLookupByLibrary.simpleMessage("Your Age"),
     "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),

@@ -1306,6 +1306,126 @@ class Tr {
       args: [],
     );
   }
+
+  /// `OTP sent successfully`
+  String get send_otp_success {
+    return Intl.message(
+      'OTP sent successfully',
+      name: 'send_otp_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error sending OTP`
+  String get send_otp_error {
+    return Intl.message(
+      'Error sending OTP',
+      name: 'send_otp_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP verified successfully`
+  String get verify_otp_success {
+    return Intl.message(
+      'OTP verified successfully',
+      name: 'verify_otp_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error verifying OTP`
+  String get verify_otp_error {
+    return Intl.message(
+      'Error verifying OTP',
+      name: 'verify_otp_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset successfully`
+  String get reset_password_success {
+    return Intl.message(
+      'Password reset successfully',
+      name: 'reset_password_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error resetting password`
+  String get reset_password_error {
+    return Intl.message(
+      'Error resetting password',
+      name: 'reset_password_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get change_password_success {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'change_password_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error changing password`
+  String get change_password_error {
+    return Intl.message(
+      'Error changing password',
+      name: 'change_password_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new password`
+  String get change_password_hint {
+    return Intl.message(
+      'Enter new password',
+      name: 'change_password_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get change_password {
+    return Intl.message(
+      'Change Password',
+      name: 'change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product added successfully`
+  String get add_product_success {
+    return Intl.message(
+      'Product added successfully',
+      name: 'add_product_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error adding product`
+  String get add_product_error {
+    return Intl.message(
+      'Error adding product',
+      name: 'add_product_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

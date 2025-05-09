@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:get_thumbnail_video/video_thumbnail.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/utils/api_endpoints.dart';
 import 'package:snap_deals/core/utils/api_handler.dart';
@@ -8,11 +11,15 @@ part "i_product_repository.dart";
 class ProductRepository implements IProductRepository {
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> createProduct(
-      ProductModel product) async {
+      ProductModel product, XFile image) async {
+        print("createProduct called with image: ${product.createProductJson()}");
     return HttpHelper.handleRequest(
-      (token) => HttpHelper.postData(
+      (token) => HttpHelper.postFile(
+        name: "images",
+        file: File(image.path),
         linkUrl: ApiEndpoints.products,
-        data: product.toJson(),
+        field: product.createProductJson(),
+        
         token: token,
       ),
     );

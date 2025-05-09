@@ -50,7 +50,7 @@ class EditCategory extends StatelessWidget {
                     children: [
                       CategoryCard(
                         categoryName: category.name,
-                        categoryId: category.id,
+                        categoryId: category.id!,
                         categoryIcon:
                             Icons.category, // أو حسب نوع الأيقونة عندك
                       ),

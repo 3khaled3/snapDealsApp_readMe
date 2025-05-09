@@ -1,6 +1,7 @@
 //handle go router
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
@@ -8,6 +9,7 @@ import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/home_feature/view/pages/products.dart';
+import 'package:snap_deals/app/product_feature/model_view/create_product_cubit/create_product_cubit.dart';
 
 abstract class HomeRouter {
   static final List<GoRoute> routes = [
@@ -71,8 +73,15 @@ abstract class HomeRouter {
 
     GoRoute(
       path: AddView.routeName,
-      builder: (context, state) {
-        return const AddView();
+     builder: (context, state) {
+       
+
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => EditCategoryCubit()),
+          ],
+          child: AddView(),
+        );
       },
     ),
 
@@ -84,7 +93,12 @@ abstract class HomeRouter {
           args = state.extra as AddDetailsArgs;
         }
 
-        return AddDetailsView(args: args);
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => CreateProductCubit()),
+          ],
+          child: AddDetailsView(args: args,),
+        );
       },
     ),
 

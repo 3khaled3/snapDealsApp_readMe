@@ -133,5 +133,17 @@
     "Files": "ملفات",
     "Location": "موقع",
     "Text": "نص",
-    "noChatsAvailable" : "لا يوجد دردشات متاحة"
+    "noChatsAvailable" : "لا يوجد دردشات متاحة",
+    "send_otp_success" : "تم إرسال الرمز بنجاح",
+    "send_otp_error" : "خطأ في إرسال الرمز",
+    "verify_otp_success" : "تم التحقق من الرمز بنجاح",
+    "verify_otp_error" : "خطأ في التحقق من الرمز",
+    "reset_password_success" : "تم إعادة تعيين كلمة المرور بنجاح",
+    "reset_password_error" : "خطأ في إعادة تعيين كلمة المرور",
+    "change_password_success" : "تم تغيير كلمة المرور بنجاح",
+    "change_password_error" : "خطاء في تغيير كلمة المرور",
+    "change_password_hint" : "تغيير كلمة المرور",
+    "change_password" : "تغيير كلمة المرور",
+    "add_product_success" : "تم إضافة المنتج بنجاح",
+    "add_product_error" : "خطأ في إضافة المنتج"
 }

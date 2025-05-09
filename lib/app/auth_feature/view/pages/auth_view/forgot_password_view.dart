@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/model_view/forget_password_cubit/forget_password_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/otp_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
@@ -21,6 +23,8 @@ class ForgetPasswordView extends StatelessWidget {
   static const String routeName = '/forget_password_route';
   final formKey = GlobalKey<FormState>();
   String? email;
+  final TextEditingController emailController = TextEditingController();
+  // ForgetPasswordCubit forgetPasswordCubit = ForgetPasswordCubit();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,21 +96,49 @@ class ForgetPasswordView extends StatelessWidget {
                       hintText: context.tr.hintEmail,
                       labelText: context.tr.emailLabel,
                       prefixIcon: Icons.email_outlined,
+                      controller: emailController,
                       validator: Validators.validateEmail,
                       onChanged: (value) {
                         email = value;
                       },
                     ),
                     49.ph,
-                    CustomButtonRow(
-                      saveButtonText: context.tr.sendButtonLabel,
-                      onSave: () {
-                        if (formKey.currentState?.validate() ?? false) {
-                          // loginCubit.loginWithEmail(email, password);
-                          GoRouter.of(context)
-                              .push(OtpView.routeName, extra: OtpViewArgs());
-                        }
-                      },
+                    SizedBox(
+                      width: double.infinity,
+                      child: BlocListener<ForgetPasswordCubit,
+                          ForgetPasswordState>(
+                        // bloc: forgetPasswordCubit,
+                        listener: (context, state) {
+                          if (state is SendOtpSuccess) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              context.showSuccessSnackBar(
+                                message: context.tr.send_otp_success,
+                              );
+                              GoRouter.of(context).pushReplacement(
+                                  OtpView.routeName,
+                                  extra:
+                                      OtpViewArgs(email: emailController.text));
+                            });
+                          } else if (state is SendOtpError) {
+                            context.showErrorSnackBar(
+                              message: context.tr.send_otp_error,
+                            );
+                            Navigator.of(context).pop();
+                          } else if (state is SendOtpLoading) {
+                            context.showLoadingDialog();
+                          }
+                        },
+                        child: CustomButtonRow(
+                          saveButtonText: context.tr.sendButtonLabel,
+                          onSave: () async {
+                            if (formKey.currentState?.validate() ?? false) {
+                              await BlocProvider.of<ForgetPasswordCubit>(
+                                      context)
+                                  .sendOTP(email: emailController.text);
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),

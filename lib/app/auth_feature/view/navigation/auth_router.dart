@@ -1,6 +1,7 @@
 //handle go router
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/auth_feature/model_view/forget_password_cubit/forget_password_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/otp_view.dart';
@@ -66,14 +67,19 @@ abstract class AuthRouter {
         return LoginScreen(args);
       },
     ),
-    GoRoute(
+     GoRoute(
       path: ForgetPasswordView.routeName,
       builder: (context, state) {
         ForgetPasswordViewArgs? args;
 
         args = state.extra as ForgetPasswordViewArgs;
 
-        return ForgetPasswordView(args);
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ForgetPasswordCubit()),
+          ],
+          child: ForgetPasswordView(args),
+        );
       },
     ),
     GoRoute(
@@ -95,10 +101,15 @@ abstract class AuthRouter {
           args = state.extra as ResetPasswordViewArgs;
         }
 
-        return ResetPasswordView(args!);
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ForgetPasswordCubit()),
+          ],
+          child: ResetPasswordView(args!),
+        );
       },
     ),
-    GoRoute(
+     GoRoute(
       path: OtpView.routeName,
       builder: (context, state) {
         OtpViewArgs? args;
@@ -106,7 +117,12 @@ abstract class AuthRouter {
           args = state.extra as OtpViewArgs;
         }
 
-        return OtpView(args!);
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ForgetPasswordCubit()),
+          ],
+          child: OtpView(args!),
+        );
       },
     ),
     //add any other routes in same feature

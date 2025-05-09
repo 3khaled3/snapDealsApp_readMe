@@ -155,5 +155,17 @@
     "Files": "Files",
     "Location": "Location",
     "Text": "Text",
-    "noChatsAvailable" : "No chats available"
+    "noChatsAvailable" : "No chats available",
+    "send_otp_success" : "OTP sent successfully",
+    "send_otp_error" : "Error sending OTP",
+    "verify_otp_success" : "OTP verified successfully",
+    "verify_otp_error" : "Error verifying OTP",
+    "reset_password_success" : "Password reset successfully",
+    "reset_password_error" : "Error resetting password",
+    "change_password_success" : "Password changed successfully",
+    "change_password_error" : "Error changing password",
+    "change_password_hint" : "Enter new password",
+    "change_password" : "Change Password",
+    "add_product_success" : "Product added successfully",
+    "add_product_error" : "Error adding product"
 }
