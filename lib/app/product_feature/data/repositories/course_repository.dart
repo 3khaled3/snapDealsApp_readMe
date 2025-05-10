@@ -3,12 +3,14 @@ part of "i_course_repository.dart";
 class CourseRepository implements ICourseRepository {
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> createCourse(
-      CourseModel course) async {
+      CourseModel course, XFile image) async {
     return HttpHelper.handleRequest(
-      (token) => HttpHelper.postData(
+      (token) => HttpHelper.postFile(
         linkUrl: ApiEndpoints.courses,
-        data: course.toJson(),
         token: token,
+         file: File(image.path),
+        name: "images",
+        field: course.createCourseJson(),
       ),
     );
   }

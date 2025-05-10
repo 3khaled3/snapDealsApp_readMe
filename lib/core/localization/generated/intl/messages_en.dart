@@ -99,6 +99,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "Version": MessageLookupByLibrary.simpleMessage("Version"),
     "Video": MessageLookupByLibrary.simpleMessage("Video"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("About us"),
+    "about_course": MessageLookupByLibrary.simpleMessage("About Course"),
+    "about_course_hint": MessageLookupByLibrary.simpleMessage(
+      "Enter course description",
+    ),
     "accessUsers": MessageLookupByLibrary.simpleMessage("Access Users"),
     "adDetails": MessageLookupByLibrary.simpleMessage("Ad details"),
     "adTitle": MessageLookupByLibrary.simpleMessage("Ad title *"),
@@ -116,6 +120,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "add_category_success": MessageLookupByLibrary.simpleMessage(
       "Category added successfully",
+    ),
+    "add_lesson_title_hint": MessageLookupByLibrary.simpleMessage(
+      "Add Lesson Title",
     ),
     "add_product_error": MessageLookupByLibrary.simpleMessage(
       "Error adding product",
@@ -213,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeTitle": MessageLookupByLibrary.simpleMessage("Good Morning"),
     "lang": MessageLookupByLibrary.simpleMessage("en"),
     "less": MessageLookupByLibrary.simpleMessage("Less"),
+    "lesson": MessageLookupByLibrary.simpleMessage("Lesson"),
     "location": MessageLookupByLibrary.simpleMessage("Location *"),
     "locationHint": MessageLookupByLibrary.simpleMessage("Choose location"),
     "logOut": MessageLookupByLibrary.simpleMessage("Log out"),

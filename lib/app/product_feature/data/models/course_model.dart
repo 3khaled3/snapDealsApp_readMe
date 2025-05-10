@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 
 class CourseModel {
@@ -97,6 +99,29 @@ class CourseModel {
         'updatedAt': updatedAt.toIso8601String(),
       };
 
+       Map<String, dynamic> createCourseJson() => {
+        'title': title,
+        'description': description,
+        'images': images,
+        'price': price,
+        'category': category.id,
+        'lessonModels': lessonModels.map((x) => x.toJson()).toList(),
+        'instructor': instructor.id,
+        'location': location,
+        'ratingsAverage': ratingsAverage,
+        'ratingsQuantity': ratingsQuantity,
+        'language': language,
+        'access': access,
+        'certificate': certificate,
+        'pendingRequests': pendingRequests,
+        'students': students,
+        'reviews': reviews,
+        'views': views,
+        'details': jsonEncode(details),
+        'createdAt': createdAt.toIso8601String(),
+        'updatedAt': updatedAt.toIso8601String(),
+      };
+
   CourseModel copyWith({
     String? id,
     String? title,
@@ -161,14 +186,14 @@ class LessonModel {
 class Instructor {
   final String id;
   final String name;
-  final String phone;
-  final String profileImg;
+  final String? phone;
+  final String? profileImg;
 
   Instructor({
     required this.id,
     required this.name,
-    required this.phone,
-    required this.profileImg,
+     this.phone,
+     this.profileImg,
   });
 
   factory Instructor.fromJson(Map<String, dynamic> json) => Instructor(

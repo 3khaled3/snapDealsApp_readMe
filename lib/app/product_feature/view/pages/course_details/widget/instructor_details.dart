@@ -22,7 +22,7 @@ class InstructorDetails extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(1000),
               child: CachedNetworkImage(
-                imageUrl: instructor.profileImg,
+                imageUrl: instructor.profileImg!,
                 placeholder: (context, url) => SvgPicture.asset(
                   AppImageAssets.defaultProfile,
                   height: 40,

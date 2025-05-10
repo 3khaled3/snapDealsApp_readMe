@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
+import 'package:snap_deals/app/home_feature/view/pages/add_course_details.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -45,8 +46,14 @@ class AddView extends StatelessWidget {
                       CustomListTile(
                         title: category.name,
                         onTap: () {
-                          GoRouter.of(context).push(AddDetailsView.routeName,
+                          if(category.name == "Courses") {
+                            GoRouter.of(context).push(AddCourseDetails.routeName,
+                              extra: AddCourseDetailsArgs(category));
+                          }else{
+                            GoRouter.of(context).push(AddDetailsView.routeName,
                               extra: AddDetailsArgs(category));
+                          }
+                          
                         },
                         leadingIcon: Icons.category,
                         isAddView: true,

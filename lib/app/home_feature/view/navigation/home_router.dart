@@ -2,6 +2,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
+import 'package:snap_deals/app/home_feature/view/pages/add_course_details.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
@@ -9,6 +10,7 @@ import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/home_feature/view/pages/products.dart';
+import 'package:snap_deals/app/product_feature/model_view/courses/create_course_cubit/create_course_cubit.dart';
 import 'package:snap_deals/app/product_feature/model_view/create_product_cubit/create_product_cubit.dart';
 
 abstract class HomeRouter {
@@ -101,6 +103,24 @@ abstract class HomeRouter {
         );
       },
     ),
+
+    GoRoute(
+      path: AddCourseDetails.routeName,
+      builder: (context, state) {
+        AddCourseDetailsArgs? args;
+        if (state.extra != null) {
+          args = state.extra as AddCourseDetailsArgs;
+        }
+
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => CreateCourseCubit()),
+          ],
+          child: AddCourseDetails(args: args,),
+        );
+      },
+    ),
+
 
     //add any other routes in same feature
   ];

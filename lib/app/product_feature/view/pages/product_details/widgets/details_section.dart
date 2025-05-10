@@ -9,9 +9,27 @@ class CustomDetailsGrid extends StatelessWidget {
 
   const CustomDetailsGrid({super.key, required this.details});
 
+  /// دالة لتفريغ أي Map داخلية
+  List<MapEntry<String, dynamic>> flattenMap(Map<String, dynamic> map) {
+    final List<MapEntry<String, dynamic>> result = [];
+
+    for (var entry in map.entries) {
+      if (entry.value is Map) {
+        final nestedMap = entry.value as Map;
+        result.addAll(nestedMap.entries.map(
+          (e) => MapEntry(e.key.toString(), e.value),
+        ));
+      } else {
+        result.add(entry);
+      }
+    }
+
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final entries = details.entries.toList();
+    final entries = flattenMap(details);
 
     return Container(
       padding: const EdgeInsets.all(12),
@@ -53,8 +71,7 @@ class CustomDetailsGrid extends StatelessWidget {
             itemBuilder: (context, index) {
               final entry = entries[index];
               return Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(10),

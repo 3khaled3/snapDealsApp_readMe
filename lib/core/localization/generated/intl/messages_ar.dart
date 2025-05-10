@@ -96,6 +96,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "Version": MessageLookupByLibrary.simpleMessage("النسخة"),
     "Video": MessageLookupByLibrary.simpleMessage("فيديو"),
     "aboutUs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
+    "about_course": MessageLookupByLibrary.simpleMessage("حول الكورس"),
+    "about_course_hint": MessageLookupByLibrary.simpleMessage("وصف الكورس"),
     "adDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإعلان"),
     "adTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان *"),
     "addImageDis": MessageLookupByLibrary.simpleMessage(
@@ -103,6 +105,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addImages": MessageLookupByLibrary.simpleMessage("إضافة صور"),
     "addTitle": MessageLookupByLibrary.simpleMessage("ماذا تقدم؟"),
+    "add_lesson_title_hint": MessageLookupByLibrary.simpleMessage(
+      "إضافة عنوان الدرس",
+    ),
     "add_product_error": MessageLookupByLibrary.simpleMessage(
       "خطأ في إضافة المنتج",
     ),

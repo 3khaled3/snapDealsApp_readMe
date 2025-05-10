@@ -1426,6 +1426,41 @@ class Tr {
       args: [],
     );
   }
+
+  /// `About Course`
+  String get about_course {
+    return Intl.message(
+      'About Course',
+      name: 'about_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter course description`
+  String get about_course_hint {
+    return Intl.message(
+      'Enter course description',
+      name: 'about_course_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson`
+  String get lesson {
+    return Intl.message('Lesson', name: 'lesson', desc: '', args: []);
+  }
+
+  /// `Add Lesson Title`
+  String get add_lesson_title_hint {
+    return Intl.message(
+      'Add Lesson Title',
+      name: 'add_lesson_title_hint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

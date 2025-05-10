@@ -167,5 +167,9 @@
     "change_password_hint" : "Enter new password",
     "change_password" : "Change Password",
     "add_product_success" : "Product added successfully",
-    "add_product_error" : "Error adding product"
+    "add_product_error" : "Error adding product",
+    "about_course" : "About Course",
+    "about_course_hint" : "Enter course description",
+    "lesson" : "Lesson",
+    "add_lesson_title_hint" : "Add Lesson Title"
 }

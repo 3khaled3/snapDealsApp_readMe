@@ -145,5 +145,9 @@
     "change_password_hint" : "تغيير كلمة المرور",
     "change_password" : "تغيير كلمة المرور",
     "add_product_success" : "تم إضافة المنتج بنجاح",
-    "add_product_error" : "خطأ في إضافة المنتج"
+    "add_product_error" : "خطأ في إضافة المنتج",
+    "about_course" : "حول الكورس",
+    "about_course_hint" : "وصف الكورس",
+    "lessons" : "الدروس",
+    "add_lesson_title_hint" : "إضافة عنوان الدرس"
 }
