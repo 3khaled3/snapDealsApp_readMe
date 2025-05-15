@@ -9,7 +9,7 @@ class CourseModel {
   final List<String> images;
   final int price;
   final Category category;
-  final List<LessonModel> lessonModels;
+  final List<LessonModel> lessons;
   final Instructor instructor;
   final String location;
   final double ratingsAverage;
@@ -32,7 +32,7 @@ class CourseModel {
     required this.images,
     required this.price,
     required this.category,
-    required this.lessonModels,
+    required this.lessons,
     required this.instructor,
     required this.location,
     required this.ratingsAverage,
@@ -56,9 +56,9 @@ class CourseModel {
         images: List<String>.from(json['images']),
         price: json['price'],
         category: Category.fromJson(json['category']),
-        lessonModels: [],
-        //  List<LessonModel>.from(
-        //     json['lessonModels'].map((x) => LessonModel.fromJson(x))),
+        lessons: 
+         List<LessonModel>.from(
+            json['lessons'].map((x) => LessonModel.fromJson(x))),
         instructor: Instructor.fromJson(json['instructor']),
         location: json['location'],
         ratingsAverage: (json['ratingsAverage'] ?? 0).toDouble(),
@@ -82,7 +82,7 @@ class CourseModel {
         'images': images,
         'price': price,
         'category': category.toJson(),
-        'lessonModels': lessonModels.map((x) => x.toJson()).toList(),
+        'lessons': lessons.map((x) => x.toJson()).toList(),
         'instructor': instructor.toJson(),
         'location': location,
         'ratingsAverage': ratingsAverage,
@@ -105,7 +105,7 @@ class CourseModel {
         'images': images,
         'price': price,
         'category': category.id,
-        'lessonModels': lessonModels.map((x) => x.toJson()).toList(),
+        'lessons': jsonEncode(lessons.map((x) => x.toJson()).toList()),
         'instructor': instructor.id,
         'location': location,
         'ratingsAverage': ratingsAverage,
@@ -129,7 +129,7 @@ class CourseModel {
     List<String>? images,
     int? price,
     Category? category,
-    List<LessonModel>? lessonModels,
+    List<LessonModel>? lessons,
     Instructor? instructor,
     String? location,
     double? ratingsAverage,
@@ -152,7 +152,7 @@ class CourseModel {
       images: images ?? this.images,
       price: price ?? this.price,
       category: category ?? this.category,
-      lessonModels: lessonModels ?? this.lessonModels,
+      lessons: lessons ?? this.lessons,
       instructor: instructor ?? this.instructor,
       location: location ?? this.location,
       ratingsAverage: ratingsAverage ?? this.ratingsAverage,

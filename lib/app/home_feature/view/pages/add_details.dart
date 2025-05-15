@@ -174,7 +174,7 @@ Widget build(BuildContext context) {
                             price: double.parse(priceController.text),
                             images: [],
                             category: Category(
-                              id: '6802df7227ad6e735473af04',
+                              id: widget.args!.category!.id,
                               name: widget.args!.category!.name,
                             ),
                             visit: 0,

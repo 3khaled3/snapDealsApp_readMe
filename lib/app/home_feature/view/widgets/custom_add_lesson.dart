@@ -36,9 +36,13 @@ class CustomAddLessonState extends State<CustomAddLesson> {
   }
 
   /// ✅ تُرجع قائمة بعناوين الدروس فقط
-  List<String> getLessonsTitles() {
-    return List.generate(_descriptionControllers.length, (index) => 'Lesson ${index + 1}');
-  }
+ List<String> getLessonsTitles() {
+  return _descriptionControllers
+      .map((controller) => controller.text.trim())
+      .where((text) => text.isNotEmpty)
+      .toList();
+}
+
 
   @override
   Widget build(BuildContext context) {

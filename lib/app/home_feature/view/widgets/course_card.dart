@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:snap_deals/app/home_feature/view_model/favorite_cubit/add_to_favorite/add_to_favorite_cubit.dart';
+import 'package:snap_deals/app/home_feature/view_model/favorite_cubit/remove_from_favorite/remove_from_favorite_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -46,7 +50,6 @@ class CourseCard extends StatelessWidget {
                   left: 12,
                   right: 12,
                   top: 8,
-                  
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,11 +149,16 @@ class CourseCard extends StatelessWidget {
             ),
 
             /// Favorite Button
-            const Positioned(
-              top: 12,
-              right: 12,
-              child: _FavoriteButton(),
-            ),
+            Positioned(
+                top: 12,
+                right: 12,
+                child: MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (_) => AddToFavoriteCubit()),
+                    BlocProvider(create: (_) => RemoveFromFavoriteCubit()),
+                  ],
+                  child: _FavoriteButton(productId: course.id),
+                )),
           ],
         ),
       ),
@@ -159,38 +167,89 @@ class CourseCard extends StatelessWidget {
 }
 
 class _FavoriteButton extends StatefulWidget {
-  const _FavoriteButton();
+  final String productId;
+
+  const _FavoriteButton({required this.productId});
 
   @override
   State<_FavoriteButton> createState() => _FavoriteButtonState();
 }
 
-class _FavoriteButtonState extends State<_FavoriteButton>
-    with SingleTickerProviderStateMixin {
+class _FavoriteButtonState extends State<_FavoriteButton> {
   bool _isFavorite = false;
+  late AddToFavoriteCubit addCubit;
+  late RemoveFromFavoriteCubit removeCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    addCubit = context.read<AddToFavoriteCubit>();
+    removeCubit = context.read<RemoveFromFavoriteCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(() => _isFavorite = !_isFavorite),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          color: ColorsBox.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AddToFavoriteCubit, AddToFavoriteState>(
+          listener: (context, state) {
+            if (state is AddToFavoriteSuccess) {
+               context.showSuccessSnackBar(
+                                  message: 'تمت الإضافة إلى المفضلة',
+                                );
+            setState(() => _isFavorite = !_isFavorite);
+            } else if (state is AddToFavoriteError) {
+              context.showErrorSnackBar(
+                                  message: 'فشل في الإضافة',
+                                );
+              
+            }
+          },
         ),
-        child: Icon(
-          _isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
-          color: _isFavorite ? Colors.red : Colors.grey,
-          size: 18,
+        BlocListener<RemoveFromFavoriteCubit, RemoveFromFavoriteState>(
+          listener: (context, state) {
+            if (state is RemoveFromFavoriteSuccess) {
+              context.showSuccessSnackBar(
+                                  message: ' تمت الازالة بنجاح',
+                                );
+              setState(() => _isFavorite = !_isFavorite);
+            } else if (state is RemoveFromFavoriteError) {
+               context.showErrorSnackBar(
+                                  message: 'فشل في الإزالة',
+                                );
+              
+            }
+          },
+        ),
+      ],
+      child: GestureDetector(
+        onTap: () {
+          setState(() => _isFavorite = !_isFavorite);
+          if (_isFavorite) {
+            addCubit.addToFavorites(widget.productId);
+          } else {
+            removeCubit.removeFromFavorites(widget.productId);
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Icon(
+            _isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
+            color: _isFavorite ? Colors.red : Colors.grey,
+            size: 18,
+          ),
         ),
       ),
     );

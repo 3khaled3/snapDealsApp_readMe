@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -156,54 +158,57 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                     },
                     child: CustomPrimaryButton(
                       title: context.tr.nextButton,
-                      onTap: () async {
-                        if (formKey.currentState?.validate() ?? false) {
-                          await BlocProvider.of<CreateCourseCubit>(context)
-                              .createCourse(
-                            CourseModel(
-                              id: const Uuid().v4(),
-                              title: titleController.text,
-                              description: descriptionController.text,
-                              images: [],
-                              price: int.parse(priceController.text),
-                              category: Category(
-                                id: '6802df0a27ad6e735473aef8',
-                                name: 'Courses',
-                              ),
-                              lessonModels: lessonKey.currentState
-                                      ?.getLessonsTitles()
-                                      .map((title) => LessonModel(
-                                          id: const Uuid().v4(), title: title))
-                                      .toList() ??
-                                  [],
-                              instructor: Instructor(
-                                id: ProfileCubit.instance.state.profile.id,
-                                name: ProfileCubit.instance.state.profile.name,
-                                profileImg: ProfileCubit
-                                    .instance.state.profile.profileImg,
-                              ),
-                              location: locationController.text,
-                              ratingsAverage: 0,
-                              ratingsQuantity: 0,
-                              language: 'Arabic',
-                              access: 'Both',
-                              certificate: true,
-                              pendingRequests: [],
-                              students: [],
-                              reviews: [],
-                              views: 0,
-                              details:
-                                  topicsKey.currentState?.getTopicsMap() ?? {},
-                              createdAt: DateTime.now(),
-                              updatedAt: DateTime.now(),
-                            ),
-                            selectedImages.isNotEmpty
-                                ? selectedImages.first
-                                : XFile(''),
-                          );
-                        }
-                      },
-                    ),
+                     onTap: () async {
+  if (formKey.currentState?.validate() ?? false) {
+    // 🧪 Debug: طباعة الـ lessons و الـ course JSON
+    final lessons = lessonKey.currentState
+            ?.getLessonsTitles()
+            .map((title) => LessonModel(id: const Uuid().v4(), title: title))
+            .toList() ??
+        [];
+
+    final course = CourseModel(
+      id: const Uuid().v4(),
+      title: titleController.text,
+      description: descriptionController.text,
+      images: [],
+      price: int.parse(priceController.text),
+      category: Category(
+        id: '6802df0a27ad6e735473aef8',
+        name: 'Courses',
+      ),
+      lessons: lessons,
+      instructor: Instructor(
+        id: ProfileCubit.instance.state.profile.id,
+        name: ProfileCubit.instance.state.profile.name,
+        profileImg: ProfileCubit.instance.state.profile.profileImg,
+      ),
+      location: locationController.text,
+      ratingsAverage: 0,
+      ratingsQuantity: 0,
+      language: 'Arabic',
+      access: 'Both',
+      certificate: true,
+      pendingRequests: [],
+      students: [],
+      reviews: [],
+      views: 0,
+      details: topicsKey.currentState?.getTopicsMap() ?? {},
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    );
+
+    // 🧪 طباعة الداتا قبل الإرسال
+    log('🧪 Final Course Payload: ${course.createCourseJson()}');
+    log('🧪 Lessons: ${lessons.map((e) => e.toJson())}');
+
+    await BlocProvider.of<CreateCourseCubit>(context).createCourse(
+      course,
+      selectedImages.isNotEmpty ? selectedImages.first : XFile(''),
+    );
+  }
+},
+),
                   ),
                 ),
               ],

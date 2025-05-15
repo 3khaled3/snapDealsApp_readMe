@@ -70,8 +70,8 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
 
     final List<Widget> tabContents = [
       AboutCourseSection(course: course),
-      LessonsSection(lessons: course.lessonModels),
-      ReviewsSetion(reviews: course.reviews),
+      LessonsSection(lessons: course.lessons),
+      ReviewsSection(reviews: course.reviews),
     ];
 
     return CustomScrollView(
@@ -104,7 +104,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
                     ),
                     _iconText(
                       icon: Icons.play_circle_outline,
-                      text: '${course.lessonModels.length} lessons',
+                      text: '${course.lessons.length} lessons',
                     ),
                     if (course.certificate)
                       _iconText(

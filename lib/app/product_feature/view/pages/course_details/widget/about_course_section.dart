@@ -39,7 +39,16 @@ class AboutCourseSection extends StatelessWidget {
                 children: [
                   InfoItem(
                       title: "Language", value: course.language ?? "Unknown"),
-                  ...entries.map((e) => InfoItem(title: e.key, value: e.value))
+                  ...entries.expand((e) {
+  final value = e.value;
+  if (value is Map) {
+    return value.entries.map((subEntry) =>
+      InfoItem(title: subEntry.key, value: subEntry.value.toString()));
+  } else {
+    return [InfoItem(title: e.key, value: value.toString())];
+  }
+}),
+
                 ],
               ),
             ],

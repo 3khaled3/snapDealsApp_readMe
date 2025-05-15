@@ -4,66 +4,38 @@ import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 
-class ReviewsSetion extends StatelessWidget {
-  const ReviewsSetion({super.key, required this.reviews});
-  final List reviews;
+class ReviewsSection extends StatelessWidget {
+  const ReviewsSection({super.key, required this.reviews});
+  final List reviews; // يجب أن تحتوي على بيانات حقيقية
+
   @override
   Widget build(BuildContext context) {
-    List<CustomReviewContainer> reviews = [
-      const CustomReviewContainer(
-          imagePath: AppImageAssets.profileImage,
-          name: "reda ahmed",
-          time: '8 month age',
-          comment:
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(
-          imagePath: AppImageAssets.profileImage,
-          name: "ziad tamer",
-          time: '5 month age',
-          comment:
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(
-          imagePath: AppImageAssets.profileImage,
-          name: "khaled tarek",
-          time: '12 days age',
-          comment:
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(
-          imagePath: AppImageAssets.profileImage,
-          name: "ahmed mohamed",
-          time: '10 hours age',
-          comment:
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(
-          imagePath: AppImageAssets.profileImage,
-          name: "reda ahmed",
-          time: '2 days age',
-          comment:
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-      const CustomReviewContainer(
-          imagePath: AppImageAssets.profileImage,
-          name: "reda ahmed",
-          time: '2 month age',
-          comment:
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"),
-    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         9.ph,
         Text('Reviews (${reviews.length})', style: AppTextStyles.semiBold20()),
+        9.ph,
         ListView.builder(
-            itemCount: reviews.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  reviews[index],
-                  15.ph,
-                ],
-              );
-            }),
+          itemCount: reviews.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            final review = reviews[index];
+
+            return Column(
+              children: [
+                CustomReviewContainer(
+                  imagePath: review['image'] ?? AppImageAssets.profileImage,
+                  name: review['name'] ?? 'Unknown',
+                  time: review['time'] ?? 'N/A',
+                  comment: review['comment'] ?? '',
+                ),
+                15.ph,
+              ],
+            );
+          },
+        ),
       ],
     );
   }
