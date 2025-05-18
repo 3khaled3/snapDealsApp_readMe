@@ -62,11 +62,11 @@ class _MainHomeViewState extends State<MainHomeView> {
 
       backgroundColor: Color(0xffF9FAFB),
       body: SafeArea(
-        child: _views[_currentIndex],
-        // IndexedStack(
-        //   index: _currentIndex,
-        //   children:,
-        // ),
+        // child: _views[_currentIndex],
+        child: IndexedStack(
+          index: _currentIndex,
+          children: _views,
+        ),
       ),
       floatingActionButton: _buildBottomAppBar(),
       // bottomNavigationBar: _buildBottomAppBar(),

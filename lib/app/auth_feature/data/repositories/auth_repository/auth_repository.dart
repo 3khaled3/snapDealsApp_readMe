@@ -116,6 +116,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<FailureModel, Map<String, dynamic>>>
       getSpecificUserData(id) async {
+        print("getSpecificUserData ${ApiEndpoints.userById(id)}");
     return await HttpHelper.handleRequest(
       (authToken) => HttpHelper.getData(
         linkUrl: ApiEndpoints.userById(id),

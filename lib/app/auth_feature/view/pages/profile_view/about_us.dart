@@ -14,82 +14,84 @@ class AboutUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          12.ph,
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.only(start: 8),
-                child: CustomBackButton(),
-              ),
-              16.pw,
-              Center(
-                child: Text(
-                  context.tr.aboutUs,
-                  style: AppTextStyles.semiBold20().copyWith(
-                    fontFamily: AppTextStyles.fontFamilyLora,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 8),
+                  child: CustomBackButton(),
+                ),
+                16.pw,
+                Center(
+                  child: Text(
+                    context.tr.aboutUs,
+                    style: AppTextStyles.semiBold20().copyWith(
+                      fontFamily: AppTextStyles.fontFamilyLora,
+                    ),
+                  ),
+                ),
+                SizedBox()
+              ],
+            ),
+            12.ph,
+            Divider(
+              color: ColorsBox.greyishTwo,
+              height: 1,
+            ),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      /// Title Section
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            context.tr.onBoardingTitle,
+                            style: AppTextStyles.bold24().copyWith(
+                              color: ColorsBox.black,
+                            ),
+                          ),
+                          Text(
+                            context.tr.appName,
+                            style: AppTextStyles.bold24().copyWith(
+                              color: ColorsBox.brightBlue,
+                              fontFamily: AppTextStyles.fontFamilyLora,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      40.ph, // Space between title and description
+
+                      /// Content Section
+                      _buildContentSection(
+                        title: context.tr.onBoardingSubtitle1,
+                        description: context.tr.onBoardingDescription1,
+                      ),
+                      40.ph,
+                      _buildContentSection(
+                        title: context.tr.onBoardingSubtitle2,
+                        description: context.tr.onBoardingDescription2,
+                      ),
+                      40.ph,
+                      _buildContentSection(
+                        title: context.tr.onBoardingSubtitle3,
+                        description: context.tr.onBoardingDescription3,
+                      ),
+                    ],
                   ),
                 ),
               ),
-              SizedBox()
-            ],
-          ),
-          12.ph,
-          Divider(
-            color: ColorsBox.greyishTwo,
-            height: 1,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    /// Title Section
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          context.tr.onBoardingTitle,
-                          style: AppTextStyles.bold24().copyWith(
-                            color: ColorsBox.black,
-                          ),
-                        ),
-                        Text(
-                          context.tr.appName,
-                          style: AppTextStyles.bold24().copyWith(
-                            color: ColorsBox.brightBlue,
-                            fontFamily: AppTextStyles.fontFamilyLora,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    40.ph, // Space between title and description
-
-                    /// Content Section
-                    _buildContentSection(
-                      title: context.tr.onBoardingSubtitle1,
-                      description: context.tr.onBoardingDescription1,
-                    ),
-                    40.ph,
-                    _buildContentSection(
-                      title: context.tr.onBoardingSubtitle2,
-                      description: context.tr.onBoardingDescription2,
-                    ),
-                    40.ph,
-                    _buildContentSection(
-                      title: context.tr.onBoardingSubtitle3,
-                      description: context.tr.onBoardingDescription3,
-                    ),
-                  ],
-                ),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
+import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -58,8 +58,9 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             Align(
               alignment: Alignment.topRight,
               child: TextButton(
-                onPressed: () => GoRouter.of(context)
-                    .push(LoginScreen.routeName, extra: LoginViewArgs()),
+                onPressed: () => GoRouter.of(context).pushReplacement(
+                    MainHomeView.routeName,
+                    extra: MainHomeViewArgs()),
                 child: Text(
                   context.tr.skip,
                   style: AppTextStyles.medium16().copyWith(
@@ -116,8 +117,8 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                       curve: Curves.ease,
                     );
                   } else {
-                    GoRouter.of(context)
-                        .push(LoginScreen.routeName, extra: LoginViewArgs());
+                    GoRouter.of(context).pushReplacement(MainHomeView.routeName,
+                        extra: MainHomeViewArgs());
                   }
                 },
                 backgroundColor: ColorsBox.brightBlue,

@@ -8,6 +8,7 @@ import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+import 'package:snap_deals/app/notification/data/notification_services.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/firebase_options.dart';
 
@@ -96,14 +97,14 @@ class ChatService {
 
     await dbRef.child(updatedMessage.id).set(updatedMessage.toMap());
 
-    // NotificationService.instance.sendPushNotification(
-    //   type: ChatConfig.getChatType(chatConfig) == ChatType.support
-    //       ? "supportChat"
-    //       : "freeChat",
-    //   partner: partner,
-    //   title: "chat",
-    //   body: body,
-    // );
+    NotificationService.instance.sendPushNotification(
+      type: ChatConfig.getChatType(chatConfig) == ChatType.support
+          ? "supportChat"
+          : "freeChat",
+      partner: partner,
+      title: "chat",
+      body: body,
+    );
   }
 
   Future<void> updateMessagesToSeen({

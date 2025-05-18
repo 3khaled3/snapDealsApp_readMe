@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:snap_deals/app/chat_feature/model_view/get_sup_user_cubit/get_sup_user_cubit.dart';
-import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 
@@ -17,7 +16,6 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
-import 'package:snap_deals/core/utils/assets_manager.dart';
 part 'shimmer_effect_for_ticket.dart';
 
 class ChatTicketWidget extends StatelessWidget {
@@ -55,7 +53,7 @@ class ChatTicketWidget extends StatelessWidget {
           return _buildShimmerEffect();
         }
         if (state is GetSupUserError) {
-          return Center(child: Text(state.message));
+          // return Center(child: Text(state.message));
         }
         if (state is GetSupUserSuccess) {
           final user = state.user;

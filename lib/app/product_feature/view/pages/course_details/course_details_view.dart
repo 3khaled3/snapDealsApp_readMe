@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/about_course_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/contact_and_price.dart';
-import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/custom_image.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/lessons_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/reviews_setion.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_image_slider.dart';
@@ -30,13 +28,6 @@ class CourseDetailsView extends StatefulWidget {
 class _CourseDetailsViewState extends State<CourseDetailsView> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Color.fromARGB(76, 0, 0, 0),
-        statusBarIconBrightness: Brightness.light,
-      ),
-    );
-
     final course = widget.args!.course;
 
     return Scaffold(

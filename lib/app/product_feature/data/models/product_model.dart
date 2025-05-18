@@ -71,23 +71,22 @@ class ProductModel {
 
 // تأكد أنك مستورد مكتبة JSON
 
-Map<String, dynamic>createProductJson() {
-  return {
-    'title': title,
-    'user': user.id,
-    'slug': slug,
-    'location': location,
-    'description': description,
-    'price': price,
-    'images': images,
-    'category': category.id,
-    'visit': visit,
-    'details': jsonEncode(details), // ✅ تحويل details إلى JSON String
-    'createdAt': createdAt.toIso8601String(),
-    'updatedAt': updatedAt.toIso8601String(),
-  };
-}
-
+  Map<String, dynamic> createProductJson() {
+    return {
+      'title': title,
+      'user': user.id,
+      'slug': slug,
+      'location': location,
+      'description': description,
+      'price': price,
+      'images': images,
+      'category': category.id,
+      'visit': visit,
+      'details': jsonEncode(details), // ✅ تحويل details إلى JSON String
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
 
   ProductModel copyWith({
     String? id,
@@ -126,7 +125,7 @@ class Category {
   final String name;
 
   Category({
-     this.id,
+    this.id,
     required this.name,
   });
 
@@ -160,12 +159,14 @@ class Partner {
   final String name;
   final String? phone;
   final String? profileImg;
+  final String? notificationToken;
 
   Partner({
     required this.id,
     required this.name,
     this.phone,
-     this.profileImg,
+    this.notificationToken,
+    this.profileImg,
   });
 
   // From JSON
@@ -173,6 +174,7 @@ class Partner {
     return Partner(
       id: json['_id'],
       name: json['name'],
+      notificationToken: json['notificationToken'],
       phone: json['phone'],
       profileImg: json['profileImg'],
     );
@@ -183,6 +185,7 @@ class Partner {
     return {
       '_id': id,
       'name': name,
+      'notificationToken': notificationToken,
       'phone': phone,
       'profileImg': profileImg,
     };

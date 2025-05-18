@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
@@ -44,42 +43,37 @@ class AboutCourseSection extends StatelessWidget {
                   InfoItem(
                       title: "Language", value: course.language ?? "Unknown"),
                   ...entries.expand((e) {
-  final value = e.value;
-  if (value is Map) {
-    return value.entries.map((subEntry) =>
-      InfoItem(title: subEntry.key, value: subEntry.value.toString()));
-  } else {
-    return [InfoItem(title: e.key, value: value.toString())];
-  }
-}),
-
+                    final value = e.value;
+                    if (value is Map) {
+                      return value.entries.map((subEntry) => InfoItem(
+                          title: subEntry.key,
+                          value: subEntry.value.toString()));
+                    } else {
+                      return [InfoItem(title: e.key, value: value.toString())];
+                    }
+                  }),
                 ],
               ),
             ],
           ),
-          7.ph,
-         Expanded(
-            flex: 3,
-            child: SizedBox(
-              height: 48,
-              child: ElevatedButton(
-                onPressed: () {
-                  
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorsBox.brightBlue,
-                  foregroundColor: ColorsBox.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  elevation: 2,
+          8.ph,
+          SizedBox(
+            height: 48,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorsBox.brightBlue,
+                foregroundColor: ColorsBox.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text(
-                  context.tr.make_request,
-                  style: AppTextStyles.semiBold16().copyWith(
-                    color: ColorsBox.white,
-                  ),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                elevation: 2,
+              ),
+              child: Text(
+                context.tr.make_request,
+                style: AppTextStyles.semiBold16().copyWith(
+                  color: ColorsBox.white,
                 ),
               ),
             ),

@@ -194,30 +194,28 @@ class _FavoriteButtonState extends State<_FavoriteButton> {
         BlocListener<AddToFavoriteCubit, AddToFavoriteState>(
           listener: (context, state) {
             if (state is AddToFavoriteSuccess) {
-               context.showSuccessSnackBar(
-                                  message: 'تمت الإضافة إلى المفضلة',
-                                );
-            setState(() => _isFavorite = !_isFavorite);
+              // context.showSuccessSnackBar(
+              //   message: 'تمت الإضافة إلى المفضلة',
+              // );
+              setState(() => _isFavorite = !_isFavorite);
             } else if (state is AddToFavoriteError) {
-              context.showErrorSnackBar(
-                                  message: 'فشل في الإضافة',
-                                );
-              
+              // context.showErrorSnackBar(
+              //                     message: 'فشل في الإضافة',
+              //                   );
             }
           },
         ),
         BlocListener<RemoveFromFavoriteCubit, RemoveFromFavoriteState>(
           listener: (context, state) {
             if (state is RemoveFromFavoriteSuccess) {
-              context.showSuccessSnackBar(
-                                  message: ' تمت الازالة بنجاح',
-                                );
+              // context.showSuccessSnackBar(
+              //                     message: ' تمت الازالة بنجاح',
+              //                   );
               setState(() => _isFavorite = !_isFavorite);
             } else if (state is RemoveFromFavoriteError) {
-               context.showErrorSnackBar(
-                                  message: 'فشل في الإزالة',
-                                );
-              
+              //  context.showErrorSnackBar(
+              //                     message: 'فشل في الإزالة',
+              //                   );
             }
           },
         ),

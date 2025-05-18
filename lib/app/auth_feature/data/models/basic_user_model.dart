@@ -7,6 +7,7 @@ class UserModel {
   final String email;
   final String? phone;
   final String? profileImg;
+  final String? notificationToken;
   final Role role;
   final bool active;
   final DateTime createdAt;
@@ -18,6 +19,7 @@ class UserModel {
     this.slug,
     required this.email,
     this.phone,
+    this.notificationToken,
     this.profileImg,
     required this.role,
     required this.active,
@@ -35,6 +37,7 @@ class UserModel {
       phone: json['phone'],
       profileImg: json['profileImg'],
       role: _roleFromString(json['role']),
+      notificationToken: json['notificationToken'],
       active: json['active'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
@@ -50,6 +53,7 @@ class UserModel {
       'email': email,
       'phone': phone,
       'profileImg': profileImg,
+      'notificationToken': notificationToken,
       'role': role.toString().split('.').last, // Convert enum to string
       'active': active,
       'createdAt': createdAt.toIso8601String(),
@@ -82,6 +86,7 @@ class UserModel {
     bool? active,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? notificationToken,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -90,6 +95,7 @@ class UserModel {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       profileImg: profileImg ?? this.profileImg,
+      notificationToken: notificationToken ?? this.notificationToken,
       role: role ?? this.role,
       active: active ?? this.active,
       createdAt: createdAt ?? this.createdAt,

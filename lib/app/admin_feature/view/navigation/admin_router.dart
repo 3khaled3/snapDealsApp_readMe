@@ -18,16 +18,14 @@ abstract class AdminRouter {
           providers: [
             BlocProvider(create: (context) => EditCategoryCubit()),
           ],
-          child: EditCategory(args:  args),
+          child: EditCategory(args: args),
         );
       },
     ),
 
-     GoRoute(
+    GoRoute(
       path: AccessUsers.routeName,
       builder: (context, state) {
-       
-
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => EditCategoryCubit()),

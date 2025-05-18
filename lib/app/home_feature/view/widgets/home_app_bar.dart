@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
+import 'package:snap_deals/app/notification/view/notification_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -68,7 +71,15 @@ class HomeAppBar extends StatelessWidget {
 
           /// Notification Icon
           InkWell(
-            onTap: () {},
+            onTap: () {
+              if (ProfileCubit.instance.state.profile.role ==
+                  Role.unregistered) {
+                GoRouter.of(context)
+                    .push(LoginScreen.routeName, extra: LoginViewArgs());
+                return;
+              }
+              GoRouter.of(context).push(NotificationsView.route);
+            },
             borderRadius: BorderRadius.circular(20),
             splashColor: ColorsBox.brightBlue.withOpacity(0.1),
             child: Ink(

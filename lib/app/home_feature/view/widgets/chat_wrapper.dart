@@ -26,7 +26,7 @@ class ChatWrapper extends StatelessWidget {
         length: isAdmin ? 2 : 1,
         child: Column(
           children: [
-            ChatTabBar(isAdmin: isAdmin),
+            if (isAdmin) ChatTabBar(isAdmin: isAdmin),
             Expanded(child: ChatTabBarView(isAdmin: isAdmin)),
           ],
         ),
@@ -73,23 +73,21 @@ class ChatTabBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      children: isAdmin
-          ? [
+    return !isAdmin
+        ? BlocProvider(
+            create: (_) =>
+                ChatRoomCubit(chatConfig: ChatConfig.fromType(ChatType.free)),
+            child:
+                ChatTicketsView(chatConfig: ChatConfig.fromType(ChatType.free)),
+          )
+        : TabBarView(
+            children: [
               BlocProvider(
                 create: (_) => ChatRoomCubit(
                     chatConfig: ChatConfig.fromType(ChatType.support)),
                 child: ChatTicketsView(
                     chatConfig: ChatConfig.fromType(ChatType.support)),
               ),
-              BlocProvider(
-                create: (_) => ChatRoomCubit(
-                    chatConfig: ChatConfig.fromType(ChatType.free)),
-                child: ChatTicketsView(
-                    chatConfig: ChatConfig.fromType(ChatType.free)),
-              ),
-            ]
-          : [
               BlocProvider(
                 create: (_) => ChatRoomCubit(
                     chatConfig: ChatConfig.fromType(ChatType.free)),
@@ -97,7 +95,7 @@ class ChatTabBarView extends StatelessWidget {
                     chatConfig: ChatConfig.fromType(ChatType.free)),
               ),
             ],
-    );
+          );
   }
 }
 

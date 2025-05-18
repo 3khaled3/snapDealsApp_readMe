@@ -14,9 +14,9 @@ class ChatTicketsView extends StatelessWidget {
   final ChatConfig chatConfig;
 
   const ChatTicketsView({
-    Key? key,
+    super.key,
     required this.chatConfig,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
