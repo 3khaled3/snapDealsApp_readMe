@@ -120,38 +120,12 @@ class _YourProfileViewState extends State<YourProfileView> {
           keyboardType: TextInputType.number,
         ),
         24.ph,
-        _buildGenderDropdown(context),
-        24.ph,
         CustomTextFormField(
           hintText: context.tr.yourAddress,
           labelText: context.tr.Address,
           validator: Validators.validateAddress,
         ),
       ],
-    );
-  }
-
-  Widget _buildGenderDropdown(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
-      height: 60,
-      decoration: BoxDecoration(
-        border: Border.all(color: ColorsBox.black),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Center(
-        child: DropdownButton<String>(
-          items: [
-            DropdownMenuItem(value: 'male', child: Text(context.tr.male)),
-            DropdownMenuItem(value: 'female', child: Text(context.tr.female)),
-          ],
-          value: gender,
-          underline: const SizedBox(),
-          isExpanded: true,
-          style: AppTextStyles.regular16().copyWith(color: ColorsBox.slateGrey),
-          onChanged: (String? value) => setState(() => gender = value!),
-        ),
-      ),
     );
   }
 
@@ -175,13 +149,6 @@ class _YourProfileViewState extends State<YourProfileView> {
         8.ph,
         Text(context.tr.contactNumber, style: AppTextStyles.regular12()),
         18.ph,
-        CustomTextFormField(
-          hintText: context.tr.hintEmail,
-          labelText: context.tr.emailLabel,
-          validator: Validators.validateEmail,
-        ),
-        8.ph,
-        Text(context.tr.contactEmail, style: AppTextStyles.regular12()),
       ],
     );
   }

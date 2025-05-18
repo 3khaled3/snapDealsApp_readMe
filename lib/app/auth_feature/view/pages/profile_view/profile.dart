@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/admin_feature/view/pages/access_users.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
@@ -44,13 +46,31 @@ class ProfileView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           children: [
-            const CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage(AppImageAssets.profileImage),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(1000),
+              child: CachedNetworkImage(
+                imageUrl: ProfileCubit.instance.state.profile.profileImg ?? " ",
+                placeholder: (context, url) => SvgPicture.asset(
+                  AppImageAssets.defaultProfile,
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
+                errorWidget: (context, url, error) => SvgPicture.asset(
+                  AppImageAssets.defaultProfile,
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
+                height: 120,
+                width: 120,
+                fit: BoxFit.cover,
+              ),
             ),
+
             12.ph,
             Text(
-              "Ziad Tamer",
+              ProfileCubit.instance.state.profile.name,
               style: AppTextStyles.semiBold24().copyWith(
                 fontFamily: AppTextStyles.fontFamilyLora,
               ),
