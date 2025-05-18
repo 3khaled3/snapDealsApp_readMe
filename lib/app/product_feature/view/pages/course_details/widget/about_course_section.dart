@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AboutCourseSection extends StatelessWidget {
   final CourseModel course;
@@ -52,6 +56,33 @@ class AboutCourseSection extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+          7.ph,
+         Expanded(
+            flex: 3,
+            child: SizedBox(
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () {
+                  
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsBox.brightBlue,
+                  foregroundColor: ColorsBox.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  elevation: 2,
+                ),
+                child: Text(
+                  context.tr.make_request,
+                  style: AppTextStyles.semiBold16().copyWith(
+                    color: ColorsBox.white,
+                  ),
+                ),
+              ),
+            ),
           ),
           15.ph,
         ],

@@ -152,6 +152,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "currentPassword": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الحالية",
     ),
+    "delete_item_error": MessageLookupByLibrary.simpleMessage(
+      "خطأ في حذف العنصر",
+    ),
+    "delete_item_label": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+    ),
+    "delete_item_success": MessageLookupByLibrary.simpleMessage(
+      "تم حذف العنصر بنجاح",
+    ),
     "describtion": MessageLookupByLibrary.simpleMessage("الوصف *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "صف العنصر الذي تبيعه",
@@ -209,6 +218,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout_success": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الخروج بنجاح",
     ),
+    "make_request": MessageLookupByLibrary.simpleMessage("إرسال طلب"),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
     "medicalTools": MessageLookupByLibrary.simpleMessage("أدوات طبية"),
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(

@@ -149,5 +149,9 @@
     "about_course" : "حول الكورس",
     "about_course_hint" : "وصف الكورس",
     "lessons" : "الدروس",
-    "add_lesson_title_hint" : "إضافة عنوان الدرس"
+    "add_lesson_title_hint" : "إضافة عنوان الدرس",
+    "delete_item_label": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+    "delete_item_success": "تم حذف العنصر بنجاح",
+    "delete_item_error": "خطأ في حذف العنصر",
+    "make_request": "إرسال طلب"
 }

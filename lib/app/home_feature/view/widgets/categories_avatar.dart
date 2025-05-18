@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/admin_feature/view/pages/edit_category.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
@@ -10,7 +11,6 @@ import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-
 class CategoriesAvatar extends StatefulWidget {
   const CategoriesAvatar({super.key});
 
@@ -20,111 +20,112 @@ class CategoriesAvatar extends StatefulWidget {
 
 class _CategoriesAvatarState extends State<CategoriesAvatar> {
   bool isMore = false;
+  final EditCategoryCubit editCategoryCubit = EditCategoryCubit();
 
-  // Original categories and icons
-  final List<String> originalCategories = [
-    Tr.current.medicalTools,
-    Tr.current.courses,
-    Tr.current.mobilesAndTablets,
-    Tr.current.more,
-    Tr.current.drawingTools,
-    Tr.current.engineeringTools,
-    Tr.current.less
-  ];
-
-  final List<IconData> originalIcons = [
-    Icons.medical_services_outlined,
-    Icons.school_outlined,
-    Icons.phone_iphone_outlined,
-    Icons.apps_outlined,
-    Icons.school_outlined,
-    Icons.engineering_outlined,
-    Icons.apps_outlined
-  ];
-
-  // Mutable lists to change dynamically
-  List<String> categories = [];
-  List<IconData> categoriesIcons = [];
+  // أيقونات ثابتة حسب اسم التصنيف
+  final Map<String, IconData> categoryIcons = {
+    Tr.current.medicalTools: Icons.medical_services_outlined,
+    Tr.current.courses: Icons.school_outlined,
+    Tr.current.mobilesAndTablets: Icons.phone_iphone_outlined,
+    Tr.current.drawingTools: Icons.school_outlined,
+    Tr.current.engineeringTools: Icons.engineering_outlined,
+    Tr.current.electronics: Icons.computer_outlined,
+    Tr.current.more: Icons.expand_more,
+    Tr.current.less: Icons.expand_less,
+  };
+  
 
   @override
   void initState() {
     super.initState();
-    // Initialize with original values
-    categories = List.from(originalCategories);
-    categoriesIcons = List.from(originalIcons);
+    Future.microtask(() =>
+        editCategoryCubit.getAllCategoryData());
   }
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(builder: (context, setState) {
-      return Wrap(
-        runSpacing: 20,
-        spacing: 15,
-        children: List.generate(isMore ? categories.length : 4, (index) {
-          return SizedBox(
-            width: 80,
-            // height: 150,
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    if (categories[index] == context.tr.more ||
-                        categories[index] == context.tr.less) {
-                      if (ProfileCubit.instance.state.profile.role ==
-                          Role.admin) {
-                        if (categories[index] == context.tr.more) {
-                          GoRouter.of(context).push(EditCategory.routeName,
-                              extra: EditCategoryArgs());
-                        }
-                      } else {
-                        setState(() {
-                          isMore = !isMore;
-                          if (categories[index] == context.tr.more) {
-                            // Change "More" to "Electronic" and update the icon
-                            categories[index] = context.tr.electronics;
-                            categoriesIcons[index] = Icons.computer_outlined;
-                          } else if (categories[index] == context.tr.less) {
-                            // Restore to original categories and icons
-                            categories = List.from(originalCategories);
-                            categoriesIcons = List.from(originalIcons);
+    return BlocBuilder<EditCategoryCubit, EditCategoryState>(
+      bloc: editCategoryCubit,
+      builder: (context, state) {
+        if (state is GetCategoriesLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is GetCategoriesError) {
+          return Center(child: Text("Something went wrong"));
+        } else if (state is GetCategoriesSuccess) {
+          final allCategories = state.categories;
+          final List<String> categoryNames =
+              allCategories.map((c) => c.name).toList();
+
+          final displayNames = isMore
+              ? [...categoryNames, context.tr.less]
+              : [...categoryNames.take(3), context.tr.more];
+
+          return Wrap(
+            runSpacing: 20,
+            spacing: 15,
+            children: List.generate(displayNames.length, (index) {
+              final name = displayNames[index];
+              final icon = categoryIcons[name] ?? Icons.category;
+
+              return SizedBox(
+                width: 80,
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        final user = ProfileCubit.instance.state.profile;
+                        final isAdmin = user.role == Role.admin;
+
+                        if (name == context.tr.more) {
+                          if (isAdmin) {
+                            GoRouter.of(context).push(
+                              EditCategory.routeName,
+                              extra: EditCategoryArgs(),
+                            );
+                          } else {
+                            setState(() => isMore = true);
                           }
-                        });
-                        return;
-                      }
-                    } else if (categories[index] == context.tr.courses) {
-                      GoRouter.of(context).push(CoursesView.routeName,
-                          extra: CoursesViewArgs(title: categories[index]));
-                      return;
-                    } else if (categories[index] != context.tr.more ||
-                        categories[index] != context.tr.less) {
-                      GoRouter.of(context).push(ProductsView.routeName,
-                          extra: ProductsViewArgs(title: categories[index]));
-                    }
-                  },
-                  child: SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: CircleAvatar(
-                      backgroundColor: ColorsBox.paleGrey,
-                      child: Icon(
-                        categoriesIcons[index],
-                        color: ColorsBox.brightBlue,
+                        } else if (name == context.tr.less) {
+                          setState(() => isMore = false);
+                        } else if (name == context.tr.courses) {
+                          GoRouter.of(context).push(
+                            CoursesView.routeName,
+                            extra: CoursesViewArgs(title: name),
+                          );
+                        } else {
+                          GoRouter.of(context).push(
+                            ProductsView.routeName,
+                            extra: ProductsViewArgs(title: name),
+                          );
+                        }
+                      },
+                      child: SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: CircleAvatar(
+                          backgroundColor: ColorsBox.paleGrey,
+                          child: Icon(
+                            icon,
+                            color: ColorsBox.brightBlue,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Text(
+                      name,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.regular16(),
+                    ),
+                  ],
                 ),
-                Text(
-                  categories[index],
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.regular16(),
-                ),
-              ],
-            ),
+              );
+            }),
           );
-        }),
-      );
-    });
+        }
+        return const SizedBox.shrink();
+      },
+    );
   }
 }

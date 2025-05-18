@@ -77,11 +77,11 @@
     "TermsAndConditionTitle6": "Cancellation and Returns*",
     "TermsAndConditionDiscription6": "Refer to our Cancellation Policy and Return Policy for information on how to cancel or return orders. You can find detailed guidelines on how to initiate a cancellation or return process on our platform.",
     "addTitle": "What are you offering?",
-    "electronics": "Electronics",
+    "electronics": "Electronic",
     "mobilesAndTablets": "Mobiles and Tablets",
     "medicalTools": "Medical tools",
-    "drawingTools": "Drawing tools",
-    "engineeringTools": "Engineering tools",
+    "drawingTools": "Drowing Tools",
+    "engineeringTools": "Engineering Tools",
     "courses": "Courses",
     "other": "Other",
     "adDetails": "Ad details",
@@ -171,5 +171,9 @@
     "about_course" : "About Course",
     "about_course_hint" : "Enter course description",
     "lesson" : "Lesson",
-    "add_lesson_title_hint" : "Add Lesson Title"
+    "add_lesson_title_hint" : "Add Lesson Title",
+    "delete_item_label": "Are you sure you want to delete this item?",
+    "delete_item_success": "Item deleted successfully",
+    "delete_item_error": "Error deleting item",
+    "make_request": "Make Request"
 }

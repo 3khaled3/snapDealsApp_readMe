@@ -188,17 +188,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_category_success": MessageLookupByLibrary.simpleMessage(
       "Category deleted successfully",
     ),
+    "delete_item_error": MessageLookupByLibrary.simpleMessage(
+      "Error deleting item",
+    ),
+    "delete_item_label": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this item?",
+    ),
+    "delete_item_success": MessageLookupByLibrary.simpleMessage(
+      "Item deleted successfully",
+    ),
     "describtion": MessageLookupByLibrary.simpleMessage("Describtion *"),
     "describtionHint": MessageLookupByLibrary.simpleMessage(
       "Describe the item you are selling",
     ),
     "describtionWord": MessageLookupByLibrary.simpleMessage("Describtion"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
-    "drawingTools": MessageLookupByLibrary.simpleMessage("Drawing tools"),
-    "electronics": MessageLookupByLibrary.simpleMessage("Electronics"),
+    "drawingTools": MessageLookupByLibrary.simpleMessage("Drowing Tools"),
+    "electronics": MessageLookupByLibrary.simpleMessage("Electronic"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "engineeringTools": MessageLookupByLibrary.simpleMessage(
-      "Engineering tools",
+      "Engineering Tools",
     ),
     "enterTitle": MessageLookupByLibrary.simpleMessage("Enter title"),
     "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite View"),
@@ -246,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "logout_error": MessageLookupByLibrary.simpleMessage("logout error"),
     "logout_success": MessageLookupByLibrary.simpleMessage("logout success"),
+    "make_request": MessageLookupByLibrary.simpleMessage("Make Request"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "medicalTools": MessageLookupByLibrary.simpleMessage("Medical tools"),
     "mobilesAndTablets": MessageLookupByLibrary.simpleMessage(

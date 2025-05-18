@@ -702,9 +702,9 @@ class Tr {
     );
   }
 
-  /// `Electronics`
+  /// `Electronic`
   String get electronics {
-    return Intl.message('Electronics', name: 'electronics', desc: '', args: []);
+    return Intl.message('Electronic', name: 'electronics', desc: '', args: []);
   }
 
   /// `Mobiles and Tablets`
@@ -727,20 +727,20 @@ class Tr {
     );
   }
 
-  /// `Drawing tools`
+  /// `Drowing Tools`
   String get drawingTools {
     return Intl.message(
-      'Drawing tools',
+      'Drowing Tools',
       name: 'drawingTools',
       desc: '',
       args: [],
     );
   }
 
-  /// `Engineering tools`
+  /// `Engineering Tools`
   String get engineeringTools {
     return Intl.message(
-      'Engineering tools',
+      'Engineering Tools',
       name: 'engineeringTools',
       desc: '',
       args: [],
@@ -1457,6 +1457,46 @@ class Tr {
     return Intl.message(
       'Add Lesson Title',
       name: 'add_lesson_title_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this item?`
+  String get delete_item_label {
+    return Intl.message(
+      'Are you sure you want to delete this item?',
+      name: 'delete_item_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item deleted successfully`
+  String get delete_item_success {
+    return Intl.message(
+      'Item deleted successfully',
+      name: 'delete_item_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting item`
+  String get delete_item_error {
+    return Intl.message(
+      'Error deleting item',
+      name: 'delete_item_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Request`
+  String get make_request {
+    return Intl.message(
+      'Make Request',
+      name: 'make_request',
       desc: '',
       args: [],
     );
