@@ -6,6 +6,7 @@ import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cub
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/home_feature/view_model/test_cubit/test_cubit.dart';
@@ -123,209 +124,508 @@ class CustomBottomSheet {
   }
 
   static void showPasswordManagerSheet(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final currentPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final currentPasswordController = TextEditingController();
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
+  final newPassword1Controller = TextEditingController();
+  final newPassword2Controller = TextEditingController();
+
+  bool isVerifyingCurrentPassword = true;
+  bool obscureTextCurrent = true;
+  bool obscureText1 = true;
+  bool obscureText2 = true;
+
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24),
+        topRight: Radius.circular(24),
       ),
-      builder: (testContext) {
-        return Padding(
-          padding: EdgeInsets.only(
-            left: 28,
-            right: 28,
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: Form(
-            key: formKey,
-            child: SizedBox(
-              height: 320,
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  24.ph,
-                  Container(
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  24.ph,
-                  Text(
-                    testContext.tr.passwordManager,
-                    style: AppTextStyles.medium20()
-                        .copyWith(color: ColorsBox.black),
-                  ),
-                  25.ph,
-                  CustomTextFormField(
-                    hintText: testContext.tr.currentPassword,
-                    labelText: testContext.tr.currentPassword,
-                    controller: currentPasswordController,
-                    isPassword: true,
-                    validator: (String? value) {
-                      final password = HiveHelper.instance.getItem("password");
-                      if (value == null || value.isEmpty || value != password) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        GoRouter.of(testContext).push(
-                          ForgetPasswordView.routeName,
-                          extra: ForgetPasswordViewArgs(),
-                        );
-                      },
-                      child: Text(
-                        testContext.tr.forgotPasswordButton,
-                        style: AppTextStyles.medium14().copyWith(
-                          color: ColorsBox.brightBlue,
-                        ),
-                      ),
-                    ),
-                  ),
-                  25.ph,
-                  CustomButtonRow(
-                      saveButtonText: context.tr.nextButton,
-                      onSave: () {
-                        if (formKey.currentState!.validate()) {
-                          Navigator.of(testContext).pop();
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (_) => BlocProvider.value(
-                                value: ProfileCubit.instance,
-                                child: Builder(
-                                  builder: (newContext) =>
-                                      showChangePasswordSheet(newContext),
-                                ),
-                              ),
-                            );
-                          });
-                        }
-                      }),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  static Widget showChangePasswordSheet(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final newPassword1Controller = TextEditingController();
-    final newPassword2Controller = TextEditingController();
-
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 28,
-        right: 28,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-        top: 20,
-      ),
-      child: Form(
-        key: formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 40,
-              height: 4,
+    ),
+    builder: (ctx) {
+      // هنا بنوفر الـ ProfileCubit بشكل محلي داخل البوتوم شيت
+      return BlocProvider.value(
+        value: ProfileCubit.instance, // أو .create إذا انت بتستخدم create
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            return Padding(
               padding: EdgeInsets.only(
                 left: 28,
                 right: 28,
-                bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20,
                 top: 20,
               ),
-              margin: const EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            Text(
-              context.tr.passwordManager,
-              style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
-            ),
-            25.ph,
-            CustomTextFormField(
-              hintText: context.tr.hintPassword,
-              labelText: context.tr.newPasswordLabel,
-              controller: newPassword1Controller,
-              isPassword: true,
-              validator: Validators.validatePassword,
-            ),
-            24.ph,
-            CustomTextFormField(
-              hintText: context.tr.hintPassword,
-              labelText: context.tr.confirmPasswordLabel,
-              controller: newPassword2Controller,
-              isPassword: true,
-              validator: (String? value) {
-                final password = newPassword2Controller.text;
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                } else if (value != password) {
-                  return 'Passwords do not match';
-                }
-                return null;
-              },
-            ),
-            25.ph,
-            SizedBox(
-              width: double.infinity,
-              child: BlocListener<ProfileCubit, ProfileStates>(
-                listener: (context, state) {
-                  if (state is ProfileSuccess) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      context.showSuccessSnackBar(
-                        message: 'Password changed successfully',
-                      );
-                      HiveHelper.instance
-                          .addItem("password", newPassword2Controller.text);
-                      GoRouter.of(context).pushReplacement(
-                        MainHomeView.routeName,
-                        extra: MainHomeViewArgs(),
-                      );
-                    });
-                  } else if (state is ProfileError) {
-                    context.showErrorSnackBar(message: "Something went wrong");
-                    Navigator.of(context).pop();
-                  } else if (state is ProfileLoading) {
-                    context.showLoadingDialog();
-                  }
-                },
-                child: CustomButtonRow(
-                  saveButtonText: context.tr.resetPasswordButton,
-                  onSave: () async {
-                    if (formKey.currentState?.validate() ?? false) {
-                      await ProfileCubit.instance.changePassword(
-                        newPassword: newPassword2Controller.text,
-                      );
-                    }
-                  },
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 4,
+                        margin: const EdgeInsets.only(bottom: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                      Text(
+                        ctx.tr.passwordManager,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+
+                      if (isVerifyingCurrentPassword) ...[
+                        TextFormField(
+                          controller: currentPasswordController,
+                          obscureText: obscureTextCurrent,
+                          decoration: InputDecoration(
+                            labelText: ctx.tr.currentPassword,
+                            hintText: ctx.tr.currentPassword,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                obscureTextCurrent ? Icons.visibility_off : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  obscureTextCurrent = !obscureTextCurrent;
+                                });
+                              },
+                            ),
+                          ),
+                          validator: (String? value) {
+                            final password = HiveHelper.instance.getItem("password");
+                            if (value == null || value.isEmpty || value != password) {
+                              return 'Please enter your password correctly';
+                            }
+                            return null;
+                          },
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              GoRouter.of(ctx).push(
+                                ForgetPasswordView.routeName,
+                                extra: ForgetPasswordViewArgs(),
+                              );
+                            },
+                            child: Text(
+                              ctx.tr.forgotPasswordButton,
+                              style: AppTextStyles.medium14().copyWith(
+                                color: ColorsBox.brightBlue,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 25),
+                        CustomButtonRow(
+                          saveButtonText: ctx.tr.nextButton,
+                          onSave: () {
+                            if (formKey.currentState?.validate() ?? false) {
+                              setState(() {
+                                isVerifyingCurrentPassword = false;
+                                formKey.currentState?.reset();
+                              });
+                            }
+                          },
+                        ),
+                      ] else ...[
+                        TextFormField(
+                          controller: newPassword1Controller,
+                          obscureText: obscureText1,
+                          decoration: InputDecoration(
+                            labelText: ctx.tr.newPasswordLabel,
+                            hintText: ctx.tr.hintPassword,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                obscureText1 ? Icons.visibility_off : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  obscureText1 = !obscureText1;
+                                });
+                              },
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your new password';
+                            } else if (value.length < 6) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        TextFormField(
+                          controller: newPassword2Controller,
+                          obscureText: obscureText2,
+                          decoration: InputDecoration(
+                            labelText: ctx.tr.confirmPasswordLabel,
+                            hintText: ctx.tr.hintPassword,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                obscureText2 ? Icons.visibility_off : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  obscureText2 = !obscureText2;
+                                });
+                              },
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please confirm your password';
+                            } else if (value != newPassword1Controller.text) {
+                              return 'Passwords do not match';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 25),
+                        SizedBox(
+                          width: double.infinity,
+                          child: BlocListener<ProfileCubit, ProfileStates>(
+                            listener: (context, state) {
+                              if (state is ProfileSuccess) {
+                                Navigator.of(context).pop(); // اقفل الـ bottom sheet
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Password changed successfully'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                                HiveHelper.instance.addItem("password", newPassword2Controller.text);
+                                GoRouter.of(context).pushReplacement(
+                                  MainHomeView.routeName,
+                                  extra: MainHomeViewArgs(),
+                                );
+                              } else if (state is ProfileError) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Something went wrong"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                                Navigator.of(context).pop();
+                              } else if (state is ProfileLoading) {
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (_) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              }
+                            },
+                            child: CustomPrimaryButton(title: ctx.tr.saveButton, onTap: () async {
+                                if (formKey.currentState?.validate() ?? false) {
+                                  await ProfileCubit.instance.changePassword(
+                                    newPassword: newPassword2Controller.text,
+                                  );
+                                  Navigator.of(context).pop();
+                                }
+                              },)
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            );
+          },
         ),
-      ),
-    );
-  }
+      );
+    },
+  );
+}
+
+
+//  static void showPasswordManagerSheet(BuildContext context) {
+//   final formKey = GlobalKey<FormState>();
+//   final currentPasswordController = TextEditingController();
+
+//   showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true,
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: BorderRadius.only(
+//         topLeft: Radius.circular(24),
+//         topRight: Radius.circular(24),
+//       ),
+//     ),
+//     builder: (testContext) {
+//       return Padding(
+//         padding: EdgeInsets.only(
+//           left: 28,
+//           right: 28,
+//           bottom: MediaQuery.of(context).viewInsets.bottom,
+//         ),
+//         child: Form(
+//           key: formKey,
+//           child: SizedBox(
+//             height: 320,
+//             width: double.infinity,
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: [
+//                 24.ph,
+//                 Container(
+//                   width: 40,
+//                   height: 4,
+//                   decoration: BoxDecoration(
+//                     color: Colors.grey.shade300,
+//                     borderRadius: BorderRadius.circular(2),
+//                   ),
+//                 ),
+//                 24.ph,
+//                 Text(
+//                   testContext.tr.passwordManager,
+//                   style: AppTextStyles.medium20()
+//                       .copyWith(color: ColorsBox.black),
+//                 ),
+//                 25.ph,
+//                 CustomTextFormField(
+//                   hintText: testContext.tr.currentPassword,
+//                   labelText: testContext.tr.currentPassword,
+//                   controller: currentPasswordController,
+//                   isPassword: true,
+//                   validator: (String? value) {
+//                     final password = HiveHelper.instance.getItem("password");
+//                     if (value == null || value.isEmpty || value != password) {
+//                       return 'Please enter your password';
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//                 Align(
+//                   alignment: Alignment.centerRight,
+//                   child: TextButton(
+//                     onPressed: () {
+//                       GoRouter.of(testContext).push(
+//                         ForgetPasswordView.routeName,
+//                         extra: ForgetPasswordViewArgs(),
+//                       );
+//                     },
+//                     child: Text(
+//                       testContext.tr.forgotPasswordButton,
+//                       style: AppTextStyles.medium14().copyWith(
+//                         color: ColorsBox.brightBlue,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 25.ph,
+//                 CustomButtonRow(
+//                   saveButtonText: context.tr.nextButton,
+//                   onSave: () {
+//                     if (formKey.currentState!.validate()) {
+//                       Navigator.of(testContext).pop();  // اقفل البوتوم شيت الحالي
+//                       Future.delayed(const Duration(milliseconds: 150), () {
+//                         // افتح البوتوم شيت التاني كـ bottom sheet جديد
+//                         showChangePasswordSheet(context);
+//                       });
+//                     }
+//                   },
+//                 )
+//               ],
+//             ),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
+
+// // خلي الدالة دي تبقى تفتح bottom sheet مش ترجع widget فقط
+// static void showChangePasswordSheet(BuildContext context) {
+//   final formKey = GlobalKey<FormState>();
+//   final newPassword1Controller = TextEditingController();
+//   final newPassword2Controller = TextEditingController();
+
+//   showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true,
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: BorderRadius.only(
+//         topLeft: Radius.circular(24),
+//         topRight: Radius.circular(24),
+//       ),
+//     ),
+//     builder: (ctx) {
+//       bool obscureText1 = true;
+//       bool obscureText2 = true;
+
+//       return StatefulBuilder(
+//         builder: (context, setState) {
+//           return Padding(
+//             padding: EdgeInsets.only(
+//               left: 28,
+//               right: 28,
+//               bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+//               top: 20,
+//             ),
+//             child: SingleChildScrollView(
+//               child: Form(
+//                 key: formKey,
+//                 child: Column(
+//                   mainAxisSize: MainAxisSize.min,
+//                   crossAxisAlignment: CrossAxisAlignment.center,
+//                   children: [
+//                     Container(
+//                       width: 40,
+//                       height: 4,
+//                       margin: const EdgeInsets.only(bottom: 20),
+//                       decoration: BoxDecoration(
+//                         color: Colors.grey.shade300,
+//                         borderRadius: BorderRadius.circular(2),
+//                       ),
+//                     ),
+//                     Text(
+//                       ctx.tr.passwordManager,
+//                       style: const TextStyle(
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.w500,
+//                         color: Colors.black,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 25),
+//                     TextFormField(
+//                       controller: newPassword1Controller,
+//                       obscureText: obscureText1,
+//                       decoration: InputDecoration(
+//                         labelText: ctx.tr.newPasswordLabel,
+//                         hintText: ctx.tr.hintPassword,
+//                         border: OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(16),
+//                         ),
+//                         suffixIcon: IconButton(
+//                           icon: Icon(
+//                             obscureText1 ? Icons.visibility_off : Icons.visibility,
+//                           ),
+//                           onPressed: () {
+//                             setState(() {
+//                               obscureText1 = !obscureText1;
+//                             });
+//                           },
+//                         ),
+//                       ),
+//                       validator: (value) {
+//                         if (value == null || value.isEmpty) {
+//                           return 'Please enter your new password';
+//                         } else if (value.length < 6) {
+//                           return 'Password must be at least 6 characters';
+//                         }
+//                         return null;
+//                       },
+//                     ),
+//                     const SizedBox(height: 24),
+//                     TextFormField(
+//                       controller: newPassword2Controller,
+//                       obscureText: obscureText2,
+//                       decoration: InputDecoration(
+//                         labelText: ctx.tr.confirmPasswordLabel,
+//                         hintText: ctx.tr.hintPassword,
+//                         border: OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(16),
+//                         ),
+//                         suffixIcon: IconButton(
+//                           icon: Icon(
+//                             obscureText2 ? Icons.visibility_off : Icons.visibility,
+//                           ),
+//                           onPressed: () {
+//                             setState(() {
+//                               obscureText2 = !obscureText2;
+//                             });
+//                           },
+//                         ),
+//                       ),
+//                       validator: (value) {
+//                         if (value == null || value.isEmpty) {
+//                           return 'Please confirm your password';
+//                         } else if (value != newPassword1Controller.text) {
+//                           return 'Passwords do not match';
+//                         }
+//                         return null;
+//                       },
+//                     ),
+//                     const SizedBox(height: 25),
+//                     SizedBox(
+//                       width: double.infinity,
+//                       child: BlocListener<ProfileCubit, ProfileStates>(
+//                         listener: (context, state) {
+//                           if (state is ProfileSuccess) {
+//                             Navigator.of(context).pop(); // اقفل bottom sheet
+//                             ScaffoldMessenger.of(context).showSnackBar(
+//                               const SnackBar(
+//                                 content: Text('Password changed successfully'),
+//                                 backgroundColor: Colors.green,
+//                               ),
+//                             );
+//                             HiveHelper.instance.addItem("password", newPassword2Controller.text);
+//                             GoRouter.of(context).pushReplacement(
+//                               MainHomeView.routeName,
+//                               extra: MainHomeViewArgs(),
+//                             );
+//                           } else if (state is ProfileError) {
+//                             ScaffoldMessenger.of(context).showSnackBar(
+//                               const SnackBar(
+//                                 content: Text("Something went wrong"),
+//                                 backgroundColor: Colors.red,
+//                               ),
+//                             );
+//                             Navigator.of(context).pop();
+//                           } else if (state is ProfileLoading) {
+//                             showDialog(
+//                               context: context,
+//                               barrierDismissible: false,
+//                               builder: (_) => const Center(
+//                                 child: CircularProgressIndicator(),
+//                               ),
+//                             );
+//                           }
+//                         },
+//                         child: ElevatedButton(
+//                           onPressed: () async {
+//                             if (formKey.currentState?.validate() ?? false) {
+//                               await ProfileCubit.instance.changePassword(
+//                                 newPassword: newPassword2Controller.text,
+//                               );
+//                             }
+//                           },
+//                           child: Text(ctx.tr.resetPasswordButton),
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       );
+//     },
+//   );
+// }
+
 }

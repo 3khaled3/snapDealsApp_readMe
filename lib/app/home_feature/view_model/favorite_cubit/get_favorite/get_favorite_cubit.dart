@@ -24,7 +24,7 @@ class GetFavoriteCubit extends Cubit<GetFavoriteState> {
        List<CourseModel> courseList = [];
 
       for (final item in productsMap) {
-          print("Item type: ${item.containsKey("lessons") ? "Course" : "Product"}");
+        
         if (item.containsKey('lessons')) {
           // Course
           courseList.add(CourseModel.fromJson(item));
