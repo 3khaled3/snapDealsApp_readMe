@@ -22,7 +22,7 @@ class AboutCourseSection extends StatelessWidget {
       width: double.infinity,
       child: ListView(
         padding: const EdgeInsets.all(0),
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

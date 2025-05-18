@@ -5,7 +5,7 @@ abstract class IProductRepository {
       {required String limit, required String page});
   Future<Either<FailureModel, Map<String, dynamic>>> getProductById(String id);
   Future<Either<FailureModel, Map<String, dynamic>>> getProductsByCategory(
-      String id);
+     {required String limit, required String page, required String id});
   Future<Either<FailureModel, Map<String, dynamic>>> createProduct(
       ProductModel product,XFile image);
   Future<Either<FailureModel, Map<String, dynamic>>> updateProduct(

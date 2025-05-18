@@ -95,7 +95,7 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                         } else {
                           GoRouter.of(context).push(
                             ProductsView.routeName,
-                            extra: ProductsViewArgs(title: name),
+                            extra: ProductsViewArgs(title: name,id: allCategories[index].id),
                           );
                         }
                       },

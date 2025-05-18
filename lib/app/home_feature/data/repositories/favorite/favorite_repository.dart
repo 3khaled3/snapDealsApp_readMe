@@ -14,15 +14,24 @@ class FavoriteRepository implements IFavoriteRepository {
   }
 
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>> getFavorites({required String limit, required String page}) {
-    // TODO: implement getFavorites
-    throw UnimplementedError();
+  Future<Either<FailureModel, Map<String, dynamic>>> getFavorites() {
+    return HttpHelper.handleRequest(
+      (token) => HttpHelper.getData(
+        linkUrl: ApiEndpoints.favorites,
+        token: token,
+      ),
+    );
   }
 
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> removeFromFavorites(String id) {
-    // TODO: implement removeFromFavorites
-    throw UnimplementedError();
+   return HttpHelper.handleRequest(
+        (token) => HttpHelper.deleteData(
+          linkUrl: ApiEndpoints.favoriteById(id),
+          data:null,
+          token: token,
+        ),
+      );
   }
  
 
