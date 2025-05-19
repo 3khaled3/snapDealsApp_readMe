@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/data/repositories/auth_repository/i_auth_repository.dart';
+import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/core/utils/api_handler.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
 
@@ -106,22 +108,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
   //   );
   // }
 
-  // void changePassword({required String newPassword}) async {
-  //   emit(ProfileLoading(state.profile));
-
-  //   final result = await AuthRepositoryImpl.instance
-  //       .changePassword(newPassword: newPassword);
-  //   result.fold(
-  //     (left) {
-  //       emit(ProfileError(state.profile));
-  //     },
-  //     (right) {
-  //       emit(ProfileSuccess(state.profile));
-  //     },
-  //   );
-  // }
-
- changePassword({required String newPassword}) async {
+  changePassword({required String newPassword}) async {
     emit(ProfileLoading(state.profile));
 
     final result = await AuthRepositoryImpl.instance
@@ -187,4 +174,5 @@ resetCurrentUser() async {
   await HiveHelper.instance.removeItem("email");
   await HiveHelper.instance.removeItem("password");
   await HiveHelper.instance.removeItem('customToken');
+  Hive.box(Constants.favorites).clear();
 }
