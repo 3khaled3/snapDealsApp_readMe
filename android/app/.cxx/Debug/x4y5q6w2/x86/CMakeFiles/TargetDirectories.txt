@@ -1,2 +1,0 @@
-D:/snap_deals/android/app/.cxx/Debug/x4y5q6w2/x86/CMakeFiles/edit_cache.dir
-D:/snap_deals/android/app/.cxx/Debug/x4y5q6w2/x86/CMakeFiles/rebuild_cache.dir
