@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/data/repositories/auth_repository/i_auth_repository.dart';
 import 'package:snap_deals/app/notification/data/notification_services.dart';
@@ -71,6 +72,38 @@ class ProfileCubit extends Cubit<ProfileStates> {
 
         emit(ProfileSuccess(UserModel.fromJson(right["data"])));
         await NotificationService.instance.getDeviceToken();
+      },
+    );
+  }
+
+  Future<void> updateUser(UserModel userModel, XFile? newProfileImage) async {
+    emit(ProfileLoading(state.profile));
+    // if (newProfileImage != null) {
+    //   final result = await AuthRepositoryImpl.instance.changeProfileImage(
+    //     storagePath: "profileImage/${userModel.id}",
+    //     filePath: newProfileImage.path,
+    //   );
+
+    //   result.fold(
+    //     (left) {
+    //       print('🚨🚨🚨🚨: Profile failed to upload image');
+    //       emit(ProfileError(state.profile));
+    //       return;
+    //     },
+    //     (right) {
+    //       userModel = userModel.copyWith(profileImg: right);
+    //     },
+    //   );
+    // }
+    final result = await AuthRepositoryImpl.instance
+        .updateUserData(user: userModel, image: newProfileImage);
+
+    result.fold(
+      (left) {
+        emit(ProfileError(state.profile));
+      },
+      (right) {
+        emit(ProfileSuccess(userModel));
       },
     );
   }
