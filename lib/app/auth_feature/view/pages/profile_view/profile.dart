@@ -13,7 +13,6 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/app/request_feature/view/pages/my_request_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
 
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
@@ -95,6 +94,14 @@ class ProfileView extends StatelessWidget {
                 ),
                 12.ph,
                 CustomListTile(
+                  leadingIcon: Icons.request_page_outlined,
+                  title: context.tr.my_requests,
+                  onTap: () =>
+                      GoRouter.of(context).push(MyRequestView.routeName),
+                ),
+                
+                12.ph,
+                CustomListTile(
                   leadingIcon: Icons.password_outlined,
                   title: context.tr.passwordManager,
                   onTap: () =>
@@ -112,13 +119,6 @@ class ProfileView extends StatelessWidget {
                   leadingIcon: Icons.logout_outlined,
                   title: context.tr.logOut,
                   onTap: () => CustomBottomSheet.showLogoutSheet(context),
-                ),
-                12.ph,
-                CustomListTile(
-                  leadingIcon: Icons.request_page_outlined,
-                  title: context.tr.my_requests,
-                  onTap: () =>
-                      GoRouter.of(context).push(MyRequestView.routeName),
                 ),
                 12.ph,
                 ProfileCubit.instance.state.profile.role == Role.admin

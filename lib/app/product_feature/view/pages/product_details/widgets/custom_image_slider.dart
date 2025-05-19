@@ -96,12 +96,13 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
           ),
         ),
         if (isAdmin || isOwner)
-          Align(
-            alignment: context.tr.lang == "en"
-                ? Alignment.topRight
-                : Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: 8, vertical: MediaQuery.paddingOf(context).top),
+            child: Align(
+              alignment: context.tr.lang == "en"
+                  ? Alignment.topRight
+                  : Alignment.topLeft,
               child: Container(
                 width: 40,
                 height: 40,
@@ -142,10 +143,10 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                               ],
                             ),
                           );
-
+                          
                           if (confirm == true) {
                             setState(() => _isDeleting = true);
-
+                          
                             if (widget.isProduct) {
                               await deleteProductCubit
                                   .deleteProduct(widget.productId);
@@ -153,7 +154,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                               await deleteCourseCubit
                                   .deleteCourse(widget.productId);
                             }
-
+                          
                             if (mounted) {
                               setState(() => _isDeleting = false);
                               Navigator.pop(context);
