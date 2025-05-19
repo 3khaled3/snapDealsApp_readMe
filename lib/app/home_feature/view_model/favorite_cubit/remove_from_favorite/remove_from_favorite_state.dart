@@ -8,6 +8,9 @@ sealed class RemoveFromFavoriteState extends Equatable {
 }
 
 final class RemoveFromFavoriteInitial extends RemoveFromFavoriteState {}
+
 final class RemoveFromFavoriteLoading extends RemoveFromFavoriteState {}
+
 final class RemoveFromFavoriteSuccess extends RemoveFromFavoriteState {}
+
 final class RemoveFromFavoriteError extends RemoveFromFavoriteState {}

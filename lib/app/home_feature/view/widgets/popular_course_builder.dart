@@ -4,6 +4,8 @@ import 'package:snap_deals/app/home_feature/view/widgets/Course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/get_all_course_cubit/get_all_courses_cubit.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class PopularCourseBuilder extends StatefulWidget {
   const PopularCourseBuilder({super.key});
@@ -99,10 +101,10 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Error loading Courses"),
+                   Text(context.tr.error_loading_data,style: AppTextStyles.semiBold20(),),
                   ElevatedButton(
                     onPressed: _loadInitialCourses,
-                    child: const Text("Retry"),
+                    child: Text(context.tr.retry),
                   ),
                 ],
               ),
@@ -116,7 +118,7 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                   child: Row(
                     children: [
                       ..._Courses.map(
-                        (Course) => CourseCard(course: Course),
+                        (course) => CourseCard(course: course),
                       ),
                       if (_isLoading)
                         Row(
@@ -124,9 +126,9 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                               2, (index) => const ShimmerProductCard()),
                         ),
                       if (!_hasMore && _Courses.isNotEmpty)
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Center(child: Text("No more Courses")),
+                         Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Center(child: Text(context.tr.no_more_data,style: AppTextStyles.semiBold20(),)),
                         ),
                     ],
                   ),
@@ -140,9 +142,10 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         color: Colors.red.withOpacity(0.7),
-                        child: const Text(
-                          "Error loading more. Tap to retry",
-                          style: TextStyle(color: Colors.white),
+                        child:  Text(
+                         context.tr.retry_load_more ,
+                          style: AppTextStyles.semiBold16()
+                              .copyWith(color: Colors.white,),
                         ),
                       ),
                     ),

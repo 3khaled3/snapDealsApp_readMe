@@ -12,14 +12,13 @@ class ProductRepository implements IProductRepository {
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> createProduct(
       ProductModel product, XFile image) async {
-        print("createProduct called with image: ${product.createProductJson()}");
+    print("createProduct called with image: ${product.createProductJson()}");
     return HttpHelper.handleRequest(
       (token) => HttpHelper.postFile(
         name: "images",
         file: File(image.path),
         linkUrl: ApiEndpoints.products,
         field: product.createProductJson(),
-        
         token: token,
       ),
     );
@@ -48,10 +47,11 @@ class ProductRepository implements IProductRepository {
 
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> getProductsByCategory(
-       {required String limit, required String page, required String id}) {
-        return HttpHelper.handleRequest(
+      {required String limit, required String page, required String id}) {
+    return HttpHelper.handleRequest(
       (token) => HttpHelper.getData(
-        linkUrl: "${ApiEndpoints.products}?page=$page&limit=$limit&category=$id",
+        linkUrl:
+            "${ApiEndpoints.products}?page=$page&limit=$limit&category=$id",
         token: token,
       ),
     );

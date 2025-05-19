@@ -75,9 +75,7 @@ abstract class HomeRouter {
 
     GoRoute(
       path: AddView.routeName,
-     builder: (context, state) {
-       
-
+      builder: (context, state) {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => EditCategoryCubit()),
@@ -99,7 +97,9 @@ abstract class HomeRouter {
           providers: [
             BlocProvider(create: (context) => CreateProductCubit()),
           ],
-          child: AddDetailsView(args: args,),
+          child: AddDetailsView(
+            args: args,
+          ),
         );
       },
     ),
@@ -116,11 +116,12 @@ abstract class HomeRouter {
           providers: [
             BlocProvider(create: (context) => CreateCourseCubit()),
           ],
-          child: AddCourseDetails(args: args,),
+          child: AddCourseDetails(
+            args: args,
+          ),
         );
       },
     ),
-
 
     //add any other routes in same feature
   ];

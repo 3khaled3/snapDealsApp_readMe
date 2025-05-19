@@ -36,113 +36,112 @@ class _CustomAddImageState extends State<CustomAddImage> {
       print('حدث خطأ أثناء اختيار الصور: $e');
     }
   }
-@override
-Widget build(BuildContext context) {
-  return Container(
-    height: 220,
-    width: double.infinity,
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey),
-      borderRadius: BorderRadius.circular(5),
-    ),
-    child: selectedImages.isEmpty
-        ? Column(
-            children: [
-              20.ph,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 33,
-                    width: 33,
-                    decoration: BoxDecoration(border: Border.all()),
-                    child: const Icon(
-                      Icons.home,
-                      color: ColorsBox.brightBlue,
-                      size: 26,
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 220,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: selectedImages.isEmpty
+          ? Column(
+              children: [
+                20.ph,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 33,
+                      width: 33,
+                      decoration: BoxDecoration(border: Border.all()),
+                      child: const Icon(
+                        Icons.home,
+                        color: ColorsBox.brightBlue,
+                        size: 26,
+                      ),
                     ),
-                  ),
-                  6.pw,
-                  Container(
-                    height: 42,
-                    width: 42,
-                    decoration: BoxDecoration(border: Border.all()),
-                    child: const Icon(
-                      Icons.pedal_bike,
-                      color: ColorsBox.brightBlue,
-                      size: 26,
+                    6.pw,
+                    Container(
+                      height: 42,
+                      width: 42,
+                      decoration: BoxDecoration(border: Border.all()),
+                      child: const Icon(
+                        Icons.pedal_bike,
+                        color: ColorsBox.brightBlue,
+                        size: 26,
+                      ),
                     ),
-                  ),
-                  6.pw,
-                  Container(
-                    height: 33,
-                    width: 33,
-                    decoration: BoxDecoration(border: Border.all()),
-                    child: const Icon(
-                      Icons.home,
-                      color: ColorsBox.brightBlue,
-                      size: 26,
+                    6.pw,
+                    Container(
+                      height: 33,
+                      width: 33,
+                      decoration: BoxDecoration(border: Border.all()),
+                      child: const Icon(
+                        Icons.home,
+                        color: ColorsBox.brightBlue,
+                        size: 26,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              15.ph,
-              CustomContainer(
-                width: 120,
-                height: 50,
-                text: context.tr.addImages,
-                textStyle: AppTextStyles.medium14()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                borderColor: ColorsBox.brightBlue,
-                borderRadius: 5.0,
-                onTap: pickMultipleImages,
-              ),
-              16.ph,
-              Text(
-                context.tr.addImageDis,
-                style: AppTextStyles.regular12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          )
-        : Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.file(
-                  File(selectedImages[0].path),
-                  width: double.infinity,
-                  height: 220,
-                  fit: BoxFit.cover,
+                  ],
                 ),
-              ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedImages.clear();
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.white,
-                      size: 24,
-                    ),
+                15.ph,
+                CustomContainer(
+                  width: 120,
+                  height: 50,
+                  text: context.tr.addImages,
+                  textStyle: AppTextStyles.medium14()
+                      .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  borderColor: ColorsBox.brightBlue,
+                  borderRadius: 5.0,
+                  onTap: pickMultipleImages,
+                ),
+                16.ph,
+                Text(
+                  context.tr.addImageDis,
+                  style: AppTextStyles.regular12()
+                      .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            )
+          : Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.file(
+                    File(selectedImages[0].path),
+                    width: double.infinity,
+                    height: 220,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ),
-            ],
-          ),
-  );
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedImages.clear();
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
 }
-}
-
-

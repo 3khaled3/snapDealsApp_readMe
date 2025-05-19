@@ -5,7 +5,11 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CustomAddTextField extends StatelessWidget {
   const CustomAddTextField(
-      {super.key, required this.title, required this.hint, this.isPrice, this.controller});
+      {super.key,
+      required this.title,
+      required this.hint,
+      this.isPrice,
+      this.controller});
   final String title;
   final String hint;
   final bool? isPrice;
@@ -22,7 +26,11 @@ class CustomAddTextField extends StatelessWidget {
               .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
         ),
         6.ph,
-        CustomTextFormField(hintText: hint, isPrice: isPrice,controller: controller,),
+        CustomTextFormField(
+          hintText: hint,
+          isPrice: isPrice,
+          controller: controller,
+        ),
       ],
     );
   }

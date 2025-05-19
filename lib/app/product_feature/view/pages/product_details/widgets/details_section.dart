@@ -71,7 +71,8 @@ class CustomDetailsGrid extends StatelessWidget {
             itemBuilder: (context, index) {
               final entry = entries[index];
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(10),

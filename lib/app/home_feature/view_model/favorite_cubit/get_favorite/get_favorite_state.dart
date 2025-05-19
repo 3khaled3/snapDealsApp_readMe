@@ -8,7 +8,9 @@ abstract class GetFavoriteState extends Equatable {
 }
 
 class GetFavoriteInitial extends GetFavoriteState {}
+
 class GetFavoriteLoading extends GetFavoriteState {}
+
 class GetFavoriteSuccess extends GetFavoriteState {
   final List<ProductModel> products;
   final List<CourseModel> courses;
@@ -17,6 +19,5 @@ class GetFavoriteSuccess extends GetFavoriteState {
     required this.courses,
   });
 }
+
 class GetFavoriteError extends GetFavoriteState {}
-
-

@@ -47,7 +47,6 @@ abstract class HttpHelper {
   }) async {
     var headers = {
       if (token != null) 'Authorization': 'Bearer $token',
-
       'accept': 'application/json',
       'Content-Type': 'application/json',
     };
@@ -223,8 +222,10 @@ abstract class HttpHelper {
 
       // Create the multipart request
       var request = http.MultipartRequest('PUT', Uri.parse(linkUrl));
-      if (token != null) request.headers['Authorization'] = token;
 
+      if (token != null) {
+        request.headers['Authorization'] = 'Bearer $token';
+      }
       // Check if file exists
       if (!await file.exists()) {
         throw Exception("File not found at path: ${file.path}");
@@ -282,53 +283,50 @@ abstract class HttpHelper {
   }
 
   // todo: post file
-static Future<http.Response> postFile({
-  required String linkUrl,
-  required File file,
-  required String name,
-  required String? token,
-  required Map<String, dynamic> field, // لا داعي لـ fieldName
-}) async {
-  try {
-    print("Attempting to upload file...");
+  static Future<http.Response> postFile({
+    required String linkUrl,
+    required File file,
+    required String name,
+    required String? token,
+    required Map<String, dynamic> field, // لا داعي لـ fieldName
+  }) async {
+    try {
+      print("Attempting to upload file...");
 
-    var request = http.MultipartRequest('POST', Uri.parse(linkUrl));
+      var request = http.MultipartRequest('POST', Uri.parse(linkUrl));
 
-    if (token != null) {
-      request.headers['Authorization'] = 'Bearer $token';
+      if (token != null) {
+        request.headers['Authorization'] = 'Bearer $token';
+      }
+
+      // 👇 إرسال كل key-value كـ field منفصل
+      field.forEach((key, value) {
+        request.fields[key] = value.toString(); // يجب أن يكونوا Strings
+      });
+      log("field: $field");
+      final mimeType = lookupMimeType(file.path) ?? 'application/octet-stream';
+      final mimeTypeData = mimeType.split('/');
+
+      request.files.add(await http.MultipartFile.fromPath(
+        name,
+        file.path,
+        contentType: MediaType(mimeTypeData[0], mimeTypeData[1]),
+      ));
+
+      print("Sending request with fields: ${request.fields}");
+
+      final response = await request.send();
+      final http.Response res = await http.Response.fromStream(response);
+
+      print("Response Status: ${response.statusCode}");
+      print("Response Body: ${res.body}");
+
+      return res;
+    } catch (e) {
+      print("Error in postFile: $e");
+      rethrow;
     }
-
-    // 👇 إرسال كل key-value كـ field منفصل
-    field.forEach((key, value) {
-      request.fields[key] = value.toString(); // يجب أن يكونوا Strings
-
-    });
-  log("field: $field");
-    final mimeType = lookupMimeType(file.path) ?? 'application/octet-stream';
-    final mimeTypeData = mimeType.split('/');
-
-    request.files.add(await http.MultipartFile.fromPath(
-      name,
-      file.path,
-      contentType: MediaType(mimeTypeData[0], mimeTypeData[1]),
-    ));
-
-    print("Sending request with fields: ${request.fields}");
-
-    final response = await request.send();
-    final http.Response res = await http.Response.fromStream(response);
-
-    print("Response Status: ${response.statusCode}");
-    print("Response Body: ${res.body}");
-    
-
-    return res;
-  } catch (e) {
-    print("Error in postFile: $e");
-    rethrow;
   }
-}
-
 
   // todo: post form
   // todo: patch form

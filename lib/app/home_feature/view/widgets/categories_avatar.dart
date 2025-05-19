@@ -11,6 +11,7 @@ import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+
 class CategoriesAvatar extends StatefulWidget {
   const CategoriesAvatar({super.key});
 
@@ -33,13 +34,11 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
     Tr.current.more: Icons.expand_more,
     Tr.current.less: Icons.expand_less,
   };
-  
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        editCategoryCubit.getAllCategoryData());
+    Future.microtask(() => editCategoryCubit.getAllCategoryData());
   }
 
   @override
@@ -95,7 +94,8 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                         } else {
                           GoRouter.of(context).push(
                             ProductsView.routeName,
-                            extra: ProductsViewArgs(title: name,id: allCategories[index].id),
+                            extra: ProductsViewArgs(
+                                title: name, id: allCategories[index].id),
                           );
                         }
                       },

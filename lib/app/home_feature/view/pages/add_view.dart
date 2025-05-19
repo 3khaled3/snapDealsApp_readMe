@@ -19,6 +19,7 @@ class AddView extends StatelessWidget {
       create: (_) => EditCategoryCubit()..getAllCategoryData(),
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: ColorsBox.white,
           title: Text(
             context.tr.addTitle,
             style: AppTextStyles.bold24(),
@@ -46,14 +47,14 @@ class AddView extends StatelessWidget {
                       CustomListTile(
                         title: category.name,
                         onTap: () {
-                          if(category.name == "Courses") {
-                            GoRouter.of(context).push(AddCourseDetails.routeName,
-                              extra: AddCourseDetailsArgs(category));
-                          }else{
+                          if (category.name == "Courses") {
+                            GoRouter.of(context).push(
+                                AddCourseDetails.routeName,
+                                extra: AddCourseDetailsArgs(category));
+                          } else {
                             GoRouter.of(context).push(AddDetailsView.routeName,
-                              extra: AddDetailsArgs(category));
+                                extra: AddDetailsArgs(category));
                           }
-                          
                         },
                         leadingIcon: Icons.category,
                         isAddView: true,
@@ -64,7 +65,7 @@ class AddView extends StatelessWidget {
                 },
               );
             } else if (state is GetCategoriesError) {
-              return const Center(child: Text("حدث خطأ أثناء تحميل البيانات."));
+              return  Center(child: Text(context.tr.error_loading_data));
             } else {
               return const SizedBox.shrink();
             }

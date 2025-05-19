@@ -55,21 +55,20 @@ class CustomTobicState extends State<CustomTobic> {
 
   /// ✅ هذه الدالة ترجع البيانات على شكل Map<String, dynamic>
   Map<String, dynamic> getTopicsMap() {
-  final Map<String, String> topicsData = {};
+    final Map<String, String> topicsData = {};
 
-  for (var ctrls in _controllersList) {
-    final label = ctrls['label']?.text ?? '';
-    final desc = ctrls['description']?.text ?? '';
-    if (label.isNotEmpty) {
-      topicsData[label] = desc;
+    for (var ctrls in _controllersList) {
+      final label = ctrls['label']?.text ?? '';
+      final desc = ctrls['description']?.text ?? '';
+      if (label.isNotEmpty) {
+        topicsData[label] = desc;
+      }
     }
+
+    return {
+      'topics': topicsData,
+    };
   }
-
-  return {
-    'topics': topicsData,
-  };
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +97,8 @@ class CustomTobicState extends State<CustomTobic> {
                       const Spacer(),
                       IconButton(
                         onPressed: () => _removeTopic(index),
-                        icon: const Icon(Icons.delete_outline, color: Colors.red),
+                        icon:
+                            const Icon(Icons.delete_outline, color: Colors.red),
                       ),
                     ],
                   ),

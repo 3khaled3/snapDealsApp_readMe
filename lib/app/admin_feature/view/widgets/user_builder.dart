@@ -4,7 +4,9 @@ import 'package:snap_deals/app/admin_feature/model_view/access_user_cubit/access
 import 'package:snap_deals/app/admin_feature/view/widgets/shimmer_user_card.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/user_card.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
-
+import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class UserBuilder extends StatefulWidget {
   final AccessUserCubit accessUserCubit;
@@ -42,7 +44,8 @@ class _UserBuilderState extends State<UserBuilder> {
   }
 
   void _loadInitialUsers() {
-    accessUserCubit.getAllUsersData(page: page.toString(), limit: limit.toString());
+    accessUserCubit.getAllUsersData(
+        page: page.toString(), limit: limit.toString());
   }
 
   void _onScroll() {
@@ -57,7 +60,8 @@ class _UserBuilderState extends State<UserBuilder> {
   void _loadMoreUsers() {
     setState(() => _isLoading = true);
     page++;
-    accessUserCubit.getAllUsersData(page: page.toString(), limit: limit.toString());
+    accessUserCubit.getAllUsersData(
+        page: page.toString(), limit: limit.toString());
   }
 
   @override
@@ -84,7 +88,7 @@ class _UserBuilderState extends State<UserBuilder> {
             child: Column(
               children: [
                 UserCard(uesrs: state.user),
-                const SizedBox(height: 16),
+                16.ph,
                 TextButton(
                   onPressed: () {
                     page = 1;
@@ -96,7 +100,7 @@ class _UserBuilderState extends State<UserBuilder> {
                       limit: limit.toString(),
                     );
                   },
-                  child: const Text("عرض جميع المستخدمين"),
+                  child:  Text(context.tr.display_all_users,style: AppTextStyles.semiBold14(),),
                 ),
               ],
             ),
@@ -130,7 +134,8 @@ class _UserBuilderState extends State<UserBuilder> {
                     ..._users.map((user) => UserCard(uesrs: user)),
                     if (_isLoading)
                       Column(
-                        children: List.generate(2, (_) => const ShimmerUserCard()),
+                        children:
+                            List.generate(2, (_) => const ShimmerUserCard()),
                       ),
                     if (!_hasMore && _users.isNotEmpty)
                       const Padding(

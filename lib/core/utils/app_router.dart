@@ -7,6 +7,7 @@ import 'package:snap_deals/app/chat_feature/view/navigation/chat_router.dart';
 import 'package:snap_deals/app/home_feature/view/navigation/home_router.dart';
 import 'package:snap_deals/app/notification/view/notification_view.dart';
 import 'package:snap_deals/app/product_feature/view/navigation/product_router.dart';
+import 'package:snap_deals/app/request_feature/view/navigation/request_router.dart';
 
 abstract class AppRouter {
   static final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
@@ -23,6 +24,7 @@ abstract class AppRouter {
         ...ProductRouter.routes,
         ...ChatRouter.routes,
         ...AdminRouter.routes,
+        ...RequestRouter.routes,
         GoRoute(
           path: NotificationsView.route,
           builder: (context, state) => const NotificationsView(),

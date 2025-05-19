@@ -12,8 +12,8 @@ class GetProductsByCategoryCubit extends Cubit<GetProductsByCategoryState> {
   Future<void> getProductsByCategory(
       {required String limit, required String page, required String id}) async {
     emit(GetProductsByCategoryLoading());
-    final result =
-        await _productRepository.getProductsByCategory(limit: limit, page: page, id: id);
+    final result = await _productRepository.getProductsByCategory(
+        limit: limit, page: page, id: id);
     result.fold((l) => emit(GetProductsByCategoryError()), (r) {
       final List productsMap = r["data"];
       final List<ProductModel> products =

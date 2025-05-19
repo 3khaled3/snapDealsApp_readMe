@@ -8,7 +8,7 @@ class CourseRepository implements ICourseRepository {
       (token) => HttpHelper.postFile(
         linkUrl: ApiEndpoints.courses,
         token: token,
-         file: File(image.path),
+        file: File(image.path),
         name: "images",
         field: course.createCourseJson(),
       ),

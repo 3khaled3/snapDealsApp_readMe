@@ -8,6 +8,7 @@ import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/get-products_by_category/get_products_by_category_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class ProductsViewArgs {
   final String title;
@@ -129,10 +130,10 @@ class _ProductsViewState extends State<ProductsView> {
                     return Center(
                       child: Column(
                         children: [
-                          const Text(" something went wrong"),
+                           Text(context.tr.error_load,style: AppTextStyles.semiBold16(),),
                           ElevatedButton(
                             onPressed: _loadInitialProducts,
-                            child: const Text("Retry"),
+                             child:  Text(context.tr.retry),
                           ),
                         ],
                       ),
@@ -159,7 +160,7 @@ class _ProductsViewState extends State<ProductsView> {
                           } else if (_isLoading) {
                             return const ShimmerProductCard();
                           } else if (!_hasMore) {
-                            return const Center(child: Text("no more products"));
+                            return Center(child: Text(context.tr.no_more_data));
                           }
                           return const SizedBox.shrink();
                         },
@@ -173,9 +174,11 @@ class _ProductsViewState extends State<ProductsView> {
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               color: Colors.red,
-                              child: const Text(
-                                "Error loading more products Tap to retry",
-                                style: TextStyle(color: Colors.white),
+                              child:   Text(
+                               context.tr.retry_load_product ,
+                                style: AppTextStyles.semiBold16().copyWith(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

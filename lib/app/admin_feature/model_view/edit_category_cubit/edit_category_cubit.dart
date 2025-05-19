@@ -9,23 +9,21 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
   EditCategoryCubit() : super(EditCategoryInitial());
   final _categoryRepository = EditCategoryRepositoryImpl();
 
-  Future<void> getAllCategoryData () async{
+  Future<void> getAllCategoryData() async {
     emit(GetCategoriesLoading());
     final result = await _categoryRepository.getAllCategoryData();
     result.fold((l) => emit(GetCategoriesError()), (r) {
-      final List
-       categoriesMap = r["data"];
+      final List categoriesMap = r["data"];
       final List<Category> categories =
           categoriesMap.map((category) => Category.fromJson(category)).toList();
       emit(GetCategoriesSuccess(categories));
     });
   }
 
-   Future<void> addCategory(String name) async {
+  Future<void> addCategory(String name) async {
     emit(AddCategoryLoading());
 
-    final result =
-        await _categoryRepository.addCategory(categoryName: name);
+    final result = await _categoryRepository.addCategory(categoryName: name);
 
     result.fold(
       (failure) => emit(AddCategoryError()),
@@ -48,8 +46,8 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
   Future<void> updateCategory(String categoryId, String name) async {
     emit(UpdateCategoryLoading());
 
-    final result =
-        await _categoryRepository.editCategory(categoryId: categoryId, categoryName: name);
+    final result = await _categoryRepository.editCategory(
+        categoryId: categoryId, categoryName: name);
 
     result.fold(
       (failure) => emit(UpdateCategoryError()),

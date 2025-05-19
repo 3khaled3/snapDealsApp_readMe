@@ -203,11 +203,9 @@ class ChatMessagesCubit extends Cubit<List<MessageModel>> {
         print(" updatedMessage:Send 😁😁😁😁😁😁😁😁😁😁😁2");
         // Update the chat room with the last message
         try {
-
           await chatService.updateChatRoomWithLastMessage(
               currentChatRoom: chatRoom, message: message);
-                print(" updatedMessage:Send 😁😁😁😁😁😁😁😁😁😁😁3");
-
+          print(" updatedMessage:Send 😁😁😁😁😁😁😁😁😁😁😁3");
         } catch (e) {
           print("😭😭😭😭😭😭😭Error updating chat room: $e");
         }

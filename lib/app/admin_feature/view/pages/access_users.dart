@@ -11,26 +11,26 @@ class AccessUsers extends StatelessWidget {
 
   static const String routeName = '/access-users';
 
-@override
-Widget build(BuildContext context) {
-  return BlocProvider(
-    create: (_) => AccessUserCubit()..getAllUsersData(page: '1', limit: '5'),
-    child: Scaffold(
-      backgroundColor: ColorsBox.white,
-      appBar: AppBar(
-        title: Text(
-          context.tr.accessUsers,
-          style: AppTextStyles.bold24(),
-        ),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => AccessUserCubit()..getAllUsersData(page: '1', limit: '5'),
+      child: Scaffold(
         backgroundColor: ColorsBox.white,
+        appBar: AppBar(
+          title: Text(
+            context.tr.accessUsers,
+            style: AppTextStyles.bold24(),
+          ),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          backgroundColor: ColorsBox.white,
+        ),
+        body:
+            const AccessUsersBody(), // افصل الـbody في ويدجت مستقلة للحفاظ على النقاء
       ),
-      body: const AccessUsersBody(), // افصل الـbody في ويدجت مستقلة للحفاظ على النقاء
-    ),
-  );
-}
-
+    );
+  }
 }

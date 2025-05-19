@@ -36,13 +36,12 @@ class CustomAddLessonState extends State<CustomAddLesson> {
   }
 
   /// ✅ تُرجع قائمة بعناوين الدروس فقط
- List<String> getLessonsTitles() {
-  return _descriptionControllers
-      .map((controller) => controller.text.trim())
-      .where((text) => text.isNotEmpty)
-      .toList();
-}
-
+  List<String> getLessonsTitles() {
+    return _descriptionControllers
+        .map((controller) => controller.text.trim())
+        .where((text) => text.isNotEmpty)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +59,16 @@ class CustomAddLessonState extends State<CustomAddLesson> {
                 children: [
                   Row(
                     children: [
-                       Text(
-                '${context.tr.lesson} ${index + 1}',
-                style: AppTextStyles.semiBold12().copyWith(
-                    fontFamily: AppTextStyles.fontFamilyLora),
-              ),
+                      Text(
+                        '${context.tr.lesson} ${index + 1}',
+                        style: AppTextStyles.semiBold12()
+                            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                      ),
                       const Spacer(),
                       IconButton(
                         onPressed: () => _removeLesson(index),
-                        icon: const Icon(Icons.delete_outline, color: Colors.red),
+                        icon:
+                            const Icon(Icons.delete_outline, color: Colors.red),
                       ),
                     ],
                   ),

@@ -142,6 +142,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "callWord": MessageLookupByLibrary.simpleMessage("Call"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelWord": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel Request"),
+    "cancel_request_hint": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to cancel this request?",
+    ),
     "category": MessageLookupByLibrary.simpleMessage("Category*"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
     "change_password_error": MessageLookupByLibrary.simpleMessage(
@@ -158,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
+    "confirmWord": MessageLookupByLibrary.simpleMessage("Confirm"),
     "contactEmail": MessageLookupByLibrary.simpleMessage(
       "This email will be useful to keep in touch",
     ),
@@ -215,6 +220,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "describtionWord": MessageLookupByLibrary.simpleMessage("Describtion"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
+    "display_all_users": MessageLookupByLibrary.simpleMessage(
+      "Display all users",
+    ),
     "drawingTools": MessageLookupByLibrary.simpleMessage("Drowing Tools"),
     "electronics": MessageLookupByLibrary.simpleMessage("Electronic"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
@@ -223,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "enterTitle": MessageLookupByLibrary.simpleMessage("Enter title"),
     "error": MessageLookupByLibrary.simpleMessage("An error has occurred"),
+    "error_load": MessageLookupByLibrary.simpleMessage("something went wrong"),
+    "error_loading_data": MessageLookupByLibrary.simpleMessage(
+      "Error loading data",
+    ),
     "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite View"),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
     "forgotPasswordButton": MessageLookupByLibrary.simpleMessage(
@@ -234,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordScreenLabel": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
     ),
+    "go_my_requests": MessageLookupByLibrary.simpleMessage("Go to my requests"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("example@gmail.com"),
     "hintPassword": MessageLookupByLibrary.simpleMessage("Password"),
     "hintSearch": MessageLookupByLibrary.simpleMessage(
@@ -281,11 +294,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Mobiles and Tablets",
     ),
     "more": MessageLookupByLibrary.simpleMessage("More"),
+    "my_requests": MessageLookupByLibrary.simpleMessage("My Requests"),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage("New Password"),
     "newWord": MessageLookupByLibrary.simpleMessage("NEW"),
     "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
     "noChatsAvailable": MessageLookupByLibrary.simpleMessage(
       "No chats available",
+    ),
+    "no_item_in_favorite": MessageLookupByLibrary.simpleMessage(
+      "No items in favorite",
+    ),
+    "no_more_data": MessageLookupByLibrary.simpleMessage(
+      "No more data available",
     ),
     "no_notifications": MessageLookupByLibrary.simpleMessage(
       "No notifications available",
@@ -335,6 +355,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "registerLabel": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
     ),
+    "request_accepted": MessageLookupByLibrary.simpleMessage(
+      "Request accepted successfully",
+    ),
+    "request_error": MessageLookupByLibrary.simpleMessage(
+      "Error sending request",
+    ),
+    "request_rejected": MessageLookupByLibrary.simpleMessage(
+      "Request rejected successfully",
+    ),
+    "request_sent": MessageLookupByLibrary.simpleMessage(
+      "Request sent successfully",
+    ),
     "resendCodeButton": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPasswordButton": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
@@ -347,6 +379,16 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "reset_password_success": MessageLookupByLibrary.simpleMessage(
       "Password reset successfully",
+    ),
+    "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "retry_load_course": MessageLookupByLibrary.simpleMessage(
+      "Error loading more courses Tap to retry",
+    ),
+    "retry_load_more": MessageLookupByLibrary.simpleMessage(
+      "Error loading more data Tap to retry",
+    ),
+    "retry_load_product": MessageLookupByLibrary.simpleMessage(
+      "Error loading more products Tap to retry",
     ),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("Send"),
@@ -365,6 +407,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "update_category_success": MessageLookupByLibrary.simpleMessage(
       "Category updated successfully",
+    ),
+    "update_profile_error": MessageLookupByLibrary.simpleMessage(
+      "Error updating profile",
+    ),
+    "update_profile_success": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully",
     ),
     "used": MessageLookupByLibrary.simpleMessage("USED"),
     "verify_otp_error": MessageLookupByLibrary.simpleMessage(

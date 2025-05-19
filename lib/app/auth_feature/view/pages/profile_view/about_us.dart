@@ -19,8 +19,8 @@ class AboutUsView extends StatelessWidget {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 8),
+                const Padding(
+                  padding: EdgeInsetsDirectional.only(start: 8),
                   child: CustomBackButton(),
                 ),
                 16.pw,
@@ -32,11 +32,11 @@ class AboutUsView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox()
+                
               ],
             ),
             12.ph,
-            Divider(
+            const Divider(
               color: ColorsBox.greyishTwo,
               height: 1,
             ),

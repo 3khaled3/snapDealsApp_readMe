@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/Course_card.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/products_header.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
-import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/get_all_course_cubit/get_all_courses_cubit.dart';
-import 'package:snap_deals/app/product_feature/model_view/get-products_by_category/get_products_by_category_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CoursesViewArgs {
   final String title;
- 
 
-  CoursesViewArgs({ required this.title});
+  CoursesViewArgs({required this.title});
 }
 
 class CoursesView extends StatefulWidget {
@@ -93,8 +90,7 @@ class _CoursesViewState extends State<CoursesView> {
             ),
             20.ph,
             Expanded(
-              child: BlocConsumer<GetAllCoursesCubit,
-                  GetAllCoursesState>(
+              child: BlocConsumer<GetAllCoursesCubit, GetAllCoursesState>(
                 bloc: _cubit,
                 listener: (context, state) {
                   if (state is GetAllCoursesSuccess) {
@@ -125,15 +121,14 @@ class _CoursesViewState extends State<CoursesView> {
                       itemBuilder: (context, index) =>
                           const ShimmerProductCard(),
                     );
-                  } else if (state is GetAllCoursesError &&
-                      _page == 1) {
+                  } else if (state is GetAllCoursesError && _page == 1) {
                     return Center(
                       child: Column(
                         children: [
-                          const Text(" something went wrong"),
+                           Text(context.tr.error_load,style: AppTextStyles.semiBold16(),),
                           ElevatedButton(
                             onPressed: _loadInitialProducts,
-                            child: const Text("Retry"),
+                            child:  Text(context.tr.retry),
                           ),
                         ],
                       ),
@@ -152,15 +147,15 @@ class _CoursesViewState extends State<CoursesView> {
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
                         ),
-                        itemCount: _courses.length +
-                            (_isLoading || !_hasMore ? 1 : 0),
+                        itemCount:
+                            _courses.length + (_isLoading || !_hasMore ? 1 : 0),
                         itemBuilder: (context, index) {
                           if (index < _courses.length) {
                             return CourseCard(course: _courses[index]);
                           } else if (_isLoading) {
                             return const ShimmerProductCard();
                           } else if (!_hasMore) {
-                            return const Center(child: Text("no more courses"));
+                            return  Center(child: Text(context.tr.no_more_data));
                           }
                           return const SizedBox.shrink();
                         },
@@ -174,9 +169,11 @@ class _CoursesViewState extends State<CoursesView> {
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               color: Colors.red,
-                              child: const Text(
-                                "Error loading more courses Tap to retry",
-                                style: TextStyle(color: Colors.white),
+                              child:  Text(
+                               context.tr.retry_load_course ,
+                                style: AppTextStyles.semiBold16().copyWith(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

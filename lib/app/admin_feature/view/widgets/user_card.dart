@@ -12,62 +12,66 @@ import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({super.key, required this.uesrs});
- final UserModel uesrs;
+  final UserModel uesrs;
   @override
   Widget build(BuildContext context) {
-     final String userId=uesrs.id;
-  final String userName =uesrs.name;
-  final String userEmail=uesrs.email;
-  final String userPhoneNumber =uesrs.phone ?? "No Phone Number";
-  final String useerimage = uesrs.profileImg ?? "";
+    final String userId = uesrs.id;
+    final String userName = uesrs.name;
+    final String userEmail = uesrs.email;
+    final String userPhoneNumber = uesrs.phone ?? "No Phone Number";
+    final String useerimage = uesrs.profileImg ?? "";
     return Card(
       color: ColorsBox.white,
-       elevation: 4,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.grey, width: 0.5),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        child: Padding(padding: const EdgeInsets.all(12),
-        
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: Colors.grey, width: 0.5),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              
               children: [
-                Text('ID: $userId', style: AppTextStyles.bold12(), maxLines: 1,
-                      overflow: TextOverflow.ellipsis,),
+                Text(
+                  'ID: $userId',
+                  style: AppTextStyles.bold12(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 8.pw,
-               CustomCopyButton(
-                          textToCopy: userId,
-                        ),
+                CustomCopyButton(
+                  textToCopy: userId,
+                ),
                 const Spacer(),
-                 IconButton(
-              icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () {
-                CustomDialog.deleteUser(context, userId);
-              }
-            ),
+                IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      CustomDialog.deleteUser(context, userId);
+                    }),
               ],
             ),
             8.ph,
             Row(
               children: [
-              CircleAvatar(
-  radius: 37,
-  backgroundImage: buildUserImage(useerimage),
-),
-
-
+                CircleAvatar(
+                  radius: 37,
+                  backgroundImage: buildUserImage(useerimage),
+                ),
                 20.pw,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(userName, style: AppTextStyles.bold16(), maxLines: 1,
-                      overflow: TextOverflow.ellipsis,),
+                        Text(
+                          userName,
+                          style: AppTextStyles.bold16(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                         8.pw,
                         CustomCopyButton(
                           textToCopy: userName,
@@ -79,8 +83,12 @@ class UserCard extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: 190,
-                          child: Text(userEmail, style: AppTextStyles.semiBold14(), maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,),
+                          child: Text(
+                            userEmail,
+                            style: AppTextStyles.semiBold14(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         8.pw,
                         CustomCopyButton(
@@ -91,8 +99,12 @@ class UserCard extends StatelessWidget {
                     7.ph,
                     Row(
                       children: [
-                        Text(userPhoneNumber, style: AppTextStyles.semiBold14(), maxLines: 1,
-                      overflow: TextOverflow.ellipsis,),
+                        Text(
+                          userPhoneNumber,
+                          style: AppTextStyles.semiBold14(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                         8.pw,
                         CustomCopyButton(
                           textToCopy: userPhoneNumber,
@@ -105,7 +117,7 @@ class UserCard extends StatelessWidget {
             )
           ],
         ),
-        ),
+      ),
     );
   }
 }
@@ -122,4 +134,3 @@ ImageProvider buildUserImage(String? imageUrl) {
     return const AssetImage(AppImageAssets.profileImage);
   }
 }
-

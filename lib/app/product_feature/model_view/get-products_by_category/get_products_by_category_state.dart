@@ -8,12 +8,13 @@ abstract class GetProductsByCategoryState extends Equatable {
 }
 
 class GetProductsByCategoryInitial extends GetProductsByCategoryState {}
+
 class GetProductsByCategoryLoading extends GetProductsByCategoryState {}
+
 class GetProductsByCategorySuccess extends GetProductsByCategoryState {
   final List<ProductModel> products;
-  
-  const GetProductsByCategorySuccess(this.products);
 
-  
+  const GetProductsByCategorySuccess(this.products);
 }
+
 class GetProductsByCategoryError extends GetProductsByCategoryState {}

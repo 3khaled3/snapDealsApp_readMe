@@ -36,13 +36,12 @@ class CategoryCard extends StatelessWidget {
           children: [
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () =>
-                  CustomDialog.deleteCategory(context, categoryId),
+              onPressed: () => CustomDialog.deleteCategory(context, categoryId),
             ),
             IconButton(
               icon: const Icon(Icons.edit, color: Colors.blue),
-              onPressed: () => CustomDialog.editCategory(
-                  context, categoryId, categoryName),
+              onPressed: () =>
+                  CustomDialog.editCategory(context, categoryId, categoryName),
             ),
           ],
         ),

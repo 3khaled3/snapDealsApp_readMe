@@ -114,9 +114,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   // Implementing method to get logged-in user data
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>>
-      getSpecificUserData(id) async {
-        print("getSpecificUserData ${ApiEndpoints.userById(id)}");
+  Future<Either<FailureModel, Map<String, dynamic>>> getSpecificUserData(
+      id) async {
+    print("getSpecificUserData ${ApiEndpoints.userById(id)}");
     return await HttpHelper.handleRequest(
       (authToken) => HttpHelper.getData(
         linkUrl: ApiEndpoints.userById(id),
@@ -141,12 +141,14 @@ class AuthRepositoryImpl implements AuthRepository {
   // Implementing method to update logged-in user data (email, phone, etc.)
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> updateUserData(
-      {required Map<String, dynamic> data}) async {
+      {required UserModel user, XFile? image}) async {
     return await HttpHelper.handleRequest(
-      (authToken) => HttpHelper.putData(
+      (authToken) => HttpHelper.putFile(
         linkUrl: ApiEndpoints.updateMe,
-        data: data,
+        field: user.toJson(),
         token: authToken,
+        name: "images",
+        file: File(image!.path),
       ),
     );
   }

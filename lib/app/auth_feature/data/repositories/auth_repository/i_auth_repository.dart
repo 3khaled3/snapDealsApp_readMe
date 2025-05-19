@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:get_thumbnail_video/video_thumbnail.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/core/utils/api_endpoints.dart';
 import 'package:snap_deals/core/utils/api_handler.dart';
 import 'package:dartz/dartz.dart';
@@ -35,7 +39,8 @@ abstract class AuthRepository {
 
   // Method to update logged-in user data (email, phone, etc.)
   Future<Either<FailureModel, Map<String, dynamic>>> updateUserData({
-    required Map<String, dynamic> data,
+    required UserModel user,
+    XFile? image,
   });
 
   // Method to delete logged-in user

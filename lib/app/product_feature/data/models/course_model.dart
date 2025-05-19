@@ -56,8 +56,7 @@ class CourseModel {
         images: List<String>.from(json['images']),
         price: json['price'],
         category: Category.fromJson(json['category']),
-        lessons: 
-         List<LessonModel>.from(
+        lessons: List<LessonModel>.from(
             json['lessons'].map((x) => LessonModel.fromJson(x))),
         instructor: Instructor.fromJson(json['instructor']),
         location: json['location'],
@@ -99,7 +98,7 @@ class CourseModel {
         'updatedAt': updatedAt.toIso8601String(),
       };
 
-       Map<String, dynamic> createCourseJson() => {
+  Map<String, dynamic> createCourseJson() => {
         'title': title,
         'description': description,
         'images': images,
@@ -192,8 +191,8 @@ class Instructor {
   Instructor({
     required this.id,
     required this.name,
-     this.phone,
-     this.profileImg,
+    this.phone,
+    this.profileImg,
   });
 
   factory Instructor.fromJson(Map<String, dynamic> json) => Instructor(

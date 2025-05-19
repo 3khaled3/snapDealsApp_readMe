@@ -13,8 +13,7 @@ class GetAllCoursesCubit extends Cubit<GetAllCoursesState> {
   Future<void> getAllCourses(
       {required String limit, required String page}) async {
     emit(GetAllCoursesLoading());
-    final result =
-        await _courseRepository.getCourses(limit: limit, page: page);
+    final result = await _courseRepository.getCourses(limit: limit, page: page);
     result.fold((l) => emit(GetAllCoursesError()), (r) {
       final List coursesMap = r["data"];
       final List<CourseModel> courses =

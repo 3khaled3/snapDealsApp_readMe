@@ -1,4 +1,5 @@
 part of 'chat_ticket_widget.dart';
+
 Widget _buildShimmerEffect() {
   return Shimmer.fromColors(
     baseColor: Colors.grey.shade300,

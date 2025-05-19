@@ -8,38 +8,35 @@ part 'get_favorite_state.dart';
 
 class GetFavoriteCubit extends Cubit<GetFavoriteState> {
   GetFavoriteCubit() : super(GetFavoriteInitial());
-    final _favoriteRepository = FavoriteRepository();
-    
-    
-    Future<void> getFavorites() async {
-  emit(GetFavoriteLoading());
+  final _favoriteRepository = FavoriteRepository();
 
-  final result = await _favoriteRepository.getFavorites();
-  result.fold(
-    (l) => emit(GetFavoriteError()),
-    (r) {
-      final List<dynamic> productsMap = r["data"];
+  Future<void> getFavorites() async {
+    emit(GetFavoriteLoading());
 
-       List<ProductModel> productList = [];
-       List<CourseModel> courseList = [];
+    final result = await _favoriteRepository.getFavorites();
+    result.fold(
+      (l) => emit(GetFavoriteError()),
+      (r) {
+        final List<dynamic> productsMap = r["data"];
 
-      for (final item in productsMap) {
-        
-        if (item.containsKey('lessons')) {
-          // Course
-          courseList.add(CourseModel.fromJson(item));
-        } else {
-          // Product
-          productList.add(ProductModel.fromJson(item));
+        List<ProductModel> productList = [];
+        List<CourseModel> courseList = [];
+
+        for (final item in productsMap) {
+          if (item.containsKey('lessons')) {
+            // Course
+            courseList.add(CourseModel.fromJson(item));
+          } else {
+            // Product
+            productList.add(ProductModel.fromJson(item));
+          }
         }
-      }
 
-      emit(GetFavoriteSuccess(
-        products: productList,
-        courses: courseList,
-      ));
-    },
-  );
-}
-
+        emit(GetFavoriteSuccess(
+          products: productList,
+          courses: courseList,
+        ));
+      },
+    );
+  }
 }

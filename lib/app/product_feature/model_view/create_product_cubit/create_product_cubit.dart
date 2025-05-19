@@ -12,7 +12,7 @@ class CreateProductCubit extends Cubit<CreateProductState> {
 
   Future<void> createProduct(ProductModel product, XFile image) async {
     emit(CreateProductLoading());
-    final result = await _productRepository.createProduct(product,image);
+    final result = await _productRepository.createProduct(product, image);
     result.fold((l) => emit(CreateProductError()), (r) {
       emit(CreateProductSuccess());
     });

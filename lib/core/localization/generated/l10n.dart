@@ -1601,6 +1601,191 @@ class Tr {
   String get delete {
     return Intl.message('Delete', name: 'delete', desc: '', args: []);
   }
+
+  /// `Request sent successfully`
+  String get request_sent {
+    return Intl.message(
+      'Request sent successfully',
+      name: 'request_sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error sending request`
+  String get request_error {
+    return Intl.message(
+      'Error sending request',
+      name: 'request_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request accepted successfully`
+  String get request_accepted {
+    return Intl.message(
+      'Request accepted successfully',
+      name: 'request_accepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request rejected successfully`
+  String get request_rejected {
+    return Intl.message(
+      'Request rejected successfully',
+      name: 'request_rejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to my requests`
+  String get go_my_requests {
+    return Intl.message(
+      'Go to my requests',
+      name: 'go_my_requests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Requests`
+  String get my_requests {
+    return Intl.message('My Requests', name: 'my_requests', desc: '', args: []);
+  }
+
+  /// `Cancel Request`
+  String get cancel_request {
+    return Intl.message(
+      'Cancel Request',
+      name: 'cancel_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to cancel this request?`
+  String get cancel_request_hint {
+    return Intl.message(
+      'Are you sure you want to cancel this request?',
+      name: 'cancel_request_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirmWord {
+    return Intl.message('Confirm', name: 'confirmWord', desc: '', args: []);
+  }
+
+  /// `Display all users`
+  String get display_all_users {
+    return Intl.message(
+      'Display all users',
+      name: 'display_all_users',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get update_profile_success {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'update_profile_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating profile`
+  String get update_profile_error {
+    return Intl.message(
+      'Error updating profile',
+      name: 'update_profile_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading data`
+  String get error_loading_data {
+    return Intl.message(
+      'Error loading data',
+      name: 'error_loading_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `something went wrong`
+  String get error_load {
+    return Intl.message(
+      'something went wrong',
+      name: 'error_load',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `No more data available`
+  String get no_more_data {
+    return Intl.message(
+      'No more data available',
+      name: 'no_more_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading more courses Tap to retry`
+  String get retry_load_course {
+    return Intl.message(
+      'Error loading more courses Tap to retry',
+      name: 'retry_load_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading more products Tap to retry`
+  String get retry_load_product {
+    return Intl.message(
+      'Error loading more products Tap to retry',
+      name: 'retry_load_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading more data Tap to retry`
+  String get retry_load_more {
+    return Intl.message(
+      'Error loading more data Tap to retry',
+      name: 'retry_load_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No items in favorite`
+  String get no_item_in_favorite {
+    return Intl.message(
+      'No items in favorite',
+      name: 'no_item_in_favorite',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

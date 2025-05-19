@@ -17,54 +17,53 @@ class InstructorDetails extends StatelessWidget {
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
-       Row(
-  children: [
-    ClipRRect(
-      borderRadius: BorderRadius.circular(1000),
-     child: (instructor.profileImg != null && instructor.profileImg!.isNotEmpty)
-    ? CachedNetworkImage(
-        imageUrl: instructor.profileImg!,
-        placeholder: (context, url) => SvgPicture.asset(
-          AppImageAssets.defaultProfile,
-          height: 40,
-          width: 40,
-          fit: BoxFit.cover,
-        ),
-        errorWidget: (context, url, error) => SvgPicture.asset(
-          AppImageAssets.defaultProfile,
-          height: 40,
-          width: 40,
-          fit: BoxFit.cover,
-        ),
-        height: 40,
-        width: 40,
-        fit: BoxFit.cover,
-      )
-    : SvgPicture.asset(
-        AppImageAssets.defaultProfile,
-        height: 40,
-        width: 40,
-        fit: BoxFit.cover,
-      ),
-
-    ),
-    SizedBox(width: 10),
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          instructor.name,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Text(
-          instructor.phone ?? '',
-          style: TextStyle(color: Colors.grey),
-        ),
-      ],
-    )
-  ],
-)
-
+        Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(1000),
+              child: (instructor.profileImg != null &&
+                      instructor.profileImg!.isNotEmpty)
+                  ? CachedNetworkImage(
+                      imageUrl: instructor.profileImg!,
+                      placeholder: (context, url) => SvgPicture.asset(
+                        AppImageAssets.defaultProfile,
+                        height: 40,
+                        width: 40,
+                        fit: BoxFit.cover,
+                      ),
+                      errorWidget: (context, url, error) => SvgPicture.asset(
+                        AppImageAssets.defaultProfile,
+                        height: 40,
+                        width: 40,
+                        fit: BoxFit.cover,
+                      ),
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      AppImageAssets.defaultProfile,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+            ),
+            SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  instructor.name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  instructor.phone ?? '',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            )
+          ],
+        )
       ],
     );
   }

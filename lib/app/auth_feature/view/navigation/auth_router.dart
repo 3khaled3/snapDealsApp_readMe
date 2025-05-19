@@ -67,7 +67,7 @@ abstract class AuthRouter {
         return LoginScreen(args);
       },
     ),
-     GoRoute(
+    GoRoute(
       path: ForgetPasswordView.routeName,
       builder: (context, state) {
         ForgetPasswordViewArgs? args;
@@ -109,7 +109,7 @@ abstract class AuthRouter {
         );
       },
     ),
-     GoRoute(
+    GoRoute(
       path: OtpView.routeName,
       builder: (context, state) {
         OtpViewArgs? args;

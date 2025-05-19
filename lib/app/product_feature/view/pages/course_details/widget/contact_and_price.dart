@@ -57,11 +57,11 @@ class ContactAndPrice extends StatelessWidget {
                   startChat(
                       context,
                       Partner(
-                          id: courseModel.instructor.id,
-                          name: courseModel.instructor.name,
-                          profileImg: courseModel.instructor.profileImg,
-                          phone: courseModel.instructor.phone,
-                          ));
+                        id: courseModel.instructor.id,
+                        name: courseModel.instructor.name,
+                        profileImg: courseModel.instructor.profileImg,
+                        phone: courseModel.instructor.phone,
+                      ));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsBox.brightBlue,

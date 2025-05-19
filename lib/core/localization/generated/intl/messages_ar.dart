@@ -123,6 +123,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "callWord": MessageLookupByLibrary.simpleMessage("اتصال"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancelWord": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cancel_request": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
+    "cancel_request_hint": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد إلغاء هذا الطلب؟",
+    ),
     "category": MessageLookupByLibrary.simpleMessage("الفئة*"),
     "change_password": MessageLookupByLibrary.simpleMessage(
       "تغيير كلمة المرور",
@@ -141,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
     ),
+    "confirmWord": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "contactEmail": MessageLookupByLibrary.simpleMessage(
       "سيكون هذا البريد الإلكتروني مفيدًا للبقاء على تواصل",
     ),
@@ -194,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordScreenLabel": MessageLookupByLibrary.simpleMessage(
       "إعادة تعيين كلمة المرور",
     ),
+    "go_my_requests": MessageLookupByLibrary.simpleMessage("اذهب إلى طلباتي"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("example@gmail.com"),
     "hintPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "hintSearch": MessageLookupByLibrary.simpleMessage("ما الذي تبحث عنه؟"),
@@ -242,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "هواتف وأجهزة لوحية",
     ),
     "more": MessageLookupByLibrary.simpleMessage("أكثر"),
+    "my_requests": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الجديدة",
     ),
@@ -291,6 +298,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
     "registerButton": MessageLookupByLibrary.simpleMessage("متابعة"),
     "registerLabel": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+    "request_accepted": MessageLookupByLibrary.simpleMessage("تم قبول الطلب"),
+    "request_error": MessageLookupByLibrary.simpleMessage("خطأ في إرسال الطلب"),
+    "request_rejected": MessageLookupByLibrary.simpleMessage("تم رفض الطلب"),
+    "request_sent": MessageLookupByLibrary.simpleMessage(
+      "تم إرسال الطلب بنجاح",
+    ),
     "resendCodeButton": MessageLookupByLibrary.simpleMessage(
       "إعادة إرسال الرمز",
     ),

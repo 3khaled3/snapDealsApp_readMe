@@ -166,5 +166,14 @@
     "delete_all_notifications": "حذف جميع الإشعارات",
     "are_you_sure_delete": "هل أنت متأكد أنك تريد الحذف؟",
     "cancel": "إلغاء",
-    "delete": "حذف"
+    "delete": "حذف",
+    "request_sent": "تم إرسال الطلب بنجاح",
+    "request_error": "خطأ في إرسال الطلب",
+    "request_accepted": "تم قبول الطلب",
+    "request_rejected": "تم رفض الطلب",
+    "go_my_requests": "اذهب إلى طلباتي",
+    "my_requests": "طلباتي",
+    "cancel_request": "إلغاء الطلب",
+    "cancel_request_hint": "هل أنت متأكد أنك تريد إلغاء هذا الطلب؟",
+    "confirmWord": "تأكيد"
 }

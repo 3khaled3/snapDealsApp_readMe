@@ -8,6 +8,9 @@ sealed class AddToFavoriteState extends Equatable {
 }
 
 final class AddToFavoriteInitial extends AddToFavoriteState {}
+
 final class AddToFavoriteLoading extends AddToFavoriteState {}
+
 final class AddToFavoriteSuccess extends AddToFavoriteState {}
+
 final class AddToFavoriteError extends AddToFavoriteState {}

@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/Course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view_model/favorite_cubit/get_favorite/get_favorite_cubit.dart';
-import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
-import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -32,11 +31,11 @@ class FavoriteView extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("حدث خطأ أثناء تحميل المفضلة"),
+                       Text(context.tr.error_loading_data),
                       ElevatedButton(
                         onPressed: () =>
                             context.read<GetFavoriteCubit>().getFavorites(),
-                        child: const Text("إعادة المحاولة"),
+                        child: Text(context.tr.retry),
                       ),
                     ],
                   ),
@@ -46,19 +45,23 @@ class FavoriteView extends StatelessWidget {
                 final courses = state.courses;
 
                 if (products.isEmpty && courses.isEmpty) {
-                  return const Center(child: Text("لا توجد عناصر مفضلة حتى الآن"));
+                  return  Center(
+                      child: Text(context.tr.no_item_in_favorite,style: AppTextStyles.semiBold20()));
                 }
-               final List<Widget> productWidgets =
-      products.map((item) => ProductCard(product: item)).toList();
+                final List<Widget> productWidgets =
+                    products.map((item) => ProductCard(product: item)).toList();
 
-  final List<Widget> courseWidgets =
-      courses.map((item) => CourseCard(course: item)).toList();
+                final List<Widget> courseWidgets =
+                    courses.map((item) => CourseCard(course: item)).toList();
 
-  final List<Widget> allWidgets = [...productWidgets, ...courseWidgets];
+                final List<Widget> allWidgets = [
+                  ...productWidgets,
+                  ...courseWidgets
+                ];
 
                 return Column(
                   children: [
-                    const SizedBox(height: 16),
+                    16.ph,
                     Center(
                       child: Text(
                         context.tr.favoriteView,
@@ -67,7 +70,7 @@ class FavoriteView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                   16.ph,
                     const Divider(
                       color: ColorsBox.greyishTwo,
                       height: 1,
@@ -84,8 +87,7 @@ class FavoriteView extends StatelessWidget {
                             mainAxisSpacing: 8,
                             childAspectRatio: 0.66,
                           ),
-                          itemBuilder:(context, index) => allWidgets[index],
-
+                          itemBuilder: (context, index) => allWidgets[index],
                         ),
                       ),
                     ),

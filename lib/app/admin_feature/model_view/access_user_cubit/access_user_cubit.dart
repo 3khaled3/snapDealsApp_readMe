@@ -9,7 +9,6 @@ class AccessUserCubit extends Cubit<AccessUserState> {
   AccessUserCubit() : super(AccessUserInitial());
   final _accessUserRepository = AccessUserRepositoryImpl();
 
-
   Future<void> getAllUsersData(
       {required String limit, required String page}) async {
     emit(GetAllUsersLoading());
@@ -26,8 +25,7 @@ class AccessUserCubit extends Cubit<AccessUserState> {
   Future<void> deleteUser(String userId) async {
     emit(DeleteUserLoading());
 
-    final result =
-        await _accessUserRepository.deleteUser(userId: userId);
+    final result = await _accessUserRepository.deleteUser(userId: userId);
 
     result.fold(
       (failure) => emit(DeleteUserError()),
@@ -35,9 +33,9 @@ class AccessUserCubit extends Cubit<AccessUserState> {
     );
   }
 
-   Future<void> getUserDataById(String userId) async {
+  Future<void> getUserDataById(String userId) async {
     emit(GetSpecificUserLoading());
-    final result = await _accessUserRepository.getUserDataById(userId:userId );
+    final result = await _accessUserRepository.getUserDataById(userId: userId);
     result.fold((l) => emit(GetSpecificUserError()), (r) {
       emit(GetSpecificUserSuccess(UserModel.fromJson(r["data"])));
     });

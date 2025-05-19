@@ -12,9 +12,9 @@ class CustomCopyButton extends StatelessWidget {
     return InkWell(
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: textToCopy));
-         context.showSuccessSnackBar(
-                                message: context.tr.copyTextSuccess,
-                              );
+        context.showSuccessSnackBar(
+          message: context.tr.copyTextSuccess,
+        );
       },
       child: const Icon(
         Icons.copy,

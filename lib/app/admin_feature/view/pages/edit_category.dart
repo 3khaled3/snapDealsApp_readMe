@@ -10,9 +10,7 @@ import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/validators.dart';
 
-class EditCategoryArgs {
-
-}
+class EditCategoryArgs {}
 
 class EditCategory extends StatelessWidget {
   const EditCategory({super.key, this.args});
@@ -80,11 +78,12 @@ class EditCategory extends StatelessWidget {
     );
   }
 }
+
 void showAddCategory(BuildContext context) {
   final formKey = GlobalKey<FormState>();
   final TextEditingController categoryNameController = TextEditingController();
 
-  final cubit = BlocProvider.of<EditCategoryCubit>(context); 
+  final cubit = BlocProvider.of<EditCategoryCubit>(context);
 
   showModalBottomSheet(
     context: context,
@@ -96,7 +95,7 @@ void showAddCategory(BuildContext context) {
       ),
     ),
     builder: (modalContext) {
-      return BlocProvider.value( 
+      return BlocProvider.value(
         value: cubit,
         child: Padding(
           padding: EdgeInsets.only(
@@ -107,12 +106,12 @@ void showAddCategory(BuildContext context) {
               if (state is AddCategorySuccess) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                   SnackBar(content: Text(context.tr.add_category_success)),
+                  SnackBar(content: Text(context.tr.add_category_success)),
                 );
                 cubit.getAllCategoryData(); // ✅ إعادة تحميل البيانات
               } else if (state is AddCategoryError) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                   SnackBar(content: Text(context.tr.add_category_error)),
+                  SnackBar(content: Text(context.tr.add_category_error)),
                 );
               }
             },
@@ -128,7 +127,8 @@ void showAddCategory(BuildContext context) {
                       23.ph,
                       Text(
                         context.tr.add_category,
-                        style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
+                        style: AppTextStyles.medium20()
+                            .copyWith(color: ColorsBox.black),
                       ),
                       25.ph,
                       CustomTextFormField(

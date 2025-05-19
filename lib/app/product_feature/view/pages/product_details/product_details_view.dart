@@ -27,7 +27,12 @@ class ProductDetailsView extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            CustomImageSlider(images: product.images, userId: product.user.id, productId: product.id, isProduct: true,),
+            CustomImageSlider(
+              images: product.images,
+              userId: product.user.id,
+              productId: product.id,
+              isProduct: true,
+            ),
             19.ph,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,7 +1,9 @@
 part of "i_request_repository.dart";
+
 class RequestRepository implements IRequestRepository {
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>> approveRequest(String requestId) {
+  Future<Either<FailureModel, Map<String, dynamic>>> approveRequest(
+      String requestId) {
     return HttpHelper.handleRequest(
       (token) => HttpHelper.postData(
         linkUrl: ApiEndpoints.approveRequest(requestId),
@@ -12,8 +14,9 @@ class RequestRepository implements IRequestRepository {
   }
 
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>> cancelRequest(String requestId) {
-   return HttpHelper.handleRequest(
+  Future<Either<FailureModel, Map<String, dynamic>>> cancelRequest(
+      String requestId) {
+    return HttpHelper.handleRequest(
       (token) => HttpHelper.deleteData(
         linkUrl: ApiEndpoints.cancelRequest(requestId),
         token: token,
@@ -32,8 +35,9 @@ class RequestRepository implements IRequestRepository {
   }
 
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>> getRequestsById(String courseId) {
-   return HttpHelper.handleRequest(
+  Future<Either<FailureModel, Map<String, dynamic>>> getRequestsById(
+      String courseId) {
+    return HttpHelper.handleRequest(
       (token) => HttpHelper.getData(
         linkUrl: ApiEndpoints.requestById(courseId),
         token: token,
@@ -42,7 +46,8 @@ class RequestRepository implements IRequestRepository {
   }
 
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>> rejectRequest(String requestId) {
+  Future<Either<FailureModel, Map<String, dynamic>>> rejectRequest(
+      String requestId) {
     return HttpHelper.handleRequest(
       (token) => HttpHelper.postData(
         linkUrl: ApiEndpoints.rejectRequest(requestId),
@@ -53,8 +58,9 @@ class RequestRepository implements IRequestRepository {
   }
 
   @override
-  Future<Either<FailureModel, Map<String, dynamic>>> sendRequest(String courseId) {
-  return HttpHelper.handleRequest(
+  Future<Either<FailureModel, Map<String, dynamic>>> sendRequest(
+      String courseId) {
+    return HttpHelper.handleRequest(
       (token) => HttpHelper.postData(
         linkUrl: ApiEndpoints.requestById(courseId),
         data: {},
@@ -62,5 +68,4 @@ class RequestRepository implements IRequestRepository {
       ),
     );
   }
-  
 }
