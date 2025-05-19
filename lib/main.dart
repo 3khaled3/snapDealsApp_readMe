@@ -10,6 +10,7 @@ import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
+import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
 import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -50,8 +51,15 @@ Future<void> main() async {
 
 void _runApp() {
   runApp(
-    BlocProvider(
-      create: (context) => LangCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LangCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FavoriteCubit(),
+        ),
+      ],
       child: DevicePreview(
         enabled: false,
         builder: (context) => const MyApp(),
@@ -92,6 +100,7 @@ Future<void> _initializeHive() async {
     Hive.openBox<ChatRoom>(Constants.freeChatRooms),
     Hive.openBox<MessageModel>(Constants.supportChatMessages),
     Hive.openBox<ChatRoom>(Constants.supportChatRooms),
+    Hive.openBox(Constants.favorites) 
   ]);
 }
 

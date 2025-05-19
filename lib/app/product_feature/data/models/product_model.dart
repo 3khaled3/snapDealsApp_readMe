@@ -41,9 +41,9 @@ class ProductModel {
       description: json['description'],
       price: (json['price'] as num).toDouble(),
       images: List<String>.from(json['images']),
-      category: Category.fromJson(json['category']),
-      // category: Category(
-      //     id: "json['category']['_id']", name: "json['category']['name']"),
+      // category: Category.fromJson(json['category']),
+      category: Category(
+          id: "json['category']['_id']", name: "json['category']['name']"),
       visit: json['visit'],
       details: Map<String, dynamic>.from(json['details']),
       createdAt: DateTime.parse(json['createdAt']),
