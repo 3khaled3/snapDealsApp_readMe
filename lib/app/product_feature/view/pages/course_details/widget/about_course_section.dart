@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
-import 'package:snap_deals/app/request_feature/model_view/send_request_cubit/send_request_cubit.dart';
-import 'package:snap_deals/app/request_feature/view/pages/instractor_request_view.dart';
-import 'package:snap_deals/app/request_feature/view/pages/my_request_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -28,10 +22,10 @@ class AboutCourseSection extends StatelessWidget {
     final isOnwer = user.id == course.instructor.id;
 
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.42,
+      // height: MediaQuery.sizeOf(context).height * 0.42,
       width: double.infinity,
-      child: ListView(
-        padding: const EdgeInsets.all(0),
+      child: Column(
+        // padding: const EdgeInsets.all(0),
         // physics: const NeverScrollableScrollPhysics(),
         children: [
           Column(
@@ -39,7 +33,7 @@ class AboutCourseSection extends StatelessWidget {
             children: [
               DescSection(description: course.description),
               const SizedBox(height: 20),
-              InstructorDetails(instructor: course.instructor),
+              InstructorDetails(courseModel: course),
               const SizedBox(height: 20),
               const Text(
                 'Info',

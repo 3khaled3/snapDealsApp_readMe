@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
+import 'package:snap_deals/app/notification/data/notification_services.dart';
 import 'package:snap_deals/app/on_board_feature/view/on_boarding_view.dart';
 
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -47,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ProfileCubit.instance
               .loginUser(email: email, password: password)
               .then((value) async {
-            // await NotificationService.instance.getDeviceToken();
+            await NotificationService.instance.getDeviceToken();
             if (mounted) {
               GoRouter.of(context).pushReplacement(MainHomeView.routeName,
                   extra: MainHomeViewArgs());

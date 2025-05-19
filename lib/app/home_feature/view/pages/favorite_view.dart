@@ -1,105 +1,124 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/Course_card.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
-import 'package:snap_deals/app/home_feature/view_model/favorite_cubit/get_favorite/get_favorite_cubit.dart';
+import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
+import 'package:snap_deals/app/home_feature/view_model/favorite_local_storage.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
-import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class FavoriteViewArgs {}
 
-class FavoriteView extends StatelessWidget {
+class FavoriteView extends StatefulWidget {
   const FavoriteView({this.args, super.key});
   final FavoriteViewArgs? args;
 
   static const String routeName = '/favorite_route';
 
   @override
+  State<FavoriteView> createState() => _FavoriteViewState();
+}
+
+class _FavoriteViewState extends State<FavoriteView> {
+  late final FavoriteCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<FavoriteCubit>();
+    _cubit.loadFavorites(); // Initial load only once
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => GetFavoriteCubit()..getFavorites(),
-      child: Scaffold(
-        body: SafeArea(
-          child: BlocBuilder<GetFavoriteCubit, GetFavoriteState>(
-            builder: (context, state) {
-              if (state is GetFavoriteLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is GetFavoriteError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       Text(context.tr.error_loading_data),
-                      ElevatedButton(
-                        onPressed: () =>
-                            context.read<GetFavoriteCubit>().getFavorites(),
-                        child: Text(context.tr.retry),
-                      ),
-                    ],
-                  ),
-                );
-              } else if (state is GetFavoriteSuccess) {
-                final products = state.products;
-                final courses = state.courses;
+    return Scaffold(
+      body: BlocBuilder<FavoriteCubit, FavoriteState>(
+        builder: (context, state) {
+          if (state is FavoriteInitial || state is FavoriteLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-                if (products.isEmpty && courses.isEmpty) {
-                  return  Center(
-                      child: Text(context.tr.no_item_in_favorite,style: AppTextStyles.semiBold20()));
-                }
-                final List<Widget> productWidgets =
-                    products.map((item) => ProductCard(product: item)).toList();
+          if (state is FavoriteError) {
+            return _buildErrorState(context, state.message);
+          }
 
-                final List<Widget> courseWidgets =
-                    courses.map((item) => CourseCard(course: item)).toList();
+          if (state is FavoriteLoaded) {
+            final allProducts = state.products;
+            final allCourses = state.courses;
+            final favoriteIds = context.read<FavoriteCubit>().favoriteIdsSaved.value;
 
-                final List<Widget> allWidgets = [
-                  ...productWidgets,
-                  ...courseWidgets
-                ];
+            // Only show items that are still in the favoriteIds list
+            final widgets = [
+              ...allProducts
+                  .where((product) => favoriteIds.contains(product.id))
+                  .map((product) => ProductCard(product: product)),
+              ...allCourses
+                  .where((course) => favoriteIds.contains(course.id))
+                  .map((course) => CourseCard(course: course)),
+            ];
 
-                return Column(
-                  children: [
-                    16.ph,
-                    Center(
-                      child: Text(
-                        context.tr.favoriteView,
-                        style: AppTextStyles.semiBold20().copyWith(
-                          fontFamily: AppTextStyles.fontFamilyLora,
-                        ),
-                      ),
-                    ),
-                   16.ph,
-                    const Divider(
-                      color: ColorsBox.greyishTwo,
-                      height: 1,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: GridView.builder(
-                          itemCount: allWidgets.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
-                            childAspectRatio: 0.66,
-                          ),
-                          itemBuilder: (context, index) => allWidgets[index],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }
+            if (widgets.isEmpty) {
+              return const Center(
+                child: Text("لا توجد عناصر مفضلة حتى الآن"),
+              );
+            }
 
-              return const SizedBox();
-            },
+            return _buildFavoritesGrid(context, widgets);
+          }
+
+          return const SizedBox.shrink();
+        },
+      ),
+    );
+  }
+
+  Widget _buildErrorState(BuildContext context, String message) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(message),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () => _cubit.loadFavorites(),
+            child: const Text("إعادة المحاولة"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFavoritesGrid(BuildContext context, List<Widget> widgets) {
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+        Center(
+          child: Text(
+            context.tr.favoriteView,
+            style: AppTextStyles.semiBold20().copyWith(
+              fontFamily: AppTextStyles.fontFamilyLora,
+            ),
           ),
         ),
-      ),
+        const SizedBox(height: 16),
+        const Divider(color: ColorsBox.greyishTwo, height: 1),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: GridView.builder(
+              itemCount: widgets.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                childAspectRatio: 0.66,
+              ),
+              itemBuilder: (context, index) => widgets[index],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

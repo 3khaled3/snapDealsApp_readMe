@@ -189,6 +189,8 @@
     "are_you_sure_delete": "Are you sure you want to delete?",
     "cancel": "Cancel",
     "delete": "Delete",
+    "enroll_now": "Enroll Now"
+    "delete": "Delete",
     "request_sent": "Request sent successfully",
     "request_error": "Error sending request",
     "request_accepted": "Request accepted successfully",

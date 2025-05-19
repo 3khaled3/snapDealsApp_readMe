@@ -9,7 +9,6 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart'
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
-import 'package:snap_deals/app/home_feature/view_model/test_cubit/test_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -81,6 +80,7 @@ class CustomBottomSheet {
                       textColor: ColorsBox.white,
                       backgroundColor: ColorsBox.brightBlue,
                       onTap: () {
+                        ProfileCubit.instance.logoutUser();
                         GoRouter.of(context).push(LoginScreen.routeName);
                       },
                     ),

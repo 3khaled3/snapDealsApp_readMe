@@ -37,7 +37,7 @@ class ChatViewAppBar extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(1000),
                       child: CachedNetworkImage(
-                        imageUrl: partner.profileImg ?? " ",
+                        imageUrl: partner.profileImg ?? "",
                         placeholder: (context, url) => SvgPicture.asset(
                           AppImageAssets.defaultProfile,
                           height: 40,

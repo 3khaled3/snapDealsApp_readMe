@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -73,7 +74,7 @@ class ContactAndPrice extends StatelessWidget {
                   elevation: 2,
                 ),
                 child: Text(
-                  'Chat now',
+                  context.tr.enroll_now,
                   style: AppTextStyles.semiBold16().copyWith(
                     color: ColorsBox.white,
                   ),

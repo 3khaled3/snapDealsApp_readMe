@@ -1,15 +1,22 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/profile.dart';
+import 'package:snap_deals/app/chat_feature/model_view/chat_room_cubit.dart';
+import 'package:snap_deals/app/chat_feature/view/pages/chat_tickets_view.dart';
+import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/chat_wrapper.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/login_dialog.dart';
+import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 
@@ -28,9 +35,9 @@ class _MainHomeViewState extends State<MainHomeView> {
   int _currentIndex = 0;
   final List<Widget> _views = [
     const HomeView(),
-    const ChatWrapper(),
-    const FavoriteView(),
-    const ProfileView(),
+    ChatWrapper(),
+    FavoriteView(),
+    ProfileView(),
   ];
   @override
   void initState() {
@@ -56,7 +63,7 @@ class _MainHomeViewState extends State<MainHomeView> {
       extendBody: true,
       resizeToAvoidBottomInset: false,
 
-      backgroundColor: const Color(0xffF9FAFB),
+      backgroundColor: Color(0xffF9FAFB),
       body: SafeArea(
         // child: _views[_currentIndex],
         child: IndexedStack(
