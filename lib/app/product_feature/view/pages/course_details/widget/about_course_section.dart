@@ -3,10 +3,6 @@ import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
-import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AboutCourseSection extends StatelessWidget {
   final CourseModel course;
@@ -18,10 +14,10 @@ class AboutCourseSection extends StatelessWidget {
     final entries = course.details.entries.toList();
 
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.42,
+      // height: MediaQuery.sizeOf(context).height * 0.42,
       width: double.infinity,
-      child: ListView(
-        padding: const EdgeInsets.all(0),
+      child: Column(
+        // padding: const EdgeInsets.all(0),
         // physics: const NeverScrollableScrollPhysics(),
         children: [
           Column(
@@ -29,7 +25,7 @@ class AboutCourseSection extends StatelessWidget {
             children: [
               DescSection(description: course.description),
               const SizedBox(height: 20),
-              InstructorDetails(instructor: course.instructor),
+              InstructorDetails(courseModel: course),
               const SizedBox(height: 20),
               const Text(
                 'Info',
@@ -56,29 +52,6 @@ class AboutCourseSection extends StatelessWidget {
               ),
             ],
           ),
-          8.ph,
-          SizedBox(
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorsBox.brightBlue,
-                foregroundColor: ColorsBox.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                elevation: 2,
-              ),
-              child: Text(
-                context.tr.make_request,
-                style: AppTextStyles.semiBold16().copyWith(
-                  color: ColorsBox.white,
-                ),
-              ),
-            ),
-          ),
-          15.ph,
         ],
       ),
     );

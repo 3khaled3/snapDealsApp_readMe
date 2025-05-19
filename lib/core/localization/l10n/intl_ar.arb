@@ -166,5 +166,6 @@
     "delete_all_notifications": "حذف جميع الإشعارات",
     "are_you_sure_delete": "هل أنت متأكد أنك تريد الحذف؟",
     "cancel": "إلغاء",
-    "delete": "حذف"
+    "delete": "حذف",
+    "enroll_now": "تسجيل الان"
 }

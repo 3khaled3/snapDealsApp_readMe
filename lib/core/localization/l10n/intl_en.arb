@@ -188,5 +188,6 @@
     "delete_all_notifications": "Delete all notifications",
     "are_you_sure_delete": "Are you sure you want to delete?",
     "cancel": "Cancel",
-    "delete": "Delete"
+    "delete": "Delete",
+    "enroll_now": "Enroll Now"
 }

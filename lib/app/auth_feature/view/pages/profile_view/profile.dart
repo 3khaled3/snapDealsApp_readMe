@@ -49,7 +49,7 @@ class ProfileView extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(1000),
               child: CachedNetworkImage(
-                imageUrl: ProfileCubit.instance.state.profile.profileImg ?? " ",
+                imageUrl: ProfileCubit.instance.state.profile.profileImg ?? "",
                 placeholder: (context, url) => SvgPicture.asset(
                   AppImageAssets.defaultProfile,
                   height: 120,

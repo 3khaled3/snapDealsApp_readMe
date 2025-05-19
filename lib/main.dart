@@ -22,19 +22,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  // Initialize binding first and only once
-  WidgetsFlutterBinding.ensureInitialized();
-
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
-    ),
-  );
-
   // Handle zone errors properly
   runZonedGuarded(() async {
+    // Initialize binding in this zone
+    WidgetsFlutterBinding.ensureInitialized();
+
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+
     // Initialize Firebase first
     await _initializeFirebase();
 
@@ -100,7 +100,7 @@ Future<void> _initializeHive() async {
     Hive.openBox<ChatRoom>(Constants.freeChatRooms),
     Hive.openBox<MessageModel>(Constants.supportChatMessages),
     Hive.openBox<ChatRoom>(Constants.supportChatRooms),
-    Hive.openBox(Constants.favorites) 
+    Hive.openBox(Constants.favorites)
   ]);
 }
 

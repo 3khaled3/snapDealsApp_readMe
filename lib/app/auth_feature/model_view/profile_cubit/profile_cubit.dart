@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/data/repositories/auth_repository/i_auth_repository.dart';
+import 'package:snap_deals/app/notification/data/notification_services.dart';
 import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/core/utils/api_handler.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
@@ -40,7 +41,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
         print('✔️✔️✔️$right}');
 
         emit(ProfileSuccess(UserModel.fromJson(right["data"])));
-        // await NotificationService.instance.getDeviceToken();
+        await NotificationService.instance.getDeviceToken();
       },
     );
   }
@@ -69,8 +70,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
         print('✔️✔️✔️$right}');
 
         emit(ProfileSuccess(UserModel.fromJson(right["data"])));
-
-        // await NotificationService.instance.getDeviceToken();
+        await NotificationService.instance.getDeviceToken();
       },
     );
   }

@@ -186,10 +186,10 @@ class NotificationService {
     String? token = await _firebaseMessaging.getToken();
     final user = ProfileCubit.instance.state.profile;
     if (user.notificationToken == token) return token;
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.id)
-        .set({"notification_token": token}, SetOptions(merge: true));
+    // await FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(user.id)
+    //     .set({"notification_token": token}, SetOptions(merge: true));
     print("Device Token: $token");
 
     return token;
