@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_thumbnail_video/video_thumbnail.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
@@ -66,140 +67,148 @@ class _AddDetailsViewState extends State<AddDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 70, right: 20, left: 20, bottom: 20),
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomHeaderAddView(
-                  title: context.tr.adDetails,
-                  icon: Icons.arrow_back_ios_new,
-                ),
-                const Divider(thickness: 1, color: Colors.black),
-                15.ph,
-                CustomAddDetailsTitle(
-                  title: widget.args!.category!.name,
-                  icon: Icons.category,
-                ),
-                23.ph,
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar(title: context.tr.adDetails),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomAddDetailsTitle(
+                          title: widget.args!.category!.name,
+                          icon: Icons.category,
+                        ),
+                        23.ph,
 
-                // 📸 استخدام CustomAddImage مع callback
-                CustomAddImage(
-                  onImagesSelected: (images) {
-                    setState(() {
-                      selectedImages = images;
-                    });
-                  },
-                ),
+                        // 📸 استخدام CustomAddImage مع callback
+                        CustomAddImage(
+                          onImagesSelected: (images) {
+                            setState(() {
+                              selectedImages = images;
+                            });
+                          },
+                        ),
 
-                23.ph,
-                CustomAddTextField(
-                  title: context.tr.brand,
-                  hint: context.tr.brandHint,
-                  controller: brandController,
-                ),
-                23.ph,
-                CustomAddTextField(
-                  title: context.tr.adTitle,
-                  hint: context.tr.enterTitle,
-                  controller: titleController,
-                ),
-                23.ph,
-                Text(
-                  context.tr.describtion,
-                  style: AppTextStyles.semiBold12()
-                      .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                ),
-                6.ph,
-                CustomTextFormField(
-                  hintText: context.tr.describtionHint,
-                  height:
-                      const EdgeInsets.only(bottom: 100, left: 10, right: 10),
-                  controller: descriptionController,
-                ),
-                CustomTobic(key: topicsKey),
-                23.ph,
-                CustomAddTextField(
-                  title: context.tr.location,
-                  hint: context.tr.locationHint,
-                  controller: locationController,
-                ),
-                23.ph,
-                CustomAddTextField(
-                  title: context.tr.price,
-                  hint: context.tr.priceHint,
-                  isPrice: true,
-                  controller: priceController,
-                ),
-                7.ph,
+                        23.ph,
+                        CustomAddTextField(
+                          title: context.tr.brand,
+                          hint: context.tr.brandHint,
+                          controller: brandController,
+                        ),
+                        23.ph,
+                        CustomAddTextField(
+                          title: context.tr.adTitle,
+                          hint: context.tr.enterTitle,
+                          controller: titleController,
+                        ),
+                        23.ph,
+                        Text(
+                          context.tr.describtion,
+                          style: AppTextStyles.semiBold12().copyWith(
+                              fontFamily: context.tr.fontFamilyLora),
+                        ),
+                        6.ph,
+                        CustomTextFormField(
+                          hintText: context.tr.describtionHint,
+                          height: const EdgeInsets.only(
+                              bottom: 100, left: 10, right: 10),
+                          controller: descriptionController,
+                        ),
+                        CustomTobic(key: topicsKey),
+                        23.ph,
+                        CustomAddTextField(
+                          title: context.tr.location,
+                          hint: context.tr.locationHint,
+                          controller: locationController,
+                        ),
+                        23.ph,
+                        CustomAddTextField(
+                          title: context.tr.price,
+                          hint: context.tr.priceHint,
+                          isPrice: true,
+                          controller: priceController,
+                        ),
+                        7.ph,
 
-                // زر الإرسال
-                SizedBox(
-                  width: double.infinity,
-                  child: BlocListener<CreateProductCubit, CreateProductState>(
-                    listener: (context, state) {
-                      if (state is CreateProductSuccess) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          context.showSuccessSnackBar(
-                              message: context.tr.add_product_success);
-                          GoRouter.of(context).pushReplacement(
-                              MainHomeView.routeName,
-                              extra: MainHomeViewArgs());
-                        });
-                      } else if (state is CreateProductError) {
-                        context.showErrorSnackBar(
-                            message: context.tr.add_product_error);
-                        Navigator.of(context).pop();
-                      } else if (state is CreateProductLoading) {
-                        context.showLoadingDialog();
-                      }
-                    },
-                    child: CustomPrimaryButton(
-                      title: context.tr.nextButton,
-                      onTap: () async {
-                        if (formKey.currentState?.validate() ?? false) {
-                          await BlocProvider.of<CreateProductCubit>(context)
-                              .createProduct(
-                            ProductModel(
-                              id: const Uuid().v4(),
-                              title: titleController.text,
-                              user: Partner(
-                                id: ProfileCubit.instance.state.profile.id,
-                                name: ProfileCubit.instance.state.profile.name,
-                                profileImg: ProfileCubit
-                                    .instance.state.profile.profileImg,
-                              ),
-                              location: locationController.text,
-                              slug: brandController.text,
-                              description: descriptionController.text,
-                              price: double.parse(priceController.text),
-                              images: [],
-                              category: Category(
-                                id: widget.args!.category!.id,
-                                name: widget.args!.category!.name,
-                              ),
-                              visit: 0,
-                              details:
-                                  topicsKey.currentState?.getTopicsMap() ?? {},
-                              createdAt: DateTime.now(),
-                              updatedAt: DateTime.now(),
+                        // زر الإرسال
+                        SizedBox(
+                          width: double.infinity,
+                          child: BlocListener<CreateProductCubit,
+                              CreateProductState>(
+                            listener: (context, state) {
+                              if (state is CreateProductSuccess) {
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  context.showSuccessSnackBar(
+                                      message: context.tr.add_product_success);
+                                  GoRouter.of(context).pushReplacement(
+                                      MainHomeView.routeName,
+                                      extra: MainHomeViewArgs());
+                                });
+                              } else if (state is CreateProductError) {
+                                context.showErrorSnackBar(
+                                    message: context.tr.add_product_error);
+                                Navigator.of(context).pop();
+                              } else if (state is CreateProductLoading) {
+                                context.showLoadingDialog();
+                              }
+                            },
+                            child: CustomPrimaryButton(
+                              title: context.tr.nextButton,
+                              onTap: () async {
+                                if (formKey.currentState?.validate() ?? false) {
+                                  await BlocProvider.of<CreateProductCubit>(
+                                          context)
+                                      .createProduct(
+                                    ProductModel(
+                                      id: const Uuid().v4(),
+                                      title: titleController.text,
+                                      user: Partner(
+                                        id: ProfileCubit
+                                            .instance.state.profile.id,
+                                        name: ProfileCubit
+                                            .instance.state.profile.name,
+                                        profileImg: ProfileCubit
+                                            .instance.state.profile.profileImg,
+                                      ),
+                                      location: locationController.text,
+                                      slug: brandController.text,
+                                      description: descriptionController.text,
+                                      price: double.parse(priceController.text),
+                                      images: [],
+                                      category: Category(
+                                        id: widget.args!.category!.id,
+                                        name: widget.args!.category!.name,
+                                      ),
+                                      visit: 0,
+                                      details: topicsKey.currentState
+                                              ?.getTopicsMap() ??
+                                          {},
+                                      createdAt: DateTime.now(),
+                                      updatedAt: DateTime.now(),
+                                    ),
+                                    selectedImages.isNotEmpty
+                                        ? selectedImages.first
+                                        : XFile(''),
+                                  );
+                                }
+                              },
                             ),
-                            selectedImages.isNotEmpty
-                                ? selectedImages.first
-                                : XFile(''),
-                          );
-                        }
-                      },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -214,7 +223,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 //       Text(
 //         context.tr.ramWord,
 //         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//             .copyWith(fontFamily: context.tr.fontFamilyLora),
 //       ),
 //       6.ph,
 //       const CustomDropDownButton(index: 1),
@@ -222,7 +231,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 //       Text(
 //         context.tr.storageWord,
 //         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//             .copyWith(fontFamily: context.tr.fontFamilyLora),
 //       ),
 //       6.ph,
 //       const CustomDropDownButton(index: 2),
@@ -230,7 +239,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 //       Text(
 //         context.tr.batteryCapacityWord,
 //         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//             .copyWith(fontFamily: context.tr.fontFamilyLora),
 //       ),
 //       6.ph,
 //       const CustomDropDownButton(index: 3),

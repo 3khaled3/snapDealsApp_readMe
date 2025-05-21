@@ -54,7 +54,7 @@ class ResetPasswordView extends StatelessWidget {
                 child: Text(
                   context.tr.appName,
                   style: AppTextStyles.bold42().copyWith(
-                      fontFamily: AppTextStyles.fontFamilyLora,
+                      fontFamily: context.tr.fontFamilyLora,
                       color: ColorsBox.white),
                 ),
               ),
@@ -83,7 +83,7 @@ class ResetPasswordView extends StatelessWidget {
                     27.ph,
                     Text(context.tr.forgotPasswordScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
-                          fontFamily: AppTextStyles.fontFamilyLora,
+                          fontFamily: context.tr.fontFamilyLora,
                           color: ColorsBox.black,
                         )),
                     42.ph,

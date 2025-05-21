@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -94,37 +95,45 @@ class _YourProfileViewState extends State<YourProfileView> {
         return Scaffold(
           body: state is ProfileLoading
               ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  padding: const EdgeInsets.only(
-                    top: 70,
-                    left: 34,
-                    right: 21,
-                    bottom: 18,
-                  ),
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildHeader(context),
-                        12.ph,
-                        _buildProfileSection(),
-                        49.ph,
-                        _buildFormFields(context),
-                        37.ph,
-                        const Padding(
-                          padding: EdgeInsets.only(left: 30, right: 30),
-                          child: Divider(thickness: 1, color: Colors.grey),
+              : SafeArea(
+                  child: Column(
+                    children: [
+                      CustomAppBar(title: context.tr.yourProfileLabel),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                            bottom: 18,
+                          ),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                12.ph,
+                                _buildProfileSection(),
+                                24.ph,
+                                _buildFormFields(context),
+                                24.ph,
+                                _buildContactSection(context),
+                                57.ph,
+                                CustomPrimaryButton(
+                                  title: context.tr.saveButton,
+                                  onTap: _onSave,
+                                ),
+                                24.ph,
+                                CustomPrimaryButton(
+                                  title: context.tr.deleteAccount,
+                                  buttonColor: ColorsBox.brightRed,
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        24.ph,
-                        _buildContactSection(context),
-                        57.ph,
-                        CustomButtonRow(
-                          saveButtonText: context.tr.saveButton,
-                          onSave: _onSave,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
         );
@@ -132,28 +141,17 @@ class _YourProfileViewState extends State<YourProfileView> {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 60, right: 60),
-      child: Text(
-        context.tr.yourProfileLabel,
-        style: AppTextStyles.semiBold20().copyWith(
-          fontFamily: AppTextStyles.fontFamilyLora,
-        ),
-      ),
-    );
-  }
-
   Widget _buildProfileSection() {
-    return Row(
+    return Column(
       children: [
         Stack(
           children: [
             CircleAvatar(
-              radius: 40,
+              radius: 60,
               backgroundImage: _pickedImage != null
                   ? FileImage(File(_pickedImage!.path))
-                  : const AssetImage(AppImageAssets.profileImage) as ImageProvider,
+                  : const AssetImage(AppImageAssets.profileImage)
+                      as ImageProvider,
             ),
             Positioned(
               bottom: 0,
@@ -161,23 +159,20 @@ class _YourProfileViewState extends State<YourProfileView> {
               child: InkWell(
                 onTap: _pickImage,
                 child: const CircleAvatar(
-                  radius: 12,
+                  radius: 18,
                   backgroundColor: ColorsBox.brightBlue,
-                  child: Icon(EvaIcons.cameraOutline,
-                      size: 20, color: Colors.white),
+                  child: Icon(EvaIcons.cameraOutline, color: Colors.white),
                 ),
               ),
             ),
           ],
         ),
-        27.pw,
-        Expanded(
-          child: CustomTextFormField(
-            controller: _nameController,
-            hintText: context.tr.yourName,
-            labelText: context.tr.Name,
-            validator: Validators.validateName,
-          ),
+        24.ph,
+        CustomTextFormField(
+          controller: _nameController,
+          hintText: context.tr.yourName,
+          labelText: context.tr.Name,
+          validator: Validators.validateName,
         ),
       ],
     );
@@ -208,13 +203,6 @@ class _YourProfileViewState extends State<YourProfileView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          context.tr.contactInformation,
-          style: AppTextStyles.semiBold20().copyWith(
-            fontFamily: AppTextStyles.fontFamilyLora,
-          ),
-        ),
-        24.ph,
         CustomTextFormField(
           controller: _numberController,
           hintText: context.tr.yourNumber,

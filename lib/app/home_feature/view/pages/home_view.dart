@@ -39,33 +39,16 @@ class HomeView extends StatelessWidget {
             child: Text(
               context.tr.popularCourse,
               style: AppTextStyles.medium20()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),
           ),
           const PopularCourseBuilder(),
-          // SizedBox(
-          //   height: 275,
-          //   child: SingleChildScrollView(
-          //     scrollDirection: Axis.horizontal,
-          //     child: Row(
-          //       children: List.generate(
-          //           10,
-          //           (index) => const CourseCard(
-          //                 courseName: 'Course Name ',
-          //                 price: 1000,
-          //                 imagePath:
-          //                     "https://appmaster.io/api/_files/hRaLG2N4DVjRZJQzCpN2zJ/download/",
-          //                 courseOwner: 'Ziad tamer',
-          //               )),
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             child: Text(
               context.tr.popularProduct,
               style: AppTextStyles.medium20()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),
           ),
           const PopularProductBuilder(),

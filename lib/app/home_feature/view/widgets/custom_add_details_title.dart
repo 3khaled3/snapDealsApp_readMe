@@ -17,7 +17,7 @@ class CustomAddDetailsTitle extends StatelessWidget {
         Text(
           context.tr.category,
           style: AppTextStyles.semiBold12()
-              .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+              .copyWith(fontFamily: context.tr.fontFamilyLora),
         ),
         7.ph,
         Row(
@@ -36,7 +36,7 @@ class CustomAddDetailsTitle extends StatelessWidget {
             Text(
               title,
               style: AppTextStyles.semiBold12()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),
           ],
         ),

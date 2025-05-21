@@ -54,7 +54,7 @@ class OtpView extends StatelessWidget {
                 child: Text(
                   context.tr.appName,
                   style: AppTextStyles.bold42().copyWith(
-                      fontFamily: AppTextStyles.fontFamilyLora,
+                      fontFamily: context.tr.fontFamilyLora,
                       color: ColorsBox.white),
                 ),
               ),
@@ -73,7 +73,7 @@ class OtpView extends StatelessWidget {
                     33.ph,
                     Text(context.tr.otpScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
-                          fontFamily: AppTextStyles.fontFamilyLora,
+                          fontFamily: context.tr.fontFamilyLora,
                           color: ColorsBox.black,
                         )),
                     42.ph,

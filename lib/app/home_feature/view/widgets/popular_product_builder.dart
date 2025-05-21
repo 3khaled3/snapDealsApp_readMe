@@ -101,7 +101,10 @@ class _PopularProductBuilderState extends State<PopularProductBuilder> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(context.tr.error_loading_data,style: AppTextStyles.semiBold20(),),
+                  Text(
+                    context.tr.error_loading_data,
+                    style: AppTextStyles.semiBold20(),
+                  ),
                   ElevatedButton(
                     onPressed: _loadInitialProducts,
                     child: Text(context.tr.retry),
@@ -126,9 +129,13 @@ class _PopularProductBuilderState extends State<PopularProductBuilder> {
                               2, (index) => const ShimmerProductCard()),
                         ),
                       if (!_hasMore && _products.isNotEmpty)
-                         Padding(
+                        Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Center(child: Text(context.tr.no_more_data,style: AppTextStyles.semiBold20(),)),
+                          child: Center(
+                              child: Text(
+                            context.tr.no_more_data,
+                            style: AppTextStyles.semiBold20(),
+                          )),
                         ),
                     ],
                   ),
@@ -143,9 +150,10 @@ class _PopularProductBuilderState extends State<PopularProductBuilder> {
                         padding: const EdgeInsets.all(8),
                         color: Colors.red.withOpacity(0.7),
                         child: Text(
-                         context.tr.retry_load_more ,
-                          style: AppTextStyles.semiBold16()
-                              .copyWith(color: Colors.white,),
+                          context.tr.retry_load_more,
+                          style: AppTextStyles.semiBold16().copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

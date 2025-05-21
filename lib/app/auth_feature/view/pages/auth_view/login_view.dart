@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     context.tr.appName,
                     style: AppTextStyles.bold34().copyWith(
-                        fontFamily: AppTextStyles.fontFamilyLora,
+                        fontFamily: context.tr.fontFamilyLora,
                         color: ColorsBox.white),
                   ),
                 ),
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       Text(context.tr.loginScreenLabel,
                           style: AppTextStyles.semiBold24().copyWith(
-                              fontFamily: AppTextStyles.fontFamilyLora)),
+                              fontFamily: context.tr.fontFamilyLora)),
                       30.ph,
                       Text(
                         context.tr.loginLabel,

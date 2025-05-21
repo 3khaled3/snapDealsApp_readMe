@@ -62,7 +62,7 @@ class CustomAddLessonState extends State<CustomAddLesson> {
                       Text(
                         '${context.tr.lesson} ${index + 1}',
                         style: AppTextStyles.semiBold12()
-                            .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                            .copyWith(fontFamily: context.tr.fontFamilyLora),
                       ),
                       const Spacer(),
                       IconButton(
@@ -89,7 +89,7 @@ class CustomAddLessonState extends State<CustomAddLesson> {
               Text(
                 'Lessons *',
                 style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                    .copyWith(fontFamily: context.tr.fontFamilyLora),
               ),
               const Spacer(),
               OutlinedButton(

@@ -51,7 +51,7 @@ class CustomDetailsGrid extends StatelessWidget {
               Text(
                 context.tr.details,
                 style: AppTextStyles.medium20().copyWith(
-                  fontFamily: AppTextStyles.fontFamilyLora,
+                  fontFamily: context.tr.fontFamilyLora,
                   color: ColorsBox.brightBlue,
                 ),
               ),

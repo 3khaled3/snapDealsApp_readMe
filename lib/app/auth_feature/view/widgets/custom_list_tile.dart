@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -56,14 +57,14 @@ class CustomListTile extends StatelessWidget {
               child: Text(
                 title,
                 style: AppTextStyles.regular18().copyWith(
-                  fontFamily: AppTextStyles.fontFamilyLora,
+                  fontFamily: context.tr.fontFamilyLora,
                 ),
               ),
             ),
             const Icon(
-              Icons.keyboard_arrow_right_rounded,
+              Icons.arrow_forward_ios,
               color: ColorsBox.brightBlue,
-              size: 24,
+              size: 20,
             ),
           ],
         ),

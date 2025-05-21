@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorsBox {
+  static const Color darkText = Color(0xFF1A1A1A);
   static const black = Color(0xff000000);
   static const paleGrey = Color(0xffe8eef8);
   static const white = Color(0xffffffff);

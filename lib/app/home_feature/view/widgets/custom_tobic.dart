@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -117,7 +118,7 @@ class CustomTobicState extends State<CustomTobic> {
               Text(
                 'Topic *',
                 style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                    .copyWith(fontFamily: context.tr.fontFamilyLora),
               ),
               const Spacer(),
               OutlinedButton(

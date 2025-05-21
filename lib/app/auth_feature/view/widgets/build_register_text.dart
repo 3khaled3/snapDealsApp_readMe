@@ -26,7 +26,7 @@ class BuildRegisterText extends StatelessWidget {
             context.tr.createAccount,
             style: AppTextStyles.bold14().copyWith(
                 color: ColorsBox.brightBlue,
-                fontFamily: AppTextStyles.fontFamilyLora),
+                fontFamily: context.tr.fontFamilyLora),
           ),
         ),
       ],
