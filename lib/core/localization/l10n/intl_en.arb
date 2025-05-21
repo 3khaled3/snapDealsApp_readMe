@@ -209,5 +209,8 @@
     "retry_load_course":"Error loading more courses Tap to retry",
     "retry_load_product":"Error loading more products Tap to retry",
     "retry_load_more":"Error loading more data Tap to retry",
-    "no_item_in_favorite":"No items in favorite"
+    "no_item_in_favorite":"No items in favorite",
+    "editProduct":"Edit Product",
+    "update_success":"Update success",
+    "update_error":"Update error"
 }

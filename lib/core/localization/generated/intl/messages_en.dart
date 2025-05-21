@@ -224,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Display all users",
     ),
     "drawingTools": MessageLookupByLibrary.simpleMessage("Drowing Tools"),
+    "editProduct": MessageLookupByLibrary.simpleMessage("Edit Product"),
     "electronics": MessageLookupByLibrary.simpleMessage("Electronic"),
     "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "engineeringTools": MessageLookupByLibrary.simpleMessage(
@@ -409,12 +410,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "update_category_success": MessageLookupByLibrary.simpleMessage(
       "Category updated successfully",
     ),
+    "update_error": MessageLookupByLibrary.simpleMessage("Update error"),
     "update_profile_error": MessageLookupByLibrary.simpleMessage(
       "Error updating profile",
     ),
     "update_profile_success": MessageLookupByLibrary.simpleMessage(
       "Profile updated successfully",
     ),
+    "update_success": MessageLookupByLibrary.simpleMessage("Update success"),
     "used": MessageLookupByLibrary.simpleMessage("USED"),
     "verify_otp_error": MessageLookupByLibrary.simpleMessage(
       "Error verifying OTP",

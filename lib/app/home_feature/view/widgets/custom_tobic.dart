@@ -65,9 +65,7 @@ class CustomTobicState extends State<CustomTobic> {
       }
     }
 
-    return {
-      'topics': topicsData,
-    };
+    return topicsData;
   }
 
   @override

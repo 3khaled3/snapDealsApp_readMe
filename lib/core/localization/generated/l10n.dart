@@ -1791,6 +1791,36 @@ class Tr {
       args: [],
     );
   }
+
+  /// `Edit Product`
+  String get editProduct {
+    return Intl.message(
+      'Edit Product',
+      name: 'editProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update success`
+  String get update_success {
+    return Intl.message(
+      'Update success',
+      name: 'update_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update error`
+  String get update_error {
+    return Intl.message(
+      'Update error',
+      name: 'update_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

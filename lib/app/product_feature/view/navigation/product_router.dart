@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/edit_product.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
 
 abstract class ProductRouter {
@@ -22,6 +23,18 @@ abstract class ProductRouter {
         }
 
         return CourseDetailsView(args: args);
+      },
+    ),
+
+    GoRoute(
+      path: EditDetailsView.routeName,
+      builder: (context, state) {
+        EditDetailsArgs? args;
+        if (state.extra != null) {
+          args = state.extra as EditDetailsArgs;
+        }
+
+        return EditDetailsView(args: args);
       },
     ),
 
