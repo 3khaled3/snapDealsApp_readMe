@@ -104,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_product_success":
             MessageLookupByLibrary.simpleMessage("Product added successfully"),
         "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
+        "areYouSureDeleteAccount": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete your account? This action cannot be undone."),
         "are_you_sure_delete": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete?"),
         "batteryCapacityWord":
@@ -150,6 +152,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Password"),
         "days_ago": MessageLookupByLibrary.simpleMessage("Days ago"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "deleteAccountError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while deleting the account."),
+        "deleteAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Account deleted successfully."),
         "deleteUser": MessageLookupByLibrary.simpleMessage("Delete User"),
         "deleteUserHint": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this user?"),
@@ -191,8 +198,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("something went wrong"),
         "error_loading_data":
             MessageLookupByLibrary.simpleMessage("Error loading data"),
-        "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite View"),
+        "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "fontFamilyLora": MessageLookupByLibrary.simpleMessage("Lora"),
         "forgotPasswordButton":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "forgotPasswordDescription": MessageLookupByLibrary.simpleMessage(

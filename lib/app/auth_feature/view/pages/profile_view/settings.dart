@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/privacy_Policy.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
@@ -12,134 +13,201 @@ import 'package:snap_deals/core/utils/lang_cubit/lang_cubit.dart';
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
   static const String routeName = '/settings_route';
+
   @override
   State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsViewState extends State<SettingsView> {
-  bool isClicked = false;
+class _SettingsViewState extends State<SettingsView>
+    with SingleTickerProviderStateMixin {
+  bool _languageExpanded = false;
+
+  late final AnimationController _arrowAnimationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _arrowAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 250),
+    );
+  }
+
+  @override
+  void dispose() {
+    _arrowAnimationController.dispose();
+    super.dispose();
+  }
+
+  void _toggleLanguageExpand() {
+    setState(() {
+      _languageExpanded = !_languageExpanded;
+      if (_languageExpanded) {
+        _arrowAnimationController.forward();
+      } else {
+        _arrowAnimationController.reverse();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 40, left: 35, right: 35),
+      body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                OutlinedButton(
-                  onPressed: () => GoRouter.of(context).pop(),
-                  style: OutlinedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    fixedSize: const Size(55, 55),
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: ColorsBox.brightBlue,
-                      size: 27,
-                    ),
-                  ),
+            // Custom app bar with subtle shadow
+            CustomAppBar(
+              title:
+                  _languageExpanded ? context.tr.Language : context.tr.Settings,
+            ),
+            8.ph,
+
+            Expanded(
+              child: ListView.separated(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                itemCount: 5,
+                separatorBuilder: (_, __) => Divider(
+                  color: Colors.grey.shade300,
+                  height: 1,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
                 ),
-                60.pw,
-                Text(
-                  isClicked ? context.tr.Language : context.tr.Settings,
-                  style: AppTextStyles.semiBold24()
-                      .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
-                )
-              ],
-            ),
-            26.ph,
-            ListTile(
-              title: Text(
-                context.tr.Language,
-                style: AppTextStyles.regular18(),
-              ),
-              trailing: isClicked
-                  ? const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: ColorsBox.brightBlue,
-                      size: 25,
-                    )
-                  : const Icon(
-                      Icons.keyboard_arrow_right,
-                      color: ColorsBox.brightBlue,
-                      size: 25,
-                    ),
-              onTap: () {
-                setState(() {
-                  isClicked = !isClicked;
-                });
-              },
-            ),
-            spaceBetweenListTile(),
-            isClicked
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 40, right: 40),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(context.tr.Arabic,
-                              style: AppTextStyles.regular18().copyWith(
+                itemBuilder: (context, index) {
+                  switch (index) {
+                    case 0:
+                      // Language header tile with rotating arrow
+                      return ListTile(
+                        title: Text(
+                          context.tr.Language,
+                          style: AppTextStyles.semiBold18(),
+                        ),
+                        trailing: RotationTransition(
+                          turns: Tween(begin: 0.0, end: 0.5)
+                              .animate(_arrowAnimationController),
+                          child: Icon(
+                            Icons.keyboard_arrow_right_rounded,
+                            color: ColorsBox.brightBlue,
+                            size: 28,
+                          ),
+                        ),
+                        onTap: _toggleLanguageExpand,
+                      );
+
+                    case 1:
+                      return AnimatedCrossFade(
+                        firstChild: const SizedBox.shrink(),
+                        secondChild: Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Column(
+                            children: [
+                              _languageOption(
+                                context,
+                                label: context.tr.Arabic,
                                 fontFamily:
                                     AppTextStyles.fontFamilyNotoKufiArabic,
-                              )),
-                          trailing: Icon(
-                            Icons.settings_outlined,
-                            color: context.tr.lang == "ar"
-                                ? ColorsBox.brightBlue
-                                : ColorsBox.blueGrey,
-                            size: 30,
+                                isSelected: context.tr.lang == "ar",
+                                onTap: () {
+                                  BlocProvider.of<LangCubit>(context)
+                                      .changeLang(Langs.ar);
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              _languageOption(
+                                context,
+                                label: context.tr.English,
+                                isSelected: context.tr.lang == "en",
+                                onTap: () {
+                                  BlocProvider.of<LangCubit>(context)
+                                      .changeLang(Langs.en);
+                                },
+                              ),
+                            ],
                           ),
-                          onTap: () {
-                            BlocProvider.of<LangCubit>(context)
-                                .changeLang(Langs.ar);
-                          },
                         ),
-                        spaceBetweenListTile(),
-                        ListTile(
-                          title: Text(context.tr.English,
-                              style: AppTextStyles.regular18()),
-                          trailing: Icon(
-                            Icons.settings_outlined,
-                            color: context.tr.lang == "en"
-                                ? ColorsBox.brightBlue
-                                : ColorsBox.blueGrey,
-                            size: 30,
-                          ),
-                          onTap: () {
-                            BlocProvider.of<LangCubit>(context)
-                                .changeLang(Langs.en);
-                          },
+                        crossFadeState: _languageExpanded
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                        duration: const Duration(milliseconds: 250),
+                      );
+
+                    case 2:
+                      // Privacy Policy
+                      return CustomListTile(
+                        title: context.tr.privacyPolicy,
+                        onTap: () {
+                          GoRouter.of(context)
+                              .push(PrivacyPolicyView.routeName);
+                        },
+                      );
+
+                    case 3:
+                      // About Us
+                      return CustomListTile(
+                        title: context.tr.aboutUs,
+                        onTap: () {
+                          GoRouter.of(context).push(AboutUsView.routeName);
+                        },
+                      );
+
+                    case 4:
+                      // App Version
+                      return ListTile(
+                        title: Text(
+                          context.tr.Version,
+                          style: AppTextStyles.regular18(),
                         ),
-                      ],
-                    ),
-                  )
-                : const SizedBox(),
-            CustomListTile(
-              title: context.tr.privacyPolicy,
-              onTap: () {
-                GoRouter.of(context).push(PrivacyPolicyView.routeName);
-              },
+                        trailing: Text(
+                          "1.0.0",
+                          style: AppTextStyles.regular16(),
+                        ),
+                      );
+
+                    default:
+                      return const SizedBox.shrink();
+                  }
+                },
+              ),
             ),
-            spaceBetweenListTile(),
-            ListTile(
-                title:
-                    Text(context.tr.Version, style: AppTextStyles.regular18()),
-                trailing: Text("1.0.0", style: AppTextStyles.regular18())),
-            spaceBetweenListTile(),
           ],
         ),
       ),
     );
   }
-}
 
-spaceBetweenListTile() {
-  return Container(
-    width: double.infinity,
-    height: 2,
-    color: Colors.grey.shade300,
-  );
+  Widget _languageOption(BuildContext context,
+      {required String label,
+      required bool isSelected,
+      required VoidCallback onTap,
+      String? fontFamily}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                style: AppTextStyles.regular18().copyWith(
+                  fontFamily: fontFamily,
+                  color: isSelected ? ColorsBox.brightBlue : ColorsBox.blueGrey,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                ),
+              ),
+            ),
+            if (isSelected)
+              const Icon(
+                Icons.check_circle,
+                color: ColorsBox.brightBlue,
+                size: 24,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 }

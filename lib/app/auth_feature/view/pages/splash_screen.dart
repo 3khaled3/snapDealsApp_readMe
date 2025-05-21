@@ -9,6 +9,7 @@ import 'package:snap_deals/app/notification/data/notification_services.dart';
 import 'package:snap_deals/app/on_board_feature/view/on_boarding_view.dart';
 
 import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
 
@@ -66,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: ColorsBox.brightBlue,
       body: Center(
         child: Column(
@@ -79,21 +80,14 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 120,
             ),
             SizedBox(height: 20),
-            Text(
-              'Snap Deals',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+            Text('Snap Deals',
+                style: AppTextStyles.bold34().copyWith(
+                  color: ColorsBox.white,
+                )),
             SizedBox(height: 8),
             Text(
               'Grab the best deals instantly!',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white70,
-              ),
+              style: AppTextStyles.regular16().copyWith(color: Colors.white70),
             ),
           ],
         ),

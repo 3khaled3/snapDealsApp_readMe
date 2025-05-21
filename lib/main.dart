@@ -13,6 +13,7 @@ import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
 import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/app_router.dart';
 import 'package:snap_deals/core/utils/hive_helper.dart';
@@ -130,10 +131,41 @@ class MyApp extends StatelessWidget {
           locale: state.locale,
           supportedLocales: Tr.delegate.supportedLocales,
           theme: ThemeData(
+            progressIndicatorTheme:
+                const ProgressIndicatorThemeData(color: ColorsBox.brightBlue),
             scaffoldBackgroundColor: const Color(0xFFF9FAFB),
             fontFamily: state.locale == const Locale('en')
                 ? AppTextStyles.fontFamilyNotoKufiArabic
                 : AppTextStyles.fontFamilyMontserrat,
+            inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: ColorsBox.greyishTwo.withOpacity(0.1),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: ColorsBox.greyishTwo),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: ColorsBox.brightBlue, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: ColorsBox.brightRed),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: ColorsBox.brightRed, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+
+            // Cursor and selection colors for TextField
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: ColorsBox.brightBlue,
+              selectionColor: ColorsBox.brightBlue.withOpacity(0.4),
+              selectionHandleColor: ColorsBox.brightBlue,
+            ),
           ),
           routerConfig: AppRouter.router(),
           builder: (context, child) {

@@ -5,6 +5,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
 import 'package:snap_deals/app/home_feature/view_model/favorite_local_storage.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -46,7 +47,8 @@ class _FavoriteViewState extends State<FavoriteView> {
           if (state is FavoriteLoaded) {
             final allProducts = state.products;
             final allCourses = state.courses;
-            final favoriteIds = context.read<FavoriteCubit>().favoriteIdsSaved.value;
+            final favoriteIds =
+                context.read<FavoriteCubit>().favoriteIdsSaved.value;
 
             // Only show items that are still in the favoriteIds list
             final widgets = [
@@ -92,17 +94,20 @@ class _FavoriteViewState extends State<FavoriteView> {
   Widget _buildFavoritesGrid(BuildContext context, List<Widget> widgets) {
     return Column(
       children: [
-        const SizedBox(height: 16),
         Center(
-          child: Text(
-            context.tr.favoriteView,
-            style: AppTextStyles.semiBold20().copyWith(
-              fontFamily: AppTextStyles.fontFamilyLora,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                context.tr.favoriteView,
+                style:
+                    AppTextStyles.bold22().copyWith(color: ColorsBox.mainColor),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 16),
-        const Divider(color: ColorsBox.greyishTwo, height: 1),
+        12.ph,
+        const Divider(height: 1, color: ColorsBox.greyWithOpacity20),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(10),

@@ -1,6 +1,7 @@
 {
     "// flutter pub run intl_utils:generate": "generator",
     "lang": "ar",
+    "fontFamilyLora" : "NotoKufiArabic",
     "appName": "SnapDeals",
     "loginScreenLabel": "مرحبًا بعودتك",
     "homeTitle": "صباح الخير",
@@ -167,5 +168,9 @@
     "are_you_sure_delete": "هل أنت متأكد أنك تريد الحذف؟",
     "cancel": "إلغاء",
     "delete": "حذف",
-    "enroll_now": "تسجيل الان"
+    "enroll_now": "تسجيل الان",
+    "deleteAccount": "حذف الحساب",
+    "areYouSureDeleteAccount": "هل أنت متأكد من رغبتك في حذف الحساب؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "deleteAccountSuccess": "تم حذف الحساب بنجاح.",
+    "deleteAccountError": "حدث خطأ أثناء محاولة حذف الحساب. يرجى المحاولة مرة أخرى لاحقًا."
 }

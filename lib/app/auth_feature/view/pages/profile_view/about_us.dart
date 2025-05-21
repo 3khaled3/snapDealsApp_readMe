@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class AboutUsView extends StatelessWidget {
   const AboutUsView({super.key});
@@ -17,38 +18,16 @@ class AboutUsView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(start: 8),
-                  child: CustomBackButton(),
-                ),
-                16.pw,
-                Center(
-                  child: Text(
-                    context.tr.aboutUs,
-                    style: AppTextStyles.semiBold20().copyWith(
-                      fontFamily: AppTextStyles.fontFamilyLora,
-                    ),
-                  ),
-                ),
-                
-              ],
-            ),
-            12.ph,
-            const Divider(
-              color: ColorsBox.greyishTwo,
-              height: 1,
-            ),
+            CustomAppBar(title: context.tr.aboutUs),
             Expanded(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      /// Title Section
+                      /// Title Section with app name
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -68,9 +47,18 @@ class AboutUsView extends StatelessWidget {
                         ],
                       ),
 
-                      40.ph, // Space between title and description
+                      20.ph,
 
-                      /// Content Section
+                      /// App Icon SVG
+                      SvgPicture.asset(
+                        AppImageAssets.appIcon,
+                        width: 120,
+                        height: 120,
+                      ),
+
+                      40.ph, // Space between icon and content
+
+                      /// Content Sections
                       _buildContentSection(
                         title: context.tr.onBoardingSubtitle1,
                         description: context.tr.onBoardingDescription1,
@@ -117,6 +105,43 @@ class AboutUsView extends StatelessWidget {
             color: ColorsBox.greyish,
           ),
           textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+}
+
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({
+    super.key,
+    required this.title,
+  });
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            const Padding(
+              padding: EdgeInsetsDirectional.only(start: 8),
+              child: CustomBackButton(),
+            ),
+            16.pw,
+            Center(
+              child: Text(
+                title,
+                style: AppTextStyles.semiBold20().copyWith(
+                  fontFamily: AppTextStyles.fontFamilyLora,
+                ),
+              ),
+            ),
+          ],
+        ),
+        12.ph,
+        const Divider(
+          color: ColorsBox.greyishTwo,
+          height: 1,
         ),
       ],
     );

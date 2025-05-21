@@ -125,10 +125,13 @@ class _CoursesViewState extends State<CoursesView> {
                     return Center(
                       child: Column(
                         children: [
-                           Text(context.tr.error_load,style: AppTextStyles.semiBold16(),),
+                          Text(
+                            context.tr.error_load,
+                            style: AppTextStyles.semiBold16(),
+                          ),
                           ElevatedButton(
                             onPressed: _loadInitialProducts,
-                            child:  Text(context.tr.retry),
+                            child: Text(context.tr.retry),
                           ),
                         ],
                       ),
@@ -155,7 +158,7 @@ class _CoursesViewState extends State<CoursesView> {
                           } else if (_isLoading) {
                             return const ShimmerProductCard();
                           } else if (!_hasMore) {
-                            return  Center(child: Text(context.tr.no_more_data));
+                            return Center(child: Text(context.tr.no_more_data));
                           }
                           return const SizedBox.shrink();
                         },
@@ -169,8 +172,8 @@ class _CoursesViewState extends State<CoursesView> {
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               color: Colors.red,
-                              child:  Text(
-                               context.tr.retry_load_course ,
+                              child: Text(
+                                context.tr.retry_load_course,
                                 style: AppTextStyles.semiBold16().copyWith(
                                   color: Colors.white,
                                 ),

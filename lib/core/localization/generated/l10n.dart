@@ -62,6 +62,16 @@ class Tr {
     );
   }
 
+  /// `Lora`
+  String get fontFamilyLora {
+    return Intl.message(
+      'Lora',
+      name: 'fontFamilyLora',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `SnapDeals`
   String get appName {
     return Intl.message(
@@ -1252,10 +1262,10 @@ class Tr {
     );
   }
 
-  /// `Favorite View`
+  /// `Favorite`
   String get favoriteView {
     return Intl.message(
-      'Favorite View',
+      'Favorite',
       name: 'favoriteView',
       desc: '',
       args: [],
@@ -2147,6 +2157,46 @@ class Tr {
     return Intl.message(
       'No items in favorite',
       name: 'no_item_in_favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete your account? This action cannot be undone.`
+  String get areYouSureDeleteAccount {
+    return Intl.message(
+      'Are you sure you want to delete your account? This action cannot be undone.',
+      name: 'areYouSureDeleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account deleted successfully.`
+  String get deleteAccountSuccess {
+    return Intl.message(
+      'Account deleted successfully.',
+      name: 'deleteAccountSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while deleting the account.`
+  String get deleteAccountError {
+    return Intl.message(
+      'An error occurred while deleting the account.',
+      name: 'deleteAccountError',
       desc: '',
       args: [],
     );

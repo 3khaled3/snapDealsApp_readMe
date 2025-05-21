@@ -61,9 +61,9 @@ class CustomListTile extends StatelessWidget {
               ),
             ),
             const Icon(
-              Icons.keyboard_arrow_right_rounded,
+              Icons.arrow_forward_ios,
               color: ColorsBox.brightBlue,
-              size: 24,
+              size: 20,
             ),
           ],
         ),

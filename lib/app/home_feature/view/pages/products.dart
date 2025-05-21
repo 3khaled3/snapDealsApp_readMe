@@ -130,10 +130,13 @@ class _ProductsViewState extends State<ProductsView> {
                     return Center(
                       child: Column(
                         children: [
-                           Text(context.tr.error_load,style: AppTextStyles.semiBold16(),),
+                          Text(
+                            context.tr.error_load,
+                            style: AppTextStyles.semiBold16(),
+                          ),
                           ElevatedButton(
                             onPressed: _loadInitialProducts,
-                             child:  Text(context.tr.retry),
+                            child: Text(context.tr.retry),
                           ),
                         ],
                       ),
@@ -159,8 +162,6 @@ class _ProductsViewState extends State<ProductsView> {
                             return ProductCard(product: _products[index]);
                           } else if (_isLoading) {
                             return const ShimmerProductCard();
-                          } else if (!_hasMore) {
-                            return Center(child: Text(context.tr.no_more_data));
                           }
                           return const SizedBox.shrink();
                         },
@@ -174,8 +175,8 @@ class _ProductsViewState extends State<ProductsView> {
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               color: Colors.red,
-                              child:   Text(
-                               context.tr.retry_load_product ,
+                              child: Text(
+                                context.tr.retry_load_product,
                                 style: AppTextStyles.semiBold16().copyWith(
                                   color: Colors.white,
                                 ),

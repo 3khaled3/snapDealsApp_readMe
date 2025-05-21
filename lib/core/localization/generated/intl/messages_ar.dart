@@ -93,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_product_success":
             MessageLookupByLibrary.simpleMessage("تم إضافة المنتج بنجاح"),
         "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
+        "areYouSureDeleteAccount": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد من رغبتك في حذف الحساب؟ هذا الإجراء لا يمكن التراجع عنه."),
         "are_you_sure_delete": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد الحذف؟"),
         "brand": MessageLookupByLibrary.simpleMessage("العلامة التجارية *"),
@@ -127,6 +129,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "days_ago": MessageLookupByLibrary.simpleMessage("قبل أيام"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "deleteAccountError": MessageLookupByLibrary.simpleMessage(
+            "حدث خطأ أثناء محاولة حذف الحساب. يرجى المحاولة مرة أخرى لاحقًا."),
+        "deleteAccountSuccess":
+            MessageLookupByLibrary.simpleMessage("تم حذف الحساب بنجاح."),
         "delete_all":
             MessageLookupByLibrary.simpleMessage("حذف جميع الإشعارات"),
         "delete_all_notifications":
@@ -152,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("حدث خطأ"),
         "favoriteView": MessageLookupByLibrary.simpleMessage("عرض المفضلة"),
         "female": MessageLookupByLibrary.simpleMessage("أنثي"),
+        "fontFamilyLora":
+            MessageLookupByLibrary.simpleMessage("NotoKufiArabic"),
         "forgotPasswordButton":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور؟"),
         "forgotPasswordDescription": MessageLookupByLibrary.simpleMessage(
