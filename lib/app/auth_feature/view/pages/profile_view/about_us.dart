@@ -41,7 +41,7 @@ class AboutUsView extends StatelessWidget {
                             context.tr.appName,
                             style: AppTextStyles.bold24().copyWith(
                               color: ColorsBox.brightBlue,
-                              fontFamily: AppTextStyles.fontFamilyLora,
+                              fontFamily: context.tr.fontFamilyLora,
                             ),
                           ),
                         ],
@@ -60,16 +60,19 @@ class AboutUsView extends StatelessWidget {
 
                       /// Content Sections
                       _buildContentSection(
+                        context: context,
                         title: context.tr.onBoardingSubtitle1,
                         description: context.tr.onBoardingDescription1,
                       ),
                       40.ph,
                       _buildContentSection(
+                        context: context,
                         title: context.tr.onBoardingSubtitle2,
                         description: context.tr.onBoardingDescription2,
                       ),
                       40.ph,
                       _buildContentSection(
+                        context: context,
                         title: context.tr.onBoardingSubtitle3,
                         description: context.tr.onBoardingDescription3,
                       ),
@@ -88,13 +91,14 @@ class AboutUsView extends StatelessWidget {
   Widget _buildContentSection({
     required String title,
     required String description,
+    required BuildContext context,
   }) {
     return Column(
       children: [
         Text(
           title,
           style: AppTextStyles.semiBold20().copyWith(
-            fontFamily: AppTextStyles.fontFamilyLora,
+            fontFamily: context.tr.fontFamilyLora,
             color: ColorsBox.black,
           ),
         ),
@@ -132,7 +136,7 @@ class CustomAppBar extends StatelessWidget {
               child: Text(
                 title,
                 style: AppTextStyles.semiBold20().copyWith(
-                  fontFamily: AppTextStyles.fontFamilyLora,
+                  fontFamily: context.tr.fontFamilyLora,
                 ),
               ),
             ),

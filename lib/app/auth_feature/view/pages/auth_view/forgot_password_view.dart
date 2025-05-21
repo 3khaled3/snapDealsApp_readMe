@@ -52,7 +52,7 @@ class ForgetPasswordView extends StatelessWidget {
                 child: Text(
                   context.tr.appName,
                   style: AppTextStyles.bold34().copyWith(
-                      fontFamily: AppTextStyles.fontFamilyLora,
+                      fontFamily: context.tr.fontFamilyLora,
                       color: ColorsBox.white),
                 ),
               ),
@@ -82,7 +82,7 @@ class ForgetPasswordView extends StatelessWidget {
                     27.ph,
                     Text(context.tr.forgotPasswordScreenLabel,
                         style: AppTextStyles.semiBold30().copyWith(
-                          fontFamily: AppTextStyles.fontFamilyLora,
+                          fontFamily: context.tr.fontFamilyLora,
                           color: ColorsBox.black,
                         )),
                     42.ph,

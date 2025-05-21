@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -23,7 +24,7 @@ class CustomAddTextField extends StatelessWidget {
         Text(
           title,
           style: AppTextStyles.semiBold12()
-              .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+              .copyWith(fontFamily: context.tr.fontFamilyLora),
         ),
         6.ph,
         CustomTextFormField(

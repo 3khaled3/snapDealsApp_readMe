@@ -29,7 +29,7 @@ class PrivacyPolicyView extends StatelessWidget {
                       16.ph,
                       Text(context.tr.CancelationPolicy,
                           style: AppTextStyles.medium20().copyWith(
-                              fontFamily: AppTextStyles.fontFamilyLora,
+                              fontFamily: context.tr.fontFamilyLora,
                               color: ColorsBox.brightBlue)),
                       15.ph,
                       Text(
@@ -61,7 +61,7 @@ class PrivacyPolicyView extends StatelessWidget {
                       39.ph,
                       Text(context.tr.TermsAndCondition,
                           style: AppTextStyles.medium20().copyWith(
-                              fontFamily: AppTextStyles.fontFamilyLora,
+                              fontFamily: context.tr.fontFamilyLora,
                               color: ColorsBox.brightBlue)),
                       15.ph,
                       Text(

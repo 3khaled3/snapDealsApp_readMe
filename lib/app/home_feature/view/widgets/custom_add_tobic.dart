@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -20,7 +21,7 @@ class _CustomAddTobicState extends State<CustomAddTobic> {
             Text(
               'Tobic *',
               style: AppTextStyles.semiBold12()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),
             const Spacer(),
             OutlinedButton(

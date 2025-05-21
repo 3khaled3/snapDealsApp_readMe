@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 import '../../../../core/themes/app_colors.dart';
@@ -64,7 +65,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     child: Text(
                       'EGP',
                       style: AppTextStyles.semiBold16()
-                          .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                          .copyWith(fontFamily: context.tr.fontFamilyLora),
                     ),
                   )
                 : widget.prefixIcon != null

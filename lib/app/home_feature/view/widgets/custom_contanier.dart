@@ -59,7 +59,7 @@ class CustomContainer extends StatelessWidget {
 //   width: 120,
 //   height: 50,
 //   text: context.tr.addImages,
-//   textStyle: AppTextStyles.medium14().copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//   textStyle: AppTextStyles.medium14().copyWith(fontFamily: context.tr.fontFamilyLora),
 //   borderColor: ColorsBox.brightBlue,
 //   borderRadius: 5.0,
 // )

@@ -87,10 +87,10 @@ class _SettingsViewState extends State<SettingsView>
                         trailing: RotationTransition(
                           turns: Tween(begin: 0.0, end: 0.5)
                               .animate(_arrowAnimationController),
-                          child: Icon(
-                            Icons.keyboard_arrow_right_rounded,
+                          child: const Icon(
+                            Icons.arrow_forward_ios,
                             color: ColorsBox.brightBlue,
-                            size: 28,
+                            size: 20,
                           ),
                         ),
                         onTap: _toggleLanguageExpand,

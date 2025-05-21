@@ -28,7 +28,7 @@ class DescriptionSection extends StatelessWidget {
           Text(
             context.tr.describtionWord,
             style: AppTextStyles.medium20().copyWith(
-              fontFamily: AppTextStyles.fontFamilyLora,
+              fontFamily: context.tr.fontFamilyLora,
               color: ColorsBox.brightBlue,
             ),
           ),

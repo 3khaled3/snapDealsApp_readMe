@@ -37,7 +37,7 @@ class ProfileView extends StatelessWidget {
       //   title: Text(
       //     context.tr.yourProfile,
       //     style: AppTextStyles.semiBold20().copyWith(
-      //       fontFamily: AppTextStyles.fontFamilyLora,
+      //       fontFamily: context.tr.fontFamilyLora,
       //       color: ColorsBox.black,
       //     ),
       //   ),
@@ -72,7 +72,7 @@ class ProfileView extends StatelessWidget {
             Text(
               ProfileCubit.instance.state.profile.name,
               style: AppTextStyles.semiBold24().copyWith(
-                fontFamily: AppTextStyles.fontFamilyLora,
+                fontFamily: context.tr.fontFamilyLora,
               ),
             ),
             30.ph,

@@ -93,7 +93,7 @@ class _CustomAddImageState extends State<CustomAddImage> {
                   height: 50,
                   text: context.tr.addImages,
                   textStyle: AppTextStyles.medium14()
-                      .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                      .copyWith(fontFamily: context.tr.fontFamilyLora),
                   borderColor: ColorsBox.brightBlue,
                   borderRadius: 5.0,
                   onTap: pickMultipleImages,
@@ -102,7 +102,7 @@ class _CustomAddImageState extends State<CustomAddImage> {
                 Text(
                   context.tr.addImageDis,
                   style: AppTextStyles.regular12()
-                      .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                      .copyWith(fontFamily: context.tr.fontFamilyLora),
                   textAlign: TextAlign.center,
                 ),
               ],

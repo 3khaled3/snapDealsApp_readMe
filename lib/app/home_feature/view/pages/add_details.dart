@@ -111,7 +111,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                         Text(
                           context.tr.describtion,
                           style: AppTextStyles.semiBold12().copyWith(
-                              fontFamily: AppTextStyles.fontFamilyLora),
+                              fontFamily: context.tr.fontFamilyLora),
                         ),
                         6.ph,
                         CustomTextFormField(
@@ -223,7 +223,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 //       Text(
 //         context.tr.ramWord,
 //         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//             .copyWith(fontFamily: context.tr.fontFamilyLora),
 //       ),
 //       6.ph,
 //       const CustomDropDownButton(index: 1),
@@ -231,7 +231,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 //       Text(
 //         context.tr.storageWord,
 //         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//             .copyWith(fontFamily: context.tr.fontFamilyLora),
 //       ),
 //       6.ph,
 //       const CustomDropDownButton(index: 2),
@@ -239,7 +239,7 @@ class _AddDetailsViewState extends State<AddDetailsView> {
 //       Text(
 //         context.tr.batteryCapacityWord,
 //         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+//             .copyWith(fontFamily: context.tr.fontFamilyLora),
 //       ),
 //       6.ph,
 //       const CustomDropDownButton(index: 3),

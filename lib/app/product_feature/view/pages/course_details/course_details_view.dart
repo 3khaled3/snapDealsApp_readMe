@@ -5,6 +5,7 @@ import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/lessons_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/reviews_setion.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_image_slider.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -86,7 +87,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
                 Text(
                   course.title,
                   style: AppTextStyles.medium20().copyWith(
-                    fontFamily: AppTextStyles.fontFamilyLora,
+                    fontFamily: context.tr.fontFamilyLora,
                   ),
                   textAlign: TextAlign.center,
                 ),

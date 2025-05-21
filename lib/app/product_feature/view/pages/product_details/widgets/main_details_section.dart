@@ -36,7 +36,7 @@ class MainDetailsSection extends StatelessWidget {
               Text(
                 price,
                 style: AppTextStyles.medium20().copyWith(
-                  fontFamily: AppTextStyles.fontFamilyLora,
+                  fontFamily: context.tr.fontFamilyLora,
                   color: ColorsBox.brightBlue,
                 ),
               ),
@@ -44,7 +44,7 @@ class MainDetailsSection extends StatelessWidget {
               // Text(
               //   '${context.tr.brandHint} : $brand',
               //   style: AppTextStyles.medium20().copyWith(
-              //     fontFamily: AppTextStyles.fontFamilyLora,
+              //     fontFamily: context.tr.fontFamilyLora,
               //     color: ColorsBox.brightBlue,
               //   ),
               // ),

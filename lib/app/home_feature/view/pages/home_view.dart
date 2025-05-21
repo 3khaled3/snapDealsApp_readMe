@@ -39,7 +39,7 @@ class HomeView extends StatelessWidget {
             child: Text(
               context.tr.popularCourse,
               style: AppTextStyles.medium20()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),
           ),
           const PopularCourseBuilder(),
@@ -48,7 +48,7 @@ class HomeView extends StatelessWidget {
             child: Text(
               context.tr.popularProduct,
               style: AppTextStyles.medium20()
-                  .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
+                  .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),
           ),
           const PopularProductBuilder(),

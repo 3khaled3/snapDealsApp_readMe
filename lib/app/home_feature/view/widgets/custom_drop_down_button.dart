@@ -70,7 +70,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           hint: Text(
             context.tr.choose,
             style: AppTextStyles.regular16().copyWith(
-                fontFamily: AppTextStyles.fontFamilyLora,
+                fontFamily: context.tr.fontFamilyLora,
                 color: ColorsBox.greyish),
           ),
           value: newValue,

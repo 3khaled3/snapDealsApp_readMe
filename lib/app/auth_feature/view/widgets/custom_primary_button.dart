@@ -38,7 +38,7 @@ class CustomPrimaryButton extends StatelessWidget {
           child: Center(
             child: Text(title,
                 style: AppTextStyles.semiBold18().copyWith(
-                  // fontFamily: AppTextStyles.fontFamilyLora,
+                  // fontFamily: context.tr.fontFamilyLora,
                   color:
                       isWhite == true ? ColorsBox.brightBlue : ColorsBox.white,
                 )),
