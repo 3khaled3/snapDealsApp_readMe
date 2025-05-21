@@ -201,7 +201,7 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                           );
 
                           // 🧪 طباعة الداتا قبل الإرسال
-                          log('🧪 Final Course Payload: ${course.createCourseJson()}');
+                          log('🧪 Final Course Payload: ${course.createCourseFormData()}');
                           log('🧪 Lessons: ${lessons.map((e) => e.toJson())}');
 
                           await BlocProvider.of<CreateCourseCubit>(context)

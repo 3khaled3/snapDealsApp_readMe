@@ -98,28 +98,33 @@ class CourseModel {
         'updatedAt': updatedAt.toIso8601String(),
       };
 
-  Map<String, dynamic> createCourseJson() => {
-        'title': title,
-        'description': description,
-        'images': images,
-        'price': price,
-        'category': category.id,
-        'lessons': jsonEncode(lessons.map((x) => x.toJson()).toList()),
-        'instructor': instructor.id,
-        'location': location,
-        'ratingsAverage': ratingsAverage,
-        'ratingsQuantity': ratingsQuantity,
-        'language': language,
-        'access': access,
-        'certificate': certificate,
-        'pendingRequests': pendingRequests,
-        'students': students,
-        'reviews': reviews,
-        'views': views,
-        'details': jsonEncode(details),
-        'createdAt': createdAt.toIso8601String(),
-        'updatedAt': updatedAt.toIso8601String(),
-      };
+Map<String, String> createCourseFormData() {
+  final Map<String, String> data = {
+    'title': title,
+    'description': description,
+    'price': price.toString(),
+    'category': category.id!,
+    'instructor': instructor.id,
+    'location': location,
+    'ratingsAverage': ratingsAverage.toString(),
+    'ratingsQuantity': ratingsQuantity.toString(),
+    'language': language,
+    'access': access,
+    'certificate': certificate.toString(),
+    'details': jsonEncode(details),
+    'createdAt': createdAt.toIso8601String(),
+    'updatedAt': updatedAt.toIso8601String(),
+  };
+
+  for (int i = 0; i < lessons.length; i++) {
+    data['lessons[$i][title]'] = lessons[i].title;
+    // لو في بيانات إضافية في كل درس، ضيفها كمان
+    // data['lessons[$i][duration]'] = lessons[i].duration;
+  }
+
+  return data;
+}
+
 
   CourseModel copyWith({
     String? id,
