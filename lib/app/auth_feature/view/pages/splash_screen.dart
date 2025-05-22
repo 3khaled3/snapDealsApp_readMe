@@ -74,8 +74,8 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             // SVG App Icon
-            SvgPicture.asset(
-              AppImageAssets.appIcon,
+            Image.asset(
+              AppImageAssets.appIconImage,
               width: 120,
               height: 120,
             ),

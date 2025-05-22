@@ -124,9 +124,9 @@
     "cancelWord": "Cancel",
     "logOutButtonLabel": "Yes, Logout",
     "currentPassword": "Current Password",
-    "currentPassword_error":"Please enter your password correctly",
-    "password_validate":"Please enter your new password",
-    "password_validate2":"Password must be at least 6 characters",
+    "currentPassword_error": "Please enter your password correctly",
+    "password_validate": "Please enter your new password",
+    "password_validate2": "Password must be at least 6 characters",
     "favoriteView": "Favorite",
     "more": "More",
     "less": "Less",
@@ -221,14 +221,14 @@
     "areYouSureDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
     "deleteAccountSuccess": "Account deleted successfully.",
     "deleteAccountError": "An error occurred while deleting the account.",
-    "home":"",
-    "chat":"",
-    "favorite":"",
-    "profile":"",
+    "home": "",
+    "chat": "",
+    "favorite": "",
+    "profile": "",
     "deleteAccountError": "An error occurred while deleting the account.",
-    "editProduct":"Edit Product",
-    "update_success":"Update success",
-    "update_error":"Update error",
+    "editProduct": "Edit Product",
+    "update_success": "Update success",
+    "update_error": "Update error",
     "rejectWord": "Reject",
     "acceptWord": "Accept",
     "make_review": "Make Review",
@@ -236,29 +236,20 @@
     "review_success": "Review submitted successfully",
     "review_error": "Error submitting review",
     "review": "Review",
-    "search_user_label":"Enter User ID",
-    "searching":"Searching...",
-    "search":"Search",
-    "search_user_success":"User found",
-    "search_user_error":"User not found",
-    "error_user_loag":"Error loading user",
-    "no_more_user":"No more user available",
-    "required_field":"This field is required",
-    "tobic":"Tobic",
-    "info":"Info",
-    "total_price":"Total Price",
-    "instructor":"Instructor",
-    "no_reviews":"No reviews yet",
-    "certificate":"Certificate"
-
-
-
-
-
-
-
-
-
+    "search_user_label": "Enter User ID",
+    "searching": "Searching...",
+    "search": "Search",
+    "search_user_success": "User found",
+    "search_user_error": "User not found",
+    "error_user_loag": "Error loading user",
+    "no_more_user": "No more user available",
+    "required_field": "This field is required",
+    "tobic": "Tobic",
+    "info": "Info",
+    "total_price": "Total Price",
+    "instructor": "Instructor",
+    "no_reviews": "No reviews yet",
+    "certificate": "Certificate",
     "review": "Review",
     "request_cancelled": "Request cancelled successfully"
 }
