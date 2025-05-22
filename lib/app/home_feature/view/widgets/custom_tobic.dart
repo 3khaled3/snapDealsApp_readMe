@@ -35,21 +35,21 @@ class CustomTobicState extends State<CustomTobic> {
   InputDecoration _bottomBorderDecoration(String hint) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(color: Colors.grey),
+      hintStyle: AppTextStyles.regular16().copyWith(color: ColorsBox.grey) ,
       isDense: true,
       contentPadding: const EdgeInsets.only(bottom: 4),
       enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
+        borderSide: BorderSide(color: ColorsBox.grey),
       ),
       focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue),
+        borderSide: BorderSide(color: ColorsBox.brightBlue),
       ),
     );
   }
 
   String? _requiredValidator(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'This field is required';
+      return context.tr.required_field;
     }
     return null;
   }
@@ -103,7 +103,7 @@ class CustomTobicState extends State<CustomTobic> {
                   ),
                   10.ph,
                   CustomTextFormField(
-                    hintText: 'Enter description',
+                    hintText: context.tr.descriptionHint,
                     isPrice: false,
                     validator: _requiredValidator,
                     controller: controllers['description'],
@@ -116,7 +116,7 @@ class CustomTobicState extends State<CustomTobic> {
           Row(
             children: [
               Text(
-                'Topic *',
+                context.tr.tobic,
                 style: AppTextStyles.semiBold12()
                     .copyWith(fontFamily: context.tr.fontFamilyLora),
               ),

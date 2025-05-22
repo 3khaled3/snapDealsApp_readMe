@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 
 class SearchUserByIdWidget extends StatefulWidget {
   final Future<void> Function(String userId) onSearch;
@@ -40,7 +42,7 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
           child: TextField(
             controller: _controller,
             decoration: InputDecoration(
-              labelText: 'Enter User ID',
+              labelText:context.tr.search_user_label ,
               border: const OutlineInputBorder(),
               suffixIcon: _controller.text.isNotEmpty
                   ? IconButton(
@@ -52,7 +54,7 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
             onChanged: (_) => setState(() {}), // لتحديث زر المسح تلقائيًا
           ),
         ),
-        const SizedBox(width: 12),
+        12.pw,
         ElevatedButton.icon(
           onPressed: _isLoading ? null : _handleSearch,
           icon: _isLoading
@@ -62,7 +64,7 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : const Icon(Icons.search),
-          label: Text(_isLoading ? 'Searching...' : 'Search'),
+          label: Text(_isLoading ? context.tr.searching : context.tr.search),
         ),
       ],
     );

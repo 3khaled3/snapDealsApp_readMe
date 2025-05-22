@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
-import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/products_header.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/get-products_by_category/get_products_by_category_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';

@@ -61,8 +61,8 @@ class _FavoriteViewState extends State<FavoriteView> {
             ];
 
             if (widgets.isEmpty) {
-              return const Center(
-                child: Text("لا توجد عناصر مفضلة حتى الآن"),
+              return  Center(
+                child: Text(context.tr.no_item_in_favorite),
               );
             }
 
@@ -84,7 +84,7 @@ class _FavoriteViewState extends State<FavoriteView> {
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () => _cubit.loadFavorites(),
-            child: const Text("إعادة المحاولة"),
+            child:  Text(context.tr.retry),
           ),
         ],
       ),

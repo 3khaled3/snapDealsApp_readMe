@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AttachmentOption extends StatelessWidget {
   const AttachmentOption({
@@ -27,8 +29,8 @@ class AttachmentOption extends StatelessWidget {
             backgroundColor: color.withOpacity(0.2),
             child: Icon(icon, color: color, size: 28),
           ),
-          SizedBox(height: 8),
-          Text(label, style: TextStyle(fontSize: 12)),
+          8.ph,
+          Text(label, style: AppTextStyles.semiBold12() ),
         ],
       ),
     );

@@ -30,7 +30,7 @@ class CustomAddLessonState extends State<CustomAddLesson> {
 
   String? _requiredValidator(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'This field is required';
+      return context.tr.required_field;
     }
     return null;
   }
@@ -87,7 +87,7 @@ class CustomAddLessonState extends State<CustomAddLesson> {
           Row(
             children: [
               Text(
-                'Lessons *',
+                context.tr.lesson,
                 style: AppTextStyles.semiBold12()
                     .copyWith(fontFamily: context.tr.fontFamilyLora),
               ),

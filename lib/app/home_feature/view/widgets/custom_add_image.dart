@@ -153,12 +153,12 @@ class _CustomAddImageState extends State<CustomAddImage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: ColorsBox.black.withOpacity(0.5),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.close,
-                    color: Colors.white,
+                    color: ColorsBox.white,
                     size: 24,
                   ),
                 ),
@@ -197,12 +197,12 @@ class _CustomAddImageState extends State<CustomAddImage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: ColorsBox.black.withOpacity(0.5),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.close,
-                    color: Colors.white,
+                    color: ColorsBox.white,
                     size: 24,
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -47,7 +48,7 @@ customAppDialog({
                 ),
           content: Text(
             supTitle,
-            style: AppTextStyles.regular16().copyWith(color: Colors.black87),
+            style: AppTextStyles.regular16().copyWith(color: ColorsBox.black),
           ),
           actionsPadding: const EdgeInsets.symmetric(horizontal: 20),
           actions: [
@@ -61,9 +62,9 @@ customAppDialog({
                     onPressed: onPressed,
                     confirmColor: confirmColor,
                   ),
-                  const SizedBox(height: 10),
+                  10.ph,
                   CustomOutlinedButton(buttonTitle: cancelButtonTitle),
-                  const SizedBox(height: 18),
+                  18.ph,
                 ],
               ),
             ),

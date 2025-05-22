@@ -1,5 +1,6 @@
 // Reusable Custom Widget
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CustomContainer extends StatelessWidget {
   final double width;
@@ -38,7 +39,7 @@ class CustomContainer extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: textStyle ?? const TextStyle(fontSize: 14),
+            style: textStyle ?? AppTextStyles.regular14(),
           ),
         ),
       ),

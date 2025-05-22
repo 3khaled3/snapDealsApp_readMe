@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class UpperScreen extends StatelessWidget {
   const UpperScreen({
@@ -17,14 +19,13 @@ class UpperScreen extends StatelessWidget {
           image: AssetImage('assets/images/login.jpeg'),
         ),
       ),
-      child: const Text(
+      child:  Text(
         'SnapDeals',
-        style: TextStyle(
-          fontSize: 36,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          fontFamily: 'Lora',
+        style: AppTextStyles.bold34().copyWith(
+          color: ColorsBox.white,
         ),
+        
+       
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class InfoItem extends StatelessWidget {
   final String title;
@@ -15,11 +17,11 @@ class InfoItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(color: Colors.grey),
+            style: AppTextStyles.regular14().copyWith(color: ColorsBox.grey),
           ),
           Text(
             value,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: AppTextStyles.bold16().copyWith(color: ColorsBox.black),
           ),
         ],
       ),

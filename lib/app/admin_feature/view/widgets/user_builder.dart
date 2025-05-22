@@ -6,6 +6,7 @@ import 'package:snap_deals/app/admin_feature/view/widgets/user_card.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class UserBuilder extends StatefulWidget {
@@ -119,10 +120,10 @@ class _UserBuilderState extends State<UserBuilder> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Error loading users"),
+                 Text(context.tr.error_user_loag),
                 ElevatedButton(
                   onPressed: _loadInitialUsers,
-                  child: const Text("Retry"),
+                  child:  Text(context.tr.retry),
                 ),
               ],
             ),
@@ -141,9 +142,9 @@ class _UserBuilderState extends State<UserBuilder> {
                             List.generate(2, (_) => const ShimmerUserCard()),
                       ),
                     if (!_hasMore && _users.isNotEmpty)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Center(child: Text("No more users")),
+                       Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Center(child: Text(context.tr.no_more_user)),
                       ),
                   ],
                 ),
@@ -156,10 +157,10 @@ class _UserBuilderState extends State<UserBuilder> {
                     onTap: _loadMoreUsers,
                     child: Container(
                       padding: const EdgeInsets.all(8),
-                      color: Colors.red.withOpacity(0.7),
-                      child: const Text(
-                        "Error loading more. Tap to retry",
-                        style: TextStyle(color: Colors.white),
+                      color: ColorsBox.red.withOpacity(0.7),
+                      child:  Text(
+                       context.tr.retry_load_more,
+                        style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.white),
                       ),
                     ),
                   ),

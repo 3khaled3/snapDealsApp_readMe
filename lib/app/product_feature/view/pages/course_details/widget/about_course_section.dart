@@ -4,7 +4,9 @@ import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AboutCourseSection extends StatelessWidget {
   final CourseModel course;
@@ -26,16 +28,17 @@ class AboutCourseSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DescSection(description: course.description),
-              const SizedBox(height: 20),
+              20.ph,
               if (course.instructor.id !=
                   ProfileCubit.instance.state.profile.id)
                 InstructorDetails(courseModel: course),
-              const SizedBox(height: 20),
-              const Text(
-                'Info',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              20.ph,
+               Text(
+                context.tr.info,
+                style: AppTextStyles.bold16(),
+               
               ),
-              const SizedBox(height: 10),
+              10.ph,
               Wrap(
                 spacing: 40,
                 runSpacing: 15,
