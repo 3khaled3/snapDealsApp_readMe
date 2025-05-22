@@ -9,6 +9,7 @@ class ColorsBox {
   static const brightRed = Color(0xffff0018);
   static const Color red = Colors.red;
   static const Color greyReceivedMessage = Color(0xffE5E5EA);
+  static const green = Color(0xFF00FF00);
 
   static const greyish = Color(0xffababab);
   static const brightBlue = Color(0xff006cff);

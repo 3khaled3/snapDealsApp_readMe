@@ -18,17 +18,20 @@ class Tr {
   static Tr? _current;
 
   static Tr get current {
-    assert(_current != null,
-        'No instance of Tr was loaded. Try to initialize the Tr delegate before accessing Tr.current.');
+    assert(
+      _current != null,
+      'No instance of Tr was loaded. Try to initialize the Tr delegate before accessing Tr.current.',
+    );
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<Tr> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -2197,46 +2200,6 @@ class Tr {
     return Intl.message(
       'An error occurred while deleting the account.',
       name: 'deleteAccountError',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get home {
-    return Intl.message(
-      '',
-      name: 'home',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get chat {
-    return Intl.message(
-      '',
-      name: 'chat',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get favorite {
-    return Intl.message(
-      '',
-      name: 'favorite',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get profile {
-    return Intl.message(
-      '',
-      name: 'profile',
       desc: '',
       args: [],
     );

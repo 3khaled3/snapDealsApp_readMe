@@ -2,18 +2,18 @@ part of "i_course_repository.dart";
 
 class CourseRepository implements ICourseRepository {
   @override
- Future<Either<FailureModel, Map<String, dynamic>>> createCourse(
-    CourseModel course, XFile image) async {
-  return HttpHelper.handleRequest(
-    (token) => HttpHelper.postFile(
-      linkUrl: ApiEndpoints.courses,
-      token: token,
-      file: File(image.path),
-      name: "images",
-      field: course.createCourseFormData(), // تم التعديل هنا
-    ),
-  );
-}
+  Future<Either<FailureModel, Map<String, dynamic>>> createCourse(
+      CourseModel course, XFile image) async {
+    return HttpHelper.handleRequest(
+      (token) => HttpHelper.postFile(
+        linkUrl: ApiEndpoints.courses,
+        token: token,
+        file: File(image.path),
+        name: "images",
+        field: course.createCourseFormData(), // تم التعديل هنا
+      ),
+    );
+  }
 
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> getCourseById(String id) {

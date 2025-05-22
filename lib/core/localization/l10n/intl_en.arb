@@ -219,4 +219,16 @@
 "chat":"",
 "favorite":"",
 "profile":""
+    "deleteAccountError": "An error occurred while deleting the account.",
+    "editProduct":"Edit Product",
+    "update_success":"Update success",
+    "update_error":"Update error",
+    "rejectWord": "Reject",
+    "acceptWord": "Accept",
+    "make_review": "Make Review",
+    "review_hint": "Enter your review",
+    "review_success": "Review submitted successfully",
+    "review_error": "Error submitting review",
+    "review": "Review"
+
 }

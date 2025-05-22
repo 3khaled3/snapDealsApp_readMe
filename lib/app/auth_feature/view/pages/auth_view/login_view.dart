@@ -85,8 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       30.ph,
 
                       Text(context.tr.loginScreenLabel,
-                          style: AppTextStyles.semiBold24().copyWith(
-                              fontFamily: context.tr.fontFamilyLora)),
+                          style: AppTextStyles.semiBold24()
+                              .copyWith(fontFamily: context.tr.fontFamilyLora)),
                       30.ph,
                       Text(
                         context.tr.loginLabel,

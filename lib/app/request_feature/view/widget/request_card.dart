@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:snap_deals/app/request_feature/data/model/request/request.dart';
 import 'package:snap_deals/app/request_feature/view/widget/request_dialog.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -10,7 +11,19 @@ class RequestCard extends StatelessWidget {
     super.key,
     required this.request,
   });
+
   final RequestModel request;
+
+  String formatTime(DateTime date) {
+    final DateFormat timeFormatter = DateFormat('h:mm a', 'en');
+    return timeFormatter.format(date);
+  }
+
+  String formatDate(DateTime date) {
+    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy', 'en');
+    return dateFormatter.format(date);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,11 +41,23 @@ class RequestCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  'ID: ${request.id}',
-                  style: AppTextStyles.bold12(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: request.status == 'pending'
+                        ? ColorsBox.greyish
+                        : request.status == 'accepted'
+                            ? ColorsBox.green
+                            : ColorsBox.red,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    request.status.toString(),
+                    style: AppTextStyles.semiBold14(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 const Spacer(),
                 IconButton(
@@ -40,7 +65,7 @@ class RequestCard extends StatelessWidget {
                     RequestDialogs.cancelRequest(context, request.id!);
                   },
                   icon: const Icon(
-                    Icons.delete,
+                    Icons.cancel_outlined,
                     color: Colors.red,
                   ),
                 ),
@@ -51,27 +76,38 @@ class RequestCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  request.course!.title ?? 'empty title',
+                  request.course?.title ?? 'empty title',
                   style: AppTextStyles.bold16(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 7.ph,
                 Text(
-                  request.status.toString(),
-                  style: AppTextStyles.semiBold14(),
+                  'ID: ${request.id}',
+                  style: AppTextStyles.semiBold12(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 7.ph,
-                Text(
-                  request.createdAt.toString(),
-                  style: AppTextStyles.semiBold14(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Row(
+                  children: [
+                    const Icon(Icons.access_time, color: Colors.grey),
+                    6.pw,
+                    Text(
+                      formatTime(request.createdAt!),
+                      style: AppTextStyles.semiBold14(),
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.calendar_today, color: Colors.grey),
+                    6.pw,
+                    Text(
+                      formatDate(request.createdAt!),
+                      style: AppTextStyles.semiBold14(),
+                    ),
+                  ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

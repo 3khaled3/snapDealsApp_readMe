@@ -14,10 +14,11 @@ class GetRequestsByIdCubit extends Cubit<GetRequestsByIdState> {
     result.fold(
       (l) => emit(GetRequestsByIdError()),
       (r) {
-         final List requestsMap = r["data"];
-      final List<InstractorRequestModel> requests =
-          requestsMap.map((request) => InstractorRequestModel.fromJson(request)).toList();
-          emit(GetRequestsByIdSuccess( requests));
+        final List requestsMap = r["data"];
+        final List<InstractorRequestModel> requests = requestsMap
+            .map((request) => InstractorRequestModel.fromJson(request))
+            .toList();
+        emit(GetRequestsByIdSuccess(requests));
       },
     );
   }

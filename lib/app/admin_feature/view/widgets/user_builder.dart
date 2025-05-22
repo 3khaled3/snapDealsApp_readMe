@@ -100,7 +100,10 @@ class _UserBuilderState extends State<UserBuilder> {
                       limit: limit.toString(),
                     );
                   },
-                  child:  Text(context.tr.display_all_users,style: AppTextStyles.semiBold14(),),
+                  child: Text(
+                    context.tr.display_all_users,
+                    style: AppTextStyles.semiBold14(),
+                  ),
                 ),
               ],
             ),

@@ -9,7 +9,7 @@ abstract class IProductRepository {
   Future<Either<FailureModel, Map<String, dynamic>>> createProduct(
       ProductModel product, XFile image);
   Future<Either<FailureModel, Map<String, dynamic>>> updateProduct(
-      ProductModel product);
+      ProductModel product, XFile? image);
   Future<Either<FailureModel, Map<String, dynamic>>> deleteProduct(String id);
   Future<Either<FailureModel, Map<String, dynamic>>> increaseView(String id);
 }

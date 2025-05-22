@@ -28,6 +28,7 @@ class ProductDetailsView extends StatelessWidget {
         child: Column(
           children: [
             CustomImageSlider(
+              product: product,
               images: product.images,
               userId: product.user.id,
               productId: product.id,

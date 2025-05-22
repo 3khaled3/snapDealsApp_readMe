@@ -1,21 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-class CustomTobic extends StatefulWidget {
-  const CustomTobic({super.key});
+class CustomEditTobic extends StatefulWidget {
+  final Map<String, dynamic>? initialTopics;
+
+  const CustomEditTobic({super.key, this.initialTopics});
 
   @override
-  State<CustomTobic> createState() => CustomTobicState();
+  State<CustomEditTobic> createState() => CustomEditTobicState();
 }
 
-class CustomTobicState extends State<CustomTobic> {
+class CustomEditTobicState extends State<CustomEditTobic> {
   final _formKey = GlobalKey<FormState>();
-
   final List<Map<String, TextEditingController>> _controllersList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialTopics != null) {
+      for (var entry in widget.initialTopics!.entries) {
+        final key = entry.key; // المفتاح (مثلا battery)
+        final value = entry.value; // القيمة (مثلا 80% أو List)
+
+        String description = '';
+        if (value is List) {
+          description = value.join(', '); // لو القيمة ليست List نصها مباشرة
+        } else if (value is String) {
+          description = value;
+        } else {
+          description = value.toString(); // في حالة أخرى مثل int أو غيره
+        }
+
+        _controllersList.add({
+          'label': TextEditingController(text: key), // المفتاح في العنوان
+          'description':
+              TextEditingController(text: description), // القيمة في الوصف
+        });
+      }
+    }
+  }
 
   void _addNewTopic() {
     setState(() {
@@ -54,8 +80,7 @@ class CustomTobicState extends State<CustomTobic> {
     return null;
   }
 
-  /// ✅ هذه الدالة ترجع البيانات على شكل Map<String, dynamic>
-  Map<String, dynamic> getTopicsMap() {
+  Map<String, String> getTopicsMap() {
     final Map<String, String> topicsData = {};
 
     for (var ctrls in _controllersList) {
@@ -101,14 +126,14 @@ class CustomTobicState extends State<CustomTobic> {
                       ),
                     ],
                   ),
-                  10.ph,
+                  const SizedBox(height: 10),
                   CustomTextFormField(
                     hintText: 'Enter description',
                     isPrice: false,
                     validator: _requiredValidator,
                     controller: controllers['description'],
                   ),
-                  23.ph,
+                  const SizedBox(height: 23),
                 ],
               );
             },
@@ -118,7 +143,7 @@ class CustomTobicState extends State<CustomTobic> {
               Text(
                 'Topic *',
                 style: AppTextStyles.semiBold12()
-                    .copyWith(fontFamily: context.tr.fontFamilyLora),
+                    .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),
               const Spacer(),
               OutlinedButton(

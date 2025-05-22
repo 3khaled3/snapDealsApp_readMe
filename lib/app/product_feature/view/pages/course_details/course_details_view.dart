@@ -63,7 +63,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
     final List<Widget> tabContents = [
       AboutCourseSection(course: course),
       LessonsSection(lessons: course.lessons),
-      ReviewsSection(reviews: course.reviews),
+      ReviewsSection( courseId: course.id),
     ];
 
     return CustomScrollView(

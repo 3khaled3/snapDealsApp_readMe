@@ -142,12 +142,17 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> updateUserData(
       {required UserModel user, XFile? image}) async {
+    print("updateUserData ${user.toJson()}");
+    print("updateUserData ${ApiEndpoints.updateMe}");
+    if (image != null) {
+      print("updateUserData image ${image.path}");
+    }
     return await HttpHelper.handleRequest(
       (authToken) => HttpHelper.putFile(
         linkUrl: ApiEndpoints.updateMe,
-        field: user.toJson(),
+        field: user.updateToJson(),
         token: authToken,
-        name: "images",
+        name: "profileImg",
         file: File(image!.path),
       ),
     );

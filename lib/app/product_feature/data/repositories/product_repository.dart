@@ -80,12 +80,14 @@ class ProductRepository implements IProductRepository {
 
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> updateProduct(
-      ProductModel product) {
+      ProductModel product, XFile? image) async {
     return HttpHelper.handleRequest(
-      (token) => HttpHelper.putData(
+      (token) => HttpHelper.putFile(
         linkUrl: ApiEndpoints.productById(product.id),
-        data: product.toJson(),
+        name: "images",
+        file: File(image!.path),
         token: token,
+        field: product.createProductJson(),
       ),
     );
   }

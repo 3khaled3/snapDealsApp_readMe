@@ -123,7 +123,7 @@ class ProductCard extends StatelessWidget {
               top: 12,
               right: 12,
               child: BlocBuilder<FavoriteCubit, FavoriteState>(
-                buildWhen: (previous, current) => 
+                buildWhen: (previous, current) =>
                   current is FavoriteLoaded || current is FavoriteError,
                 builder: (context, state) {
                   final isFavorite = context.read<FavoriteCubit>().isFavorite(product.id);
