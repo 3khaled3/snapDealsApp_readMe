@@ -24,7 +24,9 @@ class InstractorRequestView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => GetRequestsByIdCubit()..getRequestsById(args!.courseId)),
+        BlocProvider(
+            create: (_) =>
+                GetRequestsByIdCubit()..getRequestsById(args!.courseId)),
         BlocProvider(create: (_) => ApproveRequestCubit()),
         BlocProvider(create: (_) => RejectRequestCubit()),
       ],
@@ -33,13 +35,17 @@ class InstractorRequestView extends StatelessWidget {
           BlocListener<ApproveRequestCubit, ApproveRequestState>(
             listenWhen: (prev, curr) => curr is ApproveRequestSuccess,
             listener: (context, state) {
-              context.read<GetRequestsByIdCubit>().getRequestsById(args!.courseId);
+              context
+                  .read<GetRequestsByIdCubit>()
+                  .getRequestsById(args!.courseId);
             },
           ),
           BlocListener<RejectRequestCubit, RejectRequestState>(
             listenWhen: (prev, curr) => curr is RejectRequestSuccess,
             listener: (context, state) {
-              context.read<GetRequestsByIdCubit>().getRequestsById(args!.courseId);
+              context
+                  .read<GetRequestsByIdCubit>()
+                  .getRequestsById(args!.courseId);
             },
           ),
         ],
@@ -47,7 +53,7 @@ class InstractorRequestView extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: ColorsBox.white,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () => Navigator.of(context).pop(),
             ),
             title: Text(
@@ -79,7 +85,8 @@ class InstractorRequestView extends StatelessWidget {
                   },
                 );
               } else if (state is GetRequestsByIdError) {
-                return const Center(child: Text("حدث خطأ أثناء تحميل البيانات."));
+                return const Center(
+                    child: Text("حدث خطأ أثناء تحميل البيانات."));
               } else {
                 return const SizedBox.shrink();
               }

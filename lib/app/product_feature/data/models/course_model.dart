@@ -98,33 +98,32 @@ class CourseModel {
         'updatedAt': updatedAt.toIso8601String(),
       };
 
-Map<String, String> createCourseFormData() {
-  final Map<String, String> data = {
-    'title': title,
-    'description': description,
-    'price': price.toString(),
-    'category': category.id!,
-    'instructor': instructor.id,
-    'location': location,
-    'ratingsAverage': ratingsAverage.toString(),
-    'ratingsQuantity': ratingsQuantity.toString(),
-    'language': language,
-    'access': access,
-    'certificate': certificate.toString(),
-    'details': jsonEncode(details),
-    'createdAt': createdAt.toIso8601String(),
-    'updatedAt': updatedAt.toIso8601String(),
-  };
+  Map<String, String> createCourseFormData() {
+    final Map<String, String> data = {
+      'title': title,
+      'description': description,
+      'price': price.toString(),
+      'category': category.id!,
+      'instructor': instructor.id,
+      'location': location,
+      'ratingsAverage': ratingsAverage.toString(),
+      'ratingsQuantity': ratingsQuantity.toString(),
+      'language': language,
+      'access': access,
+      'certificate': certificate.toString(),
+      'details': jsonEncode(details),
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
 
-  for (int i = 0; i < lessons.length; i++) {
-    data['lessons[$i][title]'] = lessons[i].title;
-    // لو في بيانات إضافية في كل درس، ضيفها كمان
-    // data['lessons[$i][duration]'] = lessons[i].duration;
+    for (int i = 0; i < lessons.length; i++) {
+      data['lessons[$i][title]'] = lessons[i].title;
+      // لو في بيانات إضافية في كل درس، ضيفها كمان
+      // data['lessons[$i][duration]'] = lessons[i].duration;
+    }
+
+    return data;
   }
-
-  return data;
-}
-
 
   CourseModel copyWith({
     String? id,

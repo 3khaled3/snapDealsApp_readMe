@@ -61,6 +61,22 @@ class UserModel {
     };
   }
 
+  Map<String, dynamic> updateToJson() {
+    if (notificationToken == null) {
+      return {
+        'name': name,
+        'email': email,
+        'phone': phone,
+      };
+    }
+    return {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'notificationToken': notificationToken,
+    };
+  }
+
   // Convert string to Role enum
   static Role _roleFromString(String role) {
     switch (role) {

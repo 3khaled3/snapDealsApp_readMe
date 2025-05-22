@@ -101,7 +101,10 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(context.tr.error_loading_data,style: AppTextStyles.semiBold20(),),
+                  Text(
+                    context.tr.error_loading_data,
+                    style: AppTextStyles.semiBold20(),
+                  ),
                   ElevatedButton(
                     onPressed: _loadInitialCourses,
                     child: Text(context.tr.retry),
@@ -126,9 +129,13 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                               2, (index) => const ShimmerProductCard()),
                         ),
                       if (!_hasMore && _Courses.isNotEmpty)
-                         Padding(
+                        Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Center(child: Text(context.tr.no_more_data,style: AppTextStyles.semiBold20(),)),
+                          child: Center(
+                              child: Text(
+                            context.tr.no_more_data,
+                            style: AppTextStyles.semiBold20(),
+                          )),
                         ),
                     ],
                   ),
@@ -142,10 +149,11 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         color: Colors.red.withOpacity(0.7),
-                        child:  Text(
-                         context.tr.retry_load_more ,
-                          style: AppTextStyles.semiBold16()
-                              .copyWith(color: Colors.white,),
+                        child: Text(
+                          context.tr.retry_load_more,
+                          style: AppTextStyles.semiBold16().copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

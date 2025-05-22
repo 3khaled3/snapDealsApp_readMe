@@ -214,15 +214,16 @@
     "deleteAccount": "Delete Account",
     "areYouSureDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
     "deleteAccountSuccess": "Account deleted successfully.",
-    "deleteAccountError": "An error occurred while deleting the account."
-    "error_load":"something went wrong",
-    "retry":"Retry",
-    "no_more_data":"No more data available",
-    "retry_load_course":"Error loading more courses Tap to retry",
-    "retry_load_product":"Error loading more products Tap to retry",
-    "retry_load_more":"Error loading more data Tap to retry",
-    "no_item_in_favorite":"No items in favorite",
+    "deleteAccountError": "An error occurred while deleting the account.",
     "editProduct":"Edit Product",
     "update_success":"Update success",
-    "update_error":"Update error"
+    "update_error":"Update error",
+    "rejectWord": "Reject",
+    "acceptWord": "Accept",
+    "make_review": "Make Review",
+    "review_hint": "Enter your review",
+    "review_success": "Review submitted successfully",
+    "review_error": "Error submitting review",
+    "review": "Review"
+    
 }

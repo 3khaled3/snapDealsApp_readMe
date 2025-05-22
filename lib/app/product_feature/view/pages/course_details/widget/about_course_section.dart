@@ -13,8 +13,6 @@ class AboutCourseSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final entries = course.details.entries.toList();
-  
-   
 
     return SizedBox(
       // height: MediaQuery.sizeOf(context).height * 0.42,
@@ -55,8 +53,6 @@ class AboutCourseSection extends StatelessWidget {
               ),
             ],
           ),
-          
-         
           15.ph,
         ],
       ),

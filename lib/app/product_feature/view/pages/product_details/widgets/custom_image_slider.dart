@@ -20,7 +20,9 @@ class CustomImageSlider extends StatefulWidget {
       required this.images,
       required this.userId,
       required this.productId,
-      required this.isProduct,  this.product, this.course});
+      required this.isProduct,
+      this.product,
+      this.course});
   final List<String> images;
   final String userId;
   final String productId;
@@ -103,8 +105,8 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
         ),
         if (isAdmin || isOwner)
           Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: 8, vertical: MediaQuery.paddingOf(context).top),
+            padding: EdgeInsets.symmetric(
+                horizontal: 8, vertical: MediaQuery.paddingOf(context).top),
             child: Align(
               alignment: context.tr.lang == "en"
                   ? Alignment.topRight
@@ -112,32 +114,29 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                 isAdmin ? Container(
-            width: 40,
-            height: 40,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color.fromARGB(109, 0, 0, 0),
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.edit,
-                  color: Colors.white, size: 20),
-              onPressed: () {
-                GoRouter.of(context).push(
-                  EditDetailsView.routeName,
-                  extra: EditDetailsArgs(
-                    
-                   widget.product
-                   
-                  ),
-                  );
-              },
-              padding: const EdgeInsetsDirectional.only(start: 8),
-              constraints: const BoxConstraints(),
-            ),
-          ):0.pw,
-          10.pw,
-
+                  isAdmin
+                      ? Container(
+                          width: 40,
+                          height: 40,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(109, 0, 0, 0),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(Icons.edit,
+                                color: Colors.white, size: 20),
+                            onPressed: () {
+                              GoRouter.of(context).push(
+                                EditDetailsView.routeName,
+                                extra: EditDetailsArgs(widget.product),
+                              );
+                            },
+                            padding: const EdgeInsetsDirectional.only(start: 8),
+                            constraints: const BoxConstraints(),
+                          ),
+                        )
+                      : 0.pw,
+                  10.pw,
                   Container(
                     width: 40,
                     height: 40,
@@ -156,7 +155,8 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                                     AlwaysStoppedAnimation<Color>(Colors.red),
                               ),
                             )
-                          : const Icon(Icons.delete, color: Colors.red, size: 23),
+                          : const Icon(Icons.delete,
+                              color: Colors.red, size: 23),
                       onPressed: _isDeleting
                           ? null
                           : () async {
@@ -172,16 +172,17 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                                       child: Text(context.tr.cancelWord),
                                     ),
                                     TextButton(
-                                      onPressed: () => Navigator.pop(context, true),
+                                      onPressed: () =>
+                                          Navigator.pop(context, true),
                                       child: Text(context.tr.deleteWord),
                                     ),
                                   ],
                                 ),
                               );
-                              
+
                               if (confirm == true) {
                                 setState(() => _isDeleting = true);
-                              
+
                                 if (widget.isProduct) {
                                   await deleteProductCubit
                                       .deleteProduct(widget.productId);
@@ -189,7 +190,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                                   await deleteCourseCubit
                                       .deleteCourse(widget.productId);
                                 }
-                              
+
                                 if (mounted) {
                                   setState(() => _isDeleting = false);
                                   Navigator.pop(context);

@@ -16,8 +16,6 @@ class GetRequestsByIdSuccess extends GetRequestsByIdState {
   final List<InstractorRequestModel> requests;
 
   const GetRequestsByIdSuccess(this.requests);
-
-
 }
 
 class GetRequestsByIdError extends GetRequestsByIdState {}

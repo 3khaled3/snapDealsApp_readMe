@@ -103,7 +103,16 @@ class ProfileCubit extends Cubit<ProfileStates> {
         emit(ProfileError(state.profile));
       },
       (right) {
-        emit(ProfileSuccess(userModel));
+        // print('✔️✔️✔️${right}}');
+        //  refreshAccount();
+        // emit(ProfileSuccess(userModel));
+
+        final email = HiveHelper.instance.getItem("email");
+        final password = HiveHelper.instance.getItem("password");
+
+        if (email != null && password != null) {
+          ProfileCubit.instance.loginUser(email: email, password: password);
+        }
       },
     );
   }

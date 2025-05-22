@@ -57,6 +57,9 @@ abstract class HttpHelper {
       headers: headers,
     );
 
+    print("Response Status: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
     return response;
   }
 

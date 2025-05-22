@@ -125,7 +125,8 @@ class ProductCard extends StatelessWidget {
               child: BlocBuilder<FavoriteCubit, FavoriteState>(
                 buildWhen: (previous, current) => current is FavoriteLoaded,
                 builder: (context, state) {
-                  final isFavorite = context.read<FavoriteCubit>().isFavorite(product.id);
+                  final isFavorite =
+                      context.read<FavoriteCubit>().isFavorite(product.id);
                   return GestureDetector(
                     onTap: () {
                       context.read<FavoriteCubit>().toggleFavorite(product.id);
@@ -145,7 +146,9 @@ class ProductCard extends StatelessWidget {
                         ],
                       ),
                       child: Icon(
-                        isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
+                        isFavorite
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border,
                         color: isFavorite ? Colors.red : Colors.grey,
                         size: 18,
                       ),

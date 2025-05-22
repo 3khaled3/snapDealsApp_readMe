@@ -19,7 +19,8 @@ class InstractorRequestModel {
     this.v,
   });
 
-  factory InstractorRequestModel.fromJson(Map<String, dynamic> json) => InstractorRequestModel(
+  factory InstractorRequestModel.fromJson(Map<String, dynamic> json) =>
+      InstractorRequestModel(
         id: json['_id'] as String?,
         sender: json['sender'] == null
             ? null

@@ -110,8 +110,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                         23.ph,
                         Text(
                           context.tr.describtion,
-                          style: AppTextStyles.semiBold12().copyWith(
-                              fontFamily: context.tr.fontFamilyLora),
+                          style: AppTextStyles.semiBold12()
+                              .copyWith(fontFamily: context.tr.fontFamilyLora),
                         ),
                         6.ph,
                         CustomTextFormField(

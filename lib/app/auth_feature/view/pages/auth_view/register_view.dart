@@ -80,8 +80,8 @@ class _RegisterViewState extends State<RegisterView> {
                   children: [
                     separator,
                     Text(context.tr.createAccount,
-                        style: AppTextStyles.semiBold24().copyWith(
-                            fontFamily: context.tr.fontFamilyLora)),
+                        style: AppTextStyles.semiBold24()
+                            .copyWith(fontFamily: context.tr.fontFamilyLora)),
                     separator,
                     CustomTextFormField(
                       hintText: context.tr.yourName,

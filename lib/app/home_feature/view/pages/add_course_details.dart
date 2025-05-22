@@ -105,8 +105,8 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                         23.ph,
                         Text(
                           context.tr.about_course,
-                          style: AppTextStyles.semiBold12().copyWith(
-                              fontFamily: context.tr.fontFamilyLora),
+                          style: AppTextStyles.semiBold12()
+                              .copyWith(fontFamily: context.tr.fontFamilyLora),
                         ),
                         6.ph,
                         CustomTextFormField(

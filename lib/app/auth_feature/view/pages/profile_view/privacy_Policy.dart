@@ -22,7 +22,8 @@ class PrivacyPolicyView extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 35, right: 35, bottom: 20),
+                  padding:
+                      const EdgeInsets.only(left: 35, right: 35, bottom: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -63,7 +63,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
     final List<Widget> tabContents = [
       AboutCourseSection(course: course),
       LessonsSection(lessons: course.lessons),
-      ReviewsSection(reviews: course.reviews),
+      ReviewsSection( courseId: course.id),
     ];
 
     return CustomScrollView(
@@ -71,7 +71,6 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
         SliverToBoxAdapter(
           // child: CustomImage(imageUrl: course.images.first),
           child: CustomImageSlider(
-           
             images: course.images,
             userId: course.instructor.id,
             productId: course.id,
