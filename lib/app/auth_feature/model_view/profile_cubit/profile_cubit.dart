@@ -104,9 +104,9 @@ class ProfileCubit extends Cubit<ProfileStates> {
       },
       (right) {
         // print('✔️✔️✔️${right}}');
-        //  refreshAccount();
         // emit(ProfileSuccess(userModel));
 
+        // refreshAccount();
         final email = HiveHelper.instance.getItem("email");
         final password = HiveHelper.instance.getItem("password");
 

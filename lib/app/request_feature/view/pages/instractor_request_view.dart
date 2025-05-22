@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/request_feature/model_view/approve_request_cubit/approve_request_cubit.dart';
 import 'package:snap_deals/app/request_feature/model_view/get_requests_by_id_cubit/get_requests_by_id_cubit.dart';
 import 'package:snap_deals/app/request_feature/model_view/get_requests_by_id_cubit/get_requests_by_id_state.dart';
@@ -50,47 +51,44 @@ class InstractorRequestView extends StatelessWidget {
           ),
         ],
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: ColorsBox.white,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () => Navigator.of(context).pop(),
+          body: SafeArea(
+            child: Column(
+              children: [
+                CustomAppBar(title: context.tr.my_requests),
+                Expanded(
+                  child: BlocBuilder<GetRequestsByIdCubit, GetRequestsByIdState>(
+                    builder: (context, state) {
+                      if (state is GetRequestsByIdLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is GetRequestsByIdSuccess) {
+                        final requests = state.requests;
+                        return ListView.builder(
+                          padding: const EdgeInsets.all(8.0),
+                          itemCount: requests.length,
+                          itemBuilder: (context, index) {
+                            final request = requests[index];
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                InstractorRequestCard(
+                                  instractorRequestModel: request,
+                                ),
+                                20.ph,
+                              ],
+                            );
+                          },
+                        );
+                      } else if (state is GetRequestsByIdError) {
+                        return const Center(
+                            child: Text("حدث خطأ أثناء تحميل البيانات."));
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-            title: Text(
-              context.tr.my_requests,
-              style: AppTextStyles.bold20().copyWith(color: ColorsBox.black),
-            ),
-            centerTitle: true,
-          ),
-          body: BlocBuilder<GetRequestsByIdCubit, GetRequestsByIdState>(
-            builder: (context, state) {
-              if (state is GetRequestsByIdLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is GetRequestsByIdSuccess) {
-                final requests = state.requests;
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  itemCount: requests.length,
-                  itemBuilder: (context, index) {
-                    final request = requests[index];
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InstractorRequestCard(
-                          instractorRequestModel: request,
-                        ),
-                        20.ph,
-                      ],
-                    );
-                  },
-                );
-              } else if (state is GetRequestsByIdError) {
-                return const Center(
-                    child: Text("حدث خطأ أثناء تحميل البيانات."));
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
           ),
         ),
       ),

@@ -37,6 +37,7 @@ class AboutUsView extends StatelessWidget {
                               color: ColorsBox.black,
                             ),
                           ),
+                          10.pw,
                           Text(
                             context.tr.appName,
                             style: AppTextStyles.bold24().copyWith(

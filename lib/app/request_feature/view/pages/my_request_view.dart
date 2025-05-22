@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/request_feature/model_view/cancel_request_cubit/cancel_request_cubit.dart';
 import 'package:snap_deals/app/request_feature/model_view/get_my_request_cubit/get_my_request_cubit.dart';
 import 'package:snap_deals/app/request_feature/model_view/get_my_request_cubit/get_my_request_state.dart';
@@ -36,47 +37,41 @@ class MyRequestView extends StatelessWidget {
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: ColorsBox.white,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+          body: SafeArea(
+            child: Column(
+              children: [
+                CustomAppBar(title: context.tr.my_requests),
+                Expanded(
+                  child: BlocBuilder<GetMyRequestsCubit, GetMyRequestsState>(
+                    builder: (context, state) {
+                      if (state is GetMyRequestsLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is GetMyRequestsSuccess) {
+                        final requests = state.requests;
+                        return ListView.builder(
+                          itemCount: requests.length,
+                          itemBuilder: (context, index) {
+                            final request = requests[index];
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RequestCard(request: request),
+                                20.ph,
+                              ],
+                            );
+                          },
+                        );
+                      } else if (state is GetMyRequestsError) {
+                        return const Center(
+                            child: Text("حدث خطأ أثناء تحميل البيانات."));
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-            title: Text(
-              context.tr.my_requests,
-              style: AppTextStyles.bold20().copyWith(color: ColorsBox.black),
-            ),
-            centerTitle: true,
-          ),
-          body: BlocBuilder<GetMyRequestsCubit, GetMyRequestsState>(
-            builder: (context, state) {
-              if (state is GetMyRequestsLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is GetMyRequestsSuccess) {
-                final requests = state.requests;
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  itemCount: requests.length,
-                  itemBuilder: (context, index) {
-                    final request = requests[index];
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RequestCard(request: request),
-                        20.ph,
-                      ],
-                    );
-                  },
-                );
-              } else if (state is GetMyRequestsError) {
-                return const Center(
-                    child: Text("حدث خطأ أثناء تحميل البيانات."));
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
           ),
         ),
       ),

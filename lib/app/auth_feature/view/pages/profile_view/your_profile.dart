@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
@@ -81,61 +83,66 @@ class _YourProfileViewState extends State<YourProfileView> {
       bloc: ProfileCubit.instance,
       listener: (context, state) {
         if (state is ProfileError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.tr.update_profile_error)),
-          );
+          context.showErrorSnackBar(message: context.tr.update_profile_error);
+
+          Navigator.of(context).pop();
         } else if (state is ProfileSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.tr.update_profile_success)),
-          );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.showSuccessSnackBar(
+              message: context.tr.update_profile_success,
+            );
+            while (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+          });
+        } else if (state is ProfileLoading) {
+          context.showLoadingDialog();
         }
       },
       builder: (context, state) {
         // final user = state.profile;
         return Scaffold(
-          body: state is ProfileLoading
-              ? const Center(child: CircularProgressIndicator())
-              : SafeArea(
-                  child: Column(
-                    children: [
-                      CustomAppBar(title: context.tr.yourProfileLabel),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                            bottom: 18,
+          body: SafeArea(
+            child: Column(
+              children: [
+                CustomAppBar(title: context.tr.yourProfileLabel),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 18,
+                    ),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          12.ph,
+                          _buildProfileSection(),
+                          24.ph,
+                          _buildFormFields(context),
+                          24.ph,
+                          _buildContactSection(context),
+                          57.ph,
+                          CustomPrimaryButton(
+                            title: context.tr.saveButton,
+                            onTap: _onSave,
                           ),
-                          child: Form(
-                            key: formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                12.ph,
-                                _buildProfileSection(),
-                                24.ph,
-                                _buildFormFields(context),
-                                24.ph,
-                                _buildContactSection(context),
-                                57.ph,
-                                CustomPrimaryButton(
-                                  title: context.tr.saveButton,
-                                  onTap: _onSave,
-                                ),
-                                24.ph,
-                                CustomPrimaryButton(
-                                  title: context.tr.deleteAccount,
-                                  buttonColor: ColorsBox.brightRed,
-                                  onTap: () {},
-                                ),
-                              ],
-                            ),
+                          24.ph,
+                          CustomPrimaryButton(
+                            title: context.tr.deleteAccount,
+                            buttonColor: ColorsBox.brightRed,
+                            onTap: () {},
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -146,12 +153,33 @@ class _YourProfileViewState extends State<YourProfileView> {
       children: [
         Stack(
           children: [
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: _pickedImage != null
-                  ? FileImage(File(_pickedImage!.path))
-                  : const AssetImage(AppImageAssets.profileImage)
-                      as ImageProvider,
+            ClipOval(
+              child: _pickedImage != null
+                  ? Image.file(
+                      File(_pickedImage!.path),
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl:
+                          ProfileCubit.instance.state.profile.profileImg ?? "",
+                      placeholder: (context, url) => SvgPicture.asset(
+                        AppImageAssets.defaultProfile,
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                      errorWidget: (context, url, error) => SvgPicture.asset(
+                        AppImageAssets.defaultProfile,
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.cover,
+                    ),
             ),
             Positioned(
               bottom: 0,

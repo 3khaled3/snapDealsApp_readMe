@@ -7,104 +7,113 @@ import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class RequestCard extends StatelessWidget {
-  const RequestCard({
-    super.key,
-    required this.request,
-  });
-
+  const RequestCard({super.key, required this.request});
   final RequestModel request;
 
   String formatTime(DateTime date) {
-    final DateFormat timeFormatter = DateFormat('h:mm a', 'en');
-    return timeFormatter.format(date);
+    return DateFormat('h:mm a', 'en').format(date);
   }
 
   String formatDate(DateTime date) {
-    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy', 'en');
-    return dateFormatter.format(date);
+    return DateFormat('dd-MM-yyyy', 'en').format(date);
+  }
+
+  Color _getStatusColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'accepted':
+        return const Color(0xFF27AE60);
+      case 'rejected':
+        return const Color(0xFFE74C3C);
+      case 'cancelled':
+        return const Color(0xFF95A5A6);
+      default:
+        return const Color(0xFFBDC3C7);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: ColorsBox.white,
-      elevation: 4,
+      elevation: 5,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.grey, width: 0.5),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// Status and Cancel
             Row(
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: request.status == 'pending'
-                        ? ColorsBox.greyish
-                        : request.status == 'accepted'
-                            ? ColorsBox.green
-                            : ColorsBox.red,
+                    color: _getStatusColor(request.status ?? ''),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    request.status.toString(),
-                    style: AppTextStyles.semiBold14(),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    request.status?.toUpperCase() ?? '',
+                    style: AppTextStyles.semiBold12()
+                        .copyWith(color: Colors.white),
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    RequestDialogs.cancelRequest(context, request.id!);
-                  },
-                  icon: const Icon(
-                    Icons.cancel_outlined,
-                    color: Colors.red,
+                Tooltip(
+
+                  message: 'Cancel Request',
+                  textStyle: AppTextStyles.regular12(),
+                  child: InkWell(
+                    onTap: () =>
+                        RequestDialogs.cancelRequest(context, request.id!),
+                    borderRadius: BorderRadius.circular(20),
+                    child: const Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Icon(Icons.cancel_outlined, color: Colors.red),
+                    ),
                   ),
                 ),
               ],
             ),
+            12.ph,
+
+            /// Course Title
+            Text(
+              request.course?.title ?? 'No Course Title',
+              style: AppTextStyles.bold16().copyWith(fontSize: 17),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+
             8.ph,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+
+            /// Request ID
+            Text(
+              'Request ID: ${request.id}',
+              style:
+                  AppTextStyles.semiBold12().copyWith(color: Colors.grey[700]),
+            ),
+
+            12.ph,
+
+            /// Date & Time Row
+            Row(
               children: [
+                const Icon(Icons.access_time, color: Colors.grey, size: 20),
+                6.pw,
                 Text(
-                  request.course?.title ?? 'empty title',
-                  style: AppTextStyles.bold16(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  formatTime(request.createdAt!),
+                  style: AppTextStyles.regular12(),
                 ),
-                7.ph,
+                const Spacer(),
+                const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
+                6.pw,
                 Text(
-                  'ID: ${request.id}',
-                  style: AppTextStyles.semiBold12(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                7.ph,
-                Row(
-                  children: [
-                    const Icon(Icons.access_time, color: Colors.grey),
-                    6.pw,
-                    Text(
-                      formatTime(request.createdAt!),
-                      style: AppTextStyles.semiBold14(),
-                    ),
-                    const Spacer(),
-                    const Icon(Icons.calendar_today, color: Colors.grey),
-                    6.pw,
-                    Text(
-                      formatDate(request.createdAt!),
-                      style: AppTextStyles.semiBold14(),
-                    ),
-                  ],
+                  formatDate(request.createdAt!),
+                  style: AppTextStyles.regular12(),
                 ),
               ],
             ),

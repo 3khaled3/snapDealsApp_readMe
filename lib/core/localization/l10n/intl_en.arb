@@ -1,7 +1,7 @@
 {
     "// flutter pub run intl_utils:generate": "generator",
     "lang": "en",
-    "fontFamilyLora" : "Lora",
+    "fontFamilyLora": "Lora",
     "appName": "SnapDeals",
     "loginScreenLabel": "Welcome Back",
     "homeTitle": "Good Morning",
@@ -215,20 +215,19 @@
     "areYouSureDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
     "deleteAccountSuccess": "Account deleted successfully.",
     "deleteAccountError": "An error occurred while deleting the account.",
-"home":"",
-"chat":"",
-"favorite":"",
-"profile":""
-    "deleteAccountError": "An error occurred while deleting the account.",
-    "editProduct":"Edit Product",
-    "update_success":"Update success",
-    "update_error":"Update error",
+    "home": "",
+    "chat": "",
+    "favorite": "",
+    "profile": "",
+    "editProduct": "Edit Product",
+    "update_success": "Update success",
+    "update_error": "Update error",
     "rejectWord": "Reject",
     "acceptWord": "Accept",
     "make_review": "Make Review",
     "review_hint": "Enter your review",
     "review_success": "Review submitted successfully",
     "review_error": "Error submitting review",
-    "review": "Review"
-
+    "review": "Review",
+    "request_cancelled": "Request cancelled successfully"
 }

@@ -92,7 +92,6 @@ class CourseCard extends StatelessWidget {
                     Row(
                       children: [
                         ...List.generate(5, (index) {
-                          print( "qq! ${course.ratingsAverage}");
                           return Icon(
                             index < course.ratingsAverage
                                 ? Icons.star

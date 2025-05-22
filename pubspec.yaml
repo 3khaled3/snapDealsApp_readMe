@@ -69,7 +69,7 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/
+    - assets/service-account.json
     - assets/images/
     - assets/svg/
 

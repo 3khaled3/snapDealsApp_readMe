@@ -148,12 +148,12 @@ class AuthRepositoryImpl implements AuthRepository {
       print("updateUserData image ${image.path}");
     }
     return await HttpHelper.handleRequest(
-      (authToken) => HttpHelper.putFile(
+      (authToken) => HttpHelper.editProfileFile(
         linkUrl: ApiEndpoints.updateMe,
         field: user.updateToJson(),
         token: authToken,
         name: "profileImg",
-        file: File(image!.path),
+        file: image != null ? File(image.path) : null,
       ),
     );
   }

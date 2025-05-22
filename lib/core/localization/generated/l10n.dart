@@ -18,20 +18,17 @@ class Tr {
   static Tr? _current;
 
   static Tr get current {
-    assert(
-      _current != null,
-      'No instance of Tr was loaded. Try to initialize the Tr delegate before accessing Tr.current.',
-    );
+    assert(_current != null,
+        'No instance of Tr was loaded. Try to initialize the Tr delegate before accessing Tr.current.');
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<Tr> load(Locale locale) {
-    final name =
-        (locale.countryCode?.isEmpty ?? false)
-            ? locale.languageCode
-            : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -2200,6 +2197,156 @@ class Tr {
     return Intl.message(
       'An error occurred while deleting the account.',
       name: 'deleteAccountError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get home {
+    return Intl.message(
+      '',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get chat {
+    return Intl.message(
+      '',
+      name: 'chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get favorite {
+    return Intl.message(
+      '',
+      name: 'favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get profile {
+    return Intl.message(
+      '',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Product`
+  String get editProduct {
+    return Intl.message(
+      'Edit Product',
+      name: 'editProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update success`
+  String get update_success {
+    return Intl.message(
+      'Update success',
+      name: 'update_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update error`
+  String get update_error {
+    return Intl.message(
+      'Update error',
+      name: 'update_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reject`
+  String get rejectWord {
+    return Intl.message(
+      'Reject',
+      name: 'rejectWord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept`
+  String get acceptWord {
+    return Intl.message(
+      'Accept',
+      name: 'acceptWord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Review`
+  String get make_review {
+    return Intl.message(
+      'Make Review',
+      name: 'make_review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your review`
+  String get review_hint {
+    return Intl.message(
+      'Enter your review',
+      name: 'review_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review submitted successfully`
+  String get review_success {
+    return Intl.message(
+      'Review submitted successfully',
+      name: 'review_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error submitting review`
+  String get review_error {
+    return Intl.message(
+      'Error submitting review',
+      name: 'review_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review`
+  String get review {
+    return Intl.message(
+      'Review',
+      name: 'review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request cancelled successfully`
+  String get request_cancelled {
+    return Intl.message(
+      'Request cancelled successfully',
+      name: 'request_cancelled',
       desc: '',
       args: [],
     );

@@ -285,6 +285,54 @@ abstract class HttpHelper {
     }
   }
 
+static Future<http.Response> editProfileFile({
+  required String linkUrl,
+  File? file,
+  required String name,
+  required String? token,
+  Map<String, dynamic>? field,
+}) async {
+  try {
+    print("Attempting to upload file...");
+
+    var request = http.MultipartRequest('PUT', Uri.parse(linkUrl));
+
+    if (token != null) {
+      request.headers['Authorization'] = 'Bearer $token';
+    }
+
+    // Attach the image file if it exists
+    if (file != null && await file.exists()) {
+      var mimeType = lookupMimeType(file.path) ?? 'application/octet-stream';
+      var mimeTypeData = mimeType.split('/');
+
+      request.files.add(await http.MultipartFile.fromPath(
+        name,
+        file.path,
+        contentType: MediaType(mimeTypeData[0], mimeTypeData[1]),
+      ));
+    }
+
+    // Add form fields
+    if (field != null) {
+      field.forEach((key, value) {
+        request.fields[key] = value.toString();
+      });
+    }
+
+    final streamedResponse = await request.send();
+    final response = await http.Response.fromStream(streamedResponse);
+
+    print("Response Status: ${response.statusCode}");
+    print("Response Body: ${response.body}");
+
+    return response;
+  } catch (e) {
+    print("Error in putFile: $e");
+    rethrow;
+  }
+}
+
   // todo: post file
   static Future<http.Response> postFile({
     required String linkUrl,

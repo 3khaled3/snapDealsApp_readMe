@@ -15,71 +15,82 @@ class InstractorRequestCard extends StatelessWidget {
   final InstractorRequestModel instractorRequestModel;
 
   String formatTime(DateTime date) {
-    final DateFormat timeFormatter = DateFormat('h:mm a', 'en');
-    return timeFormatter.format(date);
+    return DateFormat('h:mm a', 'en').format(date);
   }
 
   String formatDate(DateTime date) {
-    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy', 'en');
-    return dateFormatter.format(date);
+    return DateFormat('dd-MM-yyyy', 'en').format(date);
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 1,
       color: ColorsBox.white,
-      elevation: 4,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.grey, width: 0.5),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              ' ${instractorRequestModel.sender?.name ?? "Unknown"}',
-              style: AppTextStyles.bold18(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Header
+            Row(
               children: [
-                const Icon(Icons.access_time, color: Colors.grey),
-                6.pw,
-                Text(
-                  formatTime(instractorRequestModel.createdAt!),
-                  style: AppTextStyles.semiBold14(),
-                ),
-                const Spacer(),
-                const Icon(Icons.calendar_today, color: Colors.grey),
-                6.pw,
-                Text(
-                  formatDate(instractorRequestModel.createdAt!),
-                  style: AppTextStyles.semiBold14(),
+                const Icon(Icons.person, color: Colors.grey),
+                8.pw,
+                Expanded(
+                  child: Text(
+                    instractorRequestModel.sender?.name ?? 'Unknown',
+                    style: AppTextStyles.bold18(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
-          ),
-          12.ph,
-          Row(
-            children: [
-              // زر الرفض
-              BlocBuilder<RejectRequestCubit, RejectRequestState>(
-                builder: (context, state) {
-                  final isLoading = state is RejectRequestLoading;
-                  return Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(12),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(12),
-                        onTap: isLoading
+            16.ph,
+
+            /// Time and Date Row
+            Row(
+              children: [
+                const Icon(Icons.access_time, color: Colors.grey, size: 20),
+                6.pw,
+                Text(
+                  formatTime(instractorRequestModel.createdAt!),
+                  style: AppTextStyles.regular14(),
+                ),
+                const Spacer(),
+                const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
+                6.pw,
+                Text(
+                  formatDate(instractorRequestModel.createdAt!),
+                  style: AppTextStyles.regular14(),
+                ),
+              ],
+            ),
+            20.ph,
+
+            /// Action Buttons
+            Row(
+              children: [
+                /// Reject Button
+                BlocBuilder<RejectRequestCubit, RejectRequestState>(
+                  builder: (context, state) {
+                    final isLoading = state is RejectRequestLoading;
+                    return Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: ColorsBox.white,
+                          backgroundColor: Colors.red,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: isLoading
                             ? null
                             : () async {
                                 final cubit =
@@ -94,46 +105,36 @@ class InstractorRequestCard extends StatelessWidget {
                                   );
                                 }
                               },
-                        child: Ink(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.red),
-                          ),
-                          child: isLoading
-                              ? const SizedBox(
-                                  height: 24,
-                                  width: 24,
-                                  child:
-                                      CircularProgressIndicator(strokeWidth: 2),
-                                )
-                              : Center(
-                                  child: Text(
-                                    context.tr.rejectWord,
-                                    style: AppTextStyles.semiBold14()
-                                        .copyWith(color: ColorsBox.white),
-                                  ),
-                                ),
-                        ),
+                        child: isLoading
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                    color: Colors.white, strokeWidth: 2),
+                              )
+                            : Text(context.tr.rejectWord,
+                                style: AppTextStyles.semiBold14()),
                       ),
-                    ),
-                  );
-                },
-              ),
-              // 2.pw,
+                    );
+                  },
+                ),
+                12.pw,
 
-              // زر القبول
-              BlocBuilder<ApproveRequestCubit, ApproveRequestState>(
-                builder: (context, state) {
-                  final isLoading = state is ApproveRequestLoading;
-                  return Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(12),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(12),
-                        onTap: isLoading
+                /// Approve Button
+                BlocBuilder<ApproveRequestCubit, ApproveRequestState>(
+                  builder: (context, state) {
+                    final isLoading = state is ApproveRequestLoading;
+                    return Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: ColorsBox.white,
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: isLoading
                             ? null
                             : () async {
                                 final cubit =
@@ -148,36 +149,23 @@ class InstractorRequestCard extends StatelessWidget {
                                   );
                                 }
                               },
-                        child: Ink(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.green),
-                          ),
-                          child: isLoading
-                              ? const SizedBox(
-                                  height: 24,
-                                  width: 24,
-                                  child:
-                                      CircularProgressIndicator(strokeWidth: 2),
-                                )
-                              : Center(
-                                  child: Text(
-                                    context.tr.acceptWord,
-                                    style: AppTextStyles.semiBold14()
-                                        .copyWith(color: ColorsBox.white),
-                                  ),
-                                ),
-                        ),
+                        child: isLoading
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                    color: Colors.white, strokeWidth: 2),
+                              )
+                            : Text(context.tr.acceptWord,
+                                style: AppTextStyles.semiBold14()),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          )
-        ],
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
