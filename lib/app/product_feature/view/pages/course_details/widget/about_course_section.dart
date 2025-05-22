@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
@@ -13,8 +14,6 @@ class AboutCourseSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final entries = course.details.entries.toList();
-  
-   
 
     return SizedBox(
       // height: MediaQuery.sizeOf(context).height * 0.42,
@@ -28,7 +27,9 @@ class AboutCourseSection extends StatelessWidget {
             children: [
               DescSection(description: course.description),
               const SizedBox(height: 20),
-              InstructorDetails(courseModel: course),
+              if (course.instructor.id !=
+                  ProfileCubit.instance.state.profile.id)
+                InstructorDetails(courseModel: course),
               const SizedBox(height: 20),
               const Text(
                 'Info',
@@ -55,8 +56,6 @@ class AboutCourseSection extends StatelessWidget {
               ),
             ],
           ),
-          
-         
           15.ph,
         ],
       ),
