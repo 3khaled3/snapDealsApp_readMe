@@ -214,5 +214,9 @@
     "deleteAccount": "Delete Account",
     "areYouSureDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
     "deleteAccountSuccess": "Account deleted successfully.",
-    "deleteAccountError": "An error occurred while deleting the account."
+    "deleteAccountError": "An error occurred while deleting the account.",
+"home":"",
+"chat":"",
+"favorite":"",
+"profile":""
 }

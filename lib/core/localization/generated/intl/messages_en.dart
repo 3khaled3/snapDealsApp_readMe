@@ -128,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter new password"),
         "change_password_success": MessageLookupByLibrary.simpleMessage(
             "Password changed successfully"),
+        "chat": MessageLookupByLibrary.simpleMessage(""),
         "choose": MessageLookupByLibrary.simpleMessage("Choose"),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
         "confirmPasswordLabel":
@@ -198,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("something went wrong"),
         "error_loading_data":
             MessageLookupByLibrary.simpleMessage("Error loading data"),
+        "favorite": MessageLookupByLibrary.simpleMessage(""),
         "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "fontFamilyLora": MessageLookupByLibrary.simpleMessage("Lora"),
@@ -213,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hintPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "hintSearch":
             MessageLookupByLibrary.simpleMessage("What are you looking for?"),
+        "home": MessageLookupByLibrary.simpleMessage(""),
         "homeTitle": MessageLookupByLibrary.simpleMessage("Good Morning"),
         "hours_ago": MessageLookupByLibrary.simpleMessage("Hours ago"),
         "just_now": MessageLookupByLibrary.simpleMessage("Just now"),
@@ -295,6 +298,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Price *"),
         "priceHint": MessageLookupByLibrary.simpleMessage("Enter price"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "profile": MessageLookupByLibrary.simpleMessage(""),
         "ramWord": MessageLookupByLibrary.simpleMessage("RAM *"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Continue"),
         "registerLabel":

@@ -110,13 +110,17 @@ class _FavoriteViewState extends State<FavoriteView> {
         const Divider(height: 1, color: ColorsBox.greyWithOpacity20),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(
+              left: 10,
+              right: 10,
+              bottom:80,
+            ),
             child: GridView.builder(
               itemCount: widgets.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 4,
                 childAspectRatio: 0.66,
               ),
               itemBuilder: (context, index) => widgets[index],

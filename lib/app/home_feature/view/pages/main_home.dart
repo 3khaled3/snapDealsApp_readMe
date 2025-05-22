@@ -17,6 +17,7 @@ import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/chat_wrapper.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/login_dialog.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 
@@ -78,86 +79,94 @@ class _MainHomeViewState extends State<MainHomeView> {
   }
 
   _buildBottomAppBar() {
-    return Container(
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.transparent,
-      ),
-      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
       child: Container(
+        height: 60,
         decoration: BoxDecoration(
-          color: ColorsBox.brightBlue,
-          borderRadius: BorderRadius.circular(40),
-          boxShadow: [
-            BoxShadow(
-              color: ColorsBox.black.withOpacity(0.1),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
         ),
-        padding: const EdgeInsets.all(4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(0, Icons.home_outlined, Icons.home),
-            _buildNavItem(1, Icons.chat_outlined, Icons.chat),
+            // 10.pw,
+            _buildAnimatedTab(
+              icon: Icons.home,
+              isSelected: _currentIndex == 0,
+              onTap: () => _onTabTapped(0),
+            ),
+            _buildAnimatedTab(
+              icon: Icons.chat,
+              isSelected: _currentIndex == 1,
+              onTap: () => _onTabTapped(1),
+            ),
             FloatingActionButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(99999)),
+                  borderRadius: BorderRadius.circular(999)),
               backgroundColor: const Color.fromARGB(255, 0, 69, 165),
-              elevation: 6,
+              elevation: 8,
               child: const Icon(Icons.add, color: ColorsBox.white, size: 30),
               onPressed: () {
                 if (ProfileCubit.instance.state.profile.role ==
                     Role.unregistered) {
                   GoRouter.of(context)
                       .push(LoginScreen.routeName, extra: LoginViewArgs());
-
                   return;
                 }
                 context.push(AddView.routeName);
               },
             ),
-            _buildNavItem(2, EvaIcons.heartOutline, EvaIcons.heart),
-            _buildNavItem(3, Icons.person_outline, Icons.person),
+            _buildAnimatedTab(
+              icon: EvaIcons.heart,
+              isSelected: _currentIndex == 2,
+              onTap: () => _onTabTapped(2),
+            ),
+            _buildAnimatedTab(
+              icon: Icons.person,
+              isSelected: _currentIndex == 3,
+              onTap: () => _onTabTapped(3),
+            ),
+            // 10.pw,
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavItem(int index, IconData outlineIcon, IconData filledIcon) {
-    final bool isActive = _currentIndex == index;
+  void _onTabTapped(int index) {
+    if (index != 0 &&
+        ProfileCubit.instance.state.profile.role == Role.unregistered) {
+      GoRouter.of(context).push(LoginScreen.routeName, extra: LoginViewArgs());
+      return;
+    }
+    setState(() => _currentIndex = index);
+  }
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(9999),
-      splashColor: ColorsBox.white.withOpacity(0.2),
-      onTap: () {
-        print('Tapped on index: $index');
-        if (index != 0 &&
-            ProfileCubit.instance.state.profile.role == Role.unregistered) {
-          GoRouter.of(context)
-              .push(LoginScreen.routeName, extra: LoginViewArgs());
-          return;
-        }
-        setState(() {
-          _currentIndex = index;
-          print('Current index: $_currentIndex');
-        });
-      },
+  Widget _buildAnimatedTab(
+      {required IconData icon,
+      required bool isSelected,
+      required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color:
-              isActive ? ColorsBox.white.withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(9999),
+          color: isSelected
+              ? ColorsBox.brightBlue.withOpacity(0.1)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: Icon(
-          isActive ? filledIcon : outlineIcon,
-          size: 28,
-          color: ColorsBox.white.withOpacity(isActive ? 1 : 0.6),
+        child: AnimatedScale(
+          duration: const Duration(milliseconds: 300),
+          scale: isSelected ? 1.2 : 1.0,
+          child: Icon(
+            icon,
+            color: isSelected ? ColorsBox.brightBlue : Colors.grey,
+            size: 28,
+          ),
         ),
       ),
     );

@@ -2201,6 +2201,46 @@ class Tr {
       args: [],
     );
   }
+
+  /// ``
+  String get home {
+    return Intl.message(
+      '',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get chat {
+    return Intl.message(
+      '',
+      name: 'chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get favorite {
+    return Intl.message(
+      '',
+      name: 'favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get profile {
+    return Intl.message(
+      '',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

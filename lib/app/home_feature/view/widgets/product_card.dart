@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
         );
       },
       child: Card(
-        elevation: 4,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -123,31 +123,40 @@ class ProductCard extends StatelessWidget {
               top: 12,
               right: 12,
               child: BlocBuilder<FavoriteCubit, FavoriteState>(
-                buildWhen: (previous, current) => current is FavoriteLoaded,
+                buildWhen: (previous, current) => 
+                  current is FavoriteLoaded || current is FavoriteError,
                 builder: (context, state) {
                   final isFavorite = context.read<FavoriteCubit>().isFavorite(product.id);
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<FavoriteCubit>().toggleFavorite(product.id);
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        context.read<FavoriteCubit>().toggleFavorite(product.id, product);
+                      },
+                      customBorder: const CircleBorder(),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 200),
+                          child: Icon(
+                            isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
+                            key: ValueKey<bool>(isFavorite),
+                            color: isFavorite ? Colors.red : Colors.grey,
+                            size: 18,
                           ),
-                        ],
-                      ),
-                      child: Icon(
-                        isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
-                        color: isFavorite ? Colors.red : Colors.grey,
-                        size: 18,
+                        ),
                       ),
                     ),
                   );

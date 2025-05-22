@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:snap_deals/app/home_feature/data/repositories/favorite/i_favorite_repository.dart';
 import 'package:snap_deals/app/home_feature/view_model/favorite_local_storage.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
@@ -8,112 +7,68 @@ import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 part 'favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
-  final IFavoriteRepository repository = FavoriteRepository();
-
   FavoriteCubit() : super(FavoriteInitial()) {
-    // Listen to local storage changes and emit new state
+    // Listen to changes in local storage
     FavoriteLocalStorage.favoriteIdsStreamMapped.listen((favoriteIds) {
-      if (state is FavoriteLoaded) {
-        emit(FavoriteLoaded(products: _products, courses: _courses));
-      }
+      favoriteIdsSaved.value = favoriteIds;
+      emit(FavoriteLoaded(products: _products, courses: _courses));
     });
   }
 
   ValueNotifier<List<String>> favoriteIdsSaved = ValueNotifier([]);
   List<ProductModel> _products = [];
   List<CourseModel> _courses = [];
+  addCourseToFavorite(CourseModel course) {
+    _courses.add(course);
+  }
+
+  addProductToFavorite(ProductModel product) {
+    _products.add(product);
+  }
+
+  /// Manually populate products and courses when available
+  void setAllItems({
+    required List<ProductModel> products,
+    required List<CourseModel> courses,
+  }) {
+    _products = products;
+    _courses = courses;
+    emit(FavoriteLoaded(products: _products, courses: _courses));
+  }
 
   Future<void> loadFavorites() async {
     emit(FavoriteLoading());
-
     final localFavorites = FavoriteLocalStorage.getFavoriteIds();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      favoriteIdsSaved.value = List<String>.from(localFavorites);
-    });
-
+    favoriteIdsSaved.value = List<String>.from(localFavorites);
     emit(FavoriteLoaded(products: _products, courses: _courses));
-
-    final result = await repository.getFavorites();
-
-    result.fold(
-      (failure) {
-        emit(FavoriteError(failure.message ?? 'Failed to load favorites.'));
-      },
-      (data) async {
-        final List<dynamic> items = data['data'];
-
-        List<ProductModel> productList = [];
-        List<CourseModel> courseList = [];
-        List<String> favoriteIds = [];
-
-        for (final item in items) {
-          final id = item["_id"].toString();
-          favoriteIds.add(id);
-
-          if (item.containsKey("lessons")) {
-            courseList.add(CourseModel.fromJson(item));
-          } else {
-            productList.add(ProductModel.fromJson(item));
-          }
-
-          await FavoriteLocalStorage.addFavoriteId(id);
-        }
-
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          favoriteIdsSaved.value = favoriteIds;
-        });
-
-        _products = productList;
-        _courses = courseList;
-
-        emit(FavoriteLoaded(products: _products, courses: _courses));
-      },
-    );
   }
 
-  Future<void> toggleFavorite(String productId) async {
+  Future<void> toggleFavorite(String productId, dynamic item) async {
     final isFav = FavoriteLocalStorage.isFavorite(productId);
 
-    // Optimistic update
     if (isFav) {
+      // Remove from local storage and from UI list
       await FavoriteLocalStorage.removeFavoriteId(productId);
-      _courses.removeWhere((c) => c.id == productId);
-      _products.removeWhere((p) => p.id == productId);
+
+      if (item is ProductModel) {
+        _products.removeWhere((p) => p.id == productId);
+      } else if (item is CourseModel) {
+        _courses.removeWhere((c) => c.id == productId);
+      }
     } else {
+      // Add to local storage and to UI list
       await FavoriteLocalStorage.addFavoriteId(productId);
+
+      if (item is ProductModel && !_products.any((p) => p.id == productId)) {
+        _products.add(item);
+      } else if (item is CourseModel &&
+          !_courses.any((c) => c.id == productId)) {
+        _courses.add(item);
+      }
     }
 
-    // Reflect optimistic update in UI
-    final updatedIds = FavoriteLocalStorage.getFavoriteIds();
-    favoriteIdsSaved.value = updatedIds;
-
+    favoriteIdsSaved.value = FavoriteLocalStorage.getFavoriteIds();
     emit(FavoriteLoaded(products: _products, courses: _courses));
-
-    final result = isFav
-        ? await repository.removeFromFavorites(productId)
-        : await repository.addToFavorites(productId);
-
-    result.fold(
-      (failure) async {
-        // Revert optimistic update on error
-        if (isFav) {
-          await FavoriteLocalStorage.addFavoriteId(productId);
-        } else {
-          await FavoriteLocalStorage.removeFavoriteId(productId);
-          _courses.removeWhere((c) => c.id == productId);
-          _products.removeWhere((p) => p.id == productId);
-        }
-
-        favoriteIdsSaved.value = FavoriteLocalStorage.getFavoriteIds();
-
-        emit(FavoriteError(failure.message ?? 'Something went wrong.'));
-      },
-      (data) async {
-        // After a successful add/remove, reload the favorites from backend
-        await loadFavorites();
-      },
-    );
   }
 
   bool isFavorite(String productId) =>

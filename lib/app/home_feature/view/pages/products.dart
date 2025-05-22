@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
@@ -80,17 +81,15 @@ class _ProductsViewState extends State<ProductsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding:
-            const EdgeInsets.only(top: 60, left: 11, right: 11, bottom: 20),
+      body: SafeArea(
         child: Column(
           children: [
-            ProductsHeader(title: widget.args!.title),
+            CustomAppBar(title: widget.args!.title),
             17.ph,
-            CustomTextFormField(
-              hintText: context.tr.hintSearch,
-              suffixIcon: Icons.search,
-            ),
+            // CustomTextFormField(
+            //   hintText: context.tr.hintSearch,
+            //   suffixIcon: Icons.search,
+            // ),
             20.ph,
             Expanded(
               child: BlocConsumer<GetProductsByCategoryCubit,
@@ -147,7 +146,11 @@ class _ProductsViewState extends State<ProductsView> {
                     children: [
                       GridView.builder(
                         controller: _scrollController,
-                        padding: const EdgeInsets.only(bottom: 80),
+                        padding: const EdgeInsets.only(
+                          bottom: 80,
+                          left: 11,
+                          right: 11,
+                        ),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,

@@ -26,7 +26,7 @@ class CourseCard extends StatelessWidget {
         );
       },
       child: Card(
-        elevation: 4,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -143,10 +143,13 @@ class CourseCard extends StatelessWidget {
               child: BlocBuilder<FavoriteCubit, FavoriteState>(
                 buildWhen: (previous, current) => current is FavoriteLoaded,
                 builder: (context, state) {
-                  final isFavorite = context.read<FavoriteCubit>().isFavorite(course.id);
+                  final isFavorite =
+                      context.read<FavoriteCubit>().isFavorite(course.id);
                   return GestureDetector(
                     onTap: () {
-                      context.read<FavoriteCubit>().toggleFavorite(course.id);
+                      context
+                          .read<FavoriteCubit>()
+                          .toggleFavorite(course.id, course );
                     },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
@@ -163,7 +166,9 @@ class CourseCard extends StatelessWidget {
                         ],
                       ),
                       child: Icon(
-                        isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
+                        isFavorite
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border,
                         color: isFavorite ? Colors.red : Colors.grey,
                         size: 18,
                       ),
