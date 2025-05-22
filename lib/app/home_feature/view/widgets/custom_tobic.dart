@@ -35,14 +35,14 @@ class CustomTobicState extends State<CustomTobic> {
   InputDecoration _bottomBorderDecoration(String hint) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(color: Colors.grey),
+      hintStyle: AppTextStyles.regular16().copyWith(color: ColorsBox.grey) ,
       isDense: true,
       contentPadding: const EdgeInsets.only(bottom: 4),
       enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
+        borderSide: BorderSide(color: ColorsBox.grey),
       ),
       focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue),
+        borderSide: BorderSide(color: ColorsBox.brightBlue),
       ),
     );
   }

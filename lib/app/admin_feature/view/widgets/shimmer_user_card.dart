@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/custom_copy_button.dart';
 
@@ -30,7 +31,7 @@ class ShimmerUserCard extends StatelessWidget {
                     width: 100,
                     height: 16,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: ColorsBox.white,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
@@ -48,7 +49,7 @@ class ShimmerUserCard extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 37,
-                    backgroundColor: Colors.white,
+                    backgroundColor: ColorsBox.white,
                   ),
                   20.pw,
                   Column(
@@ -60,7 +61,7 @@ class ShimmerUserCard extends StatelessWidget {
                             width: 120,
                             height: 16,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: ColorsBox.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -75,7 +76,7 @@ class ShimmerUserCard extends StatelessWidget {
                             width: 190,
                             height: 14,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: ColorsBox.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -90,7 +91,7 @@ class ShimmerUserCard extends StatelessWidget {
                             width: 160,
                             height: 14,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: ColorsBox.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),

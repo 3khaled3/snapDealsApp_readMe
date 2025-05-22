@@ -6,6 +6,7 @@ import 'package:snap_deals/app/admin_feature/view/widgets/user_card.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class UserBuilder extends StatefulWidget {
@@ -156,10 +157,10 @@ class _UserBuilderState extends State<UserBuilder> {
                     onTap: _loadMoreUsers,
                     child: Container(
                       padding: const EdgeInsets.all(8),
-                      color: Colors.red.withOpacity(0.7),
-                      child: const Text(
+                      color: ColorsBox.red.withOpacity(0.7),
+                      child:  Text(
                         "Error loading more. Tap to retry",
-                        style: TextStyle(color: Colors.white),
+                        style: AppTextStyles.semiBold16().copyWith(color: Colors.white),
                       ),
                     ),
                   ),

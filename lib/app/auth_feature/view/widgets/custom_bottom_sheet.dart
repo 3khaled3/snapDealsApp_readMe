@@ -175,11 +175,7 @@ class CustomBottomSheet {
                         ),
                         Text(
                           ctx.tr.passwordManager,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
+                           style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
                         ),
                         const SizedBox(height: 25),
                         if (isVerifyingCurrentPassword) ...[

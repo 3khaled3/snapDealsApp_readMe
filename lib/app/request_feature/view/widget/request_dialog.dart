@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/request_feature/model_view/cancel_request_cubit/cancel_request_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class RequestDialogs {
   static void cancelRequest(BuildContext context, String requestId) {
@@ -42,7 +44,9 @@ class RequestDialogs {
                         )
                       : Text(
                           context.tr.confirmWord,
-                          style: const TextStyle(color: Colors.red),
+                          style: AppTextStyles.regular14().copyWith(
+                            color: ColorsBox.red,
+                          ),
                         ),
                 );
               },

@@ -4,7 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/assets_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,14 +21,11 @@ class InstructorDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+         Text(
           "Instructor",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppTextStyles.semiBold16(),
         ),
-        const SizedBox(height: 12),
+       12.ph,
         Row(
           children: [
             ClipRRect(
@@ -45,7 +44,7 @@ class InstructorDetails extends StatelessWidget {
                   : _defaultProfileImage(),
             ),
 
-            const SizedBox(width: 14),
+            14.ph,
 
             // Name & Phone
             Expanded(
@@ -54,18 +53,12 @@ class InstructorDetails extends StatelessWidget {
                 children: [
                   Text(
                     instructor.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
+                     style: AppTextStyles.semiBold16(),
                   ),
                   if (instructor.phone != null && instructor.phone!.isNotEmpty)
                     Text(
                       instructor.phone!,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                       style: AppTextStyles.regular14().copyWith(color: ColorsBox.grey),
                     ),
                 ],
               ),
@@ -77,7 +70,7 @@ class InstructorDetails extends StatelessWidget {
                 icon: Icons.call,
                 onTap: () => callInstructor(instructor.phone!),
               ),
-            const SizedBox(width: 12),
+            12.pw,
             _circleIconButton(
               icon: Icons.message_outlined,
               onTap: () {

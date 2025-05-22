@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CountdownTimerScreen extends StatefulWidget {
   @override
@@ -14,7 +17,7 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
     if (_timer != null) {
       _timer!.cancel();
     }
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_start > 0) {
         setState(() {
           _start--;
@@ -34,19 +37,19 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Countdown Timer')),
+      appBar: AppBar(title: const Text('Countdown Timer')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "$_start",
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+              style: AppTextStyles.bold42().copyWith(),
             ),
-            SizedBox(height: 20),
+            20.ph,
             ElevatedButton(
               onPressed: startTimer,
-              child: Text("Start Countdown"),
+              child: const Text("Start Countdown"),
             ),
           ],
         ),

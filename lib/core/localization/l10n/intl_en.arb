@@ -218,7 +218,7 @@
 "home":"",
 "chat":"",
 "favorite":"",
-"profile":""
+"profile":"",
     "deleteAccountError": "An error occurred while deleting the account.",
     "editProduct":"Edit Product",
     "update_success":"Update success",

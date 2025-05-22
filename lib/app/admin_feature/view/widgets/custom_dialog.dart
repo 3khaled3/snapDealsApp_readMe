@@ -6,6 +6,7 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dar
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/validators.dart';
 
 abstract class CustomDialog {
@@ -99,7 +100,7 @@ abstract class CustomDialog {
               },
               child: Text(
                 context.tr.deleteWord,
-                style: const TextStyle(color: Colors.red),
+               style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.red),
               ),
             ),
           ],
@@ -131,7 +132,7 @@ abstract class CustomDialog {
               },
               child: Text(
                 context.tr.deleteWord,
-                style: const TextStyle(color: Colors.red),
+               style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.red),
               ),
             ),
           ],
