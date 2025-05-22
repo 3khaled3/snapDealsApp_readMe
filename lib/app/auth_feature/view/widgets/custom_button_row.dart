@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 
 class CustomButtonRow extends StatelessWidget {
@@ -47,7 +48,7 @@ class CustomButtonRow extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 14),
+        14.pw,
         Expanded(
           child: CustomPrimaryButton(
             title: saveButtonText,

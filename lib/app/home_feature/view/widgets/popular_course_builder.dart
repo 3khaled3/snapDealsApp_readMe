@@ -5,6 +5,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.da
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/get_all_course_cubit/get_all_courses_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class PopularCourseBuilder extends StatefulWidget {
@@ -148,11 +149,11 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                       onTap: _loadMoreCourses,
                       child: Container(
                         padding: const EdgeInsets.all(8),
-                        color: Colors.red.withOpacity(0.7),
+                        color: ColorsBox.red.withOpacity(0.7),
                         child: Text(
                           context.tr.retry_load_more,
                           style: AppTextStyles.semiBold16().copyWith(
-                            color: Colors.white,
+                            color: ColorsBox.white,
                           ),
                         ),
                       ),

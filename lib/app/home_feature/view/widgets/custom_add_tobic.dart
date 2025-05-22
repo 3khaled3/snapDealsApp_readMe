@@ -19,7 +19,7 @@ class _CustomAddTobicState extends State<CustomAddTobic> {
         Row(
           children: [
             Text(
-              'Tobic *',
+              context.tr.tobic,
               style: AppTextStyles.semiBold12()
                   .copyWith(fontFamily: context.tr.fontFamilyLora),
             ),

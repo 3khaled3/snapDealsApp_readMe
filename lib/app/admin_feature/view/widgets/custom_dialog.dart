@@ -5,6 +5,7 @@ import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/utils/validators.dart';
@@ -51,7 +52,7 @@ abstract class CustomDialog {
                           dialogContext), // استخدم dialogContext هنا
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  10.pw,
                   Expanded(
                     child: CustomBottomSheet.buildButton(
                       text: context.tr.saveButton,

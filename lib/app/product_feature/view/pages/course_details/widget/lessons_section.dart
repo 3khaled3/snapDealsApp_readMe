@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -17,7 +18,7 @@ class LessonsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         9.ph,
-        Text('Lessons (${lessons.length})', style: AppTextStyles.semiBold20()),
+        Text('${context.tr.lesson} (${lessons.length})', style: AppTextStyles.semiBold20()),
         9.ph,
         ListView.builder(
           shrinkWrap: true,

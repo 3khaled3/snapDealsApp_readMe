@@ -65,12 +65,12 @@ class ProductCard extends StatelessWidget {
                         width: double.infinity,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey.shade300,
-                          highlightColor: Colors.grey.shade100,
+                          baseColor: ColorsBox.greyReceivedMessage,
+                          highlightColor: ColorsBox.paleGrey,
                           child: Container(
                             height: 140,
                             width: double.infinity,
-                            color: Colors.grey.withOpacity(0.1),
+                            color: ColorsBox.grey.withOpacity(0.1),
                           ),
                         ),
                         errorWidget: (context, url, error) => Image.asset(
@@ -153,7 +153,7 @@ class ProductCard extends StatelessWidget {
                           child: Icon(
                             isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
                             key: ValueKey<bool>(isFavorite),
-                            color: isFavorite ? Colors.red : Colors.grey,
+                            color: isFavorite ? ColorsBox.red : ColorsBox.grey,
                             size: 18,
                           ),
                         ),

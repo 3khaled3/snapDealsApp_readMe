@@ -117,7 +117,7 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                             final comment = _commentController.text.trim();
                             if (_rating == 0 || comment.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('context.tr.please_fill_fields')),
+                                SnackBar(content: Text(context.tr.required_field)),
                               );
                               return;
                             }
@@ -151,7 +151,7 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         16.ph,
-                        Text('Reviews (${state.reviews.length})', style: AppTextStyles.semiBold20()),
+                        Text('${context.tr.review} (${state.reviews.length})', style: AppTextStyles.semiBold20()),
                         8.ph,
                         ListView.builder(
                           itemCount: state.reviews.length,
@@ -180,7 +180,7 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Center(
                       child: Text(
-                        'context.tr.no_reviews_yet',
+                        context.tr.no_reviews,
                         style: AppTextStyles.semiBold16().copyWith(color: Colors.grey),
                       ),
                     ),

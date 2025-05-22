@@ -4,6 +4,7 @@ import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/desc_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/info_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -33,7 +34,7 @@ class AboutCourseSection extends StatelessWidget {
                 InstructorDetails(courseModel: course),
               20.ph,
                Text(
-                'Info',
+                context.tr.info,
                 style: AppTextStyles.bold16(),
                
               ),

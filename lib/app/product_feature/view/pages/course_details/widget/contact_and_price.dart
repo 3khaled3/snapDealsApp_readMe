@@ -6,6 +6,7 @@ import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/request_feature/model_view/send_request_cubit/send_request_cubit.dart';
 import 'package:snap_deals/app/request_feature/view/pages/instractor_request_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -38,12 +39,12 @@ class ContactAndPrice extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Total Price',
+                context.tr.total_price,
                 style: AppTextStyles.regular14().copyWith(
                   color: ColorsBox.blueGrey,
                 ),
               ),
-              const SizedBox(height: 4),
+              4.ph,
               Text(
                 '${courseModel.price} EGP',
                 style: AppTextStyles.bold18().copyWith(

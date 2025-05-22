@@ -33,7 +33,7 @@ class HomeAppBar extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: ColorsBox.black.withOpacity(0.05),
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),
@@ -60,7 +60,7 @@ class HomeAppBar extends StatelessWidget {
               2.ph,
               Text(
                 ProfileCubit.instance.state.profile.role == Role.unregistered
-                    ? "welcome"
+                    ? context.tr.welcome
                     : name,
                 style: AppTextStyles.semiBold20(),
               ),
@@ -90,7 +90,7 @@ class HomeAppBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: ColorsBox.black.withOpacity(0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 2),
                   ),

@@ -13,15 +13,15 @@ class ShimmerUserCard extends StatelessWidget {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.grey, width: 0.5),
+        side: const BorderSide(color: ColorsBox.grey, width: 0.5),
         borderRadius: BorderRadius.circular(12),
       ),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: ColorsBox.greyReceivedMessage,
+          highlightColor: ColorsBox.paleGrey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

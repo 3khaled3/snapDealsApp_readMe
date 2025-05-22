@@ -120,10 +120,10 @@ class _UserBuilderState extends State<UserBuilder> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Error loading users"),
+                 Text(context.tr.error_user_loag),
                 ElevatedButton(
                   onPressed: _loadInitialUsers,
-                  child: const Text("Retry"),
+                  child:  Text(context.tr.retry),
                 ),
               ],
             ),
@@ -142,9 +142,9 @@ class _UserBuilderState extends State<UserBuilder> {
                             List.generate(2, (_) => const ShimmerUserCard()),
                       ),
                     if (!_hasMore && _users.isNotEmpty)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Center(child: Text("No more users")),
+                       Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Center(child: Text(context.tr.no_more_user)),
                       ),
                   ],
                 ),
@@ -159,8 +159,8 @@ class _UserBuilderState extends State<UserBuilder> {
                       padding: const EdgeInsets.all(8),
                       color: ColorsBox.red.withOpacity(0.7),
                       child:  Text(
-                        "Error loading more. Tap to retry",
-                        style: AppTextStyles.semiBold16().copyWith(color: Colors.white),
+                       context.tr.retry_load_more,
+                        style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.white),
                       ),
                     ),
                   ),

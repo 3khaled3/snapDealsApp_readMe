@@ -101,12 +101,12 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
                     ),
                     _iconText(
                       icon: Icons.play_circle_outline,
-                      text: '${course.lessons.length} lessons',
+                      text: '${course.lessons.length} ${context.tr.lesson}',
                     ),
                     if (course.certificate)
                       _iconText(
                         icon: Icons.military_tech_outlined,
-                        text: 'Certificate',
+                        text: context.tr.certificate,
                       ),
                   ],
                 ),

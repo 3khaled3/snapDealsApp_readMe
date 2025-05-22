@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 
 class ShimmerProductCard extends StatelessWidget {
   const ShimmerProductCard({super.key});
@@ -17,17 +19,17 @@ class ShimmerProductCard extends StatelessWidget {
         width: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Colors.white,
+          color: ColorsBox.white,
           border: Border.all(
-            color: Colors.grey.withOpacity(0.2),
+            color: ColorsBox.grey.withOpacity(0.2),
             width: 0.5,
           ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            baseColor: ColorsBox.greyReceivedMessage,
+            highlightColor: ColorsBox.paleGrey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,7 +42,7 @@ class ShimmerProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                const SizedBox(height: 12),
+                12.ph,
 
                 // Product name placeholder
                 Container(

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -22,7 +23,7 @@ class InstructorDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
          Text(
-          "Instructor",
+          context.tr.instructor,
           style: AppTextStyles.semiBold16(),
         ),
        12.ph,

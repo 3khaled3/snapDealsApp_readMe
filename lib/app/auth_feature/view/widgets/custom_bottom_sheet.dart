@@ -177,7 +177,7 @@ class CustomBottomSheet {
                           ctx.tr.passwordManager,
                            style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
                         ),
-                        const SizedBox(height: 25),
+                       25.ph,
                         if (isVerifyingCurrentPassword) ...[
                           TextFormField(
                             controller: currentPasswordController,
@@ -207,7 +207,7 @@ class CustomBottomSheet {
                               if (value == null ||
                                   value.isEmpty ||
                                   value != password) {
-                                return 'Please enter your password correctly';
+                                return context.tr.currentPassword_error;
                               }
                               return null;
                             },
@@ -229,7 +229,7 @@ class CustomBottomSheet {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 25),
+                          25.ph,
                           CustomButtonRow(
                             saveButtonText: ctx.tr.nextButton,
                             onSave: () {
@@ -266,14 +266,14 @@ class CustomBottomSheet {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your new password';
+                                return ctx.tr.password_validate;
                               } else if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                                return ctx.tr.password_validate2;
                               }
                               return null;
                             },
                           ),
-                          const SizedBox(height: 24),
+                          24.ph,
                           TextFormField(
                             controller: newPassword2Controller,
                             obscureText: obscureText2,
@@ -298,14 +298,14 @@ class CustomBottomSheet {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please confirm your password';
+                                return ctx.tr.resetPasswordDescription;
                               } else if (value != newPassword1Controller.text) {
-                                return 'Passwords do not match';
+                                return ctx.tr.currentPassword_error;
                               }
                               return null;
                             },
                           ),
-                          const SizedBox(height: 25),
+                          25.ph,
                           SizedBox(
                             width: double.infinity,
                             child: BlocListener<ProfileCubit, ProfileStates>(
@@ -314,10 +314,10 @@ class CustomBottomSheet {
                                     Navigator.of(context)
                                         .pop(); // اقفل الـ bottom sheet
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                       SnackBar(
                                         content: Text(
-                                            'Password changed successfully'),
-                                        backgroundColor: Colors.green,
+                                          context.tr.password_change_success  ),
+                                        backgroundColor: ColorsBox.green,
                                       ),
                                     );
                                     HiveHelper.instance.addItem("password",
@@ -328,8 +328,8 @@ class CustomBottomSheet {
                                     );
                                   } else if (state is ProfileError) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text("Something went wrong"),
+                                       SnackBar(
+                                        content: Text(context.tr.error_load),
                                         backgroundColor: Colors.red,
                                       ),
                                     );

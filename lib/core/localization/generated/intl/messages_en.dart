@@ -151,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are you sure you want to cancel this request?",
     ),
     "category": MessageLookupByLibrary.simpleMessage("Category*"),
+    "certificate": MessageLookupByLibrary.simpleMessage("Certificate"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
     "change_password_error": MessageLookupByLibrary.simpleMessage(
       "Error changing password",
@@ -187,6 +188,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
     "createAccount": MessageLookupByLibrary.simpleMessage("Create an account"),
     "currentPassword": MessageLookupByLibrary.simpleMessage("Current Password"),
+    "currentPassword_error": MessageLookupByLibrary.simpleMessage(
+      "Please enter your password correctly",
+    ),
     "days_ago": MessageLookupByLibrary.simpleMessage("Days ago"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
@@ -231,6 +235,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Describe the item you are selling",
     ),
     "describtionWord": MessageLookupByLibrary.simpleMessage("Describtion"),
+    "descriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Enter description",
+    ),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
     "display_all_users": MessageLookupByLibrary.simpleMessage(
       "Display all users",
@@ -248,6 +255,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "error_load": MessageLookupByLibrary.simpleMessage("something went wrong"),
     "error_loading_data": MessageLookupByLibrary.simpleMessage(
       "Error loading data",
+    ),
+    "error_user_loag": MessageLookupByLibrary.simpleMessage(
+      "Error loading user",
     ),
     "favorite": MessageLookupByLibrary.simpleMessage(""),
     "favoriteView": MessageLookupByLibrary.simpleMessage("Favorite"),
@@ -271,6 +281,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "home": MessageLookupByLibrary.simpleMessage(""),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Good Morning"),
     "hours_ago": MessageLookupByLibrary.simpleMessage("Hours ago"),
+    "info": MessageLookupByLibrary.simpleMessage("Info"),
+    "instructor": MessageLookupByLibrary.simpleMessage("Instructor"),
     "just_now": MessageLookupByLibrary.simpleMessage("Just now"),
     "lang": MessageLookupByLibrary.simpleMessage("en"),
     "less": MessageLookupByLibrary.simpleMessage("Less"),
@@ -325,9 +337,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_more_data": MessageLookupByLibrary.simpleMessage(
       "No more data available",
     ),
+    "no_more_user": MessageLookupByLibrary.simpleMessage(
+      "No more user available",
+    ),
     "no_notifications": MessageLookupByLibrary.simpleMessage(
       "No notifications available",
     ),
+    "no_reviews": MessageLookupByLibrary.simpleMessage("No reviews yet"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
       "Discover innovative educational tools and specialized courses in one app.",
@@ -363,6 +379,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordManager": MessageLookupByLibrary.simpleMessage(
       "Password  Manager",
     ),
+    "password_change_success": MessageLookupByLibrary.simpleMessage(
+      "Password changed successfully",
+    ),
+    "password_validate": MessageLookupByLibrary.simpleMessage(
+      "Please enter your new password",
+    ),
+    "password_validate2": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 6 characters",
+    ),
     "popularCourse": MessageLookupByLibrary.simpleMessage("Popular Course"),
     "popularProduct": MessageLookupByLibrary.simpleMessage("Popular Product"),
     "price": MessageLookupByLibrary.simpleMessage("Price *"),
@@ -386,6 +411,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "request_sent": MessageLookupByLibrary.simpleMessage(
       "Request sent successfully",
+    ),
+    "required_field": MessageLookupByLibrary.simpleMessage(
+      "This field is required",
     ),
     "resendCodeButton": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resetPasswordButton": MessageLookupByLibrary.simpleMessage(
@@ -419,6 +447,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Review submitted successfully",
     ),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
+    "search": MessageLookupByLibrary.simpleMessage("Search"),
+    "search_user_error": MessageLookupByLibrary.simpleMessage("User not found"),
+    "search_user_label": MessageLookupByLibrary.simpleMessage("Enter User ID"),
+    "search_user_success": MessageLookupByLibrary.simpleMessage("User found"),
+    "searching": MessageLookupByLibrary.simpleMessage("Searching..."),
     "sendButtonLabel": MessageLookupByLibrary.simpleMessage("Send"),
     "send_otp_error": MessageLookupByLibrary.simpleMessage("Error sending OTP"),
     "send_otp_success": MessageLookupByLibrary.simpleMessage(
@@ -426,6 +459,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "storageWord": MessageLookupByLibrary.simpleMessage("Storage *"),
+    "tobic": MessageLookupByLibrary.simpleMessage("Tobic"),
+    "total_price": MessageLookupByLibrary.simpleMessage("Total Price"),
     "update_category": MessageLookupByLibrary.simpleMessage("Update Category"),
     "update_category_error": MessageLookupByLibrary.simpleMessage(
       "Error updating category",
@@ -451,6 +486,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "verify_otp_success": MessageLookupByLibrary.simpleMessage(
       "OTP verified successfully",
     ),
+    "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
     "yourAddress": MessageLookupByLibrary.simpleMessage("Your Address"),
     "yourAge": MessageLookupByLibrary.simpleMessage("Your Age"),
     "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),

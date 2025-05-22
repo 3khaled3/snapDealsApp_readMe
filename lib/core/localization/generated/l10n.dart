@@ -82,6 +82,11 @@ class Tr {
     );
   }
 
+  /// `Welcome`
+  String get welcome {
+    return Intl.message('Welcome', name: 'welcome', desc: '', args: []);
+  }
+
   /// `Good Morning`
   String get homeTitle {
     return Intl.message('Good Morning', name: 'homeTitle', desc: '', args: []);
@@ -922,6 +927,16 @@ class Tr {
     );
   }
 
+  /// `Enter description`
+  String get descriptionHint {
+    return Intl.message(
+      'Enter description',
+      name: 'descriptionHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Contact with the owner`
   String get ownerInformation {
     return Intl.message(
@@ -967,6 +982,16 @@ class Tr {
     );
   }
 
+  /// `Password changed successfully`
+  String get password_change_success {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'password_change_success',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Log out`
   String get logOut {
     return Intl.message('Log out', name: 'logOut', desc: '', args: []);
@@ -1002,6 +1027,36 @@ class Tr {
     return Intl.message(
       'Current Password',
       name: 'currentPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your password correctly`
+  String get currentPassword_error {
+    return Intl.message(
+      'Please enter your password correctly',
+      name: 'currentPassword_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your new password`
+  String get password_validate {
+    return Intl.message(
+      'Please enter your new password',
+      name: 'password_validate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get password_validate2 {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'password_validate2',
       desc: '',
       args: [],
     );
@@ -1930,6 +1985,111 @@ class Tr {
   /// `Review`
   String get review {
     return Intl.message('Review', name: 'review', desc: '', args: []);
+  }
+
+  /// `Enter User ID`
+  String get search_user_label {
+    return Intl.message(
+      'Enter User ID',
+      name: 'search_user_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Searching...`
+  String get searching {
+    return Intl.message('Searching...', name: 'searching', desc: '', args: []);
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message('Search', name: 'search', desc: '', args: []);
+  }
+
+  /// `User found`
+  String get search_user_success {
+    return Intl.message(
+      'User found',
+      name: 'search_user_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found`
+  String get search_user_error {
+    return Intl.message(
+      'User not found',
+      name: 'search_user_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading user`
+  String get error_user_loag {
+    return Intl.message(
+      'Error loading user',
+      name: 'error_user_loag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more user available`
+  String get no_more_user {
+    return Intl.message(
+      'No more user available',
+      name: 'no_more_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get required_field {
+    return Intl.message(
+      'This field is required',
+      name: 'required_field',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tobic`
+  String get tobic {
+    return Intl.message('Tobic', name: 'tobic', desc: '', args: []);
+  }
+
+  /// `Info`
+  String get info {
+    return Intl.message('Info', name: 'info', desc: '', args: []);
+  }
+
+  /// `Total Price`
+  String get total_price {
+    return Intl.message('Total Price', name: 'total_price', desc: '', args: []);
+  }
+
+  /// `Instructor`
+  String get instructor {
+    return Intl.message('Instructor', name: 'instructor', desc: '', args: []);
+  }
+
+  /// `No reviews yet`
+  String get no_reviews {
+    return Intl.message(
+      'No reviews yet',
+      name: 'no_reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificate`
+  String get certificate {
+    return Intl.message('Certificate', name: 'certificate', desc: '', args: []);
   }
 }
 
