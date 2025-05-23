@@ -55,6 +55,10 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
           _handleFetchedProducts(state.courses);
         }
 
+        if (state is GetAllCoursesError) {
+          _pagingController.error = "Something went wrong";
+        }
+
         return SizedBox(
           height: 276,
           child: PagedListView<int, CourseModel>(
@@ -71,8 +75,6 @@ class _PopularCourseBuilderState extends State<PopularCourseBuilder> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const ShimmerProductCard(),
-                    const SizedBox(height: 16),
                     const Text("Something went wrong. Please try again."),
                     const SizedBox(height: 8),
                     ElevatedButton(

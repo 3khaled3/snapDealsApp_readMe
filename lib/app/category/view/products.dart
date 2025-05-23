@@ -61,6 +61,10 @@ class _ProductsByCategoryListState extends State<ProductsByCategoryList> {
           _handleFetchedProducts(state.products);
         }
 
+        if (state is GetProductsByCategoryError) {
+          _pagingController.error = "Something went wrong";
+        }
+
         return PagedGridView<int, ProductModel>(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           scrollDirection: Axis.vertical,
@@ -102,8 +106,6 @@ class _ProductsByCategoryListState extends State<ProductsByCategoryList> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const ShimmerProductCard(),
-                  const SizedBox(height: 16),
                   const Text("Something went wrong. Please try again."),
                   const SizedBox(height: 8),
                   ElevatedButton(

@@ -53,8 +53,9 @@ class _PopularProductBuilderState extends State<PopularProductBuilder> {
       builder: (context, state) {
         if (state is GetAllProductsSuccess) {
           _handleFetchedProducts(state.products);
+        } else if (state is GetAllProductsError) {
+          _pagingController.error = "Something went wrong";
         }
-
         return SizedBox(
           height: 276,
           child: PagedListView<int, ProductModel>(
@@ -71,8 +72,6 @@ class _PopularProductBuilderState extends State<PopularProductBuilder> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const ShimmerProductCard(),
-                    const SizedBox(height: 16),
                     const Text("Something went wrong. Please try again."),
                     const SizedBox(height: 8),
                     ElevatedButton(
@@ -92,11 +91,11 @@ class _PopularProductBuilderState extends State<PopularProductBuilder> {
               newPageProgressIndicatorBuilder: (_) =>
                   const Center(child: ShimmerProductCard()),
               noItemsFoundIndicatorBuilder: (_) => const Center(
-                child: Column(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.search_off, size: 48, color: Colors.grey),
-                    SizedBox(height: 8),
+                    SizedBox(width: 8),
                     Text("No products found",
                         style: TextStyle(color: Colors.grey)),
                   ],

@@ -56,6 +56,10 @@ class _AllProductListState extends State<AllProductList> {
           _handleFetchedProducts(state.products);
         }
 
+        if (state is GetAllProductsError) {
+          _pagingController.error = "Something went wrong";
+        }
+
         return Column(
           children: [
             Expanded(
@@ -79,8 +83,6 @@ class _AllProductListState extends State<AllProductList> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const ShimmerProductCard(),
-                        const SizedBox(height: 16),
                         const Text("Something went wrong. Please try again."),
                         const SizedBox(height: 8),
                         ElevatedButton(
