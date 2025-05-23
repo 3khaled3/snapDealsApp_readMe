@@ -88,7 +88,7 @@ class CustomTobicState extends State<CustomTobic> {
                     children: [
                       Expanded(
                         child: TextFormField(
-                          decoration: _bottomBorderDecoration('Label *'),
+                          decoration: _bottomBorderDecoration('${context.tr.labelWord} *'),
                           validator: _requiredValidator,
                           controller: controllers['label'],
                         ),
@@ -97,7 +97,7 @@ class CustomTobicState extends State<CustomTobic> {
                       IconButton(
                         onPressed: () => _removeTopic(index),
                         icon:
-                            const Icon(Icons.delete_outline, color: Colors.red),
+                            const Icon(Icons.delete_outline, color: ColorsBox.red),
                       ),
                     ],
                   ),

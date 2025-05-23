@@ -6,6 +6,7 @@ import 'package:snap_deals/app/request_feature/model_view/approve_request_cubit/
 import 'package:snap_deals/app/request_feature/model_view/reject_request_cubit/reject_request_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -15,11 +16,11 @@ class InstractorRequestCard extends StatelessWidget {
   final InstractorRequestModel instractorRequestModel;
 
   String formatTime(DateTime date) {
-    return DateFormat('h:mm a', 'en').format(date);
+    return DateFormat('h:mm a', Tr.current.lang).format(date);
   }
 
   String formatDate(DateTime date) {
-    return DateFormat('dd-MM-yyyy', 'en').format(date);
+    return DateFormat('dd-MM-yyyy', Tr.current.lang).format(date);
   }
 
   @override
@@ -39,7 +40,7 @@ class InstractorRequestCard extends StatelessWidget {
             /// Header
             Row(
               children: [
-                const Icon(Icons.person, color: Colors.grey),
+                const Icon(Icons.person, color: ColorsBox.grey),
                 8.pw,
                 Expanded(
                   child: Text(
@@ -56,14 +57,14 @@ class InstractorRequestCard extends StatelessWidget {
             /// Time and Date Row
             Row(
               children: [
-                const Icon(Icons.access_time, color: Colors.grey, size: 20),
+                const Icon(Icons.access_time, color: ColorsBox.grey, size: 20),
                 6.pw,
                 Text(
                   formatTime(instractorRequestModel.createdAt!),
                   style: AppTextStyles.regular14(),
                 ),
                 const Spacer(),
-                const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
+                const Icon(Icons.calendar_today, color: ColorsBox.grey, size: 20),
                 6.pw,
                 Text(
                   formatDate(instractorRequestModel.createdAt!),
@@ -84,7 +85,7 @@ class InstractorRequestCard extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           foregroundColor: ColorsBox.white,
-                          backgroundColor: Colors.red,
+                          backgroundColor: ColorsBox.red,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -100,8 +101,8 @@ class InstractorRequestCard extends StatelessWidget {
                                 if (context.mounted &&
                                     cubit.state is RejectRequestSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('تم رفض الطلب بنجاح')),
+                                     SnackBar(
+                                        content: Text(context.tr.request_rejected)),
                                   );
                                 }
                               },
@@ -110,7 +111,7 @@ class InstractorRequestCard extends StatelessWidget {
                                 height: 20,
                                 width: 20,
                                 child: CircularProgressIndicator(
-                                    color: Colors.white, strokeWidth: 2),
+                                    color: ColorsBox.white, strokeWidth: 2),
                               )
                             : Text(context.tr.rejectWord,
                                 style: AppTextStyles.semiBold14()),
@@ -128,7 +129,7 @@ class InstractorRequestCard extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           foregroundColor: ColorsBox.white,
-                          backgroundColor: Colors.green,
+                          backgroundColor: ColorsBox.green,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -144,8 +145,8 @@ class InstractorRequestCard extends StatelessWidget {
                                 if (context.mounted &&
                                     cubit.state is ApproveRequestSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('تم قبول الطلب بنجاح')),
+                                     SnackBar(
+                                        content: Text(context.tr.request_accepted)),
                                   );
                                 }
                               },
@@ -154,7 +155,7 @@ class InstractorRequestCard extends StatelessWidget {
                                 height: 20,
                                 width: 20,
                                 child: CircularProgressIndicator(
-                                    color: Colors.white, strokeWidth: 2),
+                                    color: ColorsBox.white, strokeWidth: 2),
                               )
                             : Text(context.tr.acceptWord,
                                 style: AppTextStyles.semiBold14()),

@@ -85,7 +85,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       productName,
                       style: AppTextStyles.medium14(),
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
 

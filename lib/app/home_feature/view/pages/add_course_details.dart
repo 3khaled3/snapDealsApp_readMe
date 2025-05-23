@@ -25,9 +25,11 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:uuid/uuid.dart';
 
 class AddCourseDetailsArgs {
-  final Category? category;
+ final String id;
+  final String name;
+  final IconData icon;
 
-  AddCourseDetailsArgs(this.category);
+  AddCourseDetailsArgs(this.id, this.name, this.icon);
 }
 
 class AddCourseDetails extends StatefulWidget {
@@ -83,8 +85,8 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomAddDetailsTitle(
-                          title: widget.args!.category!.name,
-                          icon: Icons.category,
+                          title: widget.args!.name,
+                          icon: widget.args!.icon,
                         ),
                         23.ph,
 

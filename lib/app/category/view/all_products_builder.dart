@@ -5,7 +5,10 @@ import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.da
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/get_all_products_cubit/get_all_products_cubit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class AllProductList extends StatefulWidget {
   const AllProductList({super.key});
@@ -83,11 +86,11 @@ class _AllProductListState extends State<AllProductList> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Something went wrong. Please try again."),
-                        const SizedBox(height: 8),
+                        Text(context.tr.retry_load_product),
+                        8.ph,
                         ElevatedButton(
                           onPressed: () => _pagingController.refresh(),
-                          child: const Text("Retry"),
+                          child: Text(context.tr.retry),
                         ),
                       ],
                     ),
@@ -113,14 +116,14 @@ class _AllProductListState extends State<AllProductList> {
                   ),
                   newPageProgressIndicatorBuilder: (_) =>
                       const Center(child: ShimmerProductCard()),
-                  noItemsFoundIndicatorBuilder: (_) => const Center(
+                  noItemsFoundIndicatorBuilder: (_) =>  Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.search_off, size: 48, color: Colors.grey),
-                        SizedBox(height: 8),
-                        Text("No products found",
-                            style: TextStyle(color: Colors.grey)),
+                        const Icon(Icons.search_off, size: 48, color: ColorsBox.grey),
+                        8.ph,
+                        Text(context.tr.no_more_data,
+                            style: AppTextStyles.regular16().copyWith(color: ColorsBox.grey)),
                       ],
                     ),
                   ),

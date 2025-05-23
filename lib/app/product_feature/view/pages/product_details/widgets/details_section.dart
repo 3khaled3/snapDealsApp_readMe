@@ -74,7 +74,7 @@ class CustomDetailsGrid extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: ColorsBox.paleGrey,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -86,7 +86,7 @@ class CustomDetailsGrid extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.medium16().copyWith(
-                        color: Colors.grey,
+                        color: ColorsBox.grey,
                       ),
                     ),
                     4.ph,
@@ -95,7 +95,7 @@ class CustomDetailsGrid extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.semiBold14().copyWith(
-                        color: Colors.black87,
+                        color: ColorsBox.black,
                       ),
                     ),
                   ],

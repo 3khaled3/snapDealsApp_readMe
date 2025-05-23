@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +7,7 @@ import 'package:snap_deals/app/admin_feature/view/pages/edit_category.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/category/view/category_detials.dart';
-import 'package:snap_deals/app/category/view/products.dart';
-import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_categories.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -26,17 +24,47 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
   bool isMore = false;
   final EditCategoryCubit editCategoryCubit = EditCategoryCubit();
 
+
+
+  final List<String> originalCategories = [
+    Tr.current.courses,
+    Tr.current.mobilesAndTablets,
+    Tr.current.more,
+    Tr.current.drawingTools,
+    Tr.current.engineeringTools,
+    Tr.current.less
+  ];
+
+  final List<IconData> originalIcons = [
+    Icons.school_outlined,
+    Icons.phone_iphone_outlined,
+    Icons.apps_outlined,
+    Icons.school_outlined,
+    Icons.engineering_outlined,
+    Icons.apps_outlined
+  ];
+
+   Map<String, String> categoriesID ={
+    Tr.current.courses: '6802df0a27ad6e735473aef8',
+    Tr.current.mobilesAndTablets: "6802df1b27ad6e735473aefb",
+    Tr.current.drawingTools: '6802df4d27ad6e735473af01',
+    Tr.current.engineeringTools: '6802df7227ad6e735473af04',
+    Tr.current.electronics: '6802df4027ad6e735473aefe',
+  };
+  
+
   // أيقونات ثابتة حسب اسم التصنيف
   final Map<String, IconData> categoryIcons = {
     Tr.current.medicalTools: Icons.medical_services_outlined,
-    Tr.current.courses: Icons.school_outlined,
-    Tr.current.mobilesAndTablets: Icons.phone_iphone_outlined,
-    Tr.current.drawingTools: Icons.school_outlined,
-    Tr.current.engineeringTools: Icons.engineering_outlined,
-    Tr.current.electronics: Icons.computer_outlined,
+    '6802df0a27ad6e735473aef8': Icons.school_outlined,
+    "6802df1b27ad6e735473aefb": Icons.phone_iphone_outlined,
+    '6802df4d27ad6e735473af01': Icons.school_outlined,
+    '6802df7227ad6e735473af04': Icons.engineering_outlined,
+    '6802df4027ad6e735473aefe': Icons.computer_outlined,
     Tr.current.more: Icons.expand_more,
     Tr.current.less: Icons.expand_less,
   };
+  
 
   @override
   void initState() {
@@ -52,22 +80,26 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
         if (state is GetCategoriesLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is GetCategoriesError) {
-          return Center(child: Text("Something went wrong"));
+          return const CustomCategories();
         } else if (state is GetCategoriesSuccess) {
           final allCategories = state.categories;
           final List<String> categoryNames =
               allCategories.map((c) => c.name).toList();
+          final List<String?> categoryId =
+              allCategories.map((c) => c.id).toList();
 
           final displayNames = isMore
               ? [...categoryNames, context.tr.less]
               : [...categoryNames.take(3), context.tr.more];
 
-          return Wrap(
+          return 
+          Wrap(
             runSpacing: 20,
             spacing: 15,
             children: List.generate(displayNames.length, (index) {
               final name = displayNames[index];
-              final icon = categoryIcons[name] ?? Icons.category;
+              final id = categoryId[index];
+              final icon = categoryIcons[id] ?? Icons.category;
 
               return SizedBox(
                 width: 80,

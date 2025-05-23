@@ -15,6 +15,7 @@ import 'package:snap_deals/app/product_feature/model_view/update_product_cubit/u
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_edit_topic.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class EditDetailsArgs {
@@ -95,7 +96,7 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                   title: context.tr.editProduct,
                   icon: Icons.arrow_back_ios_new,
                 ),
-                const Divider(thickness: 1, color: Colors.black),
+                const Divider(thickness: 1, color: ColorsBox.black),
                 15.ph,
                 CustomAddDetailsTitle(
                   title: widget.args!.product!.category.name,

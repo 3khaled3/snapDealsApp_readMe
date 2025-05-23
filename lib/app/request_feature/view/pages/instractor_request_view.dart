@@ -8,8 +8,6 @@ import 'package:snap_deals/app/request_feature/model_view/reject_request_cubit/r
 import 'package:snap_deals/app/request_feature/view/widget/instractor_request_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
 
 class InstractorRequestViewArgs {
   final String courseId;
@@ -79,8 +77,8 @@ class InstractorRequestView extends StatelessWidget {
                           },
                         );
                       } else if (state is GetRequestsByIdError) {
-                        return const Center(
-                            child: Text("حدث خطأ أثناء تحميل البيانات."));
+                        return  Center(
+                            child: Text(context.tr.error_load));
                       } else {
                         return const SizedBox.shrink();
                       }

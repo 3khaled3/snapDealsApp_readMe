@@ -18,9 +18,9 @@ class DescriptionSection extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorsBox.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: ColorsBox.greyReceivedMessage),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class DescriptionSection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: ColorsBox.paleGrey,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(

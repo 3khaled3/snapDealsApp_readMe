@@ -20,12 +20,13 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:uuid/uuid.dart';
 
 class AddDetailsArgs {
-  final Category? category;
+  final String id;
+  final String name;
+  final IconData icon;
 
-  AddDetailsArgs(
-    this.category,
-  );
+  AddDetailsArgs(this.id, this.name, this.icon);
 }
+
 
 class AddDetailsView extends StatefulWidget {
   const AddDetailsView({
@@ -81,8 +82,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomAddDetailsTitle(
-                          title: widget.args!.category!.name,
-                          icon: Icons.category,
+                          title: widget.args!.name,
+                          icon: widget.args!.icon,
                         ),
                         23.ph,
 
@@ -183,8 +184,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                                       price: double.parse(priceController.text),
                                       images: [],
                                       category: Category(
-                                        id: widget.args!.category!.id,
-                                        name: widget.args!.category!.name,
+                                        id: widget.args!.id,
+                                        name: widget.args!.name,
                                       ),
                                       visit: 0,
                                       details: topicsKey.currentState

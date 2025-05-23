@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_categories.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/popular_course_builder.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/popular_product_builder.dart';
@@ -28,12 +29,12 @@ class HomeView extends StatelessWidget {
           18.ph,
           HomeAppBar(ProfileCubit.instance.state.profile.name),
           18.ph,
-          const Center(child: CategoriesAvatar()),
+          const Center(child: CustomCategories()),
           18.ph,
-          CustomTextFormField(
-            hintText: context.tr.hintSearch,
-            suffixIcon: Icons.search,
-          ),
+          // CustomTextFormField(
+          //   hintText: context.tr.hintSearch,
+          //   suffixIcon: Icons.search,
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             child: Text(

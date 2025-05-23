@@ -7,6 +7,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/category_tab.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 
 class CategoryDetailsArgs {
   final String title;
@@ -30,35 +31,42 @@ class _CategoryDetailsState extends State<CategoryDetails>
   late TabController _tabController;
   List<Category> allCategories = [];
   int initialIndex = 0;
+
   @override
   void initState() {
     super.initState();
+    // لا تستخدم context أو ترجمات هنا!
+  }
 
-    allCategories = [
-      Category(id: "6802df7227ad6e735473af04", name: "Engineering Tools"),
-      Category(id: "6802df4d27ad6e735473af01", name: "Drowing Tools"),
-      Category(id: "6802df4027ad6e735473aefe", name: "Electronic"),
-      Category(id: "6802df1b27ad6e735473aefb", name: "Mobiles and Tablets"),
-      Category(id: "6802df0a27ad6e735473aef8", name: "Courses"),
-    ];
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    // Determine the initial tab index
-    if (widget.args.id == null || widget.args.title.toLowerCase() == "all") {
-      initialIndex = 0; // Select 'All' tab
-    } else {
-      final categoryIndex =
-          allCategories.indexWhere((cat) => cat.id == widget.args.id);
-      initialIndex = categoryIndex != -1 ? categoryIndex + 1 : 0;
+    if (allCategories.isEmpty) {
+      allCategories = [
+        Category(id: "6802df7227ad6e735473af04", name: context.tr.engineeringTools),
+        Category(id: "6802df4d27ad6e735473af01", name: context.tr.drawingTools),
+        Category(id: "6802df4027ad6e735473aefe", name: context.tr.electronics),
+        Category(id: "6802df1b27ad6e735473aefb", name: context.tr.mobilesAndTablets),
+        Category(id: "6802df0a27ad6e735473aef8", name: context.tr.courses),
+      ];
+
+      if (widget.args.id == null || widget.args.title.toLowerCase() == context.tr.all) {
+        initialIndex = 0;
+      } else {
+        final categoryIndex = allCategories.indexWhere((cat) => cat.id == widget.args.id);
+        initialIndex = categoryIndex != -1 ? categoryIndex + 1 : 0;
+      }
+
+      _tabController = TabController(
+        length: allCategories.length + 1,
+        vsync: this,
+        initialIndex: initialIndex,
+      );
+      _tabController.addListener(() {
+        setState(() {});
+      });
     }
-
-    _tabController = TabController(
-      length: allCategories.length + 1,
-      vsync: this,
-      initialIndex: initialIndex,
-    );
-    _tabController.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -73,7 +81,7 @@ class _CategoryDetailsState extends State<CategoryDetails>
       body: SafeArea(
         child: Column(
           children: [
-            const CustomAppBar(title: "Categories"),
+            CustomAppBar(title: context.tr.categories),
             10.ph,
             Expanded(
               child: Column(
@@ -86,8 +94,7 @@ class _CategoryDetailsState extends State<CategoryDetails>
                     labelPadding: const EdgeInsets.symmetric(horizontal: 4),
                     indicatorPadding: const EdgeInsets.all(0),
                     padding: const EdgeInsetsDirectional.only(start: 8),
-                    overlayColor:
-                        const WidgetStatePropertyAll(Colors.transparent),
+                    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
                     splashBorderRadius: BorderRadius.circular(100),
                     indicator: const BoxDecoration(),
                     tabs: [

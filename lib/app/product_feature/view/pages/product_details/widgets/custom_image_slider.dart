@@ -63,10 +63,10 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                     imageUrl: widget.images[index],
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
+                      baseColor: ColorsBox.greyReceivedMessage,
+                      highlightColor: ColorsBox.paleGrey,
                       child: Container(
-                        color: Colors.white,
+                        color: ColorsBox.white,
                       ),
                     ),
                     errorWidget: (context, url, error) =>
@@ -88,13 +88,13 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
           child: Container(
             width: 40,
             height: 40,
-            decoration: const BoxDecoration(
+            decoration:  const BoxDecoration(
               shape: BoxShape.circle,
-              color: Color.fromARGB(109, 0, 0, 0),
+              color: ColorsBox.black,
             ),
             child: IconButton(
               icon: const Icon(Icons.arrow_back_ios,
-                  color: Colors.white, size: 20),
+                  color: ColorsBox.white, size: 20),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -120,11 +120,11 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                           height: 40,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Color.fromARGB(109, 0, 0, 0),
+                            color: ColorsBox.black,
                           ),
                           child: IconButton(
                             icon: const Icon(Icons.edit,
-                                color: Colors.white, size: 20),
+                                color: ColorsBox.white, size: 20),
                             onPressed: () {
                               GoRouter.of(context).push(
                                 EditDetailsView.routeName,
@@ -142,7 +142,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                     height: 40,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color.fromARGB(109, 0, 0, 0),
+                      color: ColorsBox.black,
                     ),
                     child: IconButton(
                       icon: _isDeleting
@@ -152,11 +152,11 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
                                 valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.red),
+                                    AlwaysStoppedAnimation<Color>(ColorsBox.red),
                               ),
                             )
                           : const Icon(Icons.delete,
-                              color: Colors.red, size: 23),
+                              color: ColorsBox.red, size: 23),
                       onPressed: _isDeleting
                           ? null
                           : () async {
@@ -215,7 +215,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
       height: 8,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: _currentIndex == index ? Colors.blue : Colors.grey,
+        color: _currentIndex == index ? ColorsBox.brightBlue : ColorsBox.grey,
       ),
     );
   }

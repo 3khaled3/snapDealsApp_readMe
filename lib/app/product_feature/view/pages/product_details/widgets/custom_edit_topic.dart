@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -75,7 +76,7 @@ class CustomEditTobicState extends State<CustomEditTobic> {
 
   String? _requiredValidator(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'This field is required';
+      return context.tr.required_field;
     }
     return null;
   }
@@ -122,18 +123,18 @@ class CustomEditTobicState extends State<CustomEditTobic> {
                       IconButton(
                         onPressed: () => _removeTopic(index),
                         icon:
-                            const Icon(Icons.delete_outline, color: Colors.red),
+                            const Icon(Icons.delete_outline, color: ColorsBox.red),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  10.ph,
                   CustomTextFormField(
-                    hintText: 'Enter description',
+                    hintText: context.tr.describtionHint,
                     isPrice: false,
                     validator: _requiredValidator,
                     controller: controllers['description'],
                   ),
-                  const SizedBox(height: 23),
+                  23.ph,
                 ],
               );
             },
@@ -141,7 +142,7 @@ class CustomEditTobicState extends State<CustomEditTobic> {
           Row(
             children: [
               Text(
-                'Topic *',
+                '${context.tr.tobic} *',
                 style: AppTextStyles.semiBold12()
                     .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               ),

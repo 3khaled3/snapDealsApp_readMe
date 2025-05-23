@@ -62,8 +62,8 @@ class MyRequestView extends StatelessWidget {
                           },
                         );
                       } else if (state is GetMyRequestsError) {
-                        return const Center(
-                            child: Text("حدث خطأ أثناء تحميل البيانات."));
+                        return  Center(
+                            child: Text(context.tr.error_load));
                       } else {
                         return const SizedBox.shrink();
                       }

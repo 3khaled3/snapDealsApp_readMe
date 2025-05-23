@@ -25,7 +25,7 @@ class MainDetailsSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: ColorsBox.paleGrey,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

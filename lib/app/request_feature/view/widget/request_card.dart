@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snap_deals/app/request_feature/data/model/request/request.dart';
 import 'package:snap_deals/app/request_feature/view/widget/request_dialog.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -11,19 +13,19 @@ class RequestCard extends StatelessWidget {
   final RequestModel request;
 
   String formatTime(DateTime date) {
-    return DateFormat('h:mm a', 'en').format(date);
+    return DateFormat('h:mm a', Tr.current.lang).format(date);
   }
 
   String formatDate(DateTime date) {
-    return DateFormat('dd-MM-yyyy', 'en').format(date);
+    return DateFormat('dd-MM-yyyy', Tr.current.lang).format(date);
   }
 
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case 'accepted':
-        return const Color(0xFF27AE60);
+        return  ColorsBox.green;
       case 'rejected':
-        return const Color(0xFFE74C3C);
+        return ColorsBox.red;
       case 'cancelled':
         return const Color(0xFF95A5A6);
       default:
@@ -64,7 +66,7 @@ class RequestCard extends StatelessWidget {
                 const Spacer(),
                 Tooltip(
 
-                  message: 'Cancel Request',
+                  message: context.tr.cancel_request,
                   textStyle: AppTextStyles.regular12(),
                   child: InkWell(
                     onTap: () =>
@@ -72,7 +74,7 @@ class RequestCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     child: const Padding(
                       padding: EdgeInsets.all(6),
-                      child: Icon(Icons.cancel_outlined, color: Colors.red),
+                      child: Icon(Icons.cancel_outlined, color: ColorsBox.red),
                     ),
                   ),
                 ),
@@ -82,7 +84,7 @@ class RequestCard extends StatelessWidget {
 
             /// Course Title
             Text(
-              request.course?.title ?? 'No Course Title',
+              request.course?.title ?? context.tr.no_course_title,
               style: AppTextStyles.bold16().copyWith(fontSize: 17),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -92,9 +94,9 @@ class RequestCard extends StatelessWidget {
 
             /// Request ID
             Text(
-              'Request ID: ${request.id}',
+              '${context.tr.request_id} ${request.id}',
               style:
-                  AppTextStyles.semiBold12().copyWith(color: Colors.grey[700]),
+                  AppTextStyles.semiBold12().copyWith(color: ColorsBox.grey700),
             ),
 
             12.ph,
@@ -102,14 +104,14 @@ class RequestCard extends StatelessWidget {
             /// Date & Time Row
             Row(
               children: [
-                const Icon(Icons.access_time, color: Colors.grey, size: 20),
+                const Icon(Icons.access_time, color: ColorsBox.grey, size: 20),
                 6.pw,
                 Text(
                   formatTime(request.createdAt!),
                   style: AppTextStyles.regular12(),
                 ),
                 const Spacer(),
-                const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
+                const Icon(Icons.calendar_today, color: ColorsBox.grey, size: 20),
                 6.pw,
                 Text(
                   formatDate(request.createdAt!),

@@ -7,6 +7,7 @@ import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_image_slider.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
@@ -54,7 +55,7 @@ class CourseDetailsBody extends StatefulWidget {
 class _CourseDetailsBodyState extends State<CourseDetailsBody> {
   int selectedIndex = 0;
 
-  final List<String> tabs = ['About', 'Lessons', 'Reviews'];
+  final List<String> tabs = [Tr.current.about, Tr.current.lessons, Tr.current.reviews];
 
   @override
   Widget build(BuildContext context) {
