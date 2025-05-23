@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
@@ -27,7 +28,12 @@ class HomeView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           18.ph,
-          HomeAppBar(ProfileCubit.instance.state.profile.name),
+          BlocBuilder<ProfileCubit, ProfileStates>(
+            bloc: ProfileCubit.instance,
+            builder: (context, state) {
+              return HomeAppBar(ProfileCubit.instance.state.profile.name);
+            },
+          ),
           18.ph,
           const Center(child: CustomCategories()),
           18.ph,

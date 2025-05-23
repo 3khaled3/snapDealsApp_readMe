@@ -60,7 +60,7 @@ class RequestCard extends StatelessWidget {
                   child: Text(
                     request.status?.toUpperCase() ?? '',
                     style: AppTextStyles.semiBold12()
-                        .copyWith(color: Colors.white),
+                        .copyWith(color: ColorsBox.white),
                   ),
                 ),
                 const Spacer(),
