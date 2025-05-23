@@ -50,18 +50,6 @@ abstract class HomeRouter {
     ),
 
     GoRoute(
-      path: ProductsView.routeName,
-      builder: (context, state) {
-        ProductsViewArgs? args;
-        if (state.extra != null) {
-          args = state.extra as ProductsViewArgs;
-        }
-
-        return ProductsView(args: args);
-      },
-    ),
-
-    GoRoute(
       path: CoursesView.routeName,
       builder: (context, state) {
         CoursesViewArgs? args;

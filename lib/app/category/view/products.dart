@@ -1,191 +1,138 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/get-products_by_category/get_products_by_category_cubit.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
-import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
 
-class ProductsViewArgs {
-  final String title;
-  final String? id;
+class ProductsByCategoryList extends StatefulWidget {
+  final String id; // category ID
 
-  ProductsViewArgs({required this.id, required this.title});
-}
-
-class ProductsView extends StatefulWidget {
-  const ProductsView({super.key, this.args});
-  final ProductsViewArgs? args;
-  static const String routeName = '/products_route';
+  const ProductsByCategoryList({super.key, required this.id});
 
   @override
-  State<ProductsView> createState() => _ProductsViewState();
+  State<ProductsByCategoryList> createState() => _ProductsByCategoryListState();
 }
 
-class _ProductsViewState extends State<ProductsView> {
-  final ScrollController _scrollController = ScrollController();
-  final GetProductsByCategoryCubit _cubit = GetProductsByCategoryCubit();
+class _ProductsByCategoryListState extends State<ProductsByCategoryList> {
+  int _nextPageKey = 1;
+  final int _limit = 20;
+  final PagingController<int, ProductModel> _pagingController =
+      PagingController(firstPageKey: 1);
 
-  int _page = 1;
-  final int _limit = 10;
-  bool _isLoading = false;
-  bool _hasMore = true;
-  List<ProductModel> _products = [];
+  late GetProductsByCategoryCubit _cubit;
 
   @override
   void initState() {
     super.initState();
-    _loadInitialProducts();
-    _scrollController.addListener(_onScroll);
+    _cubit = GetProductsByCategoryCubit();
+
+    _pagingController.addPageRequestListener((pageKey) {
+      _cubit.getProductsByCategory(
+        page: pageKey.toString(),
+        limit: _limit.toString(),
+        id: widget.id,
+      );
+    });
   }
 
-  @override
-  void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
-    super.dispose();
-  }
+  Future<void> _handleFetchedProducts(List<ProductModel> products) async {
+    try {
+      final isLastPage = products.isEmpty;
 
-  void _loadInitialProducts() {
-    _cubit.getProductsByCategory(
-      page: _page.toString(),
-      limit: _limit.toString(),
-      id: widget.args!.id!,
-    );
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 200 &&
-        !_isLoading &&
-        _hasMore) {
-      _loadMoreProducts();
+      if (isLastPage) {
+        _pagingController.appendLastPage(products);
+      } else {
+        _nextPageKey++;
+        _pagingController.appendPage(products, _nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
     }
-  }
-
-  void _loadMoreProducts() {
-    setState(() => _isLoading = true);
-    _page++;
-    _cubit.getProductsByCategory(
-      page: _page.toString(),
-      limit: _limit.toString(),
-      id: widget.args!.id!,
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // CustomAppBar(title: widget.args!.title),
-        // 17.ph,
-        // // CustomTextFormField(
-        // //   hintText: context.tr.hintSearch,
-        // //   suffixIcon: Icons.search,
-        // // ),
-        // 20.ph,
-        Expanded(
-          child: BlocConsumer<GetProductsByCategoryCubit,
-              GetProductsByCategoryState>(
-            bloc: _cubit,
-            listener: (context, state) {
-              if (state is GetProductsByCategorySuccess) {
-                _isLoading = false;
-                if (_page == 1) {
-                  _products = state.products;
-                } else {
-                  _products.addAll(state.products);
-                }
+    return BlocBuilder<GetProductsByCategoryCubit, GetProductsByCategoryState>(
+      bloc: _cubit,
+      builder: (context, state) {
+        if (state is GetProductsByCategorySuccess) {
+          _handleFetchedProducts(state.products);
+        }
 
-                if (state.products.length < _limit) {
-                  _hasMore = false;
-                }
-              } else if (state is GetProductsByCategoryError) {
-                _isLoading = false;
-                _page--;
-              }
-            },
-            builder: (context, state) {
-              if (state is GetProductsByCategoryLoading && _page == 1) {
-                return GridView.builder(
-                  itemCount: 4,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.66,
-                  ),
-                  itemBuilder: (context, index) => const ShimmerProductCard(),
-                );
-              } else if (state is GetProductsByCategoryError && _page == 1) {
-                return Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        context.tr.error_load,
-                        style: AppTextStyles.semiBold16(),
-                      ),
-                      ElevatedButton(
-                        onPressed: _loadInitialProducts,
-                        child: Text(context.tr.retry),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              return Stack(
-                children: [
-                  GridView.builder(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.only(
-                      bottom: 10,
-                      left: 11,
-                      right: 11,
-                    ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.66,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
-                    itemCount:
-                        _products.length + (_isLoading || !_hasMore ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index < _products.length) {
-                        return ProductCard(product: _products[index]);
-                      } else if (_isLoading) {
-                        return const ShimmerProductCard();
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  ),
-                  if (state is GetProductsByCategoryError && _page > 1)
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: GestureDetector(
-                        onTap: _loadMoreProducts,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.red,
-                          child: Text(
-                            context.tr.retry_load_product,
-                            style: AppTextStyles.semiBold16().copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              );
-            },
+        return PagedGridView<int, ProductModel>(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 0.66,
           ),
-        ),
-      ],
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate<ProductModel>(
+            itemBuilder: (context, product, index) => Padding(
+              padding: EdgeInsets.zero,
+              child: ProductCard(product: product),
+            ),
+            firstPageProgressIndicatorBuilder: (_) => const Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: ShimmerProductCard()),
+                    Expanded(child: ShimmerProductCard()),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: ShimmerProductCard()),
+                    Expanded(child: ShimmerProductCard()),
+                  ],
+                ),
+              ],
+            ),
+            newPageProgressIndicatorBuilder: (_) =>
+                const Center(child: ShimmerProductCard()),
+            firstPageErrorIndicatorBuilder: (_) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const ShimmerProductCard(),
+                  const SizedBox(height: 16),
+                  const Text("Something went wrong. Please try again."),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () => _pagingController.refresh(),
+                    child: const Text("Retry"),
+                  ),
+                ],
+              ),
+            ),
+            noItemsFoundIndicatorBuilder: (_) => const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.search_off, size: 48, color: Colors.grey),
+                  SizedBox(height: 8),
+                  Text("No products in this category",
+                      style: TextStyle(color: Colors.grey)),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 }

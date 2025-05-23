@@ -14,7 +14,7 @@ class GetAllProductsCubit extends Cubit<GetAllProductsState> {
       {required String limit, required String page}) async {
     emit(GetAllProductsLoading());
     final result =
-        await _productRepository.getProducts(limit: limit, page: page);
+        await _productRepository.getProducts(limit: "3", page: page);
     result.fold((l) => emit(GetAllProductsError()), (r) {
       final List productsMap = r["data"];
       final List<ProductModel> products =

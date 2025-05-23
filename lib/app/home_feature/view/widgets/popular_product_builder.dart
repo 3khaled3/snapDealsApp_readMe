@@ -4,9 +4,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/get_all_products_cubit/get_all_products_cubit.dart';
-import 'package:snap_deals/core/extensions/context_extension.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class PopularProductBuilder extends StatefulWidget {
   const PopularProductBuilder({super.key});
@@ -16,154 +14,104 @@ class PopularProductBuilder extends StatefulWidget {
 }
 
 class _PopularProductBuilderState extends State<PopularProductBuilder> {
-  final ScrollController _scrollController = ScrollController();
-  final GetAllProductsCubit getAllProductsCubit = GetAllProductsCubit();
+  int _nextPageKey = 1;
+  final PagingController<int, ProductModel> _pagingController =
+      PagingController(firstPageKey: 1);
 
-  int page = 1;
-  final int limit = 10;
-  bool _isLoading = false;
-  bool _hasMore = true;
-  List<ProductModel> _products = [];
+  late GetAllProductsCubit _productCubit;
 
   @override
   void initState() {
     super.initState();
-    _loadInitialProducts();
-    _scrollController.addListener(_onScroll);
+
+    _productCubit = GetAllProductsCubit();
+    _pagingController.addPageRequestListener((pageKey) {
+      _productCubit.getAllProducts(limit: "20", page: pageKey.toString());
+    });
   }
 
-  @override
-  void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
-    super.dispose();
-  }
+  Future<void> _handleFetchedProducts(List<ProductModel> products) async {
+    try {
+      final isLastPage = products.isEmpty;
 
-  void _loadInitialProducts() {
-    getAllProductsCubit.getAllProducts(
-      page: page.toString(),
-      limit: limit.toString(),
-    );
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 200 &&
-        !_isLoading &&
-        _hasMore) {
-      _loadMoreProducts();
+      if (isLastPage) {
+        _pagingController.appendLastPage(products);
+      } else {
+        _nextPageKey++;
+        _pagingController.appendPage(products, _nextPageKey);
+      }
+      print('Added new items');
+    } catch (error) {
+      _pagingController.error = error;
     }
-  }
-
-  void _loadMoreProducts() {
-    setState(() => _isLoading = true);
-    page++;
-    getAllProductsCubit.getAllProducts(
-      page: page.toString(),
-      limit: limit.toString(),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 275,
-      child: BlocConsumer<GetAllProductsCubit, GetAllProductsState>(
-        bloc: getAllProductsCubit,
-        listener: (context, state) {
-          if (state is GetAllProductsSuccess) {
-            _isLoading = false;
+    return BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
+      bloc: _productCubit,
+      builder: (context, state) {
+        if (state is GetAllProductsSuccess) {
+          _handleFetchedProducts(state.products);
+        }
 
-            if (page == 1) {
-              _products = state.products;
-            } else {
-              _products.addAll(state.products);
-            }
-
-            if (state.products.length < limit) {
-              _hasMore = false;
-            }
-          } else if (state is GetAllProductsError) {
-            _isLoading = false;
-            page--;
-          }
-        },
-        builder: (context, state) {
-          if (state is GetAllProductsLoading && page == 1) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children:
-                    List.generate(2, (index) => const ShimmerProductCard()),
+        return SizedBox(
+          height: 276,
+          child: PagedListView<int, ProductModel>(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<ProductModel>(
+              itemBuilder: (context, product, index) => Padding(
+                padding: EdgeInsets.zero,
+                child: ProductCard(product: product),
               ),
-            );
-          } else if (state is GetAllProductsError && page == 1) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              firstPageErrorIndicatorBuilder: (_) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const ShimmerProductCard(),
+                    const SizedBox(height: 16),
+                    const Text("Something went wrong. Please try again."),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () => _pagingController.refresh(),
+                      child: const Text("Retry"),
+                    ),
+                  ],
+                ),
+              ),
+              firstPageProgressIndicatorBuilder: (_) => const Row(
                 children: [
-                  Text(
-                    context.tr.error_loading_data,
-                    style: AppTextStyles.semiBold20(),
-                  ),
-                  ElevatedButton(
-                    onPressed: _loadInitialProducts,
-                    child: Text(context.tr.retry),
-                  ),
+                  Expanded(child: ShimmerProductCard()),
+                  SizedBox(width: 8),
+                  Expanded(child: ShimmerProductCard()),
                 ],
               ),
-            );
-          } else {
-            return Stack(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  controller: _scrollController,
-                  child: Row(
-                    children: [
-                      ..._products.map(
-                        (product) => ProductCard(product: product),
-                      ),
-                      if (_isLoading)
-                        Row(
-                          children: List.generate(
-                              2, (index) => const ShimmerProductCard()),
-                        ),
-                      if (!_hasMore && _products.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Center(
-                              child: Text(
-                            context.tr.no_more_data,
-                            style: AppTextStyles.semiBold20(),
-                          )),
-                        ),
-                    ],
-                  ),
+              newPageProgressIndicatorBuilder: (_) =>
+                  const Center(child: ShimmerProductCard()),
+              noItemsFoundIndicatorBuilder: (_) => const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.search_off, size: 48, color: Colors.grey),
+                    SizedBox(height: 8),
+                    Text("No products found",
+                        style: TextStyle(color: Colors.grey)),
+                  ],
                 ),
-                if (state is GetAllProductsError && page > 1)
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: _loadMoreProducts,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        color: ColorsBox.red.withOpacity(0.7),
-                        child: Text(
-                          context.tr.retry_load_more,
-                          style: AppTextStyles.semiBold16().copyWith(
-                            color: ColorsBox.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            );
-          }
-        },
-      ),
+              ),
+            ),
+          ),
+        );
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 }

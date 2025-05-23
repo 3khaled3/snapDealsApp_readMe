@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
+import 'package:snap_deals/app/category/view/all_courses_builder.dart';
+import 'package:snap_deals/app/category/view/all_products_builder.dart';
 import 'package:snap_deals/app/category/view/products.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/category_tab.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
@@ -28,12 +30,10 @@ class _CategoryDetailsState extends State<CategoryDetails>
   late TabController _tabController;
   List<Category> allCategories = [];
   int initialIndex = 0;
-
   @override
   void initState() {
     super.initState();
 
-    // if (state is GetCategoriesSuccess) {
     allCategories = [
       Category(id: "6802df7227ad6e735473af04", name: "Engineering Tools"),
       Category(id: "6802df4d27ad6e735473af01", name: "Drowing Tools"),
@@ -42,16 +42,20 @@ class _CategoryDetailsState extends State<CategoryDetails>
       Category(id: "6802df0a27ad6e735473aef8", name: "Courses"),
     ];
 
-    if (widget.args.title.toLowerCase() == "all") {
-      initialIndex = 0;
+    // Determine the initial tab index
+    if (widget.args.id == null || widget.args.title.toLowerCase() == "all") {
+      initialIndex = 0; // Select 'All' tab
     } else {
       final categoryIndex =
           allCategories.indexWhere((cat) => cat.id == widget.args.id);
       initialIndex = categoryIndex != -1 ? categoryIndex + 1 : 0;
     }
 
-    _tabController =
-        TabController(length: allCategories.length + 1, vsync: this);
+    _tabController = TabController(
+      length: allCategories.length + 1,
+      vsync: this,
+      initialIndex: initialIndex,
+    );
     _tabController.addListener(() {
       setState(() {});
     });
@@ -105,15 +109,13 @@ class _CategoryDetailsState extends State<CategoryDetails>
                     child: TabBarView(
                       controller: _tabController,
                       children: [
-                        ProductsView(
-                          args: ProductsViewArgs(title: "All", id: ""),
-                        ),
+                        const AllProductList(),
                         ...allCategories.map((category) {
-                          return ProductsView(
-                            args: ProductsViewArgs(
-                              title: category.name,
-                              id: category.id,
-                            ),
+                          if (category.id == "6802df0a27ad6e735473aef8") {
+                            return const AllCoursesList();
+                          }
+                          return ProductsByCategoryList(
+                            id: category.id ?? "",
                           );
                         }).toList(),
                       ],
