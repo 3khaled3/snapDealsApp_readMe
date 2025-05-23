@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("خطأ في إضافة المنتج"),
         "add_product_success":
             MessageLookupByLibrary.simpleMessage("تم إضافة المنتج بنجاح"),
+        "all": MessageLookupByLibrary.simpleMessage("الكل"),
         "appName": MessageLookupByLibrary.simpleMessage("SnapDeals"),
         "areYouSureDeleteAccount": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء."),

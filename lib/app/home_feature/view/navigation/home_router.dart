@@ -5,11 +5,11 @@ import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit
 import 'package:snap_deals/app/home_feature/view/pages/add_course_details.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_view.dart';
-import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
+import 'package:snap_deals/app/category/view/courses.dart';
 import 'package:snap_deals/app/home_feature/view/pages/favorite_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/home_view.dart';
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
-import 'package:snap_deals/app/home_feature/view/pages/products.dart';
+import 'package:snap_deals/app/category/view/products.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/create_course_cubit/create_course_cubit.dart';
 import 'package:snap_deals/app/product_feature/model_view/create_product_cubit/create_product_cubit.dart';
 

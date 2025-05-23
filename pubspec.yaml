@@ -72,6 +72,8 @@ flutter:
     - assets/service-account.json
     - assets/images/
     - assets/svg/
+    - assets/
+    - assets/3333r2.PNG
 
   fonts:
     - family: Lora

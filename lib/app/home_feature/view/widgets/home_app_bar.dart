@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
@@ -39,8 +41,26 @@ class HomeAppBar extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const CircleAvatar(
-                backgroundImage: AssetImage(AppImageAssets.profileImage),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(99999),
+                child: CachedNetworkImage(
+                  imageUrl: ProfileCubit.instance.state.profile.profileImg ?? "",
+                  placeholder: (context, url) => SvgPicture.asset(
+                    AppImageAssets.defaultProfile,
+                    height: 48,
+                    width: 48,
+                    fit: BoxFit.cover,
+                  ),
+                  errorWidget: (context, url, error) => SvgPicture.asset(
+                    AppImageAssets.defaultProfile,
+                    height: 48,
+                    width: 48,
+                    fit: BoxFit.cover,
+                  ),
+                  height: 48,
+                  width: 48,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

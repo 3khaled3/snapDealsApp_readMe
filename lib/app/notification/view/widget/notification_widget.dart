@@ -77,7 +77,7 @@ class _NotificationWidgetState extends State<NotificationWidget>
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSeen ? const Color(0xFFF9FAFB) : const Color(0xFFFFF3E0),
+          color: isSeen ? const Color(0xFFF9FAFB) : const Color.fromARGB(183, 187, 222, 251),
           borderRadius: BorderRadius.circular(16),
           boxShadow: isSeen
               ? []
@@ -91,6 +91,7 @@ class _NotificationWidgetState extends State<NotificationWidget>
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: markAsSeen,
+          
           onLongPress: widget.onDelete,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +104,7 @@ class _NotificationWidgetState extends State<NotificationWidget>
                       ? Icons.notifications_none
                       : Icons.notifications_active,
                   key: ValueKey<bool>(isSeen),
-                  color: isSeen ? ColorsBox.grey700 : Colors.orange,
+                  color: isSeen ? ColorsBox.grey700 : ColorsBox.mainColor,
                   size: 26,
                 ),
               ),
@@ -148,7 +149,7 @@ class _NotificationWidgetState extends State<NotificationWidget>
                 child: isSeen
                     ? const SizedBox.shrink()
                     : const Icon(Icons.circle,
-                        color: Colors.orange,
+                        color: ColorsBox.mainColor,
                         size: 12,
                         key: ValueKey<bool>(false)),
               ),

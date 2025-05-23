@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +7,9 @@ import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit
 import 'package:snap_deals/app/admin_feature/view/pages/edit_category.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
-import 'package:snap_deals/app/home_feature/view/pages/courses.dart';
-import 'package:snap_deals/app/home_feature/view/pages/products.dart';
+import 'package:snap_deals/app/category/view/category_detials.dart';
+import 'package:snap_deals/app/category/view/products.dart';
+import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -87,14 +90,20 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                         } else if (name == context.tr.less) {
                           setState(() => isMore = false);
                         } else if (name == context.tr.courses) {
+                          // GoRouter.of(context).push(
+                          //   CoursesView.routeName,
+                          //   extra: CoursesViewArgs(title: name),
+                          // );
+
                           GoRouter.of(context).push(
-                            CoursesView.routeName,
-                            extra: CoursesViewArgs(title: name),
+                            CategoryDetails.route,
+                            extra: CategoryDetailsArgs(
+                                title: name, id: allCategories[index].id),
                           );
                         } else {
                           GoRouter.of(context).push(
-                            ProductsView.routeName,
-                            extra: ProductsViewArgs(
+                            CategoryDetails.route,
+                            extra: CategoryDetailsArgs(
                                 title: name, id: allCategories[index].id),
                           );
                         }

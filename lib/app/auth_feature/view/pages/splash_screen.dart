@@ -76,8 +76,9 @@ class _SplashScreenState extends State<SplashScreen> {
             // SVG App Icon
             Image.asset(
               AppImageAssets.appIconImage,
-              width: 120,
-              height: 120,
+              width: 160,
+              height: 160,
+              fit: BoxFit.fitHeight,
             ),
             SizedBox(height: 20),
             Text('Snap Deals',

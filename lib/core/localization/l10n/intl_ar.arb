@@ -212,5 +212,7 @@
     "instructor": "المدرب",
     "no_reviews": "لا توجد مراجعات حتى الآن",
     "certificate": "شهادة",
-    "request_cancelled": "تم إلغاء الطلب بنجاح"
+    "request_cancelled": "تم إلغاء الطلب بنجاح",
+    "all" : "الكل"
+  
 }

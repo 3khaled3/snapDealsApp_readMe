@@ -251,5 +251,6 @@
     "no_reviews": "No reviews yet",
     "certificate": "Certificate",
     "review": "Review",
-    "request_cancelled": "Request cancelled successfully"
+    "request_cancelled": "Request cancelled successfully",
+    "all": "All"
 }

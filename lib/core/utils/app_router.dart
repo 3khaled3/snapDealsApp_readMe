@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/admin_feature/view/navigation/admin_router.dart';
 import 'package:snap_deals/app/auth_feature/view/navigation/auth_router.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/splash_screen.dart';
+import 'package:snap_deals/app/category/view/category_detials.dart';
 import 'package:snap_deals/app/chat_feature/view/navigation/chat_router.dart';
 import 'package:snap_deals/app/home_feature/view/navigation/home_router.dart';
 import 'package:snap_deals/app/notification/view/notification_view.dart';
@@ -28,6 +29,12 @@ abstract class AppRouter {
         GoRoute(
           path: NotificationsView.route,
           builder: (context, state) => const NotificationsView(),
+        ),
+        GoRoute(
+          path: CategoryDetails.route,
+          builder: (context, state) =>  CategoryDetails(
+            args: state.extra as CategoryDetailsArgs,
+          ),
         ),
       ],
     );

@@ -51,13 +51,14 @@ class AboutUsView extends StatelessWidget {
                       20.ph,
 
                       /// App Icon SVG
-                      SvgPicture.asset(
-                        AppImageAssets.appIcon,
-                        width: 120,
-                        height: 120,
+                      Image.asset(
+                        AppImageAssets.appIconImage,
+                        width: 160,
+                        height: 160,
+                        fit: BoxFit.cover,
                       ),
 
-                      40.ph, // Space between icon and content
+                      20.ph,
 
                       /// Content Sections
                       _buildContentSection(

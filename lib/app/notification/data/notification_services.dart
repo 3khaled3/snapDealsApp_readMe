@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:googleapis_auth/auth_io.dart' as googleapis_auth;
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/data/repositories/auth_repository/i_auth_repository.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
@@ -186,7 +187,9 @@ class NotificationService {
   Future<String?> getDeviceToken() async {
     String? token = await _firebaseMessaging.getToken();
     final user = ProfileCubit.instance.state.profile;
-    if (user.notificationToken == token) return token;
+    if (user.role != Role.unregistered && user.notificationToken == token) {
+      return token;
+    }
     await AuthRepositoryImpl.instance.updateUserData(
       user: user.copyWith(notificationToken: token),
     );
