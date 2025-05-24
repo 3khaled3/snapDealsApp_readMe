@@ -11,6 +11,8 @@ part "course_repository.dart";
 abstract class ICourseRepository {
   Future<Either<FailureModel, Map<String, dynamic>>> getCourses(
       {required String limit, required String page});
+   Future<Either<FailureModel, Map<String, dynamic>>> getMyCourses(
+      {required String limit, required String page,required String uesrId});    
   Future<Either<FailureModel, Map<String, dynamic>>> getCourseById(String id);
   Future<Either<FailureModel, Map<String, dynamic>>> getCoursesByCategory(
       String id);

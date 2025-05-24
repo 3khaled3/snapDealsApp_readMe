@@ -45,6 +45,17 @@ class ProductRepository implements IProductRepository {
     );
   }
 
+   @override
+  Future<Either<FailureModel, Map<String, dynamic>>> getMyProducts(
+      {required String limit, required String page,required String uesrId}) {
+    return HttpHelper.handleRequest(
+      (token) => HttpHelper.getData(
+        linkUrl: "${ApiEndpoints.products}?page=$page&limit=$limit&user=$uesrId",
+        token: token,
+      ),
+    );
+  }
+
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> getProductsByCategory(
       {required String limit, required String page, required String id}) {

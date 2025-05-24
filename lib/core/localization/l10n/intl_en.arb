@@ -257,5 +257,9 @@
     "all": "All",
     "no_course_title":"No Course Title",
     "request_id":"Request ID:",
-    "labelWord": "Label"
+    "labelWord": "Label",
+    "my_products": "My Products",
+    "my_courses": "My Courses",
+    "products": "Products"
+    
 }

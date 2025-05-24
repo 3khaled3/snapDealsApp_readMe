@@ -257,6 +257,10 @@
     "all": "الكل",
     "no_course_title": "لا يوجد عنوان للدورة",
     "request_id": "معرف الطلب:",
-    "labelWord": "العنوان"
+    "labelWord": "العنوان",
+    "my_products": "منتجاتي",
+    "my_courses": "كورسات",
+    "products": "المنتجات"
+  
     
 }

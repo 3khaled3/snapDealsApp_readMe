@@ -2146,6 +2146,21 @@ class Tr {
   String get labelWord {
     return Intl.message('Label', name: 'labelWord', desc: '', args: []);
   }
+
+  /// `My Products`
+  String get my_products {
+    return Intl.message('My Products', name: 'my_products', desc: '', args: []);
+  }
+
+  /// `My Courses`
+  String get my_courses {
+    return Intl.message('My Courses', name: 'my_courses', desc: '', args: []);
+  }
+
+  /// `Products`
+  String get products {
+    return Intl.message('Products', name: 'products', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Tr> {

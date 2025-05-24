@@ -36,6 +36,17 @@ class CourseRepository implements ICourseRepository {
     );
   }
 
+    @override
+  Future<Either<FailureModel, Map<String, dynamic>>> getMyCourses(
+      {required String limit, required String page,required String uesrId}) {
+    return HttpHelper.handleRequest(
+      (token) => HttpHelper.getData(
+        linkUrl: "${ApiEndpoints.courses}?page=$page&limit=$limit&instructor=$uesrId",
+        token: token,
+      ),
+    );
+  }
+
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> getCoursesByCategory(
       String id) {

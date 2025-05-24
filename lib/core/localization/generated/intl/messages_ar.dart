@@ -329,6 +329,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "الهواتف والأجهزة اللوحية",
     ),
     "more": MessageLookupByLibrary.simpleMessage("المزيد"),
+    "my_courses": MessageLookupByLibrary.simpleMessage("كورسات"),
+    "my_products": MessageLookupByLibrary.simpleMessage("منتجاتي"),
     "my_requests": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "newPasswordLabel": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الجديدة",
@@ -399,6 +401,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "price": MessageLookupByLibrary.simpleMessage("السعر *"),
     "priceHint": MessageLookupByLibrary.simpleMessage("أدخل السعر"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+    "products": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "ramWord": MessageLookupByLibrary.simpleMessage("الذاكرة العشوائية *"),
     "registerButton": MessageLookupByLibrary.simpleMessage("متابعة"),

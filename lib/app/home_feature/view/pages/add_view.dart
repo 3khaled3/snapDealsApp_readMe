@@ -1,11 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/home_feature/view/pages/add_course_details.dart';
+import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.dart';
+import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/app/home_feature/view/pages/add_details.dart';
 
 class AddView extends StatelessWidget {
   const AddView({super.key});
@@ -14,7 +14,7 @@ class AddView extends StatelessWidget {
   final List<Map<String, dynamic>> categories = const [
     {
       'id': '6802df0a27ad6e735473aef8',
-      'nameKey': 'courses', // مفتاح الترجمة
+      'nameKey': 'courses',
       'icon': Icons.school_outlined,
     },
     {
@@ -37,6 +37,11 @@ class AddView extends StatelessWidget {
       'nameKey': 'electronics',
       'icon': Icons.computer_outlined,
     },
+    {
+      'id': '',
+      'nameKey': 'other',
+      'icon': Icons.category_outlined,
+    },
   ];
 
   String translateCategoryName(BuildContext context, String key) {
@@ -52,6 +57,8 @@ class AddView extends StatelessWidget {
         return tr.engineeringTools;
       case 'electronics':
         return tr.electronics;
+      case 'other':
+        return tr.other;
       default:
         return key;
     }
@@ -60,58 +67,46 @@ class AddView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 70, right: 20, left: 20),
         child: Column(
           children: [
-            CustomAppBar(title: context.tr.addTitle),
-            10.ph,
-            Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: categories.length,
-                separatorBuilder: (_, __) => 15.ph,
-                itemBuilder: (context, index) {
-                  final category = categories[index];
-                  final name = translateCategoryName(context, category['nameKey']);
-                  final icon = category['icon'] as IconData;
-                  final id = category['id'] as String;
+            CustomHeaderAddView(title: context.tr.addTitle, icon: Icons.close),
+            const Divider(thickness: 1, color: Colors.black),
+            ...categories.map((category) {
+              final name = translateCategoryName(context, category['nameKey']);
+              final icon = category['icon'] as IconData;
+              final id = category['id'] as String;
 
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.grey.shade300,
-                      child: Icon(icon, color: Colors.blue),
-                    ),
-                    title: Text(name),
-                    onTap: () {
-                      if(id=='6802df0a27ad6e735473aef8'){
-                        GoRouter.of(context).push(
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: CustomListTile(
+                  title: name,
+                  leadingIcon: icon,
+                  isAddView: true,
+                  onTap: () {
+                    if (id == '6802df0a27ad6e735473aef8') {
+                      GoRouter.of(context).push(
                         AddCourseDetails.routeName,
-                        extra: AddCourseDetailsArgs(
-                           id,
-                           name,
-                           icon,
-                        ),
+                        extra: AddCourseDetailsArgs(id, name, icon),
                       );
-                      }else{GoRouter.of(context).push(
+                    } else {
+                      GoRouter.of(context).push(
                         AddDetailsView.routeName,
-                        extra: AddDetailsArgs(
-                           id,
-                           name,
-                           icon,
-                        ),
-                      );}
-                      
-                    },
-                  );
-                },
-              ),
-            ),
+                        extra: AddDetailsArgs(id, name, icon),
+                      );
+                    }
+                  },
+                ),
+              );
+            }),
           ],
         ),
       ),
     );
   }
 }
+
 
 
 // import 'package:flutter/material.dart';

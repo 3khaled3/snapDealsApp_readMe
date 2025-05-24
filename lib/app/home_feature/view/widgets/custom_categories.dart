@@ -72,7 +72,7 @@ class _CustomCategoriesState extends State<CustomCategories> {
       spacing: 15,
       children: List.generate(categories.length, (index) {
         return SizedBox(
-          width: 80,
+          width: 85,
           child: Column(
             children: [
               GestureDetector(

@@ -11,6 +11,7 @@ import 'package:snap_deals/app/auth_feature/view/pages/profile_view/settings.dar
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/your_profile.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_bottom_sheet.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
+import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my_products_views.dart';
 import 'package:snap_deals/app/request_feature/view/pages/my_request_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -91,6 +92,13 @@ class ProfileView extends StatelessWidget {
                       title: context.tr.my_requests,
                       onTap: () =>
                           GoRouter.of(context).push(MyRequestView.routeName),
+                    ),
+                    12.ph,
+                     CustomListTile(
+                      leadingIcon: Icons.shopping_cart_outlined,
+                      title: '${context.tr.my_products} & ${context.tr.my_courses}',
+                      onTap: () =>
+                          GoRouter.of(context).push(MyProductsViews.routeName),
                     ),
                     12.ph,
                     CustomListTile(
