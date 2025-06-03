@@ -124,14 +124,18 @@ class ProductCard extends StatelessWidget {
               right: 12,
               child: BlocBuilder<FavoriteCubit, FavoriteState>(
                 buildWhen: (previous, current) =>
-                  current is FavoriteLoaded || current is FavoriteError,
+                    current is FavoriteLoaded || current is FavoriteError,
                 builder: (context, state) {
-                  final isFavorite = context.read<FavoriteCubit>().isFavorite(product.id);
+                  final isFavorite = context
+                      .read<FavoriteCubit>()
+                      .isFavorite(true, product.id);
                   return Material(
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: () {
-                        context.read<FavoriteCubit>().toggleFavorite(product.id, product);
+                        context
+                            .read<FavoriteCubit>()
+                            .toggleFavorite(product.id, product);
                       },
                       customBorder: const CircleBorder(),
                       child: AnimatedContainer(
@@ -151,7 +155,9 @@ class ProductCard extends StatelessWidget {
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 200),
                           child: Icon(
-                            isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
+                            isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border,
                             key: ValueKey<bool>(isFavorite),
                             color: isFavorite ? ColorsBox.red : ColorsBox.grey,
                             size: 18,

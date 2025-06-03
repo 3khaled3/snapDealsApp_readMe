@@ -86,11 +86,11 @@ class _AllCoursesListState extends State<AllCoursesList> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Text(context.tr.retry_load_course),
+                        Text(context.tr.retry_load_course),
                         8.ph,
                         ElevatedButton(
                           onPressed: () => _pagingController.refresh(),
-                          child:  Text(context.tr.retry),
+                          child: Text(context.tr.retry),
                         ),
                       ],
                     ),
@@ -116,14 +116,16 @@ class _AllCoursesListState extends State<AllCoursesList> {
                   ),
                   newPageProgressIndicatorBuilder: (_) =>
                       const Center(child: ShimmerProductCard()),
-                  noItemsFoundIndicatorBuilder: (_) =>  Center(
+                  noItemsFoundIndicatorBuilder: (_) => Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.search_off, size: 48, color: ColorsBox.grey),
+                        const Icon(Icons.search_off,
+                            size: 48, color: ColorsBox.grey),
                         8.ph,
                         Text(context.tr.no_more_data,
-                            style: AppTextStyles.regular16().copyWith(color: ColorsBox.grey)),
+                            style: AppTextStyles.regular16()
+                                .copyWith(color: ColorsBox.grey)),
                       ],
                     ),
                   ),

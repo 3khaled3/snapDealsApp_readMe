@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+
 class ProductModel {
   final String id;
   final String title;
@@ -35,7 +37,7 @@ class ProductModel {
     return ProductModel(
       id: json['_id'],
       title: json['title'],
-      user: Partner.fromJson(json['user']),
+      user: Partner.fromJson(json['user']?? nonRegisteredUser.toJson()),
       slug: json['slug'],
       location: json['location'] ?? " location",
       description: json['description'],

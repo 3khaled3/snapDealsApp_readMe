@@ -143,13 +143,14 @@ class CourseCard extends StatelessWidget {
               child: BlocBuilder<FavoriteCubit, FavoriteState>(
                 buildWhen: (previous, current) => current is FavoriteLoaded,
                 builder: (context, state) {
-                  final isFavorite =
-                      context.read<FavoriteCubit>().isFavorite(course.id);
+                  final isFavorite = context
+                      .read<FavoriteCubit>()
+                      .isFavorite(false, course.id);
                   return GestureDetector(
                     onTap: () {
                       context
                           .read<FavoriteCubit>()
-                          .toggleFavorite(course.id, course );
+                          .toggleFavorite(course.id, course);
                     },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),

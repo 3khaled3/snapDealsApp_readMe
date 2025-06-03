@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/category/view/all_courses_builder.dart';
@@ -119,6 +121,7 @@ class _CategoryDetailsState extends State<CategoryDetails>
                         const AllProductList(),
                         ...allCategories.map((category) {
                           if (category.id == "6802df0a27ad6e735473aef8") {
+                            log("🚀🚀🚀🚀🚀 category.id: ${category.id}");
                             return const AllCoursesList();
                           }
                           return ProductsByCategoryList(

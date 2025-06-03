@@ -24,7 +24,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   // Handle zone errors properly
-  runZonedGuarded(() async {
+  // runZonedGuarded(() async {
     // Initialize binding in this zone
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -47,7 +47,7 @@ Future<void> main() async {
 
     // Run app in the same zone
     _runApp();
-  }, (error, stack) => debugPrint('Initialization error: $error'));
+  // }, (error, stack) => debugPrint('🤬🤬🤬🤬🤬🤬 Initialization error: $error'));
 }
 
 void _runApp() {
@@ -108,7 +108,8 @@ Future<void> _initializeHive() async {
 Future<void> _initializeSupabase() async {
   await Supabase.initialize(
     url: 'https://frsafocyzvvgdzgwjzil.supabase.co',
-    anonKey: 'your-key-here',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyc2FmY296enZ2Z2R6Z3dqemlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc0MjM5MjgsImV4cCI6MjAzMzAwOTkyOH0.00000000000000000000000000000000',
   );
 }
 

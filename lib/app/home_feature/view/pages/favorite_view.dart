@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
@@ -50,18 +52,29 @@ class _FavoriteViewState extends State<FavoriteView> {
             final favoriteIds =
                 context.read<FavoriteCubit>().favoriteIdsSaved.value;
 
-            // Only show items that are still in the favoriteIds list
+            final productIds = favoriteIds
+                .where((id) => id.startsWith("productID"))
+                .map((id) => id.replaceFirst("productID", ""))
+                .toSet();
+
+            final courseIds = favoriteIds
+                .where((id) => id.startsWith("courseID"))
+                .map((id) => id.replaceFirst("courseID", ""))
+                .toSet();
+
             final widgets = [
               ...allProducts
-                  .where((product) => favoriteIds.contains(product.id))
+                  .where((product) => productIds.contains(product.id))
                   .map((product) => ProductCard(product: product)),
               ...allCourses
-                  .where((course) => favoriteIds.contains(course.id))
+                  .where((course) => courseIds.contains(course.id))
                   .map((course) => CourseCard(course: course)),
             ];
 
+            log("🚀🚀🚀🚀🚀 widgets: ${widgets.length}");
+
             if (widgets.isEmpty) {
-              return  Center(
+              return Center(
                 child: Text(context.tr.no_item_in_favorite),
               );
             }
@@ -84,7 +97,7 @@ class _FavoriteViewState extends State<FavoriteView> {
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () => _cubit.loadFavorites(),
-            child:  Text(context.tr.retry),
+            child: Text(context.tr.retry),
           ),
         ],
       ),
@@ -113,7 +126,7 @@ class _FavoriteViewState extends State<FavoriteView> {
             padding: const EdgeInsets.only(
               left: 10,
               right: 10,
-              bottom:80,
+              bottom: 80,
             ),
             child: GridView.builder(
               itemCount: widgets.length,

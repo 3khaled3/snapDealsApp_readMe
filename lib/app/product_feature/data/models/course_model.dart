@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 
 class CourseModel {
@@ -58,7 +59,8 @@ class CourseModel {
         category: Category.fromJson(json['category']),
         lessons: List<LessonModel>.from(
             json['lessons'].map((x) => LessonModel.fromJson(x))),
-        instructor: Instructor.fromJson(json['instructor']),
+        instructor: Instructor.fromJson(
+            json['instructor'] ?? nonRegisteredUser.toJson()),
         location: json['location'],
         ratingsAverage: (json['ratingsAverage'] ?? 0).toDouble(),
         ratingsQuantity: json['ratingsQuantity'],
