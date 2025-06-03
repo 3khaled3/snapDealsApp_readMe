@@ -83,7 +83,7 @@
     "mobilesAndTablets": "Mobiles and Tablets",
     "medicalTools": "Medical tools",
     "drawingTools": "Drowing Tools",
-    "engineeringTools": "Engineering Tools",
+    "engineeringTools": "Engineer Kit",
     "courses": "Courses",
     "other": "Other",
     "adDetails": "Ad details",
@@ -255,11 +255,10 @@
     "about": "About",
     "request_cancelled": "Request cancelled successfully",
     "all": "All",
-    "no_course_title":"No Course Title",
-    "request_id":"Request ID:",
+    "no_course_title": "No Course Title",
+    "request_id": "Request ID:",
     "labelWord": "Label",
     "my_products": "My Products",
     "my_courses": "My Courses",
     "products": "Products"
-    
 }
