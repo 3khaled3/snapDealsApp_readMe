@@ -9,6 +9,7 @@ import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/data/repositories/chat_room_repository.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_view.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/instructor_details.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -50,7 +51,7 @@ class ContactSection extends StatelessWidget {
                   Expanded(
                     child: CustomPrimaryButton(
                       title: context.tr.callWord,
-                      onTap: () {},
+                      onTap: () => callInstructor(user.phone!),
                     ),
                   ),
                   12.pw,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_image_slider.dart';
@@ -53,7 +54,8 @@ class ProductDetailsView extends StatelessWidget {
                 if (product.description.isNotEmpty)
                   DescriptionSection(description: product.description),
                 18.ph,
-                ContactSection(user: product.user)
+                if (product.user.id != ProfileCubit.instance.state.profile.id)
+                  ContactSection(user: product.user)
               ],
             )
           ],

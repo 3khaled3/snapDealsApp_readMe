@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
+import 'package:snap_deals/app/home_feature/view/widgets/chat_wrapper.dart';
 import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my_courses_builder.dart';
 import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my_products_builder.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/category_tab.dart'; // للتبويبات بنفس التصميم
+import 'package:snap_deals/app/home_feature/view/widgets/category_tab.dart';
+import 'package:snap_deals/core/localization/generated/l10n.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 
 class MyProductsViewsArgs {}
 
@@ -21,23 +24,16 @@ class MyProductsViews extends StatefulWidget {
 class _MyProductsViewsState extends State<MyProductsViews>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> tabs = [];
+  late List<String> _tabs;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _tabController.addListener(() {
-      setState(() {}); // لتحديث التبويبات عند التغيير
-    });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (tabs.isEmpty) {
-      tabs.addAll([context.tr.products, context.tr.courses]);
-    }
+    _tabs = [
+      Tr.current.products,
+      Tr.current.courses,
+    ];
   }
 
   @override
@@ -52,26 +48,23 @@ class _MyProductsViewsState extends State<MyProductsViews>
       body: SafeArea(
         child: Column(
           children: [
-            CustomAppBar(title: '${context.tr.my_products} & ${context.tr.my_courses}'),
+            CustomAppBar(
+              title: '${context.tr.my_products} & ${context.tr.my_courses}',
+            ),
             10.ph,
             TabBar(
               controller: _tabController,
-              isScrollable: true,
-              tabAlignment: TabAlignment.start,
-              dividerColor: Colors.transparent,
-              labelPadding: const EdgeInsets.symmetric(horizontal: 4),
-              indicatorPadding: const EdgeInsets.all(0),
-              padding: const EdgeInsetsDirectional.only(start: 8),
-              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: ColorsBox.mainColor,
+              ),
+              indicatorSize: TabBarIndicatorSize.tab,
+              labelColor: ColorsBox.white,
+              unselectedLabelColor: ColorsBox.mainColor,
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
               splashBorderRadius: BorderRadius.circular(100),
-              indicator: const BoxDecoration(),
-              tabs: tabs.asMap().entries.map((entry) {
-                final index = entry.key;
-                return CategoryTabChild(
-                  title: entry.value,
-                  isSelected: _tabController.index == index,
-                );
-              }).toList(),
+              dividerColor: Colors.transparent,
+              tabs: _tabs.map((title) => TabChild(title: title)).toList(),
             ),
             Expanded(
               child: TabBarView(
