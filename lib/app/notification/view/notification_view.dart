@@ -5,8 +5,8 @@ import 'package:snap_deals/app/chat_feature/model_view/get_sup_user_cubit/get_su
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 import '../../product_feature/view/pages/product_details/widgets/contact_section.dart';
 import '../view_model/cubit/notification_cubit.dart';
@@ -139,8 +139,7 @@ class NotificationsView extends StatelessWidget {
                             if (notification.title == 'chat') {
                               GetSupUserCubit getSupUserCubit =
                                   GetSupUserCubit();
-                              getSupUserCubit
-                                  .getSupUser(notification.receiverId);
+                              getSupUserCubit.getSupUser(notification.senderId);
                               if (getSupUserCubit.state is GetSupUserSuccess) {
                                 Partner partner =
                                     (getSupUserCubit.state as GetSupUserSuccess)

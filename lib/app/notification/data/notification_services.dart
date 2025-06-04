@@ -241,11 +241,7 @@ class NotificationService {
         },
         body: jsonEncode(message),
       );
-
-      // Check the response status
-      if (response.statusCode == 200) {
-        print("✅ Notification Sent Successfully!");
-        final uuid = Uuid().v4();
+final uuid = Uuid().v4();
         NotificationRepository().addNotification(NotificationModel(
           id: uuid,
           senderId: ProfileCubit.instance.state.profile.id,
@@ -255,6 +251,10 @@ class NotificationService {
           date: DateTime.now().toString(),
           isSeen: false,
         ));
+      // Check the response status
+      if (response.statusCode == 200) {
+        print("✅ Notification Sent Successfully!");
+        
       } else {
         print("❌ Error Sending Notification: ${response.body}");
       }

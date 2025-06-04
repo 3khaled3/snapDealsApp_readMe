@@ -11,6 +11,7 @@ import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_type.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
+import 'package:snap_deals/app/notification/data/notification_services.dart';
 import 'package:snap_deals/core/constants/constants.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -25,28 +26,28 @@ import 'firebase_options.dart';
 Future<void> main() async {
   // Handle zone errors properly
   // runZonedGuarded(() async {
-    // Initialize binding in this zone
-    WidgetsFlutterBinding.ensureInitialized();
+  // Initialize binding in this zone
+  WidgetsFlutterBinding.ensureInitialized();
 
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ),
+  );
 
-    // Initialize Firebase first
-    await _initializeFirebase();
+  // Initialize Firebase first
+  await _initializeFirebase();
 
-    // Then initialize other services in parallel
-    await Future.wait([
-      _initializeHive(),
-      _initializeSupabase(),
-    ]);
+  // Then initialize other services in parallel
+  await Future.wait([
+    _initializeHive(),
+    _initializeSupabase(),
+  ]);
 
-    // Run app in the same zone
-    _runApp();
+  // Run app in the same zone
+  _runApp();
   // }, (error, stack) => debugPrint('🤬🤬🤬🤬🤬🤬 Initialization error: $error'));
 }
 
@@ -90,6 +91,8 @@ Future<void> _initializeFirebase() async {
 
 Future<void> _initializeHive() async {
   await HiveHelper.instance.init('myBox');
+
+  await NotificationService.instance.initialize();
 
   Hive.registerAdapter(ChatRoomAdapter());
   Hive.registerAdapter(MessageModelAdapter());

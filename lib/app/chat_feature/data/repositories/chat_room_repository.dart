@@ -27,12 +27,14 @@ class ChatRoomRepository {
     });
   }
 
+
   Future<Either<Failure, List<ChatRoom>>> getSpecificChatRooms(
       String salonId) async {
     return await FirebaseUtils.handleRequest(() async {
       final currentUser = ProfileCubit.instance.state.profile.id;
       print("right:  members currentUser: $currentUser salonId: $salonId");
       final result = await FirebaseFirestore.instance
+      
           .collection(chatConfig.chatRoomsCollection)
           .where("members", arrayContainsAny: [currentUser]).get();
       return result.docs

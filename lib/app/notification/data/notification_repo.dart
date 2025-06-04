@@ -27,12 +27,14 @@ class NotificationRepository {
   /// ✅ Add a new notification to Firestore
   Future<void> addNotification(NotificationModel notification) async {
     try {
+      print("🔥 Adding notification 222: ${notification.toJson()}");
       await _firestore
           .collection(_collectionPath)
           .doc(notification.id)
           .set(notification.toJson());
+      print("eeev  Notification added: ${notification.toJson()}");
     } catch (e) {
-      debugPrint("🔥 Error adding notification: $e");
+      print("eeev  Error adding notification: $e");
     }
   }
 
