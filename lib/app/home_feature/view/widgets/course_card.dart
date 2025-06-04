@@ -50,23 +50,26 @@ class CourseCard extends StatelessWidget {
                     /// Course Image
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            course.images.isEmpty ? '' : course.images.first,
-                        height: 140,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey.shade300,
-                          highlightColor: Colors.grey.shade100,
-                          child: Container(
-                            height: 140,
-                            width: double.infinity,
-                            color: Colors.grey.withOpacity(0.1),
+                      child: Hero(
+                        tag: 'course-${course.id}',
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              course.images.isEmpty ? '' : course.images.first,
+                          height: 140,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey.shade300,
+                            highlightColor: Colors.grey.shade100,
+                            child: Container(
+                              height: 140,
+                              width: double.infinity,
+                              color: Colors.grey.withOpacity(0.1),
+                            ),
                           ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
                       ),
                     ),
                     0.ph,

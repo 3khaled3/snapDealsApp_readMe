@@ -57,25 +57,28 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     /// Product Image
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl: imagePath,
-                        height: 140,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: ColorsBox.greyReceivedMessage,
-                          highlightColor: ColorsBox.paleGrey,
-                          child: Container(
-                            height: 140,
-                            width: double.infinity,
-                            color: ColorsBox.grey.withOpacity(0.1),
+                    Hero(
+                      tag: 'product-${product.id}',
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: CachedNetworkImage(
+                          imageUrl: imagePath,
+                          height: 140,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: ColorsBox.greyReceivedMessage,
+                            highlightColor: ColorsBox.paleGrey,
+                            child: Container(
+                              height: 140,
+                              width: double.infinity,
+                              color: ColorsBox.grey.withOpacity(0.1),
+                            ),
                           ),
-                        ),
-                        errorWidget: (context, url, error) => Image.asset(
-                          AppImageAssets.onboardingImage,
-                          fit: BoxFit.contain,
+                          errorWidget: (context, url, error) => Image.asset(
+                            AppImageAssets.onboardingImage,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                     ),

@@ -72,6 +72,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
         SliverToBoxAdapter(
           // child: CustomImage(imageUrl: course.images.first),
           child: CustomImageSlider(
+            course: course,
             images: course.images,
             userId: course.instructor.id,
             productId: course.id,

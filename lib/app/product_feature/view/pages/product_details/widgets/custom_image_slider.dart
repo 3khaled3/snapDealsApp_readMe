@@ -51,28 +51,33 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
           children: [
             SizedBox(
               height: 300,
-              child: PageView.builder(
-                itemCount: widget.images.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return CachedNetworkImage(
-                    imageUrl: widget.images[index],
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: ColorsBox.greyReceivedMessage,
-                      highlightColor: ColorsBox.paleGrey,
-                      child: Container(
-                        color: ColorsBox.white,
+              child: Hero(
+                tag: widget.product != null 
+                    ? 'product-${widget.product!.id}'
+                    : 'course-${widget.course!.id}',
+                child: PageView.builder(
+                  itemCount: widget.images.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    return CachedNetworkImage(
+                      imageUrl: widget.images[index],
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: ColorsBox.greyReceivedMessage,
+                        highlightColor: ColorsBox.paleGrey,
+                        child: Container(
+                          color: ColorsBox.white,
+                        ),
                       ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  );
-                },
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    );
+                  },
+                ),
               ),
             ),
             8.ph,
@@ -88,7 +93,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
           child: Container(
             width: 40,
             height: 40,
-            decoration:  const BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: ColorsBox.black,
             ),
@@ -151,8 +156,8 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                               height: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(ColorsBox.red),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    ColorsBox.red),
                               ),
                             )
                           : const Icon(Icons.delete,

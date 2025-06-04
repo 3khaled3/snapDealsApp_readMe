@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/category/view/category_detials.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
-
 
 class CustomCategories extends StatefulWidget {
   const CustomCategories({super.key});
@@ -18,19 +18,19 @@ class _CustomCategoriesState extends State<CustomCategories> {
   bool isMore = false;
 
   Map<String, String> get categoriesID => {
-    Tr.current.courses: '6802df0a27ad6e735473aef8',
-    Tr.current.mobilesAndTablets: "6802df1b27ad6e735473aefb",
-    Tr.current.drawingTools: '6802df4d27ad6e735473af01',
-    Tr.current.engineeringTools: '6802df7227ad6e735473af04',
-    Tr.current.electronics: '6802df4027ad6e735473aefe',
-  };
+        Tr.current.courses: '6802df0a27ad6e735473aef8',
+        Tr.current.mobilesAndTablets: "6802df1b27ad6e735473aefb",
+        Tr.current.drawingTools: '6802df4d27ad6e735473af01',
+        Tr.current.engineeringTools: '6802df7227ad6e735473af04',
+        Tr.current.electronics: '6802df4027ad6e735473aefe',
+      };
 
   List<String> get baseCategories => [
-    Tr.current.courses,
-    Tr.current.mobilesAndTablets,
-    Tr.current.drawingTools,
-    Tr.current.engineeringTools,
-  ];
+        Tr.current.courses,
+        Tr.current.mobilesAndTablets,
+        Tr.current.drawingTools,
+        Tr.current.engineeringTools,
+      ];
 
   final List<IconData> baseIcons = [
     Icons.school_outlined,
@@ -41,7 +41,6 @@ class _CustomCategoriesState extends State<CustomCategories> {
 
   @override
   Widget build(BuildContext context) {
-    // جهز القوائم حسب حالة isMore في كل مرة يتم بناء الواجهة فيها
     List<String> categories;
     List<IconData> categoriesIcons;
 
@@ -72,7 +71,7 @@ class _CustomCategoriesState extends State<CustomCategories> {
       spacing: 15,
       children: List.generate(categories.length, (index) {
         return SizedBox(
-          width: 85,
+          width: 80,
           child: Column(
             children: [
               GestureDetector(
@@ -113,9 +112,13 @@ class _CustomCategoriesState extends State<CustomCategories> {
                   ),
                 ),
               ),
+              Hero(
+                tag: 'category-from-home-${categoriesID[categories[index]]}',
+                child: 0.pw,
+              ),
               Text(
                 categories[index],
-                maxLines: 2,
+                maxLines: categories[index] == Tr.current.electronics ? 1 : 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.regular16(),

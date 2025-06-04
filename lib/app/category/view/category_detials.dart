@@ -46,17 +46,21 @@ class _CategoryDetailsState extends State<CategoryDetails>
 
     if (allCategories.isEmpty) {
       allCategories = [
-        Category(id: "6802df7227ad6e735473af04", name: context.tr.engineeringTools),
+        Category(
+            id: "6802df7227ad6e735473af04", name: context.tr.engineeringTools),
         Category(id: "6802df4d27ad6e735473af01", name: context.tr.drawingTools),
         Category(id: "6802df4027ad6e735473aefe", name: context.tr.electronics),
-        Category(id: "6802df1b27ad6e735473aefb", name: context.tr.mobilesAndTablets),
+        Category(
+            id: "6802df1b27ad6e735473aefb", name: context.tr.mobilesAndTablets),
         Category(id: "6802df0a27ad6e735473aef8", name: context.tr.courses),
       ];
 
-      if (widget.args.id == null || widget.args.title.toLowerCase() == context.tr.all) {
+      if (widget.args.id == null ||
+          widget.args.title.toLowerCase() == context.tr.all) {
         initialIndex = 0;
       } else {
-        final categoryIndex = allCategories.indexWhere((cat) => cat.id == widget.args.id);
+        final categoryIndex =
+            allCategories.indexWhere((cat) => cat.id == widget.args.id);
         initialIndex = categoryIndex != -1 ? categoryIndex + 1 : 0;
       }
 
@@ -84,7 +88,7 @@ class _CategoryDetailsState extends State<CategoryDetails>
         child: Column(
           children: [
             CustomAppBar(title: context.tr.categories),
-            10.ph,
+            Hero(tag: 'category-from-home-${widget.args.id}', child: 10.ph),
             Expanded(
               child: Column(
                 children: [
@@ -96,7 +100,8 @@ class _CategoryDetailsState extends State<CategoryDetails>
                     labelPadding: const EdgeInsets.symmetric(horizontal: 4),
                     indicatorPadding: const EdgeInsets.all(0),
                     padding: const EdgeInsetsDirectional.only(start: 8),
-                    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                    overlayColor:
+                        const WidgetStatePropertyAll(Colors.transparent),
                     splashBorderRadius: BorderRadius.circular(100),
                     indicator: const BoxDecoration(),
                     tabs: [
