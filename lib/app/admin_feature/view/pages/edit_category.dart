@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/category_card.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
@@ -36,7 +37,12 @@ class EditCategory extends StatelessWidget {
         body: BlocBuilder<EditCategoryCubit, EditCategoryState>(
           builder: (context, state) {
             if (state is GetCategoriesLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: LoadingAnimationWidget.threeArchedCircle(
+                  color: ColorsBox.mainColor,
+                  size: 200,
+                ),
+              );
             } else if (state is GetCategoriesSuccess) {
               final categories = state.categories;
               return ListView.builder(
@@ -139,7 +145,12 @@ void showAddCategory(BuildContext context) {
                       ),
                       25.ph,
                       state is AddCategoryLoading
-                          ? const CircularProgressIndicator()
+                          ? Center(
+                              child: LoadingAnimationWidget.threeArchedCircle(
+                                color: ColorsBox.mainColor,
+                                size: 40,
+                              ),
+                            )
                           : CustomButtonRow(
                               saveButtonText: context.tr.saveButton,
                               onSave: () async {

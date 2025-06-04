@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
@@ -7,6 +8,7 @@ import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/get_all_course_cubit/get_all_courses_cubit.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 
@@ -138,8 +140,12 @@ class _CoursesViewState extends State<CoursesView> {
                           if (index < _courses.length) {
                             return CourseCard(course: _courses[index]);
                           } else {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return Center(
+                              child: LoadingAnimationWidget.threeArchedCircle(
+                                color: ColorsBox.mainColor,
+                                size: 40,
+                              ),
+                            );
                           }
                         },
                       ),

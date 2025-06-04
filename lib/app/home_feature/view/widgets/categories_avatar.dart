@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
 import 'package:snap_deals/app/admin_feature/view/pages/edit_category.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
@@ -24,8 +24,6 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
   bool isMore = false;
   final EditCategoryCubit editCategoryCubit = EditCategoryCubit();
 
-
-
   final List<String> originalCategories = [
     Tr.current.courses,
     Tr.current.mobilesAndTablets,
@@ -44,14 +42,13 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
     Icons.apps_outlined
   ];
 
-   Map<String, String> categoriesID ={
+  Map<String, String> categoriesID = {
     Tr.current.courses: '6802df0a27ad6e735473aef8',
     Tr.current.mobilesAndTablets: "6802df1b27ad6e735473aefb",
     Tr.current.drawingTools: '6802df4d27ad6e735473af01',
     Tr.current.engineeringTools: '6802df7227ad6e735473af04',
     Tr.current.electronics: '6802df4027ad6e735473aefe',
   };
-  
 
   // أيقونات ثابتة حسب اسم التصنيف
   final Map<String, IconData> categoryIcons = {
@@ -64,7 +61,6 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
     Tr.current.more: Icons.expand_more,
     Tr.current.less: Icons.expand_less,
   };
-  
 
   @override
   void initState() {
@@ -78,7 +74,12 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
       bloc: editCategoryCubit,
       builder: (context, state) {
         if (state is GetCategoriesLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: LoadingAnimationWidget.threeArchedCircle(
+              color: ColorsBox.mainColor,
+              size: 40,
+            ),
+          );
         } else if (state is GetCategoriesError) {
           return const CustomCategories();
         } else if (state is GetCategoriesSuccess) {
@@ -92,8 +93,7 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
               ? [...categoryNames, context.tr.less]
               : [...categoryNames.take(3), context.tr.more];
 
-          return 
-          Wrap(
+          return Wrap(
             runSpacing: 20,
             spacing: 15,
             children: List.generate(displayNames.length, (index) {
@@ -122,11 +122,6 @@ class _CategoriesAvatarState extends State<CategoriesAvatar> {
                         } else if (name == context.tr.less) {
                           setState(() => isMore = false);
                         } else if (name == context.tr.courses) {
-                          // GoRouter.of(context).push(
-                          //   CoursesView.routeName,
-                          //   extra: CoursesViewArgs(title: name),
-                          // );
-
                           GoRouter.of(context).push(
                             CategoryDetails.route,
                             extra: CategoryDetailsArgs(

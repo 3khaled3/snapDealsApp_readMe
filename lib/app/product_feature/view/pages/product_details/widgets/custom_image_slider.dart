@@ -52,7 +52,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
             SizedBox(
               height: 300,
               child: Hero(
-                tag: widget.product != null 
+                tag: widget.product != null
                     ? 'product-${widget.product!.id}'
                     : 'course-${widget.course!.id}',
                 child: PageView.builder(

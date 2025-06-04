@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get_thumbnail_video/index.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_status.dart';
 import 'package:snap_deals/app/chat_feature/data/models/uploading_message.dart';
@@ -119,11 +120,14 @@ class VideoMessageBubble extends StatelessWidget {
             future: _generateThumbnail(message.content),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SizedBox(
+                return SizedBox(
                   width: 100,
                   height: 100,
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: LoadingAnimationWidget.threeArchedCircle(
+                      color: ColorsBox.mainColor,
+                      size: 40,
+                    ),
                   ),
                 );
               }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/product_feature/data/models/review.model.dart';
 import 'package:snap_deals/app/product_feature/model_view/review_cubit/review_cubit.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/custom_review_container.dart';
@@ -57,7 +58,8 @@ class _ReviewsSectionState extends State<ReviewsSection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -85,8 +87,10 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                         allowHalfRating: false,
                         itemSize: 28,
                         unratedColor: Colors.grey.shade300,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
+                        itemPadding:
+                            const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) =>
+                            const Icon(Icons.star, color: Colors.amber),
                         onRatingUpdate: (rating) {
                           setState(() {
                             _rating = rating;
@@ -106,7 +110,8 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -117,7 +122,8 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                             final comment = _commentController.text.trim();
                             if (_rating == 0 || comment.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(context.tr.required_field)),
+                                SnackBar(
+                                    content: Text(context.tr.required_field)),
                               );
                               return;
                             }
@@ -128,7 +134,8 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                             );
                           },
                           icon: const Icon(Icons.send),
-                          label: Text(context.tr.sendButtonLabel, style: AppTextStyles.semiBold16()),
+                          label: Text(context.tr.sendButtonLabel,
+                              style: AppTextStyles.semiBold16()),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black87,
                             foregroundColor: Colors.white,
@@ -143,7 +150,12 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                   ),
                 ),
                 if (state is GetReviewLoading)
-                  const Center(child: CircularProgressIndicator()),
+                  Center(
+                    child: LoadingAnimationWidget.threeArchedCircle(
+                      color: ColorsBox.mainColor,
+                      size: 40,
+                    ),
+                  ),
                 if (state is GetReviewSuccess)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -151,7 +163,8 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         16.ph,
-                        Text('${context.tr.review} (${state.reviews.length})', style: AppTextStyles.semiBold20()),
+                        Text('${context.tr.review} (${state.reviews.length})',
+                            style: AppTextStyles.semiBold20()),
                         8.ph,
                         ListView.builder(
                           itemCount: state.reviews.length,
@@ -181,7 +194,8 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                     child: Center(
                       child: Text(
                         context.tr.no_reviews,
-                        style: AppTextStyles.semiBold16().copyWith(color: Colors.grey),
+                        style: AppTextStyles.semiBold16()
+                            .copyWith(color: Colors.grey),
                       ),
                     ),
                   ),
@@ -193,6 +207,7 @@ class _ReviewsSectionState extends State<ReviewsSection> {
     );
   }
 }
+
 void showRatingDialog(BuildContext context, {required String courseId}) {
   double rating = 0;
   final TextEditingController commentController = TextEditingController();

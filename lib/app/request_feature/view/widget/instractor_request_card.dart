@@ -64,7 +64,8 @@ class InstractorRequestCard extends StatelessWidget {
                   style: AppTextStyles.regular14(),
                 ),
                 const Spacer(),
-                const Icon(Icons.calendar_today, color: ColorsBox.grey, size: 20),
+                const Icon(Icons.calendar_today,
+                    color: ColorsBox.grey, size: 20),
                 6.pw,
                 Text(
                   formatDate(instractorRequestModel.createdAt!),
@@ -101,8 +102,9 @@ class InstractorRequestCard extends StatelessWidget {
                                 if (context.mounted &&
                                     cubit.state is RejectRequestSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                     SnackBar(
-                                        content: Text(context.tr.request_rejected)),
+                                    SnackBar(
+                                        content:
+                                            Text(context.tr.request_rejected)),
                                   );
                                 }
                               },
@@ -145,8 +147,9 @@ class InstractorRequestCard extends StatelessWidget {
                                 if (context.mounted &&
                                     cubit.state is ApproveRequestSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                     SnackBar(
-                                        content: Text(context.tr.request_accepted)),
+                                    SnackBar(
+                                        content:
+                                            Text(context.tr.request_accepted)),
                                   );
                                 }
                               },

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:video_player/video_player.dart';
 
 class LocalVideoPlayer extends StatefulWidget {
@@ -62,27 +64,31 @@ class _LocalVideoPlayerState extends State<LocalVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _controller.value.isInitialized
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Video player
-                AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                ),
-                const SizedBox(height: 20),
-                // Play/Pause button
-                IconButton(
-                  icon: Icon(
-                    _isPlaying ? Icons.pause : Icons.play_arrow,
-                    size: 50,
+        child: _controller.value.isInitialized
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Video player
+                  AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
                   ),
-                  onPressed: _togglePlayPause,
+                  const SizedBox(height: 20),
+                  // Play/Pause button
+                  IconButton(
+                    icon: Icon(
+                      _isPlaying ? Icons.pause : Icons.play_arrow,
+                      size: 50,
+                    ),
+                    onPressed: _togglePlayPause,
+                  ),
+                ],
+              )
+            : Center(
+                child: LoadingAnimationWidget.threeArchedCircle(
+                  color: ColorsBox.mainColor,
+                  size: 40,
                 ),
-              ],
-            )
-          : const CircularProgressIndicator(),
-    );
+              ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/request_feature/model_view/approve_request_cubit/approve_request_cubit.dart';
 import 'package:snap_deals/app/request_feature/model_view/get_requests_by_id_cubit/get_requests_by_id_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:snap_deals/app/request_feature/model_view/reject_request_cubit/r
 import 'package:snap_deals/app/request_feature/view/widget/instractor_request_card.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 
 class InstractorRequestViewArgs {
   final String courseId;
@@ -54,10 +56,16 @@ class InstractorRequestView extends StatelessWidget {
               children: [
                 CustomAppBar(title: context.tr.my_requests),
                 Expanded(
-                  child: BlocBuilder<GetRequestsByIdCubit, GetRequestsByIdState>(
+                  child:
+                      BlocBuilder<GetRequestsByIdCubit, GetRequestsByIdState>(
                     builder: (context, state) {
                       if (state is GetRequestsByIdLoading) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: LoadingAnimationWidget.threeArchedCircle(
+                            color: ColorsBox.mainColor,
+                            size: 40,
+                          ),
+                        );
                       } else if (state is GetRequestsByIdSuccess) {
                         final requests = state.requests;
                         return ListView.builder(
@@ -77,8 +85,7 @@ class InstractorRequestView extends StatelessWidget {
                           },
                         );
                       } else if (state is GetRequestsByIdError) {
-                        return  Center(
-                            child: Text(context.tr.error_load));
+                        return Center(child: Text(context.tr.error_load));
                       } else {
                         return const SizedBox.shrink();
                       }

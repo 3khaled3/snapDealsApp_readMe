@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
@@ -39,7 +40,12 @@ class _FavoriteViewState extends State<FavoriteView> {
       body: BlocBuilder<FavoriteCubit, FavoriteState>(
         builder: (context, state) {
           if (state is FavoriteInitial || state is FavoriteLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: LoadingAnimationWidget.threeArchedCircle(
+                color: ColorsBox.mainColor,
+                size: 40,
+              ),
+            );
           }
 
           if (state is FavoriteError) {

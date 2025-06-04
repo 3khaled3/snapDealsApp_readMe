@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/request_feature/model_view/cancel_request_cubit/cancel_request_cubit.dart';
 import 'package:snap_deals/app/request_feature/model_view/get_my_request_cubit/get_my_request_cubit.dart';
@@ -45,7 +46,12 @@ class MyRequestView extends StatelessWidget {
                   child: BlocBuilder<GetMyRequestsCubit, GetMyRequestsState>(
                     builder: (context, state) {
                       if (state is GetMyRequestsLoading) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: LoadingAnimationWidget.threeArchedCircle(
+                            color: ColorsBox.mainColor,
+                            size: 40,
+                          ),
+                        );
                       } else if (state is GetMyRequestsSuccess) {
                         final requests = state.requests;
                         return ListView.builder(
@@ -62,8 +68,7 @@ class MyRequestView extends StatelessWidget {
                           },
                         );
                       } else if (state is GetMyRequestsError) {
-                        return  Center(
-                            child: Text(context.tr.error_load));
+                        return Center(child: Text(context.tr.error_load));
                       } else {
                         return const SizedBox.shrink();
                       }

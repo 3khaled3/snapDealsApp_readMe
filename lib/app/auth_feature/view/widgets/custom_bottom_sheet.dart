@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/forgot_password_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
@@ -175,9 +176,10 @@ class CustomBottomSheet {
                         ),
                         Text(
                           ctx.tr.passwordManager,
-                           style: AppTextStyles.medium20().copyWith(color: ColorsBox.black),
+                          style: AppTextStyles.medium20()
+                              .copyWith(color: ColorsBox.black),
                         ),
-                       25.ph,
+                        25.ph,
                         if (isVerifyingCurrentPassword) ...[
                           TextFormField(
                             controller: currentPasswordController,
@@ -314,9 +316,9 @@ class CustomBottomSheet {
                                     Navigator.of(context)
                                         .pop(); // اقفل الـ bottom sheet
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                       SnackBar(
+                                      SnackBar(
                                         content: Text(
-                                          context.tr.password_change_success  ),
+                                            context.tr.password_change_success),
                                         backgroundColor: ColorsBox.green,
                                       ),
                                     );
@@ -328,7 +330,7 @@ class CustomBottomSheet {
                                     );
                                   } else if (state is ProfileError) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                       SnackBar(
+                                      SnackBar(
                                         content: Text(context.tr.error_load),
                                         backgroundColor: Colors.red,
                                       ),
@@ -338,8 +340,12 @@ class CustomBottomSheet {
                                     showDialog(
                                       context: context,
                                       barrierDismissible: false,
-                                      builder: (_) => const Center(
-                                        child: CircularProgressIndicator(),
+                                      builder: (_) => Center(
+                                        child: LoadingAnimationWidget
+                                            .threeArchedCircle(
+                                          color: ColorsBox.mainColor,
+                                          size: 40,
+                                        ),
                                       ),
                                     );
                                   }
@@ -371,271 +377,4 @@ class CustomBottomSheet {
       },
     );
   }
-
-//  static void showPasswordManagerSheet(BuildContext context) {
-//   final formKey = GlobalKey<FormState>();
-//   final currentPasswordController = TextEditingController();
-
-//   showModalBottomSheet(
-//     context: context,
-//     isScrollControlled: true,
-//     shape: const RoundedRectangleBorder(
-//       borderRadius: BorderRadius.only(
-//         topLeft: Radius.circular(24),
-//         topRight: Radius.circular(24),
-//       ),
-//     ),
-//     builder: (testContext) {
-//       return Padding(
-//         padding: EdgeInsets.only(
-//           left: 28,
-//           right: 28,
-//           bottom: MediaQuery.of(context).viewInsets.bottom,
-//         ),
-//         child: Form(
-//           key: formKey,
-//           child: SizedBox(
-//             height: 320,
-//             width: double.infinity,
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 24.ph,
-//                 Container(
-//                   width: 40,
-//                   height: 4,
-//                   decoration: BoxDecoration(
-//                     color: Colors.grey.shade300,
-//                     borderRadius: BorderRadius.circular(2),
-//                   ),
-//                 ),
-//                 24.ph,
-//                 Text(
-//                   testContext.tr.passwordManager,
-//                   style: AppTextStyles.medium20()
-//                       .copyWith(color: ColorsBox.black),
-//                 ),
-//                 25.ph,
-//                 CustomTextFormField(
-//                   hintText: testContext.tr.currentPassword,
-//                   labelText: testContext.tr.currentPassword,
-//                   controller: currentPasswordController,
-//                   isPassword: true,
-//                   validator: (String? value) {
-//                     final password = HiveHelper.instance.getItem("password");
-//                     if (value == null || value.isEmpty || value != password) {
-//                       return 'Please enter your password';
-//                     }
-//                     return null;
-//                   },
-//                 ),
-//                 Align(
-//                   alignment: Alignment.centerRight,
-//                   child: TextButton(
-//                     onPressed: () {
-//                       GoRouter.of(testContext).push(
-//                         ForgetPasswordView.routeName,
-//                         extra: ForgetPasswordViewArgs(),
-//                       );
-//                     },
-//                     child: Text(
-//                       testContext.tr.forgotPasswordButton,
-//                       style: AppTextStyles.medium14().copyWith(
-//                         color: ColorsBox.brightBlue,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 25.ph,
-//                 CustomButtonRow(
-//                   saveButtonText: context.tr.nextButton,
-//                   onSave: () {
-//                     if (formKey.currentState!.validate()) {
-//                       Navigator.of(testContext).pop();  // اقفل البوتوم شيت الحالي
-//                       Future.delayed(const Duration(milliseconds: 150), () {
-//                         // افتح البوتوم شيت التاني كـ bottom sheet جديد
-//                         showChangePasswordSheet(context);
-//                       });
-//                     }
-//                   },
-//                 )
-//               ],
-//             ),
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
-
-// // خلي الدالة دي تبقى تفتح bottom sheet مش ترجع widget فقط
-// static void showChangePasswordSheet(BuildContext context) {
-//   final formKey = GlobalKey<FormState>();
-//   final newPassword1Controller = TextEditingController();
-//   final newPassword2Controller = TextEditingController();
-
-//   showModalBottomSheet(
-//     context: context,
-//     isScrollControlled: true,
-//     shape: const RoundedRectangleBorder(
-//       borderRadius: BorderRadius.only(
-//         topLeft: Radius.circular(24),
-//         topRight: Radius.circular(24),
-//       ),
-//     ),
-//     builder: (ctx) {
-//       bool obscureText1 = true;
-//       bool obscureText2 = true;
-
-//       return StatefulBuilder(
-//         builder: (context, setState) {
-//           return Padding(
-//             padding: EdgeInsets.only(
-//               left: 28,
-//               right: 28,
-//               bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-//               top: 20,
-//             ),
-//             child: SingleChildScrollView(
-//               child: Form(
-//                 key: formKey,
-//                 child: Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   crossAxisAlignment: CrossAxisAlignment.center,
-//                   children: [
-//                     Container(
-//                       width: 40,
-//                       height: 4,
-//                       margin: const EdgeInsets.only(bottom: 20),
-//                       decoration: BoxDecoration(
-//                         color: Colors.grey.shade300,
-//                         borderRadius: BorderRadius.circular(2),
-//                       ),
-//                     ),
-//                     Text(
-//                       ctx.tr.passwordManager,
-//                       style: const TextStyle(
-//                         fontSize: 20,
-//                         fontWeight: FontWeight.w500,
-//                         color: Colors.black,
-//                       ),
-//                     ),
-//                     const SizedBox(height: 25),
-//                     TextFormField(
-//                       controller: newPassword1Controller,
-//                       obscureText: obscureText1,
-//                       decoration: InputDecoration(
-//                         labelText: ctx.tr.newPasswordLabel,
-//                         hintText: ctx.tr.hintPassword,
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(16),
-//                         ),
-//                         suffixIcon: IconButton(
-//                           icon: Icon(
-//                             obscureText1 ? Icons.visibility_off : Icons.visibility,
-//                           ),
-//                           onPressed: () {
-//                             setState(() {
-//                               obscureText1 = !obscureText1;
-//                             });
-//                           },
-//                         ),
-//                       ),
-//                       validator: (value) {
-//                         if (value == null || value.isEmpty) {
-//                           return 'Please enter your new password';
-//                         } else if (value.length < 6) {
-//                           return 'Password must be at least 6 characters';
-//                         }
-//                         return null;
-//                       },
-//                     ),
-//                     const SizedBox(height: 24),
-//                     TextFormField(
-//                       controller: newPassword2Controller,
-//                       obscureText: obscureText2,
-//                       decoration: InputDecoration(
-//                         labelText: ctx.tr.confirmPasswordLabel,
-//                         hintText: ctx.tr.hintPassword,
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(16),
-//                         ),
-//                         suffixIcon: IconButton(
-//                           icon: Icon(
-//                             obscureText2 ? Icons.visibility_off : Icons.visibility,
-//                           ),
-//                           onPressed: () {
-//                             setState(() {
-//                               obscureText2 = !obscureText2;
-//                             });
-//                           },
-//                         ),
-//                       ),
-//                       validator: (value) {
-//                         if (value == null || value.isEmpty) {
-//                           return 'Please confirm your password';
-//                         } else if (value != newPassword1Controller.text) {
-//                           return 'Passwords do not match';
-//                         }
-//                         return null;
-//                       },
-//                     ),
-//                     const SizedBox(height: 25),
-//                     SizedBox(
-//                       width: double.infinity,
-//                       child: BlocListener<ProfileCubit, ProfileStates>(
-//                         listener: (context, state) {
-//                           if (state is ProfileSuccess) {
-//                             Navigator.of(context).pop(); // اقفل bottom sheet
-//                             ScaffoldMessenger.of(context).showSnackBar(
-//                               const SnackBar(
-//                                 content: Text('Password changed successfully'),
-//                                 backgroundColor: Colors.green,
-//                               ),
-//                             );
-//                             HiveHelper.instance.addItem("password", newPassword2Controller.text);
-//                             GoRouter.of(context).pushReplacement(
-//                               MainHomeView.routeName,
-//                               extra: MainHomeViewArgs(),
-//                             );
-//                           } else if (state is ProfileError) {
-//                             ScaffoldMessenger.of(context).showSnackBar(
-//                               const SnackBar(
-//                                 content: Text("Something went wrong"),
-//                                 backgroundColor: Colors.red,
-//                               ),
-//                             );
-//                             Navigator.of(context).pop();
-//                           } else if (state is ProfileLoading) {
-//                             showDialog(
-//                               context: context,
-//                               barrierDismissible: false,
-//                               builder: (_) => const Center(
-//                                 child: CircularProgressIndicator(),
-//                               ),
-//                             );
-//                           }
-//                         },
-//                         child: ElevatedButton(
-//                           onPressed: () async {
-//                             if (formKey.currentState?.validate() ?? false) {
-//                               await ProfileCubit.instance.changePassword(
-//                                 newPassword: newPassword2Controller.text,
-//                               );
-//                             }
-//                           },
-//                           child: Text(ctx.tr.resetPasswordButton),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           );
-//         },
-//       );
-//     },
-//   );
-// }
 }

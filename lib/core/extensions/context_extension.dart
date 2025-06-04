@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 
 extension Localization on BuildContext {
   Tr get tr => Tr.of(this);
@@ -34,12 +36,14 @@ extension Localization on BuildContext {
       context: this,
       barrierDismissible: false,
       builder: (context) {
-        return const Dialog(
-          backgroundColor: Colors.transparent,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Center(
+              child: LoadingAnimationWidget.threeArchedCircle(
+                color: ColorsBox.mainColor,
+                size: 40,
+              ),
+            ));
       },
     );
   }

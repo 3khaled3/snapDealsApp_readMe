@@ -94,9 +94,10 @@ class ProfileView extends StatelessWidget {
                           GoRouter.of(context).push(MyRequestView.routeName),
                     ),
                     12.ph,
-                     CustomListTile(
+                    CustomListTile(
                       leadingIcon: Icons.shopping_cart_outlined,
-                      title: '${context.tr.my_products} & ${context.tr.my_courses}',
+                      title:
+                          '${context.tr.my_products} & ${context.tr.my_courses}',
                       onTap: () =>
                           GoRouter.of(context).push(MyProductsViews.routeName),
                     ),

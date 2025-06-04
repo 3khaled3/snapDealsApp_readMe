@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:video_player/video_player.dart';
 
@@ -57,8 +58,11 @@ class _OnlineVideoPlayerState extends State<OnlineVideoPlayer> {
                     child: VideoPlayer(_controller),
                   );
                 } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Center(
+                    child: LoadingAnimationWidget.threeArchedCircle(
+                      color: ColorsBox.mainColor,
+                      size: 40,
+                    ),
                   );
                 }
               },
