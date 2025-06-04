@@ -45,6 +45,10 @@ Future<void> main() async {
     _initializeHive(),
     _initializeSupabase(),
   ]);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // Run app in the same zone
   _runApp();

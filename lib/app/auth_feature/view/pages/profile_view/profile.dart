@@ -35,7 +35,8 @@ class ProfileView extends StatelessWidget {
         bloc: ProfileCubit.instance,
         builder: (context, state) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 70),
             child: Column(
               children: [
                 ClipRRect(

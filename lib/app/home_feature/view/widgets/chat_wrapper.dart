@@ -7,6 +7,7 @@ import 'package:snap_deals/app/chat_feature/model_view/chat_room_cubit.dart';
 import 'package:snap_deals/app/chat_feature/view/pages/chat_tickets_view.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/chat_app_bar.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
+import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
