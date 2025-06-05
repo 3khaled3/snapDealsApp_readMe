@@ -165,6 +165,22 @@ class ProfileCubit extends Cubit<ProfileStates> {
     );
   }
 
+  //deleteMe
+   deleteUser( {required String password}) async {
+    emit(DeleteUserLoading(state.profile));
+
+    final result = await AuthRepositoryImpl.instance
+        .deleteUser(password: password);
+    result.fold(
+      (left) {
+        emit(DeleteUserError(state.profile));
+      },
+      (right) {
+        emit(DeleteUserSuccess(state.profile));
+      },
+    );
+  }
+
   // logout
   logoutUser() async {
     emit(ProfileLoading(state.profile));

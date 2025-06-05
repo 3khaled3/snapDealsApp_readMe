@@ -260,5 +260,9 @@
     "labelWord": "Label",
     "my_products": "My Products",
     "my_courses": "My Courses",
-    "products": "Products"
+    "products": "Products",
+    "delete_account_success": "Account deleted successfully",
+    "delete_account_error": "Error deleting account",
+    "delete_product_success": " deleted successfully",
+    "delete_product_error": "Error deleting "
 }

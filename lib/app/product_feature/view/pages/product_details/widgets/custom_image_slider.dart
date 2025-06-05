@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
@@ -13,6 +15,7 @@ import 'package:snap_deals/app/product_feature/view/pages/product_details/edit_p
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CustomImageSlider extends StatefulWidget {
   const CustomImageSlider(
@@ -142,67 +145,91 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                         )
                       : 0.pw,
                   10.pw,
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorsBox.black,
-                    ),
-                    child: IconButton(
-                      icon: _isDeleting
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    ColorsBox.red),
-                              ),
-                            )
-                          : const Icon(Icons.delete,
-                              color: ColorsBox.red, size: 23),
-                      onPressed: _isDeleting
-                          ? null
-                          : () async {
-                              final confirm = await showDialog<bool>(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  backgroundColor: ColorsBox.white,
-                                  content: Text(context.tr.delete_item_label),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, false),
-                                      child: Text(context.tr.cancelWord),
-                                    ),
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, true),
-                                      child: Text(context.tr.deleteWord),
-                                    ),
-                                  ],
+                  BlocListener<DeleteProductCubit, DeleteProductState>(
+                    bloc: deleteProductCubit,
+                    listener: (context, state) {
+                      if (widget.isProduct){
+                      if (state is DeleteProductLoading) {
+                        context.showLoadingDialog();
+                      } else if (state is DeleteProductSuccess) {
+                        Navigator.of(context).pop();
+                        context.showSuccessSnackBar(
+                          message: context.tr.delete_product_success,
+                        );
+                         GoRouter.of(context).pushReplacement(
+                                      MainHomeView.routeName,
+                                      extra: MainHomeViewArgs());
+
+                      } else if (state is DeleteProductError) {
+                        Navigator.of(context).pop();
+                        context.showErrorSnackBar(
+                          message: context.tr.delete_product_error,
+                        );
+                      }}
+                      else {
+                        if (state is DeleteCourseLoading) {
+                          context.showLoadingDialog();
+                        } else if (state is DeleteCourseSuccess) {
+                          Navigator.of(context).pop();
+                          context.showSuccessSnackBar(
+                            message: context.tr.delete_product_success,
+                          );
+                           GoRouter.of(context).pushReplacement(
+                                      MainHomeView.routeName,
+                                      extra: MainHomeViewArgs());
+                        } else if (state is DeleteCourseError) {
+                          Navigator.of(context).pop();
+                          context.showErrorSnackBar(
+                            message: context.tr.delete_product_error,
+                          );
+                        }
+                      }
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorsBox.black,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.delete,
+                            color: ColorsBox.red, size: 23),
+                        onPressed: () async {
+                          final confirm = await showDialog<bool>(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              backgroundColor: ColorsBox.white,
+                              content: Text(context.tr.delete_item_label),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: Text(context.tr.cancelWord),
                                 ),
-                              );
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, true),
+                                  child: Text(context.tr.deleteWord,
+                                      style: AppTextStyles.regular14()
+                                          .copyWith(
+                                        color: ColorsBox.red,
+                                      )),
+                                ),
+                              ],
+                            ),
+                          );
 
-                              if (confirm == true) {
-                                setState(() => _isDeleting = true);
-
-                                if (widget.isProduct) {
-                                  await deleteProductCubit
-                                      .deleteProduct(widget.productId);
-                                } else {
-                                  await deleteCourseCubit
-                                      .deleteCourse(widget.productId);
-                                }
-
-                                if (mounted) {
-                                  setState(() => _isDeleting = false);
-                                  Navigator.pop(context);
-                                }
-                              }
-                            },
-                      constraints: const BoxConstraints(),
+                          if (confirm == true) {
+                            if (widget.isProduct) {
+                              deleteProductCubit
+                                  .deleteProduct(widget.productId);
+                            } else {
+                              deleteCourseCubit.deleteCourse(widget.productId);
+                            }
+                          }
+                        },
+                        constraints: const BoxConstraints(),
+                      ),
                     ),
                   ),
                 ],

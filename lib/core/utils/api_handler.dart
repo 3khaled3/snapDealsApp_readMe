@@ -134,6 +134,8 @@ abstract class HttpHelper {
     var response =
         await http.delete(Uri.parse(linkUrl), body: data, headers: headers);
 
+     print("Response Status: ${response.statusCode}");
+      print("Response Body: ${response.body}");
     return response;
   }
 
