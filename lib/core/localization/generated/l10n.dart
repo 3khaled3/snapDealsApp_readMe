@@ -1487,6 +1487,26 @@ class Tr {
     );
   }
 
+  /// `Course added successfully`
+  String get add_course_success {
+    return Intl.message(
+      'Course added successfully',
+      name: 'add_course_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error adding course`
+  String get add_course_error {
+    return Intl.message(
+      'Error adding course',
+      name: 'add_course_error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `About Course`
   String get about_course {
     return Intl.message(

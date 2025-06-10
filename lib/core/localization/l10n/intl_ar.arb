@@ -176,6 +176,8 @@
     "change_password": "تغيير كلمة المرور",
     "add_product_success": "تمت إضافة المنتج بنجاح",
     "add_product_error": "حدث خطأ أثناء إضافة المنتج",
+    "add_course_error": "حدث خطأ أثناء إضافة الدورة",
+    "add_course_success": "تمت إضافة الدورة بنجاح",
     "about_course": "عن الدورة",
     "about_course_hint": "أدخل وصف الدورة",
     "lesson": "درس",

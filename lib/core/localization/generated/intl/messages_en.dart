@@ -123,6 +123,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_category_success": MessageLookupByLibrary.simpleMessage(
       "Category added successfully",
     ),
+    "add_course_error": MessageLookupByLibrary.simpleMessage(
+      "Error adding course",
+    ),
+    "add_course_success": MessageLookupByLibrary.simpleMessage(
+      "Course added successfully",
+    ),
     "add_lesson_title_hint": MessageLookupByLibrary.simpleMessage(
       "Add Lesson Title",
     ),

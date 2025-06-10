@@ -176,6 +176,8 @@
     "change_password": "Change Password",
     "add_product_success": "Product added successfully",
     "add_product_error": "Error adding product",
+    "add_course_success": "Course added successfully",
+    "add_course_error": "Error adding course",
     "about_course": "About Course",
     "about_course_hint": "Enter course description",
     "lesson": "Lesson",

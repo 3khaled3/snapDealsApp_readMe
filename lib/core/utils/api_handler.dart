@@ -396,12 +396,14 @@ static Future<http.Response> editProfileFile({
         // Perform the request with the token
         http.Response response = await requestFunction(customToken);
 
-        if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.statusCode == 200 || response.statusCode == 201 || response.statusCode == 204) {
           // Use utf8.decode to properly handle special characters in the response
           var decodedBody = utf8.decode(response.bodyBytes);
 
           // Log the response body for debugging
-
+          if (decodedBody.trim().isEmpty) {
+    return const Right(<String, dynamic>{});
+  }
           return Right(jsonDecode(decodedBody));
         } else if (response.statusCode == 400 || response.statusCode == 401) {
           String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];

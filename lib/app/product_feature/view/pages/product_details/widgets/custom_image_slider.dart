@@ -38,7 +38,7 @@ class CustomImageSlider extends StatefulWidget {
 
 class _CustomImageSliderState extends State<CustomImageSlider> {
   final DeleteProductCubit deleteProductCubit = DeleteProductCubit();
-  final DeleteCourseCubit deleteCourseCubit = DeleteCourseCubit();
+  // final DeleteCourseCubit deleteCourseCubit = DeleteCourseCubit();
 
   int _currentIndex = 0;
   final user = ProfileCubit.instance.state.profile;
@@ -224,7 +224,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                               deleteProductCubit
                                   .deleteProduct(widget.productId);
                             } else {
-                              deleteCourseCubit.deleteCourse(widget.productId);
+                              deleteProductCubit.deleteCourse(widget.productId);
                             }
                           }
                         },

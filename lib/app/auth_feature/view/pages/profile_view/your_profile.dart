@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
+import 'package:snap_deals/app/auth_feature/view/pages/auth_view/login_view.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_primary_button.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
@@ -146,19 +147,18 @@ class _YourProfileViewState extends State<YourProfileView> {
                         listener: (context, state) {
                           if (state is DeleteUserError) {
                             context.showErrorSnackBar(
-                                message: "account deletion failed");
+                                message: context.tr.delete_account_error);
 
                             Navigator.of(context).pop();
                           } else if (state is DeleteUserSuccess) {
+                            Navigator.of(context).pop();
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               context.showSuccessSnackBar(
-                                message: 'account deleted successfully',
+                                message: context.tr.delete_account_success,
                               );
-                              while (Navigator.canPop(context)) {
-                                GoRouter.of(context).pushReplacement(
-                                    MainHomeView.routeName,
-                                    extra: MainHomeViewArgs());
-                              }
+                              GoRouter.of(context).pushReplacement(
+                                   LoginScreen.routeName,
+                                    extra: LoginViewArgs());
                             });
                           } else if (state is DeleteUserLoading) {
                             context.showLoadingDialog();

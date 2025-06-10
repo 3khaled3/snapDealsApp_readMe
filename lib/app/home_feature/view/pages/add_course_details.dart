@@ -145,14 +145,14 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                                 WidgetsBinding.instance
                                     .addPostFrameCallback((_) {
                                   context.showSuccessSnackBar(
-                                      message: context.tr.add_product_success);
+                                      message: context.tr.add_course_success);
                                   GoRouter.of(context).pushReplacement(
                                       MainHomeView.routeName,
                                       extra: MainHomeViewArgs());
                                 });
                               } else if (state is CreateCourseError) {
                                 context.showErrorSnackBar(
-                                    message: context.tr.add_product_error);
+                                    message: context.tr.add_course_error);
                                 Navigator.of(context).pop();
                               } else if (state is CreateCourseLoading) {
                                 context.showLoadingDialog();

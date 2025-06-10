@@ -14,3 +14,12 @@ final class DeleteProductLoading extends DeleteProductState {}
 final class DeleteProductSuccess extends DeleteProductState {}
 
 final class DeleteProductError extends DeleteProductState {}
+
+
+final class DeleteCourseInitial extends DeleteProductState {}
+
+final class DeleteCourseLoading extends DeleteProductState {}
+
+final class DeleteCourseSuccess extends DeleteProductState {}
+
+final class DeleteCourseError extends DeleteProductState {}

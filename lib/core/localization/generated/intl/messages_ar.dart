@@ -119,6 +119,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_category_success": MessageLookupByLibrary.simpleMessage(
       "تمت إضافة الفئة بنجاح",
     ),
+    "add_course_error": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ أثناء إضافة الدورة",
+    ),
+    "add_course_success": MessageLookupByLibrary.simpleMessage(
+      "تمت إضافة الدورة بنجاح",
+    ),
     "add_lesson_title_hint": MessageLookupByLibrary.simpleMessage(
       "أدخل عنوان الدرس",
     ),
