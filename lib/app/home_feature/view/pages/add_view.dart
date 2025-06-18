@@ -6,6 +6,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_list_tile.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
 
 class AddView extends StatelessWidget {
   const AddView({super.key});
@@ -67,19 +68,22 @@ class AddView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 70, right: 20, left: 20),
+      body: SafeArea(
         child: Column(
           children: [
             CustomHeaderAddView(title: context.tr.addTitle, icon: Icons.close),
-            const Divider(thickness: 1, color: Colors.black),
+            10.ph,
+            const Divider(
+              color: ColorsBox.greyishTwo,
+              height: 1,
+            ),
             ...categories.map((category) {
               final name = translateCategoryName(context, category['nameKey']);
               final icon = category['icon'] as IconData;
               final id = category['id'] as String;
 
               return Padding(
-                padding: const EdgeInsets.only(bottom: 15),
+                padding: const EdgeInsets.only(top: 10, right: 16, left: 16),
                 child: CustomListTile(
                   title: name,
                   leadingIcon: icon,
@@ -106,4 +110,3 @@ class AddView extends StatelessWidget {
     );
   }
 }
-

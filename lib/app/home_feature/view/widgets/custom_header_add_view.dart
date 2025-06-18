@@ -14,16 +14,17 @@ class CustomHeaderAddView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-            onPressed: () {
+        10.pw,
+        GestureDetector(
+            onTap: () {
               GoRouter.of(context).pop();
             },
-            icon: Icon(
+            child: Icon(
               icon,
               color: ColorsBox.brightBlue,
-              size: 40,
+              size: 30,
             )),
-        23.pw,
+        10.pw,
         Text(
           title,
           style: AppTextStyles.bold18()

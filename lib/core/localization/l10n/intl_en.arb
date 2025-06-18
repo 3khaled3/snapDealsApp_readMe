@@ -260,5 +260,7 @@
     "labelWord": "Label",
     "my_products": "My Products",
     "my_courses": "My Courses",
-    "products": "Products"
+    "products": "Products",
+    "continueAsGuest": "Continue as Guest"
+
 }

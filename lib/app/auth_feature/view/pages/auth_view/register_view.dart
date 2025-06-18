@@ -181,73 +181,28 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ),
                     13.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // 66.pw,
-                        OutlinedButton(
-                          onPressed: () {
-                            // Handle login
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            backgroundColor: Colors.white,
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 12,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.apple,
-                            color: Colors.black,
-                            size: 32,
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          GoRouter.of(context).pushReplacement(
+                            MainHomeView.routeName,
+                            extra: MainHomeViewArgs(),
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            side: const BorderSide(color: Colors.black12),
                           ),
                         ),
-                        13.pw,
-                        OutlinedButton(
-                            onPressed: () {
-                              // Handle login
-                            },
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              backgroundColor: Colors.white,
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 12,
-                              ),
-                            ),
-                            child: const Icon(
-                              EvaIcons.google,
-                              color: Color(0xffd62d20),
-                              size: 32,
-                            )),
-                        13.pw,
-                        OutlinedButton(
-                          onPressed: () {
-                            // Handle login
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            backgroundColor: Colors.white,
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 12,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.facebook,
-                            color: Colors.blue,
-                            size: 30,
-                          ),
+                        child: Text(
+                          context.tr.continueAsGuest,
+                          style: AppTextStyles.medium14()
+                              .copyWith(color: Colors.black54),
                         ),
-                        // 66.pw,
-                      ],
+                      ),
                     ),
                   ],
                 ),

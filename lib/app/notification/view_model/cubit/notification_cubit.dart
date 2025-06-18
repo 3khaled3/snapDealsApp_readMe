@@ -14,13 +14,10 @@ class NotificationCubit extends Cubit<NotificationState> {
   StreamSubscription? _notificationSubscription;
 
   void fetchNotifications() {
-    print("fetchNotifications 11111");
     emit(NotificationLoading());
-    print("fetchNotifications 22222");
 
     // Cancel any existing subscription to avoid multiple streams
     _notificationSubscription?.cancel();
-    print("fetchNotifications 33333");
 
     // Debounce the stream to limit the frequency of emissions
     _notificationSubscription = _repository
@@ -28,17 +25,13 @@ class NotificationCubit extends Cubit<NotificationState> {
         .debounceTime(const Duration(milliseconds: 300))
         .listen(
       (notifications) {
-        print("fetchNotifications 44444");
         if (state is! NotificationLoaded ||
             _hasNotificationsChanged(
                 (state as NotificationLoaded).notifications, notifications)) {
-          print("fetchNotifications 5555");
           emit(NotificationLoaded(notifications));
         }
-        print("fetchNotifications 6666");
       },
       onError: (error) {
-        print("fetchNotifications 7777");
         emit(NotificationError(error.toString()));
       },
     );

@@ -140,9 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           listener: (context, state) {
                             if (state is ProfileSuccess) {
                               WidgetsBinding.instance.addPostFrameCallback((_) {
-                                context.showSuccessSnackBar(
-                                  message: context.tr.loginSuccess,
-                                );
+                                // context.showSuccessSnackBar(
+                                //   message: context.tr.loginSuccess,
+                                // );
                                 GoRouter.of(context).pushReplacement(
                                     MainHomeView.routeName,
                                     extra: MainHomeViewArgs());
@@ -173,6 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: BuildRegisterText(),
                       ),
                       18.ph,
+
                       Padding(
                         padding: const EdgeInsets.only(left: 80, right: 80),
                         child: Row(
@@ -200,77 +201,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       13.ph,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // 66.pw,
-                          OutlinedButton(
-                            onPressed: () {
-                              GoRouter.of(context).push(MainHomeView.routeName,
-                                  extra: MainHomeViewArgs());
-                              // Handle login
-                            },
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              backgroundColor: Colors.white,
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 12,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.apple,
-                              color: Colors.black,
-                              size: 32,
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushReplacement(
+                              MainHomeView.routeName,
+                              extra: MainHomeViewArgs(),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: const BorderSide(color: Colors.black12),
                             ),
                           ),
-                          13.pw,
-                          OutlinedButton(
-                              onPressed: () {
-                                // Handle login
-                              },
-                              style: OutlinedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                backgroundColor: Colors.white,
-                                elevation: 0,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                              ),
-                              child: const Icon(
-                                EvaIcons.google,
-                                color: Colors.red,
-                                size: 32,
-                              )),
-                          13.pw,
-                          OutlinedButton(
-                            onPressed: () {
-                              // GoRouter.of(context).push(HomeView.routeName,
-                              //     extra: HomeViewArgs());
-                              // Handle login
-                            },
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              backgroundColor: Colors.white,
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 12,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.facebook,
-                              color: Colors.blue,
-                              size: 30,
-                            ),
+                          child: Text(
+                            context.tr.continueAsGuest,
+                            style: AppTextStyles.medium14()
+                                .copyWith(color: Colors.black54),
                           ),
-                          // 66.pw,
-                        ],
+                        ),
                       ),
                     ],
                   ),

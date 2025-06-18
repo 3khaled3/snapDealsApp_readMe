@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات التواصل"),
         "contactNumber": MessageLookupByLibrary.simpleMessage(
             "هذا هو الرقم لجهات اتصال المشترين والإشعارات الأخرى"),
+        "continueAsGuest":
+            MessageLookupByLibrary.simpleMessage("المتابعة كزائر"),
         "continue_as_guest":
             MessageLookupByLibrary.simpleMessage("المتابعة كضيف"),
         "copyTextError":
