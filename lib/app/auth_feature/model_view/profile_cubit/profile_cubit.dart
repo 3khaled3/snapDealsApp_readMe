@@ -78,23 +78,6 @@ class ProfileCubit extends Cubit<ProfileStates> {
 
   Future<void> updateUser(UserModel userModel, XFile? newProfileImage) async {
     emit(ProfileLoading(state.profile));
-    // if (newProfileImage != null) {
-    //   final result = await AuthRepositoryImpl.instance.changeProfileImage(
-    //     storagePath: "profileImage/${userModel.id}",
-    //     filePath: newProfileImage.path,
-    //   );
-
-    //   result.fold(
-    //     (left) {
-    //       print('🚨🚨🚨🚨: Profile failed to upload image');
-    //       emit(ProfileError(state.profile));
-    //       return;
-    //     },
-    //     (right) {
-    //       userModel = userModel.copyWith(profileImg: right);
-    //     },
-    //   );
-    // }
     final result = await AuthRepositoryImpl.instance
         .updateUserData(user: userModel, image: newProfileImage);
 
@@ -103,10 +86,6 @@ class ProfileCubit extends Cubit<ProfileStates> {
         emit(ProfileError(state.profile));
       },
       (right) {
-        // print('✔️✔️✔️${right}}');
-        // emit(ProfileSuccess(userModel));
-
-        // refreshAccount();
         final email = HiveHelper.instance.getItem("email");
         final password = HiveHelper.instance.getItem("password");
 
@@ -116,39 +95,6 @@ class ProfileCubit extends Cubit<ProfileStates> {
       },
     );
   }
-
-  // update user
-  // Future<void> updateUser(UserModel userModel, XFile? newProfileImage) async {
-  //   emit(ProfileLoading(state.profile));
-  //   if (newProfileImage != null) {
-  //     final result = await AuthRepositoryImpl.instance.changeProfileImage(
-  //       storagePath: "profileImage/${userModel.id}",
-  //       filePath: newProfileImage.path,
-  //     );
-
-  //     result.fold(
-  //       (left) {
-  //         print('🚨🚨🚨🚨: Profile failed to upload image');
-  //         emit(ProfileError(state.profile));
-  //         return;
-  //       },
-  //       (right) {
-  //         userModel = userModel.copyWith(image: right);
-  //       },
-  //     );
-  //   }
-  //   final result = await AuthRepositoryImpl.instance
-  //       .updateUser(userModel.id, userModel.toJson());
-
-  //   result.fold(
-  //     (left) {
-  //       emit(ProfileError(state.profile));
-  //     },
-  //     (right) {
-  //       emit(ProfileSuccess(userModel));
-  //     },
-  //   );
-  // }
 
   changePassword({required String newPassword}) async {
     emit(ProfileLoading(state.profile));
@@ -166,11 +112,11 @@ class ProfileCubit extends Cubit<ProfileStates> {
   }
 
   //deleteMe
-   deleteUser( {required String password}) async {
+  deleteUser({required String password}) async {
     emit(DeleteUserLoading(state.profile));
 
-    final result = await AuthRepositoryImpl.instance
-        .deleteUser(password: password);
+    final result =
+        await AuthRepositoryImpl.instance.deleteUser(password: password);
     result.fold(
       (left) {
         emit(DeleteUserError(state.profile));
@@ -184,17 +130,8 @@ class ProfileCubit extends Cubit<ProfileStates> {
   // logout
   logoutUser() async {
     emit(ProfileLoading(state.profile));
-    // make request
-    // final result = await AuthRepositoryImpl.instance.signOut();
     await resetCurrentUser();
-    // result.fold(
-    //   (left) {
-    //     emit(ProfileError(nonRegisteredUser));
-    //   },
-    // (right) {
     emit(ProfileInitial(nonRegisteredUser));
-    // },
-    // );
   }
 
   Future<bool?> refreshAccount() async {
