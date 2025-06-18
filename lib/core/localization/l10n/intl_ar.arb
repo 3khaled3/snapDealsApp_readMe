@@ -176,6 +176,8 @@
     "change_password": "تغيير كلمة المرور",
     "add_product_success": "تمت إضافة المنتج بنجاح",
     "add_product_error": "حدث خطأ أثناء إضافة المنتج",
+    "add_course_error": "حدث خطأ أثناء إضافة الدورة",
+    "add_course_success": "تمت إضافة الدورة بنجاح",
     "about_course": "عن الدورة",
     "about_course_hint": "أدخل وصف الدورة",
     "lesson": "درس",
@@ -260,6 +262,12 @@
     "labelWord": "العنوان",
     "my_products": "منتجاتي",
     "my_courses": "كورسات",
+    "products": "المنتجات",
+    "delete_account_success": "تم حذف الحساب بنجاح",
+    "delete_account_error": "حدث خطأ أثناء حذف الحساب",
+    "delete_product_success": "تم الحذف  بنجاح",
+    "delete_product_error": "حدث خطأ أثناء الحذف "
+    
     "products": "المنتجات",
     "continueAsGuest": "المتابعة كزائر"
 }

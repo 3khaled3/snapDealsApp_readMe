@@ -22,6 +22,18 @@ final class ProfileError extends ProfileStates {
   const ProfileError(super.profile);
 }
 
+final class DeleteUserLoading extends ProfileStates {
+  const DeleteUserLoading(super.profile);
+}
+
+final class DeleteUserSuccess extends ProfileStates {
+  const DeleteUserSuccess(super.profile);
+}
+
+final class DeleteUserError extends ProfileStates {
+  const DeleteUserError(super.profile);
+}
+
 final nonRegisteredUser = UserModel(
   id: 'mock',
   name: 'mock',

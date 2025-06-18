@@ -176,6 +176,8 @@
     "change_password": "Change Password",
     "add_product_success": "Product added successfully",
     "add_product_error": "Error adding product",
+    "add_course_success": "Course added successfully",
+    "add_course_error": "Error adding course",
     "about_course": "About Course",
     "about_course_hint": "Enter course description",
     "lesson": "Lesson",
@@ -260,6 +262,11 @@
     "labelWord": "Label",
     "my_products": "My Products",
     "my_courses": "My Courses",
+    "products": "Products",
+    "delete_account_success": "Account deleted successfully",
+    "delete_account_error": "Error deleting account",
+    "delete_product_success": " deleted successfully",
+    "delete_product_error": "Error deleting "
     "products": "Products",
     "continueAsGuest": "Continue as Guest"
 
