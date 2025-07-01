@@ -82,7 +82,12 @@ class CustomBottomSheet {
                       backgroundColor: ColorsBox.brightBlue,
                       onTap: () {
                         ProfileCubit.instance.logoutUser();
-                        GoRouter.of(context).push(LoginScreen.routeName);
+                        while (GoRouter.of(context).canPop()) {
+                          GoRouter.of(context).pop();
+                        }
+                        GoRouter.of(context).pushReplacement(
+                          LoginScreen.routeName,
+                        );
                       },
                     ),
                   ),

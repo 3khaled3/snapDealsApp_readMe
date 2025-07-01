@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
@@ -82,6 +83,7 @@ class InstructorDetails extends StatelessWidget {
                     name: instructor.name,
                     profileImg: instructor.profileImg,
                     phone: instructor.phone,
+                    role: Role.user,
                   ),
                 );
               },

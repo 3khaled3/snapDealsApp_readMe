@@ -177,6 +177,10 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                                             .instance.state.profile.name,
                                         profileImg: ProfileCubit
                                             .instance.state.profile.profileImg,
+                                        role: ProfileCubit
+                                            .instance.state.profile.role,
+                                        notificationToken: ProfileCubit
+                                            .instance.state.profile.notificationToken,
                                       ),
                                       location: locationController.text,
                                       slug: brandController.text,

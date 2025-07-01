@@ -267,5 +267,6 @@
     "delete_account_error": "حدث خطأ أثناء حذف الحساب",
     "delete_product_success": "تم الحذف  بنجاح",
     "delete_product_error": "حدث خطأ أثناء الحذف ",
-    "continueAsGuest": "المتابعة كزائر"
+    "continueAsGuest": "المتابعة كزائر",
+    "contactSupport": "الدردشة مع الدعم"
 }

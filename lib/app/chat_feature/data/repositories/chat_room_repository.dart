@@ -54,7 +54,7 @@ class ChatRoomRepository {
       return result.docs
           .map((e) => ChatRoom.fromJson(e.data()))
           .toList()
-          .where((e) => e.members.contains("admin"))
+          .where((e) => e.members.contains("Support"))
           .toList();
     });
   }

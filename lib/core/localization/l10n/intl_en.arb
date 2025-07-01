@@ -267,5 +267,6 @@
     "delete_account_error": "Error deleting account",
     "delete_product_success": " deleted successfully",
     "delete_product_error": "Error deleting ",
-    "continueAsGuest": "Continue as Guest"
+    "continueAsGuest": "Continue as Guest",
+    "contactSupport": "Contact Support"
 }

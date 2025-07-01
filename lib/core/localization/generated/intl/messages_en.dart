@@ -149,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Contact information"),
         "contactNumber": MessageLookupByLibrary.simpleMessage(
             "this is the number for buyers contacts and other notification"),
+        "contactSupport":
+            MessageLookupByLibrary.simpleMessage("Contact Support"),
         "continueAsGuest":
             MessageLookupByLibrary.simpleMessage("Continue as Guest"),
         "continue_as_guest":

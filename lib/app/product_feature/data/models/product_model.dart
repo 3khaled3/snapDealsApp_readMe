@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 
 class ProductModel {
@@ -161,6 +162,7 @@ class Partner {
   final String? phone;
   final String? profileImg;
   final String? notificationToken;
+  final Role role;
 
   Partner({
     required this.id,
@@ -168,6 +170,7 @@ class Partner {
     this.phone,
     this.notificationToken,
     this.profileImg,
+    required this.role,
   });
 
   // From JSON
@@ -178,7 +181,20 @@ class Partner {
       notificationToken: json['notificationToken'],
       phone: json['phone'],
       profileImg: json['profileImg'],
+      role: _roleFromString(json['role']??"unregistered" ),
     );
+  }
+  static Role _roleFromString(String role) {
+    switch (role) {
+      case 'admin':
+        return Role.admin;
+      case 'user':
+        return Role.user;
+      case 'unregistered':
+        return Role.unregistered;
+      default:
+        throw ArgumentError('Invalid role: $role');
+    }
   }
 
   // To JSON
@@ -189,6 +205,7 @@ class Partner {
       'notificationToken': notificationToken,
       'phone': phone,
       'profileImg': profileImg,
+      'role': role,
     };
   }
 }

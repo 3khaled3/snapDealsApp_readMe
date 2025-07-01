@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/chat_feature/model_view/get_sup_user_cubit/get_sup_user_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
@@ -151,6 +152,7 @@ class NotificationsView extends StatelessWidget {
                                       name: partner.name,
                                       profileImg: partner.profileImg,
                                       phone: partner.phone,
+                                      role: Role.user,
                                     ));
                               }
                             }
