@@ -71,7 +71,6 @@ class ProductModel {
     };
   }
 
-// تأكد أنك مستورد مكتبة JSON
 
   Map<String, dynamic> createProductJson() {
     return {
@@ -84,7 +83,7 @@ class ProductModel {
       'images': images,
       'category': category.id,
       'visit': visit,
-      'details': jsonEncode(details), // ✅ تحويل details إلى JSON String
+      'details': jsonEncode(details),
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
     };
