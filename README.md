@@ -29,14 +29,14 @@ A comprehensive Flutter application that connects students and educators, enabli
 | ![Chat List](screenshots/chats.png) | ![Chat Interface](screenshots/chat.png) | ![Messages](screenshots/chat.png) |
 
 ### ⭐ Favorites & Requests
-| Favorites | Course Orders | Request Details |
-|-----------|---------------|----------------|
-| ![Favorites](screenshots/fav_product.png) | ![Course Orders](screenshots/course_ordars.png) | ![Request Details](screenshots/course_ordars.png) |
+| Favorites | Course Orders |
+|-----------|---------------|
+| ![Favorites](screenshots/fav_product.png) | ![Course Orders](screenshots/course_ordars.png) |
 
 ### 🔔 Notifications & Settings
-| Notifications | Settings | Language Settings |
-|---------------|----------|-------------------|
-| ![Notifications](screenshots/notification.png) | ![Settings](screenshots/settinga.png) | ![Language Settings](screenshots/chamge clang.png) |
+| Notifications | Settings | Change Language |
+|---------------|----------|-----------------|
+| ![Notifications](screenshots/notification.png) | ![Settings](screenshots/settinga.png) | ![Change Language](screenshots/chamge clang.png) |
 
 ### 👤 User Management
 | Edit Profile | Change Password | Privacy Policy |
@@ -47,11 +47,6 @@ A comprehensive Flutter application that connects students and educators, enabli
 | About Us | Logout | Guest Mode |
 |----------|--------|------------|
 | ![About Us](screenshots/aboutus.png) | ![Logout](screenshots/logout.png) | ![Guest Mode](screenshots/gest.png) |
-
-### 👨‍💼 Admin Panel
-| Admin Dashboard | Category Management | User Management |
-|-----------------|-------------------|-----------------|
-| ![Admin Dashboard](phone/25-portrait.png) | ![Category Management](phone/26-portrait.png) | ![User Management](phone/27-portrait.png) |
 
 ## 🚀 Features
 
