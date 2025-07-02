@@ -21,7 +21,7 @@ A comprehensive Flutter application that connects students and educators, enabli
 ### 📚 Products & Courses
 | Add Product | Add Course Details | My Products | Course Details 2 |
 |-------------|-------------------|-------------|------------------|
-| ![Add Product](screenshots/add product.png) | ![Add Course Details](screenshots/add coursedetails.png) | ![My Products](screenshots/my product.png) | ![Course Details 2](screenshots/course_details2.png) |
+| ![Add Product](screenshots/add%20product.png) | ![Add Course Details](screenshots/add%20coursedetails.png) | ![My Products](screenshots/my%20product.png) | ![Course Details 2](screenshots/course_details2.png) |
 
 ### 💬 Chat & Communication
 | Chat List | Chat Interface | Messages |
@@ -36,7 +36,7 @@ A comprehensive Flutter application that connects students and educators, enabli
 ### 🔔 Notifications & Settings
 | Notifications | Settings | Change Language |
 |---------------|----------|-----------------|
-| ![Notifications](screenshots/notification.png) | ![Settings](screenshots/settinga.png) | ![Change Language](screenshots/chamge clang.png) |
+| ![Notifications](screenshots/notification.png) | ![Settings](screenshots/settinga.png) | ![Change Language](screenshots/chamge%20clang.png) |
 
 ### 👤 User Management
 | Edit Profile | Change Password | Privacy Policy |
