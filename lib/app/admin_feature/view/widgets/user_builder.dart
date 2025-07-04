@@ -46,7 +46,9 @@ class _UserBuilderState extends State<UserBuilder> {
 
   void _loadInitialUsers() {
     accessUserCubit.getAllUsersData(
-        page: page.toString(), limit: limit.toString());
+      page: page.toString(),
+      limit: limit.toString(),
+    );
   }
 
   void _onScroll() {
@@ -62,7 +64,19 @@ class _UserBuilderState extends State<UserBuilder> {
     setState(() => _isLoading = true);
     page++;
     accessUserCubit.getAllUsersData(
-        page: page.toString(), limit: limit.toString());
+      page: page.toString(),
+      limit: limit.toString(),
+    );
+  }
+
+  void _refreshUsers() {
+    setState(() {
+      _users.clear();
+      page = 1;
+      _hasMore = true;
+      _isLoading = false;
+    });
+    accessUserCubit.getAllUsersData(page: '1', limit: '5');
   }
 
   @override
@@ -70,17 +84,36 @@ class _UserBuilderState extends State<UserBuilder> {
     return BlocConsumer<AccessUserCubit, AccessUserState>(
       bloc: accessUserCubit,
       listener: (context, state) {
+        debugPrint('AccessUserCubit state changed: $state');
+
         if (state is GetAllUsersSuccess) {
-          _isLoading = false;
-          if (page == 1) {
-            _users = state.users;
-          } else {
-            _users.addAll(state.users);
-          }
-          if (state.users.length < limit) _hasMore = false;
+          debugPrint('🎯 GetAllUsersSuccess caught, updating users list');
+          setState(() {
+            _isLoading = false;
+            if (page == 1) {
+              _users = state.users;
+            } else {
+              for (var newUser in state.users) {
+                if (!_users.any((u) => u.id == newUser.id)) {
+                  _users.add(newUser);
+                }
+              }
+            }
+            if (state.users.length < limit) _hasMore = false;
+          });
         } else if (state is GetAllUsersError) {
-          _isLoading = false;
-          page--;
+          setState(() {
+            _isLoading = false;
+            page--;
+          });
+        } else if (state is DeleteUserSuccess) {
+          debugPrint('🎯 DeleteUserSuccess caught, refreshing list');
+          _refreshUsers();
+        } else if (state is GetSpecificUserSuccess) {
+          setState(() {
+            _isLoading = false;
+            _hasMore = false;
+          });
         }
       },
       builder: (context, state) {
@@ -91,16 +124,7 @@ class _UserBuilderState extends State<UserBuilder> {
                 UserCard(uesrs: state.user),
                 16.ph,
                 TextButton(
-                  onPressed: () {
-                    page = 1;
-                    _users.clear();
-                    _hasMore = true;
-                    _isLoading = false;
-                    accessUserCubit.getAllUsersData(
-                      page: page.toString(),
-                      limit: limit.toString(),
-                    );
-                  },
+                  onPressed: _refreshUsers,
                   child: Text(
                     context.tr.display_all_users,
                     style: AppTextStyles.semiBold14(),
@@ -120,10 +144,18 @@ class _UserBuilderState extends State<UserBuilder> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Text(context.tr.error_user_loag),
+                Text(
+                  context.tr.error_user_loag,
+                  style: AppTextStyles.semiBold16()
+                      .copyWith(color: ColorsBox.black),
+                ),
                 ElevatedButton(
                   onPressed: _loadInitialUsers,
-                  child:  Text(context.tr.retry),
+                  child: Text(
+                    context.tr.retry,
+                    style: AppTextStyles.semiBold16()
+                        .copyWith(color: ColorsBox.brightBlue),
+                  ),
                 ),
               ],
             ),
@@ -142,7 +174,7 @@ class _UserBuilderState extends State<UserBuilder> {
                             List.generate(2, (_) => const ShimmerUserCard()),
                       ),
                     if (!_hasMore && _users.isNotEmpty)
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Center(child: Text(context.tr.no_more_user)),
                       ),
@@ -158,9 +190,10 @@ class _UserBuilderState extends State<UserBuilder> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       color: ColorsBox.red.withOpacity(0.7),
-                      child:  Text(
-                       context.tr.retry_load_more,
-                        style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.white),
+                      child: Text(
+                        context.tr.retry_load_more,
+                        style: AppTextStyles.semiBold16()
+                            .copyWith(color: ColorsBox.white),
                       ),
                     ),
                   ),

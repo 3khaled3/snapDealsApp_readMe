@@ -12,11 +12,13 @@ import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.
 import 'package:snap_deals/app/home_feature/view/widgets/custom_tobic.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/update_product_cubit/update_product_cubit.dart';
+import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_edit_topic.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 
 class EditDetailsArgs {
   final ProductModel? product;
@@ -50,6 +52,12 @@ class _EditDetailsViewState extends State<EditDetailsView> {
 
 // تحويل Map<String, dynamic> إلى Map<String, String> بشكل آمن:
   Map<String, String> initialTopics = {};
+  
+  // Store the updated product locally
+  ProductModel? localUpdatedProduct;
+  
+  // Flag to prevent multiple navigation calls
+  bool _hasNavigated = false;
 
   @override
   void initState() {
@@ -167,15 +175,47 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                     bloc: updateProductCubit,
                     listener: (context, state) {
                       if (state is UpdateProductSuccess) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          context.showSuccessSnackBar(
-                              message: context.tr.update_success);
-                          GoRouter.of(context).pop(); // العودة للصفحة السابقة
-                        });
+                        print('UpdateProductSuccess state received');
+                        print('Local updated product: ${localUpdatedProduct?.title}');
+                        print('Local updated product price: ${localUpdatedProduct?.price}');
+                        print('State product: ${state.updatedProduct.title}');
+                        print('State product price: ${state.updatedProduct.price}');
+                        
+                        // Prevent multiple navigation calls
+                        if (_hasNavigated) {
+                          print('Navigation already completed, skipping');
+                          return;
+                        }
+                        
+                        _hasNavigated = true;
+                        
+                        // Close any loading dialogs first
+                        Navigator.of(context).pop();
+                        
+                        // Show success message
+                        context.showSuccessSnackBar(
+                            message: context.tr.update_success);
+                        
+                        // Navigate back to ProductDetailsView with updated data
+                        print('About to navigate back to ProductDetailsView');
+                        
+                        // Ensure we use the local updated product, not the state product
+                        final productToPass = localUpdatedProduct ?? state.updatedProduct;
+                        print('Final product to pass: ${productToPass.title}');
+                        print('Final product price: ${productToPass.price}');
+                        
+                        // Use GoRouter.pop() to return data properly
+                        GoRouter.of(context).pop(productToPass);
+                        
+                        print('Navigation back to ProductDetailsView completed');
                       } else if (state is UpdateProductError) {
+                        print('UpdateProductError state received');
+                        // Close loading dialog
+                        Navigator.of(context).pop();
                         context.showErrorSnackBar(
                             message: context.tr.update_error);
                       } else if (state is UpdateProductLoading) {
+                        print('UpdateProductLoading state received');
                         context.showLoadingDialog();
                       }
                     },
@@ -183,7 +223,7 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                       title: context.tr.saveButton,
                       onTap: () async {
                         if (formKey.currentState?.validate() ?? false) {
-                          final updatedProduct = widget.args!.product!.copyWith(
+                          localUpdatedProduct = widget.args!.product!.copyWith(
                             slug: brandController.text,
                             title: titleController.text,
                             description: descriptionController.text,
@@ -193,8 +233,9 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                                 topicsKey.currentState?.getTopicsMap() ?? {},
                             updatedAt: DateTime.now(),
                           );
+                          print('Local updated product: ${localUpdatedProduct!.toJson()}');
                           await updateProductCubit.updateProduct(
-                            updatedProduct,
+                            localUpdatedProduct!,
                             selectedImages.isNotEmpty
                                 ? selectedImages.first
                                 : null,

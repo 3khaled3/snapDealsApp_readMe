@@ -111,34 +111,69 @@ abstract class CustomDialog {
   }
 
   static void deleteUser(BuildContext context, String userId) {
-    final cubit = BlocProvider.of<AccessUserCubit>(context); // ✅ خد نفس الCubit
+  final cubit = BlocProvider.of<AccessUserCubit>(context);
 
-    showDialog(
-      context: context,
-      builder: (dialogContext) => BlocProvider.value(
+  showDialog(
+    context: context,
+    builder: (dialogContext) {
+      return BlocProvider.value(
         value: cubit,
-        child: AlertDialog(
-          title: Text(context.tr.deleteUser),
-          content: Text(context.tr.deleteUserHint),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(context.tr.cancelWord),
-            ),
-            TextButton(
-              onPressed: () async {
-                await cubit.deleteUser(userId);
-                cubit.getAllUsersData(limit: 5.toString(), page: 1.toString());
-                Navigator.pop(dialogContext);
-              },
-              child: Text(
-                context.tr.deleteWord,
-               style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.red),
+        child: BlocListener<AccessUserCubit, AccessUserState>(
+          listener: (context, state) {
+            debugPrint('AccessUserCubit state changed: $state');
+
+            if (state is DeleteUserLoading) {
+              // ✅ افتح Dialog تحميل
+              context.showLoadingDialog();
+            }
+
+            else if (state is DeleteUserSuccess) {
+              debugPrint('🎯 DeleteUserSuccess caught, refreshing list');
+              // ✅ اقفل Dialog التحميل
+              Navigator.of(context, rootNavigator: true).pop(); 
+              // ✅ اقفل Dialog التأكيد
+              Navigator.pop(dialogContext); 
+
+              cubit.getAllUsersData(page: '1', limit: '5');
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(context.tr.deleteAccountSuccess)),
+              );
+            }
+
+            else if (state is DeleteUserError) {
+              // ✅ اقفل Dialog التحميل فقط (التأكيد لسه مفتوح)
+              Navigator.of(context, rootNavigator: true).pop(); 
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(context.tr.deleteAccountError)),
+              );
+            }
+          },
+          child: AlertDialog(
+            backgroundColor: ColorsBox.white,
+            title: Text(context.tr.deleteUser),
+            content: Text(context.tr.deleteUserHint),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: Text(
+                  context.tr.cancelWord,
+                  style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.black),
+                ),
               ),
-            ),
-          ],
+              TextButton(
+                onPressed: () async {
+                  await cubit.deleteUser(userId);
+                },
+                child: Text(
+                  context.tr.deleteWord,
+                  style: AppTextStyles.semiBold16().copyWith(color: ColorsBox.red),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
+    },
+  );
+}
 }

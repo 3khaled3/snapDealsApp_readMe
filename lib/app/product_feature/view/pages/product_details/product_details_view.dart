@@ -13,17 +13,56 @@ class ProductDetailsArgs {
   ProductDetailsArgs({required this.product});
 }
 
-class ProductDetailsView extends StatelessWidget {
+class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({super.key, required this.args});
   final ProductDetailsArgs args;
   static const String routeName = '/product_details_route';
+  
+  @override
+  State<ProductDetailsView> createState() => _ProductDetailsViewState();
+}
+
+class _ProductDetailsViewState extends State<ProductDetailsView> {
+  @override
+  void initState() {
+    super.initState();
+    print('ProductDetailsView initialized with product: ${widget.args.product.title}');
+    print('Product price: ${widget.args.product.price}');
+    print('Product details: ${widget.args.product.details}');
+    print('Product updatedAt: ${widget.args.product.updatedAt}');
+    print('Product ID: ${widget.args.product.id}');
+    print('Product hash: ${widget.args.product.hashCode}');
+    print('Widget hash: ${widget.hashCode}');
+  }
+
+  @override
+  void didUpdateWidget(ProductDetailsView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('ProductDetailsView didUpdateWidget called');
+    print('Old product: ${oldWidget.args.product.title}');
+    print('New product: ${widget.args.product.title}');
+    print('Old price: ${oldWidget.args.product.price}');
+    print('New price: ${widget.args.product.price}');
+  }
+
   @override
   Widget build(BuildContext context) {
-    final product = args.product;
+    final product = widget.args.product;
+    
+    print('ProductDetailsView building with product: ${product.title}');
+    print('ProductDetailsView building with price: ${product.price}');
+    print('ProductDetailsView building with updatedAt: ${product.updatedAt}');
+    print('ProductDetailsView building with ID: ${product.id}');
+    
     final formattedPrice = 'EGP ${product.price.toStringAsFixed(2)}';
     final formattedDate =
         '${product.createdAt.day}/${product.createdAt.month}/${product.createdAt.year}';
+    
+    // Create a unique key that changes when the product data changes
+    final uniqueKey = ValueKey('product_details_${product.id}_${product.title}_${product.price}_${product.updatedAt.millisecondsSinceEpoch}');
+    
     return Scaffold(
+      key: uniqueKey,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(

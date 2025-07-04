@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
+import 'package:snap_deals/core/themes/app_colors.dart';
+import 'package:snap_deals/core/themes/text_styles.dart';
 
 class SearchUserByIdWidget extends StatefulWidget {
   final Future<void> Function(String userId) onSearch;
@@ -42,7 +44,7 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
           child: TextField(
             controller: _controller,
             decoration: InputDecoration(
-              labelText:context.tr.search_user_label ,
+              labelText: context.tr.search_user_label,
               border: const OutlineInputBorder(),
               suffixIcon: _controller.text.isNotEmpty
                   ? IconButton(
@@ -56,6 +58,9 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
         ),
         12.pw,
         ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorsBox.white,
+          ),
           onPressed: _isLoading ? null : _handleSearch,
           icon: _isLoading
               ? const SizedBox(
@@ -63,8 +68,12 @@ class _SearchUserByIdWidgetState extends State<SearchUserByIdWidget> {
                   height: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              : const Icon(Icons.search),
-          label: Text(_isLoading ? context.tr.searching : context.tr.search),
+              : const Icon(Icons.search, color: ColorsBox.brightBlue),
+          label: Text(
+            _isLoading ? context.tr.searching : context.tr.search,
+            style:
+                AppTextStyles.regular14().copyWith(color: ColorsBox.brightBlue),
+          ),
         ),
       ],
     );

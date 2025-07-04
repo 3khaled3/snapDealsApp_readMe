@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/product_feature/model_view/review_cubit/review_cubit.dart';
@@ -12,8 +13,14 @@ abstract class ProductRouter {
       path: ProductDetailsView.routeName,
       builder: (context, state) {
         ProductDetailsArgs args = state.extra as ProductDetailsArgs;
-
-        return ProductDetailsView(args: args);
+        
+        // Create a unique key for the widget to force rebuild
+        final uniqueKey = ValueKey('product_details_route_${args.product.id}_${args.product.updatedAt.millisecondsSinceEpoch}');
+        
+        return KeyedSubtree(
+          key: uniqueKey,
+          child: ProductDetailsView(args: args),
+        );
       },
     ),
 

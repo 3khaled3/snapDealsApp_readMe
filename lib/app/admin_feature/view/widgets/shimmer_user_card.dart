@@ -11,6 +11,7 @@ class ShimmerUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: ColorsBox.white,
       elevation: 4,
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: ColorsBox.grey, width: 0.5),

@@ -18,6 +18,7 @@ class AccessUsers extends StatelessWidget {
       child: Scaffold(
         backgroundColor: ColorsBox.white,
         appBar: AppBar(
+          surfaceTintColor: ColorsBox.white,
           title: Text(
             context.tr.accessUsers,
             style: AppTextStyles.bold24(),

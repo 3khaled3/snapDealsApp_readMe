@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:snap_deals/app/admin_feature/data/repositories/access_user_repo/i_access_user_repository.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 
@@ -11,6 +12,7 @@ class AccessUserCubit extends Cubit<AccessUserState> {
 
   Future<void> getAllUsersData(
       {required String limit, required String page}) async {
+         debugPrint('Fetching users with limit: $limit, page: $page');
     emit(GetAllUsersLoading());
     final result =
         await _accessUserRepository.getAllUsersData(limit: limit, page: page);
@@ -23,15 +25,25 @@ class AccessUserCubit extends Cubit<AccessUserState> {
   }
 
   Future<void> deleteUser(String userId) async {
-    emit(DeleteUserLoading());
+  print("🚀 deleteUser called");
 
-    final result = await _accessUserRepository.deleteUser(userId: userId);
+  emit(DeleteUserLoading());
+  print("🔄 DeleteUserLoading emitted");
 
-    result.fold(
-      (failure) => emit(DeleteUserError()),
-      (data) => emit(DeleteUserSuccess()),
-    );
-  }
+  final result = await _accessUserRepository.deleteUser(userId: userId);
+
+  result.fold(
+    (failure) {
+      print("❌ delete failed");
+      emit(DeleteUserError());
+    },
+    (data) {
+      print("✅ delete succeeded");
+      emit(DeleteUserSuccess());
+    },
+  );
+}
+
 
   Future<void> getUserDataById(String userId) async {
     emit(GetSpecificUserLoading());
