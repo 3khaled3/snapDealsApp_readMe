@@ -215,13 +215,17 @@ final oldLessons = widget.args!.course!.lessons.map((e) => e.toJson()).toList();
 final newLessons = updatedCourse.lessons.map((e) => e.toJson()).toList();
 
 if (oldLessons.toString() != newLessons.toString()) {
-  updatedFields['lessons'] = updatedCourse.lessons.map((e) => e.toJson()).toList();
+  updatedFields['lessons'] = updatedCourse.lessons
+    .map((e) => {'title': e.title})
+    .toList();
+
 }
 
 
 
 print('Topics Map: ${topicsKey.currentState?.getTopicsMap()}');
 print('Lessons List: ${lessonsKey.currentState?.getLessonsList()?.map((e) => e.toJson()).toList()}');
+
 
 
                           await updateCourseCubit.updateCourse(
