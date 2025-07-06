@@ -8,54 +8,56 @@ import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart'
 import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_add_text_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_header_add_view.dart';
+import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
+import 'package:snap_deals/app/product_feature/model_view/courses/update_course_cubit/update_course_cubit.dart';
 import 'package:snap_deals/app/product_feature/model_view/update_product_cubit/update_product_cubit.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/edit_lesson.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/custom_edit_topic.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
-class EditDetailsArgs {
-  final ProductModel? product;
+class EditCourseArgs {
+  final CourseModel? course;
 
-  EditDetailsArgs(this.product);
+  EditCourseArgs(this.course);
 }
 
-class EditDetailsView extends StatefulWidget {
-  const EditDetailsView({super.key, this.args});
-  static const String routeName = '/edit_product_route';
-  final EditDetailsArgs? args;
+class EditCourseView extends StatefulWidget {
+  const EditCourseView({super.key, this.args});
+  static const String routeName = '/edit_course_route';
+  final EditCourseArgs? args;
 
   @override
-  State<EditDetailsView> createState() => _EditDetailsViewState();
+  State<EditCourseView> createState() => _EditCourseViewState();
 }
 
-class _EditDetailsViewState extends State<EditDetailsView> {
+class _EditCourseViewState extends State<EditCourseView> {
   final GlobalKey<CustomEditTobicState> topicsKey = GlobalKey<CustomEditTobicState>();
+  final GlobalKey<CustomEditLessonState> lessonsKey = GlobalKey<CustomEditLessonState>();
+
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  late TextEditingController brandController;
   late TextEditingController titleController;
   late TextEditingController descriptionController;
   late TextEditingController locationController;
   late TextEditingController priceController;
 
-  List<XFile> selectedImages = [];
-  List<String> oldImages = [];
 
-  UpdateProductCubit updateProductCubit = UpdateProductCubit();
+  UpdateCourseCubit updateCourseCubit = UpdateCourseCubit();
 
 // تحويل Map<String, dynamic> إلى Map<String, String> بشكل آمن:
   Map<String, String> initialTopics = {};
+ List<LessonModel> initialLessons = [];
 
   @override
   void initState() {
     super.initState();
-    final p = widget.args?.product;
+    final p = widget.args?.course;
 
-    brandController = TextEditingController(text: p?.slug ?? '');
     titleController = TextEditingController(text: p?.title ?? '');
     descriptionController = TextEditingController(text: p?.description ?? '');
     locationController = TextEditingController(text: p?.location ?? '');
@@ -65,13 +67,15 @@ class _EditDetailsViewState extends State<EditDetailsView> {
       initialTopics =
           p!.details.map((key, value) => MapEntry(key, value.toString()));
     }
+    if (p?.lessons != null) {
+      initialLessons = p!.lessons;
+    }
 
-    oldImages = List<String>.from(p!.images);
   }
 
   @override
   void dispose() {
-    brandController.dispose();
+    
     titleController.dispose();
     descriptionController.dispose();
     locationController.dispose();
@@ -104,12 +108,12 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                 // 23.ph,
                
               
-                CustomAddTextField(
-                  title: context.tr.brand,
-                  hint: context.tr.brandHint,
-                  controller: brandController,
-                ),
-                23.ph,
+                // CustomAddTextField(
+                //   title: context.tr.brand,
+                //   hint: context.tr.brandHint,
+                //   controller: brandController,
+                // ),
+                // 23.ph,
                 CustomAddTextField(
                   title: context.tr.adTitle,
                   hint: context.tr.enterTitle,
@@ -132,6 +136,12 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                   key: topicsKey,
                   initialTopics: initialTopics,
                 ),
+                15.ph,
+                CustomEditLesson(
+  key: lessonsKey,
+  initialLessons: initialLessons,
+),
+
 
                 23.ph,
                 CustomAddTextField(
@@ -149,19 +159,20 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                 7.ph,
                 SizedBox(
                   width: double.infinity,
-                  child: BlocListener<UpdateProductCubit, UpdateProductState>(
-                    bloc: updateProductCubit,
+                  child: BlocListener<UpdateCourseCubit, UpdateCourseState>(
+                    bloc: updateCourseCubit,
                     listener: (context, state) {
-                      if (state is UpdateProductSuccess) {
+                      if (state is UpdateCourseSuccess) {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           context.showSuccessSnackBar(
                               message: context.tr.update_success);
                           GoRouter.of(context).pushReplacement(MainHomeView.routeName); // العودة للصفحة السابقة
                         });
-                      } else if (state is UpdateProductError) {
+                      } else if (state is UpdateCourseError) {
+                        GoRouter.of(context).pop(); // إغلاق أي حوار مفتوح
                         context.showErrorSnackBar(
                             message: context.tr.update_error);
-                      } else if (state is UpdateProductLoading) {
+                      } else if (state is UpdateCourseLoading) {
                         context.showLoadingDialog();
                       }
                     },
@@ -169,46 +180,52 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                       title: context.tr.saveButton,
                       onTap: () async {
                         if (formKey.currentState?.validate() ?? false) {
-                          final updatedProduct = widget.args!.product!.copyWith(
-                            slug: brandController.text,
+                          final updatedCourse = widget.args!.course!.copyWith(
+                            
                             title: titleController.text,
                             description: descriptionController.text,
                             location: locationController.text,
-                            price: double.parse(priceController.text),
+                            price: int.parse(priceController.text),
                             details:
                                 topicsKey.currentState?.getTopicsMap() ?? {},
                             updatedAt: DateTime.now(),
+                            lessons: lessonsKey.currentState?.getLessonsList() ?? [],
+
+
                           );
                           final Map<String, dynamic> updatedFields = {};
 
-if (updatedProduct.slug != widget.args!.product!.slug) {
-  updatedFields['slug'] = updatedProduct.slug;
-}
-if (updatedProduct.title != widget.args!.product!.title) {
-  updatedFields['title'] = updatedProduct.title;
-}
-if (updatedProduct.description != widget.args!.product!.description) {
-  updatedFields['description'] = updatedProduct.description;
-}
-if (updatedProduct.location != widget.args!.product!.location) {
-  updatedFields['location'] = updatedProduct.location;
-}
-if (updatedProduct.price != widget.args!.product!.price) {
-  updatedFields['price'] = updatedProduct.price;
-}
-if (updatedProduct.details.toString() != widget.args!.product!.details.toString()) {
-  updatedFields['details'] = updatedProduct.details;
-}
-if (selectedImages.isNotEmpty) {
-  updatedFields['newImages'] = selectedImages; // لو فيه صور جديدة
-}
-if (oldImages.length != widget.args!.product!.images.length) {
-  updatedFields['oldImages'] = oldImages;
-}
-print('Topics Map: ${topicsKey.currentState?.getTopicsMap()}');
 
-                          await updateProductCubit.updateProduct(
-                            updatedProduct,
+if (updatedCourse.title != widget.args!.course!.title) {
+  updatedFields['title'] = updatedCourse.title;
+}
+if (updatedCourse.description != widget.args!.course!.description) {
+  updatedFields['description'] = updatedCourse.description;
+}
+if (updatedCourse.location != widget.args!.course!.location) {
+  updatedFields['location'] = updatedCourse.location;
+}
+if (updatedCourse.price != widget.args!.course!.price) {
+  updatedFields['price'] = updatedCourse.price;
+}
+if (updatedCourse.details.toString() != widget.args!.course!.details.toString()) {
+  updatedFields['details'] = updatedCourse.details;
+}
+final oldLessons = widget.args!.course!.lessons.map((e) => e.toJson()).toList();
+final newLessons = updatedCourse.lessons.map((e) => e.toJson()).toList();
+
+if (oldLessons.toString() != newLessons.toString()) {
+  updatedFields['lessons'] = updatedCourse.lessons.map((e) => e.toJson()).toList();
+}
+
+
+
+print('Topics Map: ${topicsKey.currentState?.getTopicsMap()}');
+print('Lessons List: ${lessonsKey.currentState?.getLessonsList()?.map((e) => e.toJson()).toList()}');
+
+
+                          await updateCourseCubit.updateCourse(
+                            updatedCourse,
                             updatedFields
                           );
                         }

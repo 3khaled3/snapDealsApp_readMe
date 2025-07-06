@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/product_feature/model_view/review_cubit/review_cubit.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/edit_course.dart';
 import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my_products_views.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/edit_product.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
@@ -13,22 +13,16 @@ abstract class ProductRouter {
       path: ProductDetailsView.routeName,
       builder: (context, state) {
         ProductDetailsArgs args = state.extra as ProductDetailsArgs;
-        
-        // Create a unique key for the widget to force rebuild
-        final uniqueKey = ValueKey('product_details_route_${args.product.id}_${args.product.updatedAt.millisecondsSinceEpoch}');
-        
-        return KeyedSubtree(
-          key: uniqueKey,
-          child: ProductDetailsView(args: args),
-        );
+
+        return ProductDetailsView(args: args);
       },
     ),
 
-     GoRoute(
+    GoRoute(
       path: MyProductsViews.routeName,
       builder: (context, state) {
         MyProductsViewsArgs? args;
-         if (state.extra != null) {
+        if (state.extra != null) {
           args = state.extra as MyProductsViewsArgs;
         }
 
@@ -49,7 +43,6 @@ abstract class ProductRouter {
           ],
           child: CourseDetailsView(args: args),
         );
-        
       },
     ),
 
@@ -62,6 +55,18 @@ abstract class ProductRouter {
         }
 
         return EditDetailsView(args: args);
+      },
+    ),
+
+    GoRoute(
+      path: EditCourseView.routeName,
+      builder: (context, state) {
+        EditCourseArgs? args;
+        if (state.extra != null) {
+          args = state.extra as EditCourseArgs;
+        }
+
+        return EditCourseView(args: args); 
       },
     ),
 

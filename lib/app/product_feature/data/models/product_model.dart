@@ -45,6 +45,7 @@ class ProductModel {
       price: (json['price'] as num).toDouble(),
       images: List<String>.from(json['images']),
       category: Category.fromJson(json['category']),
+   
       visit: json['visit'],
       details: Map<String, dynamic>.from(json['details']),
       createdAt: DateTime.parse(json['createdAt']),
@@ -72,7 +73,7 @@ class ProductModel {
 
 
   Map<String, dynamic> createProductJson() {
-    final json = {
+    return {
       'title': title,
       'user': user.id,
       'slug': slug,
@@ -86,15 +87,6 @@ class ProductModel {
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
     };
-    
-    print('createProductJson - Data being sent to backend:');
-    print('Title: ${json['title']}');
-    print('Price: ${json['price']}');
-    print('Category ID: ${json['category']}');
-    print('Details: ${json['details']}');
-    print('Full JSON: $json');
-    
-    return json;
   }
 
   ProductModel copyWith({

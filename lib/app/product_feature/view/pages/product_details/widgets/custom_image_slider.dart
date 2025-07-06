@@ -11,9 +11,8 @@ import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/delete_course_cubit/delete_course_cubit.dart';
 import 'package:snap_deals/app/product_feature/model_view/delete_product_cubit/delete_product_cubit.dart';
-import 'package:snap_deals/app/product_feature/model_view/get_all_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/edit_course.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/edit_product.dart';
-import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -133,67 +132,49 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                             color: ColorsBox.black,
                           ),
                           child: IconButton(
-  icon: const Icon(Icons.edit, color: ColorsBox.white, size: 20),
- onPressed: () async {
- print('Edit button pressed - Original product: ${widget.product?.title}');
- 
- print('About to push to EditDetailsView');
- 
- // Use push with await to handle returned data
- final result = await GoRouter.of(context).push(
-  EditDetailsView.routeName,
-  extra: EditDetailsArgs( widget.product),
-);
-
-print('EditDetailsView returned: $result');
-
-// If we got back an updated product, navigate to ProductDetailsView with the new data
-if (result != null && result is ProductModel) {
-  print('Received updated product: ${result.title}');
-  print('Updated product price: ${result.price}');
-  
-  // Navigate to ProductDetailsView with the updated product
-  GoRouter.of(context).pushReplacement(
-    ProductDetailsView.routeName,
-    extra: ProductDetailsArgs(product: result),
-  );
-  
-  print('Navigated to ProductDetailsView with updated data');
-} else {
-  print('No updated product returned from EditDetailsView');
-}
-
-},
-
-  padding: const EdgeInsetsDirectional.only(start: 8),
-  constraints: const BoxConstraints(),
-),
-
+                            icon: const Icon(Icons.edit,
+                                color: ColorsBox.white, size: 20),
+                            onPressed: () {
+                              if (widget.isProduct) {
+                                GoRouter.of(context).push(
+                                EditDetailsView.routeName,
+                                extra: EditDetailsArgs(widget.product),
+                              );
+                              } else {
+                                GoRouter.of(context).push(
+                                  EditCourseView.routeName,
+                                  extra: EditCourseArgs(widget.course),
+                                );
+                              }
+                              
+                            },
+                            padding: const EdgeInsetsDirectional.only(start: 8),
+                            constraints: const BoxConstraints(),
+                          ),
                         )
                       : 0.pw,
                   10.pw,
                   BlocListener<DeleteProductCubit, DeleteProductState>(
                     bloc: deleteProductCubit,
                     listener: (context, state) {
-                      if (widget.isProduct){
-                      if (state is DeleteProductLoading) {
-                        context.showLoadingDialog();
-                      } else if (state is DeleteProductSuccess) {
-                        Navigator.of(context).pop();
-                        context.showSuccessSnackBar(
-                          message: context.tr.delete_product_success,
-                        );
-                         GoRouter.of(context).pushReplacement(
-                                      MainHomeView.routeName,
-                                      extra: MainHomeViewArgs());
-
-                      } else if (state is DeleteProductError) {
-                        Navigator.of(context).pop();
-                        context.showErrorSnackBar(
-                          message: context.tr.delete_product_error,
-                        );
-                      }}
-                      else {
+                      if (widget.isProduct) {
+                        if (state is DeleteProductLoading) {
+                          context.showLoadingDialog();
+                        } else if (state is DeleteProductSuccess) {
+                          Navigator.of(context).pop();
+                          context.showSuccessSnackBar(
+                            message: context.tr.delete_product_success,
+                          );
+                          GoRouter.of(context).pushReplacement(
+                              MainHomeView.routeName,
+                              extra: MainHomeViewArgs());
+                        } else if (state is DeleteProductError) {
+                          Navigator.of(context).pop();
+                          context.showErrorSnackBar(
+                            message: context.tr.delete_product_error,
+                          );
+                        }
+                      } else {
                         if (state is DeleteCourseLoading) {
                           context.showLoadingDialog();
                         } else if (state is DeleteCourseSuccess) {
@@ -201,9 +182,9 @@ if (result != null && result is ProductModel) {
                           context.showSuccessSnackBar(
                             message: context.tr.delete_product_success,
                           );
-                           GoRouter.of(context).pushReplacement(
-                                      MainHomeView.routeName,
-                                      extra: MainHomeViewArgs());
+                          GoRouter.of(context).pushReplacement(
+                              MainHomeView.routeName,
+                              extra: MainHomeViewArgs());
                         } else if (state is DeleteCourseError) {
                           Navigator.of(context).pop();
                           context.showErrorSnackBar(
@@ -237,8 +218,7 @@ if (result != null && result is ProductModel) {
                                 TextButton(
                                   onPressed: () => Navigator.pop(context, true),
                                   child: Text(context.tr.deleteWord,
-                                      style: AppTextStyles.regular14()
-                                          .copyWith(
+                                      style: AppTextStyles.regular14().copyWith(
                                         color: ColorsBox.red,
                                       )),
                                 ),

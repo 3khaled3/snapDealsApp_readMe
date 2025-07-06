@@ -11,13 +11,6 @@ final class UpdateProductInitial extends UpdateProductState {}
 
 final class UpdateProductLoading extends UpdateProductState {}
 
-class UpdateProductSuccess extends UpdateProductState {
-  final ProductModel updatedProduct;
-  UpdateProductSuccess(this.updatedProduct);
-
-
-
-}
-
+final class UpdateProductSuccess extends UpdateProductState {}
 
 final class UpdateProductError extends UpdateProductState {}

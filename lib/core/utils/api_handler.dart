@@ -58,7 +58,7 @@ abstract class HttpHelper {
     );
 
     print("Response Status: ${response.statusCode}");
-      print("Response Body: ${response.body}");
+    print("Response Body: ${response.body}");
 
     return response;
   }
@@ -94,7 +94,10 @@ abstract class HttpHelper {
 
     var response = await http.put(Uri.parse(linkUrl),
         body: json.encode(data), headers: headers);
-
+      print("Response Status: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+      print("data : $data");
+      print("linkUrl : $linkUrl");
     return response;
   }
 
@@ -134,8 +137,8 @@ abstract class HttpHelper {
     var response =
         await http.delete(Uri.parse(linkUrl), body: data, headers: headers);
 
-     print("Response Status: ${response.statusCode}");
-      print("Response Body: ${response.body}");
+    print("Response Status: ${response.statusCode}");
+    print("Response Body: ${response.body}");
     return response;
   }
 
@@ -213,109 +216,127 @@ abstract class HttpHelper {
   }
 
   // todo: patch file
- static Future<http.Response> putFile({
-  required String linkUrl,
-  File? file, // ✅ خليها اختيارية
-  required String name,
-  required String? token,
-  String? fieldName,
-  Map<String, dynamic>? field,
-}) async {
-  try {
-    print("Attempting to upload file...");
+  static Future<http.Response> putFile({
+    required String linkUrl,
+    required File file,
+    required String name,
+    required String? token,
+    String? fieldName,
+    Map<String, dynamic>? field,
+  }) async {
+    try {
+      // Log the upload attempt
+      print("Attempting to upload file...");
 
-    var request = http.MultipartRequest('PUT', Uri.parse(linkUrl));
+      // Create the multipart request
+      var request = http.MultipartRequest('PUT', Uri.parse(linkUrl));
 
-    if (token != null) {
-      request.headers['Authorization'] = 'Bearer $token';
-    }
+      if (token != null) {
+        request.headers['Authorization'] = 'Bearer $token';
+      }
+      // Check if file exists
+      if (!await file.exists()) {
+        throw Exception("File not found at path: ${file.path}");
+      }
 
-    // ✅ تحقق من وجود الملف قبل إضافته
-    if (file != null && await file.exists()) {
-      print("File found, preparing upload...");
+      print("resss 1");
 
+      // Determine the MIME type of the file
       var mimeType = lookupMimeType(file.path) ?? 'application/octet-stream';
-      var mimeTypeData = mimeType.split('/');
+      print("Detected MIME type: $mimeType");
 
-      if (mimeTypeData.length == 2) {
-        request.files.add(await http.MultipartFile.fromPath(
-          name,
-          file.path,
-          contentType: MediaType(mimeTypeData[0], mimeTypeData[1]),
-        ));
-      } else {
+      // Split the MIME type into type and subtype
+      var mimeTypeData = mimeType.split('/');
+      if (mimeTypeData.length != 2) {
         throw Exception("Invalid MIME type: $mimeType");
       }
-    } else {
-      print("No file selected or file doesn't exist. Proceeding without file.");
-    }
 
-    // ✅ إضافة البيانات الأخرى
-    if (fieldName != null && field != null) {
-      request.fields[fieldName] = json.encode(field);
-    }
-
-    final response = await request.send();
-    final http.Response res = await http.Response.fromStream(response);
-
-    print("Response Status: ${response.statusCode}");
-    print("Response Headers: ${response.headers}");
-    print("Response Body: ${res.body}");
-
-    return res;
-  } catch (e) {
-    print("Error in putFile: $e");
-    rethrow;
-  }
-}
-
-static Future<http.Response> editProfileFile({
-  required String linkUrl,
-  File? file,
-  required String name,
-  required String? token,
-  Map<String, dynamic>? field,
-}) async {
-  try {
-    print("Attempting to upload file...");
-
-    var request = http.MultipartRequest('PUT', Uri.parse(linkUrl));
-
-    if (token != null) {
-      request.headers['Authorization'] = 'Bearer $token';
-    }
-
-    // Attach the image file if it exists
-    if (file != null && await file.exists()) {
-      var mimeType = lookupMimeType(file.path) ?? 'application/octet-stream';
-      var mimeTypeData = mimeType.split('/');
-
+      // Add the file to the request
       request.files.add(await http.MultipartFile.fromPath(
         name,
         file.path,
         contentType: MediaType(mimeTypeData[0], mimeTypeData[1]),
       ));
+
+      // Add the field
+      if (fieldName != null && field != null) {
+        request.fields[fieldName] = json.encode(field);
+      }
+
+      // Send the request
+      final response = await request.send();
+
+      // Convert the response to http.Response
+      final http.Response res = await http.Response.fromStream(response);
+
+      // Decode the response body
+      var resFile = json.decode(res.body);
+
+      // Log the response details
+      print("Response Status: ${response.statusCode}");
+      print("Response Headers: ${response.headers}");
+      print("Response Body: ${res.body}");
+
+      // Check for success
+      if (response.statusCode != 200) {
+        print("Failed to upload file: ${resFile['message']}");
+      }
+
+      return res;
+    } catch (e) {
+      // Log any errors
+      print("Error in patchFile: $e");
+      rethrow;
     }
-
-    // Add form fields
-    if (field != null) {
-      field.forEach((key, value) {
-        request.fields[key] = value.toString();
-      });
-    }
-
-    final streamedResponse = await request.send();
-    final response = await http.Response.fromStream(streamedResponse);
-
-    print("Response Status: ${response.statusCode}");
-    print("Response Body: ${response.body}");
-
-    return response;
-  } catch (e) {
-    print("Error in putFile: $e");
-    rethrow;
   }
-}
+
+  static Future<http.Response> editProfileFile({
+    required String linkUrl,
+    File? file,
+    required String name,
+    required String? token,
+    Map<String, dynamic>? field,
+  }) async {
+    try {
+      print("Attempting to upload file...");
+
+      var request = http.MultipartRequest('PUT', Uri.parse(linkUrl));
+
+      if (token != null) {
+        request.headers['Authorization'] = 'Bearer $token';
+      }
+
+      // Attach the image file if it exists
+      if (file != null && await file.exists()) {
+        var mimeType = lookupMimeType(file.path) ?? 'application/octet-stream';
+        var mimeTypeData = mimeType.split('/');
+
+        request.files.add(await http.MultipartFile.fromPath(
+          name,
+          file.path,
+          contentType: MediaType(mimeTypeData[0], mimeTypeData[1]),
+        ));
+      }
+
+      // Add form fields
+      if (field != null) {
+        field.forEach((key, value) {
+          request.fields[key] = value.toString();
+        });
+      }
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      print("Response Status: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
+      return response;
+    } catch (e) {
+      print("Error in putFile: $e");
+      rethrow;
+    }
+  }
 
   // todo: post file
   static Future<http.Response> postFile({
@@ -378,14 +399,16 @@ static Future<http.Response> editProfileFile({
         // Perform the request with the token
         http.Response response = await requestFunction(customToken);
 
-        if (response.statusCode == 200 || response.statusCode == 201 || response.statusCode == 204) {
+        if (response.statusCode == 200 ||
+            response.statusCode == 201 ||
+            response.statusCode == 204) {
           // Use utf8.decode to properly handle special characters in the response
           var decodedBody = utf8.decode(response.bodyBytes);
 
           // Log the response body for debugging
           if (decodedBody.trim().isEmpty) {
-    return const Right(<String, dynamic>{});
-  }
+            return const Right(<String, dynamic>{});
+          }
           return Right(jsonDecode(decodedBody));
         } else if (response.statusCode == 400 || response.statusCode == 401) {
           String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];

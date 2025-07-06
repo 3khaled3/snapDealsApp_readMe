@@ -36,12 +36,13 @@ class CourseRepository implements ICourseRepository {
     );
   }
 
-    @override
+  @override
   Future<Either<FailureModel, Map<String, dynamic>>> getMyCourses(
-      {required String limit, required String page,required String uesrId}) {
+      {required String limit, required String page, required String uesrId}) {
     return HttpHelper.handleRequest(
       (token) => HttpHelper.getData(
-        linkUrl: "${ApiEndpoints.courses}?page=$page&limit=$limit&instructor=$uesrId",
+        linkUrl:
+            "${ApiEndpoints.courses}?page=$page&limit=$limit&instructor=$uesrId",
         token: token,
       ),
     );
@@ -77,11 +78,11 @@ class CourseRepository implements ICourseRepository {
 
   @override
   Future<Either<FailureModel, Map<String, dynamic>>> updateCourse(
-      CourseModel course) {
+      CourseModel course,Map<String, dynamic> data) {
     return HttpHelper.handleRequest(
       (token) => HttpHelper.putData(
         linkUrl: ApiEndpoints.courseById(course.id),
-        data: course.toJson(),
+        data: data,
         token: token,
       ),
     );

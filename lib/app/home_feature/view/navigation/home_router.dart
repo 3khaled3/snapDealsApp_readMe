@@ -1,4 +1,5 @@
 //handle go router
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/admin_feature/model_view/edit_category_cubit/edit_category_cubit.dart';
@@ -34,7 +35,7 @@ abstract class HomeRouter {
           args = state.extra as MainHomeViewArgs;
         }
 
-        return MainHomeView(args);
+        return MainHomeView(args,key: Key(DateTime.now().toString()),);
       },
     ),
     GoRoute(
