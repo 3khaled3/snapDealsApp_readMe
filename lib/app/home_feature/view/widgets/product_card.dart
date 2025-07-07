@@ -108,7 +108,7 @@ class ProductCard extends StatelessWidget {
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          '\$${(price).toStringAsFixed(2)}',
+                          'EGP ${(price).toStringAsFixed(2)}',
                           maxLines: 1,
                           style: AppTextStyles.semiBold14().copyWith(
                             color: ColorsBox.brightBlue,

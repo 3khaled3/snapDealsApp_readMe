@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
-import 'package:snap_deals/app/home_feature/view_model/favorite_local_storage.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
@@ -127,7 +126,7 @@ class CourseCard extends StatelessWidget {
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          '\$${(course.price).toStringAsFixed(2)}',
+                          'EGP ${(course.price).toStringAsFixed(2)}',
                           maxLines: 1,
                           style: AppTextStyles.semiBold14().copyWith(
                             color: ColorsBox.brightBlue,
