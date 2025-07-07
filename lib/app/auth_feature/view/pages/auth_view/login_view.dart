@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelText: context.tr.passwordLoginLabel,
                         prefixIcon: EvaIcons.lockOutline,
                         isPassword: true,
-                        // validator: Validators.validatePassword,
+                        validator: Validators.validatePassword,
                         onChanged: (value) {
                           password = value;
                         },
