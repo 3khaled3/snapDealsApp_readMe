@@ -5,7 +5,6 @@ import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my
 import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my_products_builder.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/app/home_feature/view/widgets/category_tab.dart';
 import 'package:snap_deals/core/localization/generated/l10n.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 

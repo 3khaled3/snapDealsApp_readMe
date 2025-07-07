@@ -96,10 +96,19 @@ class ProductRepository implements IProductRepository {
     return HttpHelper.handleRequest(
       (token) => HttpHelper.putData(
         linkUrl: ApiEndpoints.productById(product.id),
-        
-        
         token: token,
         data: data,
+      ),
+    );
+  }
+
+  @override
+  Future<Either<FailureModel, Map<String, dynamic>>> getProductBySearch(
+      String title) {
+    return HttpHelper.handleRequest(
+      (token) => HttpHelper.getData(
+        linkUrl: ApiEndpoints.getProductBySearch(title),
+        token: token,
       ),
     );
   }

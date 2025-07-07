@@ -122,8 +122,8 @@ class CustomEditTobicState extends State<CustomEditTobic> {
                       const Spacer(),
                       IconButton(
                         onPressed: () => _removeTopic(index),
-                        icon:
-                            const Icon(Icons.delete_outline, color: ColorsBox.red),
+                        icon: const Icon(Icons.delete_outline,
+                            color: ColorsBox.red),
                       ),
                     ],
                   ),
@@ -153,7 +153,7 @@ class CustomEditTobicState extends State<CustomEditTobic> {
                   padding: const EdgeInsets.all(4),
                   shape: const CircleBorder(),
                   fixedSize: const Size(25, 25),
-                  backgroundColor: ColorsBox.slateGrey,
+                  backgroundColor: ColorsBox.grey.withOpacity(0.4),
                 ),
                 child: const Icon(Icons.add, color: ColorsBox.black, size: 30),
               ),

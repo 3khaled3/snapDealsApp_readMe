@@ -22,10 +22,11 @@ import 'package:snap_deals/app/product_feature/model_view/courses/create_course_
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/validators.dart';
 import 'package:uuid/uuid.dart';
 
 class AddCourseDetailsArgs {
- final String id;
+  final String id;
   final String name;
   final IconData icon;
 
@@ -116,6 +117,12 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                           height: const EdgeInsets.only(
                               bottom: 100, left: 10, right: 10),
                           controller: descriptionController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return context.tr.text_field_enter_req;
+                            }
+                            return null;
+                          },
                         ),
                         CustomTobic(key: topicsKey),
                         23.ph,
@@ -161,7 +168,13 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                             child: CustomPrimaryButton(
                               title: context.tr.nextButton,
                               onTap: () async {
-                                if (formKey.currentState?.validate() ?? false) {
+                                if (formKey.currentState!.validate()) {
+                                  if (selectedImages.isEmpty) {
+                                    context.showErrorSnackBar(
+                                        message:
+                                            context.tr.Please_select_an_image);
+                                    return;
+                                  }
                                   // 🧪 Debug: طباعة الـ lessons و الـ course JSON
                                   final lessons = lessonKey.currentState
                                           ?.getLessonsTitles()
@@ -170,6 +183,11 @@ class _AddCourseDetailsState extends State<AddCourseDetails> {
                                               title: title))
                                           .toList() ??
                                       [];
+                                  if (lessons.isEmpty) {
+                                    context.showErrorSnackBar(
+                                        message: context.tr.add_lesson_error);
+                                    return;
+                                  }
 
                                   final course = CourseModel(
                                     id: const Uuid().v4(),

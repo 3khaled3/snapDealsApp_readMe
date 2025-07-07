@@ -128,7 +128,7 @@ class _MainHomeViewState extends State<MainHomeView> {
   }
 
   void _onTabTapped(int index) {
-    if (index != 0 && index != 3 &&
+    if (index != 0 && index != 2 &&
         ProfileCubit.instance.state.profile.role == Role.unregistered) {
       GoRouter.of(context).push(LoginScreen.routeName, extra: LoginViewArgs());
       return;

@@ -196,7 +196,7 @@ class _YourProfileViewState extends State<YourProfileView> {
                     )
                   : CachedNetworkImage(
                       imageUrl:
-                          ProfileCubit.instance.state.profile.profileImg ?? "",
+                          ProfileCubit.instance.state.profile.profileImg ?? "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
                       placeholder: (context, url) => SvgPicture.asset(
                         AppImageAssets.defaultProfile,
                         width: 120,

@@ -268,5 +268,11 @@
     "delete_product_success": " deleted successfully",
     "delete_product_error": "Error deleting ",
     "continueAsGuest": "Continue as Guest",
-    "contactSupport": "Contact Support"
+    "contactSupport": "Contact Support",
+    "no_product_found": "No product found",
+    "no_course_found": "No course found",
+    "type_to_search": "Type to search",
+    "Please_select_an_image": "Please select an image",
+    "add_lesson_error": "Please add lessons",
+    "text_field_enter_req": "this field is required"
 }

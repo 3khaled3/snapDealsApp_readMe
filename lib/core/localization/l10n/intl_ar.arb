@@ -268,5 +268,11 @@
     "delete_product_success": "تم الحذف  بنجاح",
     "delete_product_error": "حدث خطأ أثناء الحذف ",
     "continueAsGuest": "المتابعة كزائر",
-    "contactSupport": "الدردشة مع الدعم"
+    "contactSupport": "الدردشة مع الدعم",
+    "no_product_found": "لم يتم العثور على منتجات",
+    "no_course_found": "لم يتم العثور على كورسات",
+    "type_to_search": "اكتب للبحث",
+    "Please_select_an_image": "يرجى اختيار صورة",
+    "add_lesson_error": "يرجى اضافة الدرس",
+    "text_field_enter_req" : "هذا الحقل مطلوب"
 }

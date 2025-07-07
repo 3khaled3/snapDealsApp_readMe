@@ -86,7 +86,8 @@ class ChatTicketWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(1000),
                     child: CachedNetworkImage(
-                      imageUrl: user.profileImg ?? "",
+                      imageUrl: user.profileImg ??
+                          "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
                       placeholder: (context, url) => SvgPicture.asset(
                         AppImageAssets.defaultProfile,
                         height: 60,

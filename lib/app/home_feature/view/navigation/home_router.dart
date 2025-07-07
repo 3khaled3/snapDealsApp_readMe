@@ -35,7 +35,7 @@ abstract class HomeRouter {
           args = state.extra as MainHomeViewArgs;
         }
 
-        return MainHomeView(args,key: Key(DateTime.now().toString()),);
+        return MainHomeView(args);
       },
     ),
     GoRoute(

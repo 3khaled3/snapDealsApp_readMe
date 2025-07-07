@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_text_field.dart';
 import 'package:snap_deals/app/category/view/category_detials.dart';
+import 'package:snap_deals/app/home_feature/view/pages/search_field.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/categories_avatar.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/custom_categories.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/home_app_bar.dart';
@@ -40,10 +41,8 @@ class HomeView extends StatelessWidget {
           18.ph,
           const Center(child: CustomCategories()),
           18.ph,
-          // CustomTextFormField(
-          //   hintText: context.tr.hintSearch,
-          //   suffixIcon: Icons.search,
-          // ),
+          SearchContainer(),
+          18.ph,
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             child: Row(
@@ -64,19 +63,16 @@ class HomeView extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
-                    context.tr.all,
-                    style: AppTextStyles.medium16().copyWith(
-                      color: ColorsBox.mainColor,
-                      decoration: TextDecoration.underline,
-                    )
-                  ),
+                  child: Text(context.tr.all,
+                      style: AppTextStyles.medium16().copyWith(
+                        color: ColorsBox.mainColor,
+                        decoration: TextDecoration.underline,
+                      )),
                 )
               ],
             ),
           ),
           const PopularCourseBuilder(),
-
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             child: Row(
@@ -97,13 +93,11 @@ class HomeView extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
-                    context.tr.all,
-                    style: AppTextStyles.medium16().copyWith(
-                      color: ColorsBox.mainColor,
-                      decoration: TextDecoration.underline,
-                    )
-                  ),
+                  child: Text(context.tr.all,
+                      style: AppTextStyles.medium16().copyWith(
+                        color: ColorsBox.mainColor,
+                        decoration: TextDecoration.underline,
+                      )),
                 )
               ],
             ),

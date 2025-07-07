@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/chat_app_bar.dart';
+import 'package:snap_deals/app/search_feature/view/widget/empty_widget.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
@@ -24,9 +25,9 @@ class ChatTicketsView extends StatelessWidget {
       builder: (context, chatRooms) {
         if (chatRooms.isEmpty) {
           return Center(
-            child: Text(
-              context.tr.noChatsAvailable,
-              style: AppTextStyles.medium16().copyWith(color: Colors.grey),
+            child: EmptyWidget(
+              text: context.tr.noChatsAvailable,
+              // style: AppTextStyles.medium16().copyWith(color: Colors.grey),
             ),
           );
         }

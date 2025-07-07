@@ -9,6 +9,7 @@ import 'package:snap_deals/app/home_feature/view/navigation/home_router.dart';
 import 'package:snap_deals/app/notification/view/notification_view.dart';
 import 'package:snap_deals/app/product_feature/view/navigation/product_router.dart';
 import 'package:snap_deals/app/request_feature/view/navigation/request_router.dart';
+import 'package:snap_deals/app/search_feature/view/search_view.dart';
 
 abstract class AppRouter {
   static final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
@@ -26,13 +27,14 @@ abstract class AppRouter {
         ...ChatRouter.routes,
         ...AdminRouter.routes,
         ...RequestRouter.routes,
+        GoRoute(path: SearchView.route, builder: (context, state) => SearchView(args:  SearchViewArgs())),
         GoRoute(
           path: NotificationsView.route,
           builder: (context, state) => const NotificationsView(),
         ),
         GoRoute(
           path: CategoryDetails.route,
-          builder: (context, state) =>  CategoryDetails(
+          builder: (context, state) => CategoryDetails(
             args: state.extra as CategoryDetailsArgs,
           ),
         ),

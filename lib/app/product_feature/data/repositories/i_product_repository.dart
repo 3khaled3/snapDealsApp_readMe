@@ -6,6 +6,7 @@ abstract class IProductRepository {
   Future<Either<FailureModel, Map<String, dynamic>>> getMyProducts(
       {required String limit, required String page, required String uesrId});
   Future<Either<FailureModel, Map<String, dynamic>>> getProductById(String id);
+  Future<Either<FailureModel, Map<String, dynamic>>> getProductBySearch(String title);
   Future<Either<FailureModel, Map<String, dynamic>>> getProductsByCategory(
       {required String limit, required String page, required String id});
   Future<Either<FailureModel, Map<String, dynamic>>> createProduct(

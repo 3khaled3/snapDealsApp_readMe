@@ -5,6 +5,8 @@ import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/model_view/get-products_by_category/get_products_by_category_cubit.dart';
+import 'package:snap_deals/app/search_feature/view/widget/empty_widget.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 
 class ProductsByCategoryList extends StatefulWidget {
   final String id; // category ID
@@ -77,56 +79,53 @@ class _ProductsByCategoryListState extends State<ProductsByCategoryList> {
           ),
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<ProductModel>(
-            itemBuilder: (context, product, index) => Padding(
-              padding: EdgeInsets.zero,
-              child: ProductCard(product: product),
-            ),
-            firstPageProgressIndicatorBuilder: (_) => const Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: ShimmerProductCard()),
-                    Expanded(child: ShimmerProductCard()),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: ShimmerProductCard()),
-                    Expanded(child: ShimmerProductCard()),
-                  ],
-                ),
-              ],
-            ),
-            newPageProgressIndicatorBuilder: (_) =>
-                const Center(child: ShimmerProductCard()),
-            firstPageErrorIndicatorBuilder: (_) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Something went wrong. Please try again."),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => _pagingController.refresh(),
-                    child: const Text("Retry"),
+              itemBuilder: (context, product, index) => Padding(
+                    padding: EdgeInsets.zero,
+                    child: ProductCard(product: product),
                   ),
-                ],
-              ),
-            ),
-            noItemsFoundIndicatorBuilder: (_) => const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.search_off, size: 48, color: Colors.grey),
-                  SizedBox(height: 8),
-                  Text("No products in this category",
-                      style: TextStyle(color: Colors.grey)),
-                ],
-              ),
-            ),
-          ),
+              firstPageProgressIndicatorBuilder: (_) => const Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(child: ShimmerProductCard()),
+                          Expanded(child: ShimmerProductCard()),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(child: ShimmerProductCard()),
+                          Expanded(child: ShimmerProductCard()),
+                        ],
+                      ),
+                    ],
+                  ),
+              newPageProgressIndicatorBuilder: (_) =>
+                  const Center(child: ShimmerProductCard()),
+              firstPageErrorIndicatorBuilder: (_) => Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Something went wrong. Please try again."),
+                        const SizedBox(height: 8),
+                        ElevatedButton(
+                          onPressed: () => _pagingController.refresh(),
+                          child: const Text("Retry"),
+                        ),
+                      ],
+                    ),
+                  ),
+              noItemsFoundIndicatorBuilder: (_) => Column(
+                    children: [
+                      Expanded(
+                        child: EmptyWidget(
+                          text: context.tr.no_product_found,
+                        ),
+                      ),
+                    ],
+                  )),
         );
       },
     );

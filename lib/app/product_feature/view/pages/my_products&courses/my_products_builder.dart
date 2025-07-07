@@ -6,6 +6,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.da
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:snap_deals/app/product_feature/model_view/get_my_products.dart/get_my_products_cubit.dart';
+import 'package:snap_deals/app/search_feature/view/widget/empty_widget.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -24,15 +25,16 @@ class _MyProductsBuilderState extends State<MyProductsBuilder> {
       PagingController(firstPageKey: 1);
 
   late GetMyProductsCubit _productCubit;
-   
-   String userId = ProfileCubit.instance.state.profile.id;
+
+  String userId = ProfileCubit.instance.state.profile.id;
   @override
   void initState() {
     super.initState();
 
     _productCubit = GetMyProductsCubit();
     _pagingController.addPageRequestListener((pageKey) {
-      _productCubit.getMyProducts(limit: "4", page: pageKey.toString(),uesrId:userId );
+      _productCubit.getMyProducts(
+          limit: "10", page: pageKey.toString(), uesrId: userId);
     });
   }
 
@@ -80,56 +82,53 @@ class _MyProductsBuilderState extends State<MyProductsBuilder> {
                 ),
                 pagingController: _pagingController,
                 builderDelegate: PagedChildBuilderDelegate<ProductModel>(
-                  itemBuilder: (context, product, index) => Padding(
-                    padding: EdgeInsets.zero,
-                    child: ProductCard(product: product),
-                  ),
-                  firstPageErrorIndicatorBuilder: (_) => Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(context.tr.retry_load_product),
-                        8.ph,
-                        ElevatedButton(
-                          onPressed: () => _pagingController.refresh(),
-                          child: Text(context.tr.retry),
+                    itemBuilder: (context, product, index) => Padding(
+                          padding: EdgeInsets.zero,
+                          child: ProductCard(product: product),
                         ),
-                      ],
-                    ),
-                  ),
-                  firstPageProgressIndicatorBuilder: (_) => Column(
-                    children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(child: ShimmerProductCard()),
-                          Expanded(child: ShimmerProductCard()),
-                        ],
-                      ),
-                      8.ph,
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(child: ShimmerProductCard()),
-                          Expanded(child: ShimmerProductCard()),
-                        ],
-                      ),
-                    ],
-                  ),
-                  newPageProgressIndicatorBuilder: (_) =>
-                      const Center(child: ShimmerProductCard()),
-                  noItemsFoundIndicatorBuilder: (_) =>  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.search_off, size: 48, color: ColorsBox.grey),
-                        8.ph,
-                        Text(context.tr.no_more_data,
-                            style: AppTextStyles.regular16().copyWith(color: ColorsBox.grey)),
-                      ],
-                    ),
-                  ),
-                ),
+                    firstPageErrorIndicatorBuilder: (_) => Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(context.tr.retry_load_product),
+                              8.ph,
+                              ElevatedButton(
+                                onPressed: () => _pagingController.refresh(),
+                                child: Text(context.tr.retry),
+                              ),
+                            ],
+                          ),
+                        ),
+                    firstPageProgressIndicatorBuilder: (_) => Column(
+                          children: [
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(child: ShimmerProductCard()),
+                                Expanded(child: ShimmerProductCard()),
+                              ],
+                            ),
+                            8.ph,
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(child: ShimmerProductCard()),
+                                Expanded(child: ShimmerProductCard()),
+                              ],
+                            ),
+                          ],
+                        ),
+                    newPageProgressIndicatorBuilder: (_) =>
+                        const Center(child: ShimmerProductCard()),
+                    noItemsFoundIndicatorBuilder: (_) => Column(
+                          children: [
+                            Expanded(
+                              child: EmptyWidget(
+                                text: context.tr.no_product_found,
+                              ),
+                            ),
+                          ],
+                        )),
               ),
             ),
           ],

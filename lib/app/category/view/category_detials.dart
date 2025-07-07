@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:snap_deals/app/auth_feature/view/pages/profile_view/about_us.dart';
 import 'package:snap_deals/app/category/view/all_courses_builder.dart';
 import 'package:snap_deals/app/category/view/all_products_builder.dart';
+import 'package:snap_deals/app/category/view/category_app_bar.dart';
 import 'package:snap_deals/app/category/view/products.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/category_tab.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
-import 'package:snap_deals/core/localization/generated/l10n.dart';
 
 class CategoryDetailsArgs {
   final String title;
@@ -87,7 +87,7 @@ class _CategoryDetailsState extends State<CategoryDetails>
       body: SafeArea(
         child: Column(
           children: [
-            CustomAppBar(title: context.tr.categories),
+            CategoryAppBar(title: context.tr.categories),
             Hero(tag: 'category-from-home-${widget.args.id}', child: 10.ph),
             Expanded(
               child: Column(

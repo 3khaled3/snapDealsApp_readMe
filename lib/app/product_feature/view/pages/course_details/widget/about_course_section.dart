@@ -29,14 +29,11 @@ class AboutCourseSection extends StatelessWidget {
             children: [
               DescSection(description: course.description),
               20.ph,
-              if (course.instructor.id !=
-                  ProfileCubit.instance.state.profile.id)
-                InstructorDetails(courseModel: course),
+              InstructorDetails(courseModel: course),
               20.ph,
-               Text(
+              Text(
                 context.tr.info,
                 style: AppTextStyles.bold16(),
-               
               ),
               10.ph,
               Wrap(

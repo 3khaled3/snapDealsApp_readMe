@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
+import 'package:snap_deals/app/auth_feature/model_view/profile_cubit/profile_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/contact_section.dart';
@@ -23,11 +24,11 @@ class InstructorDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
+        Text(
           context.tr.instructor,
           style: AppTextStyles.semiBold16(),
         ),
-       12.ph,
+        12.ph,
         Row(
           children: [
             ClipRRect(
@@ -35,7 +36,8 @@ class InstructorDetails extends StatelessWidget {
               child: (instructor.profileImg != null &&
                       instructor.profileImg!.isNotEmpty)
                   ? CachedNetworkImage(
-                      imageUrl: instructor.profileImg!,
+                      imageUrl: instructor.profileImg ??
+                          "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
                       placeholder: (context, url) => _defaultProfileImage(),
                       errorWidget: (context, url, error) =>
                           _defaultProfileImage(),
@@ -46,7 +48,7 @@ class InstructorDetails extends StatelessWidget {
                   : _defaultProfileImage(),
             ),
 
-            14.ph,
+            14.pw,
 
             // Name & Phone
             Expanded(
@@ -55,39 +57,41 @@ class InstructorDetails extends StatelessWidget {
                 children: [
                   Text(
                     instructor.name,
-                     style: AppTextStyles.semiBold16(),
+                    style: AppTextStyles.semiBold16(),
                   ),
                   if (instructor.phone != null && instructor.phone!.isNotEmpty)
                     Text(
                       instructor.phone!,
-                       style: AppTextStyles.regular14().copyWith(color: ColorsBox.grey),
+                      style: AppTextStyles.regular14()
+                          .copyWith(color: ColorsBox.grey),
                     ),
                 ],
               ),
             ),
-
-            // Call & Chat Buttons
-            if (instructor.phone != null && instructor.phone!.isNotEmpty)
+            if (instructor.id != ProfileCubit.instance.state.profile.id) ...[
+              if (instructor.phone != null && instructor.phone!.isNotEmpty)
+                _circleIconButton(
+                  icon: Icons.call,
+                  onTap: () => callInstructor(instructor.phone!),
+                ),
+              12.pw,
               _circleIconButton(
-                icon: Icons.call,
-                onTap: () => callInstructor(instructor.phone!),
+                icon: Icons.message_outlined,
+                onTap: () {
+                  startChat(
+                    context,
+                    Partner(
+                      id: instructor.id,
+                      name: instructor.name,
+                      profileImg: instructor.profileImg,
+                      phone: instructor.phone,
+                      role: Role.user,
+                    ),
+                  );
+                },
               ),
-            12.pw,
-            _circleIconButton(
-              icon: Icons.message_outlined,
-              onTap: () {
-                startChat(
-                  context,
-                  Partner(
-                    id: instructor.id,
-                    name: instructor.name,
-                    profileImg: instructor.profileImg,
-                    phone: instructor.phone,
-                    role: Role.user,
-                  ),
-                );
-              },
-            ),
+            ]
+            // Call & Chat Buttons
           ],
         ),
       ],

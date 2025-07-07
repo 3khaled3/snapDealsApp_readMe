@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/auth_feature/view/widgets/custom_button_row.dart';
 import 'package:snap_deals/app/chat_feature/model_view/get_sup_user_cubit/get_sup_user_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
+import 'package:snap_deals/app/product_feature/view/pages/my_products&courses/my_products_views.dart';
+import 'package:snap_deals/app/request_feature/view/pages/my_request_view.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -155,6 +158,9 @@ class NotificationsView extends StatelessWidget {
                                       role: Role.user,
                                     ));
                               }
+                            } else if (notification.title == 'new request') {
+                              GoRouter.of(context)
+                                  .push(MyProductsViews.routeName);
                             }
                           },
                           onDelete: () => notificationCubit

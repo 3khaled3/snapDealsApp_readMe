@@ -6,6 +6,7 @@ import 'package:snap_deals/app/home_feature/view/widgets/shimmer_product_card.da
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:snap_deals/app/product_feature/model_view/courses/get_my_courses_cubit/get_my_courses_cubit.dart';
+import 'package:snap_deals/app/search_feature/view/widget/empty_widget.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
@@ -118,17 +119,14 @@ class _MyCoursesBuilderState extends State<MyCoursesBuilder> {
                   ),
                   newPageProgressIndicatorBuilder: (_) =>
                       const Center(child: ShimmerProductCard()),
-                  noItemsFoundIndicatorBuilder: (_) =>  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.search_off, size: 48, color: ColorsBox.grey),
-                        8.ph,
-                        Text(context.tr.no_more_data,
-                            style: AppTextStyles.regular16().copyWith(color: ColorsBox.grey)),
-                      ],
-                    ),
-                  ),
+                      noItemsFoundIndicatorBuilder: (_) => Column(
+                    children: [
+                      Expanded(
+                        child: EmptyWidget(
+                          text: context.tr.no_course_found,
+                        ),
+                      ),
+                    ],),
                 ),
               ),
             ),

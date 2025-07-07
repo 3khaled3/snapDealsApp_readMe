@@ -8,17 +8,26 @@ part 'get_my_courses_state.dart';
 class GetMyCoursesCubit extends Cubit<GetMyCoursesState> {
   GetMyCoursesCubit() : super(GetMyCoursesInitial());
 
-   final ICourseRepository _courseRepository = CourseRepository();
+  final ICourseRepository _courseRepository = CourseRepository();
 
   Future<void> getMyCourses(
-      {required String limit, required String page,required String uesrId}) async {
+      {required String limit,
+      required String page,
+      required String uesrId}) async {
     emit(GetMyCoursesLoading());
-    final result = await _courseRepository.getMyCourses(limit: limit, page: page,uesrId: uesrId);
-    result.fold((l) => emit(GetMyCoursesError()), (r) {
+    final result = await _courseRepository.getMyCourses(
+        limit: limit, page: page, uesrId: uesrId);
+    result.fold((l) {
+      if (l.message == 'لا توجد كورسات تطابق معايير البحث') {
+        emit(const GetMyCoursesSuccess(courses: []));
+      } else {
+        emit(GetMyCoursesError());
+      }
+    }, (r) {
       final List coursesMap = r["data"];
       final List<CourseModel> courses =
           coursesMap.map((course) => CourseModel.fromJson(course)).toList();
-      emit(GetMyCoursesSuccess(courses:courses));
+      emit(GetMyCoursesSuccess(courses: courses));
     });
   }
 }

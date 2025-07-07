@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
@@ -14,7 +16,14 @@ class GetAllCoursesCubit extends Cubit<GetAllCoursesState> {
       {required String limit, required String page}) async {
     emit(GetAllCoursesLoading());
     final result = await _courseRepository.getCourses(limit: limit, page: page);
-    result.fold((l) => emit(GetAllCoursesError()), (r) {
+    result.fold((l) {
+      log("l.message ${l.message}");
+      if (l.message == "لا توجد كورسات تطابق معايير البحث") {
+        emit(const GetAllCoursesSuccess([]));
+      } else {
+        emit(GetAllCoursesError());
+      }
+    }, (r) {
       final List coursesMap = r["data"];
       final List<CourseModel> courses =
           coursesMap.map((course) => CourseModel.fromJson(course)).toList();

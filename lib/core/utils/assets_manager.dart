@@ -20,4 +20,5 @@ class AppImageAssets {
   static const String defaultProfile = "assets/svg/defaultProfile.svg";
   static const String appIcon = "assets/svg/app_icon.svg";
   static const String appIconImage = "assets/app_icon.png";
+  static const String emptyJson = "assets/empty.json";
 }

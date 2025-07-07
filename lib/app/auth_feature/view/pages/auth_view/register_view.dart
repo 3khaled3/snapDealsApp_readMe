@@ -123,9 +123,9 @@ class _RegisterViewState extends State<RegisterView> {
                       listener: (context, state) {
                         if (state is ProfileSuccess) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
-                            context.showSuccessSnackBar(
-                              message: context.tr.loginSuccess,
-                            );
+                            // context.showSuccessSnackBar(
+                            //   message: context.tr.loginSuccess,
+                            // );
                             GoRouter.of(context).pushReplacement(
                                 MainHomeView.routeName,
                                 extra: MainHomeViewArgs());

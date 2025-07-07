@@ -44,7 +44,7 @@ class HomeAppBar extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(99999),
                 child: CachedNetworkImage(
-                  imageUrl: ProfileCubit.instance.state.profile.profileImg ?? "",
+                  imageUrl: ProfileCubit.instance.state.profile.profileImg ?? "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
                   placeholder: (context, url) => SvgPicture.asset(
                     AppImageAssets.defaultProfile,
                     height: 48,

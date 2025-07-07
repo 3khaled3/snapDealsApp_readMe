@@ -31,7 +31,7 @@ class _CustomAddTobicState extends State<CustomAddTobic> {
                       const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                   shape: const CircleBorder(),
                   fixedSize: const Size(25, 25),
-                  backgroundColor: ColorsBox.slateGrey),
+                  backgroundColor: ColorsBox.grey.withOpacity(0.4)),
               child: const Icon(
                 Icons.add,
                 color: ColorsBox.black,

@@ -98,7 +98,7 @@ class CustomAddLessonState extends State<CustomAddLesson> {
                   padding: const EdgeInsets.all(4),
                   shape: const CircleBorder(),
                   fixedSize: const Size(25, 25),
-                  backgroundColor: ColorsBox.slateGrey,
+                  backgroundColor: ColorsBox.grey.withOpacity(0.4),
                 ),
                 child: const Icon(Icons.add, color: ColorsBox.black, size: 30),
               ),

@@ -25,8 +25,8 @@ abstract class ChatRouter {
         path: ChatTicketsView.routeName,
         builder: (context, state) {
           final args = state.extra as ChatConfig;
-          return BlocProvider(
-            create: (context) => ChatRoomCubit(chatConfig: args),
+          return BlocProvider.value(
+            value: ChatRoomCubit(chatConfig: args),
             child: ChatTicketsView(chatConfig: args),
           );
         }),

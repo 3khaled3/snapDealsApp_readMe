@@ -32,7 +32,8 @@ class EditDetailsView extends StatefulWidget {
 }
 
 class _EditDetailsViewState extends State<EditDetailsView> {
-  final GlobalKey<CustomEditTobicState> topicsKey = GlobalKey<CustomEditTobicState>();
+  final GlobalKey<CustomEditTobicState> topicsKey =
+      GlobalKey<CustomEditTobicState>();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -102,8 +103,7 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                 //   icon: Icons.category,
                 // ),
                 // 23.ph,
-               
-              
+
                 CustomAddTextField(
                   title: context.tr.brand,
                   hint: context.tr.brandHint,
@@ -156,7 +156,8 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           context.showSuccessSnackBar(
                               message: context.tr.update_success);
-                          GoRouter.of(context).pushReplacement(MainHomeView.routeName); // العودة للصفحة السابقة
+                          GoRouter.of(context).pushReplacement(
+                              MainHomeView.routeName); // العودة للصفحة السابقة
                         });
                       } else if (state is UpdateProductError) {
                         context.showErrorSnackBar(
@@ -181,36 +182,44 @@ class _EditDetailsViewState extends State<EditDetailsView> {
                           );
                           final Map<String, dynamic> updatedFields = {};
 
-if (updatedProduct.slug != widget.args!.product!.slug) {
-  updatedFields['slug'] = updatedProduct.slug;
-}
-if (updatedProduct.title != widget.args!.product!.title) {
-  updatedFields['title'] = updatedProduct.title;
-}
-if (updatedProduct.description != widget.args!.product!.description) {
-  updatedFields['description'] = updatedProduct.description;
-}
-if (updatedProduct.location != widget.args!.product!.location) {
-  updatedFields['location'] = updatedProduct.location;
-}
-if (updatedProduct.price != widget.args!.product!.price) {
-  updatedFields['price'] = updatedProduct.price;
-}
-if (updatedProduct.details.toString() != widget.args!.product!.details.toString()) {
-  updatedFields['details'] = updatedProduct.details;
-}
-if (selectedImages.isNotEmpty) {
-  updatedFields['newImages'] = selectedImages; // لو فيه صور جديدة
-}
-if (oldImages.length != widget.args!.product!.images.length) {
-  updatedFields['oldImages'] = oldImages;
-}
-print('Topics Map: ${topicsKey.currentState?.getTopicsMap()}');
+                          if (updatedProduct.slug !=
+                              widget.args!.product!.slug) {
+                            updatedFields['slug'] = updatedProduct.slug;
+                          }
+                          if (updatedProduct.title !=
+                              widget.args!.product!.title) {
+                            updatedFields['title'] = updatedProduct.title;
+                          }
+                          if (updatedProduct.description !=
+                              widget.args!.product!.description) {
+                            updatedFields['description'] =
+                                updatedProduct.description;
+                          }
+                          if (updatedProduct.location !=
+                              widget.args!.product!.location) {
+                            updatedFields['location'] = updatedProduct.location;
+                          }
+                          if (updatedProduct.price !=
+                              widget.args!.product!.price) {
+                            updatedFields['price'] = updatedProduct.price;
+                          }
+                          if (updatedProduct.details.toString() !=
+                              widget.args!.product!.details.toString()) {
+                            updatedFields['details'] = updatedProduct.details;
+                          }
+                          if (selectedImages.isNotEmpty) {
+                            updatedFields['newImages'] =
+                                selectedImages; // لو فيه صور جديدة
+                          }
+                          if (oldImages.length !=
+                              widget.args!.product!.images.length) {
+                            updatedFields['oldImages'] = oldImages;
+                          }
+                          print(
+                              'Topics Map: ${topicsKey.currentState?.getTopicsMap()}');
 
                           await updateProductCubit.updateProduct(
-                            updatedProduct,
-                            updatedFields
-                          );
+                              updatedProduct, updatedFields);
                         }
                       },
                     ),

@@ -6,11 +6,12 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/course_card.dart';
 import 'package:snap_deals/app/home_feature/view/widgets/product_card.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
-import 'package:snap_deals/app/home_feature/view_model/favorite_local_storage.dart';
+import 'package:snap_deals/app/search_feature/view/widget/empty_widget.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
+import 'package:snap_deals/core/utils/assets_manager.dart';
 
 class FavoriteViewArgs {}
 
@@ -80,9 +81,27 @@ class _FavoriteViewState extends State<FavoriteView> {
             log("🚀🚀🚀🚀🚀 widgets: ${widgets.length}");
 
             if (widgets.isEmpty) {
-              return Center(
-                child: Text(context.tr.no_item_in_favorite),
-              );
+              return Column(children: [
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        context.tr.favoriteView,
+                        style: AppTextStyles.bold22()
+                            .copyWith(color: ColorsBox.mainColor),
+                      ),
+                    ],
+                  ),
+                ),
+                12.ph,
+                const Divider(height: 1, color: ColorsBox.greyWithOpacity20),
+                Expanded(
+                  child: EmptyWidget(
+                      text: context.tr.no_item_in_favorite,
+                      image: AppImageAssets.emptyJson),
+                )
+              ]);
             }
 
             return _buildFavoritesGrid(context, widgets);

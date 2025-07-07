@@ -76,6 +76,9 @@ abstract class HttpHelper {
 
     var response = await http.get(Uri.parse(linkUrl), headers: headers);
 
+    print("Response Status: ${response.statusCode}");
+    log("Response Body: ${response.body}");
+
     return response;
   }
 
@@ -411,13 +414,13 @@ abstract class HttpHelper {
           }
           return Right(jsonDecode(decodedBody));
         } else if (response.statusCode == 400 || response.statusCode == 401) {
-          String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];
+          String? message = jsonDecode(utf8.decode(response.bodyBytes))['message'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.invalidData,
               message: message));
         } else {
-          String? message = jsonDecode(utf8.decode(response.bodyBytes))['msg'];
+          String? message = jsonDecode(utf8.decode(response.bodyBytes))['message'];
 
           return Left(FailureModel(
               responseStatus: HttpResponseStatus.failure, message: message));

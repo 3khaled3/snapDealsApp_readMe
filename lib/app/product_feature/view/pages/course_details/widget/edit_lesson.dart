@@ -83,7 +83,8 @@ class CustomEditLessonState extends State<CustomEditLesson> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              final controller = _lessonControllers[index]['controller'] as TextEditingController;
+              final controller = _lessonControllers[index]['controller']
+                  as TextEditingController;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -97,7 +98,8 @@ class CustomEditLessonState extends State<CustomEditLesson> {
                       const Spacer(),
                       IconButton(
                         onPressed: () => _removeLesson(index),
-                        icon: const Icon(Icons.delete_outline, color: Colors.red),
+                        icon:
+                            const Icon(Icons.delete_outline, color: Colors.red),
                       ),
                     ],
                   ),
@@ -127,7 +129,7 @@ class CustomEditLessonState extends State<CustomEditLesson> {
                   padding: const EdgeInsets.all(4),
                   shape: const CircleBorder(),
                   fixedSize: const Size(25, 25),
-                  backgroundColor: ColorsBox.slateGrey,
+                  backgroundColor: ColorsBox.grey.withOpacity(0.4),
                 ),
                 child: const Icon(Icons.add, color: ColorsBox.black, size: 30),
               ),

@@ -9,7 +9,6 @@ import 'package:snap_deals/app/home_feature/view/pages/main_home.dart';
 import 'package:snap_deals/app/on_board_feature/view/widget/page_indicator.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
-import 'package:snap_deals/app/product_feature/model_view/courses/delete_course_cubit/delete_course_cubit.dart';
 import 'package:snap_deals/app/product_feature/model_view/delete_product_cubit/delete_product_cubit.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/widget/edit_course.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/edit_product.dart';
@@ -45,7 +44,6 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
   final user = ProfileCubit.instance.state.profile;
   bool get isAdmin => user.role == Role.admin;
   bool get isOwner => user.id == widget.userId;
-  bool _isDeleting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -137,18 +135,17 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                             onPressed: () {
                               if (widget.isProduct) {
                                 GoRouter.of(context).push(
-                                EditDetailsView.routeName,
-                                extra: EditDetailsArgs(widget.product),
-                              );
+                                  EditDetailsView.routeName,
+                                  extra: EditDetailsArgs(widget.product),
+                                );
                               } else {
                                 GoRouter.of(context).push(
                                   EditCourseView.routeName,
                                   extra: EditCourseArgs(widget.course),
                                 );
                               }
-                              
                             },
-                            padding: const EdgeInsetsDirectional.only(start: 8),
+                            // padding: const EdgeInsetsDirectional.only(start: 8),
                             constraints: const BoxConstraints(),
                           ),
                         )

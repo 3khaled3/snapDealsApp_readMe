@@ -27,7 +27,6 @@ class AddDetailsArgs {
   AddDetailsArgs(this.id, this.name, this.icon);
 }
 
-
 class AddDetailsView extends StatefulWidget {
   const AddDetailsView({
     super.key,
@@ -120,6 +119,12 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                           height: const EdgeInsets.only(
                               bottom: 100, left: 10, right: 10),
                           controller: descriptionController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return context.tr.text_field_enter_req;
+                            }
+                            return null;
+                          },
                         ),
                         CustomTobic(key: topicsKey),
                         23.ph,
@@ -163,7 +168,12 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                             child: CustomPrimaryButton(
                               title: context.tr.nextButton,
                               onTap: () async {
-                                if (formKey.currentState?.validate() ?? false) {
+                                if (formKey.currentState!.validate()) {
+                                  if (selectedImages.isEmpty) {
+                                    context.showErrorSnackBar(
+                                        message:
+                                            context.tr.Please_select_an_image);
+                                  }
                                   await BlocProvider.of<CreateProductCubit>(
                                           context)
                                       .createProduct(
@@ -179,8 +189,8 @@ class _AddDetailsViewState extends State<AddDetailsView> {
                                             .instance.state.profile.profileImg,
                                         role: ProfileCubit
                                             .instance.state.profile.role,
-                                        notificationToken: ProfileCubit
-                                            .instance.state.profile.notificationToken,
+                                        notificationToken: ProfileCubit.instance
+                                            .state.profile.notificationToken,
                                       ),
                                       location: locationController.text,
                                       slug: brandController.text,
@@ -219,35 +229,3 @@ class _AddDetailsViewState extends State<AddDetailsView> {
     );
   }
 }
-
-// _AddMobileDetails(BuildContext context) {
-//   return Column(
-//     crossAxisAlignment: CrossAxisAlignment.start,
-//     children: [
-//       23.ph,
-//       Text(
-//         context.tr.ramWord,
-//         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: context.tr.fontFamilyLora),
-//       ),
-//       6.ph,
-//       const CustomDropDownButton(index: 1),
-//       23.ph,
-//       Text(
-//         context.tr.storageWord,
-//         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: context.tr.fontFamilyLora),
-//       ),
-//       6.ph,
-//       const CustomDropDownButton(index: 2),
-//       23.ph,
-//       Text(
-//         context.tr.batteryCapacityWord,
-//         style: AppTextStyles.semiBold12()
-//             .copyWith(fontFamily: context.tr.fontFamilyLora),
-//       ),
-//       6.ph,
-//       const CustomDropDownButton(index: 3),
-//     ],
-//   );
-// }

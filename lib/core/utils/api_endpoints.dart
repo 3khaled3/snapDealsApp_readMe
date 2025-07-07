@@ -9,6 +9,8 @@ class ApiEndpoints {
   // Products
   static const String products = '$baseUrl/products';
   static String productById(String id) => '$products/$id';
+  static String getProductBySearch(String search) =>
+      '$products?keyword=$search';
   static String productViews(String id) => '$products/$id/views';
 
   // Users

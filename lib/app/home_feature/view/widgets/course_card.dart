@@ -53,8 +53,9 @@ class CourseCard extends StatelessWidget {
                       child: Hero(
                         tag: 'course-${course.id}',
                         child: CachedNetworkImage(
-                          imageUrl:
-                              course.images.isEmpty ? '' : course.images.first,
+                          imageUrl: course.images.isEmpty
+                              ? "https://www.fivebranches.edu/wp-content/uploads/2021/08/default-image.jpg"
+                              : course.images.first,
                           height: 140,
                           width: double.infinity,
                           fit: BoxFit.cover,
