@@ -87,7 +87,12 @@ class _RegisterViewState extends State<RegisterView> {
                       hintText: context.tr.yourName,
                       labelText: context.tr.Name,
                       prefixIcon: EvaIcons.person,
-                      // validator: Validators.validateEmail,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return context.tr.text_field_enter_req;
+                        }
+                        return null;
+                      },
                       controller: nameController,
                     ),
                     separator,

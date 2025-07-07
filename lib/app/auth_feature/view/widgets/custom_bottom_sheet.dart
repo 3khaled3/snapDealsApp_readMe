@@ -271,14 +271,15 @@ class CustomBottomSheet {
                                 },
                               ),
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return ctx.tr.password_validate;
-                              } else if (value.length < 6) {
-                                return ctx.tr.password_validate2;
-                              }
-                              return null;
-                            },
+                            validator:  Validators.validatePassword,
+                            //  (value) {
+                            //   if (value == null || value.isEmpty) {
+                            //     return ctx.tr.password_validate;
+                            //   } else if (value.length < 6) {
+                            //     return ctx.tr.password_validate2;
+                            //   }
+                            //   return null;
+                            // },
                           ),
                           24.ph,
                           TextFormField(

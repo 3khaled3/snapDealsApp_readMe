@@ -1,146 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:snap_deals/app/admin_feature/model_view/access_user_cubit/access_user_cubit.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/shimmer_user_card.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/user_card.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/core/extensions/context_extension.dart';
-import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
 
 class UserBuilder extends StatefulWidget {
-  final AccessUserCubit accessUserCubit;
-
-  const UserBuilder({super.key, required this.accessUserCubit});
+  const UserBuilder({super.key});
 
   @override
   State<UserBuilder> createState() => _UserBuilderState();
 }
 
 class _UserBuilderState extends State<UserBuilder> {
-  final ScrollController _scrollController = ScrollController();
+  final PagingController<int, UserModel> _pagingController =
+      PagingController(firstPageKey: 1);
 
-  late AccessUserCubit accessUserCubit;
+  late final AccessUserCubit _accessUserCubit;
 
-  int page = 1;
   final int limit = 5;
-  bool _isLoading = false;
-  bool _hasMore = true;
-  List<UserModel> _users = [];
+  int _currentPage = 1;
 
   @override
   void initState() {
     super.initState();
-    accessUserCubit = widget.accessUserCubit;
-    _loadInitialUsers();
-    _scrollController.addListener(_onScroll);
+    _accessUserCubit = BlocProvider.of<AccessUserCubit>(context);
+
+    _pagingController.addPageRequestListener((pageKey) {
+      _currentPage = pageKey;
+      _accessUserCubit.getAllUsersData(
+        page: pageKey.toString(),
+        limit: limit.toString(),
+      );
+    });
+  }
+
+  void _handleUsers(List<UserModel> users) {
+    final isLastPage = users.length < limit;
+
+    if (_currentPage == 1) {
+      _pagingController.itemList = [];
+    }
+
+    if (isLastPage) {
+      _pagingController.appendLastPage(users);
+    } else {
+      _pagingController.appendPage(users, _currentPage + 1);
+    }
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
+    _pagingController.dispose();
     super.dispose();
-  }
-
-  void _loadInitialUsers() {
-    accessUserCubit.getAllUsersData(
-      page: page.toString(),
-      limit: limit.toString(),
-    );
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 200 &&
-        !_isLoading &&
-        _hasMore) {
-      _loadMoreUsers();
-    }
-  }
-
-  void _loadMoreUsers() {
-    setState(() => _isLoading = true);
-    page++;
-    accessUserCubit.getAllUsersData(
-      page: page.toString(),
-      limit: limit.toString(),
-    );
-  }
-
-  void _refreshUsers() {
-    setState(() {
-      _users.clear();
-      page = 1;
-      _hasMore = true;
-      _isLoading = false;
-    });
-    accessUserCubit.getAllUsersData(page: '1', limit: '5');
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AccessUserCubit, AccessUserState>(
-      bloc: accessUserCubit,
+    return BlocListener<AccessUserCubit, AccessUserState>(
+      bloc: _accessUserCubit,
       listener: (context, state) {
-        debugPrint('AccessUserCubit state changed: $state');
-
         if (state is GetAllUsersSuccess) {
-          debugPrint('🎯 GetAllUsersSuccess caught, updating users list');
-          setState(() {
-            _isLoading = false;
-            if (page == 1) {
-              _users = state.users;
-            } else {
-              for (var newUser in state.users) {
-                if (!_users.any((u) => u.id == newUser.id)) {
-                  _users.add(newUser);
-                }
-              }
-            }
-            if (state.users.length < limit) _hasMore = false;
-          });
+          _handleUsers(state.users);
         } else if (state is GetAllUsersError) {
-          setState(() {
-            _isLoading = false;
-            page--;
-          });
+          _pagingController.error = context.tr.error_user_loag;
         } else if (state is DeleteUserSuccess) {
-          debugPrint('🎯 DeleteUserSuccess caught, refreshing list');
-          _refreshUsers();
-        } else if (state is GetSpecificUserSuccess) {
-          setState(() {
-            _isLoading = false;
-            _hasMore = false;
-          });
+          _pagingController.refresh();
         }
       },
-      builder: (context, state) {
-        if (state is GetSpecificUserSuccess) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                UserCard(uesrs: state.user),
-                16.ph,
-                TextButton(
-                  onPressed: _refreshUsers,
-                  child: Text(
-                    context.tr.display_all_users,
-                    style: AppTextStyles.semiBold14(),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-
-        if (state is GetAllUsersLoading && page == 1) {
-          return Column(
-            children: List.generate(2, (index) => const ShimmerUserCard()),
-          );
-        } else if (state is GetAllUsersError && page == 1) {
-          return Center(
+      child: PagedListView<int, UserModel>(
+        pagingController: _pagingController,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        builderDelegate: PagedChildBuilderDelegate<UserModel>(
+          itemBuilder: (context, user, index) => UserCard(uesrs: user),
+          firstPageProgressIndicatorBuilder: (_) => Column(
+            children: List.generate(2, (_) => const ShimmerUserCard()),
+          ),
+          newPageProgressIndicatorBuilder: (_) => Column(
+            children: List.generate(1, (_) => const ShimmerUserCard()),
+          ),
+          firstPageErrorIndicatorBuilder: (_) => Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -149,8 +92,9 @@ class _UserBuilderState extends State<UserBuilder> {
                   style: AppTextStyles.semiBold16()
                       .copyWith(color: ColorsBox.black),
                 ),
+                const SizedBox(height: 8),
                 ElevatedButton(
-                  onPressed: _loadInitialUsers,
+                  onPressed: () => _pagingController.refresh(),
                   child: Text(
                     context.tr.retry,
                     style: AppTextStyles.semiBold16()
@@ -159,49 +103,15 @@ class _UserBuilderState extends State<UserBuilder> {
                 ),
               ],
             ),
-          );
-        } else {
-          return Stack(
-            children: [
-              SingleChildScrollView(
-                controller: _scrollController,
-                child: Column(
-                  children: [
-                    ..._users.map((user) => UserCard(uesrs: user)),
-                    if (_isLoading)
-                      Column(
-                        children:
-                            List.generate(2, (_) => const ShimmerUserCard()),
-                      ),
-                    if (!_hasMore && _users.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Center(child: Text(context.tr.no_more_user)),
-                      ),
-                  ],
-                ),
-              ),
-              if (state is GetAllUsersError && page > 1)
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: GestureDetector(
-                    onTap: _loadMoreUsers,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      color: ColorsBox.red.withOpacity(0.7),
-                      child: Text(
-                        context.tr.retry_load_more,
-                        style: AppTextStyles.semiBold16()
-                            .copyWith(color: ColorsBox.white),
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          );
-        }
-      },
+          ),
+          noItemsFoundIndicatorBuilder: (_) => Center(
+            child: Text(
+              context.tr.no_more_user,
+              style: AppTextStyles.medium14(),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

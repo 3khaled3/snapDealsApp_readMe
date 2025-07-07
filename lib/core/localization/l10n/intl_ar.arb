@@ -127,7 +127,7 @@
     "currentPassword": "كلمة المرور الحالية",
     "currentPassword_error": "يرجى إدخال كلمة المرور بشكل صحيح",
     "password_validate": "يرجى إدخال كلمة المرور الجديدة",
-    "password_validate2": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+    "password_validate2": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
     "favoriteView": "المفضلة",
     "more": "المزيد",
     "less": "أقل",

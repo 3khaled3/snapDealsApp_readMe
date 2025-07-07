@@ -127,7 +127,7 @@
     "currentPassword": "Current Password",
     "currentPassword_error": "Please enter your password correctly",
     "password_validate": "Please enter your new password",
-    "password_validate2": "Password must be at least 6 characters",
+    "password_validate2": "Password must be at least 8 characters",
     "favoriteView": "Favorite",
     "more": "More",
     "less": "Less",

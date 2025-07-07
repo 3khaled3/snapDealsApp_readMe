@@ -345,7 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password_validate": MessageLookupByLibrary.simpleMessage(
             "Please enter your new password"),
         "password_validate2": MessageLookupByLibrary.simpleMessage(
-            "Password must be at least 6 characters"),
+            "Password must be at least 8 characters"),
         "popularCourse": MessageLookupByLibrary.simpleMessage("Popular Course"),
         "popularProduct":
             MessageLookupByLibrary.simpleMessage("Popular Product"),

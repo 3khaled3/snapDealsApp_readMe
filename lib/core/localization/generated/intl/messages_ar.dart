@@ -343,7 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password_validate": MessageLookupByLibrary.simpleMessage(
             "يرجى إدخال كلمة المرور الجديدة"),
         "password_validate2": MessageLookupByLibrary.simpleMessage(
-            "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"),
+            "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل"),
         "popularCourse": MessageLookupByLibrary.simpleMessage("أشهر الكورسات"),
         "popularProduct":
             MessageLookupByLibrary.simpleMessage("أشهر المنتاجات"),

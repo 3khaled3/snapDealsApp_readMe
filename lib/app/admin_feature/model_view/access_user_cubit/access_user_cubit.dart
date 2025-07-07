@@ -12,38 +12,37 @@ class AccessUserCubit extends Cubit<AccessUserState> {
 
   Future<void> getAllUsersData(
       {required String limit, required String page}) async {
-         debugPrint('Fetching users with limit: $limit, page: $page');
+    debugPrint('Fetching users with limit: $limit, page: $page');
     emit(GetAllUsersLoading());
     final result =
         await _accessUserRepository.getAllUsersData(limit: limit, page: page);
     result.fold((l) => emit(GetAllUsersError()), (r) {
-      final List productsMap = r["data"];
-      final List<UserModel> products =
-          productsMap.map((product) => UserModel.fromJson(product)).toList();
-      emit(GetAllUsersSuccess(products));
+      final List usersMap = r["data"];
+      final List<UserModel> users =
+          usersMap.map((product) => UserModel.fromJson(product)).toList();
+      emit(GetAllUsersSuccess(users));
     });
   }
 
   Future<void> deleteUser(String userId) async {
-  print("🚀 deleteUser called");
+    print("🚀 deleteUser called");
 
-  emit(DeleteUserLoading());
-  print("🔄 DeleteUserLoading emitted");
+    emit(DeleteUserLoading());
+    print("🔄 DeleteUserLoading emitted");
 
-  final result = await _accessUserRepository.deleteUser(userId: userId);
+    final result = await _accessUserRepository.deleteUser(userId: userId);
 
-  result.fold(
-    (failure) {
-      print("❌ delete failed");
-      emit(DeleteUserError());
-    },
-    (data) {
-      print("✅ delete succeeded");
-      emit(DeleteUserSuccess());
-    },
-  );
-}
-
+    result.fold(
+      (failure) {
+        print("❌ delete failed");
+        emit(DeleteUserError());
+      },
+      (data) {
+        print("✅ delete succeeded");
+        emit(DeleteUserSuccess());
+      },
+    );
+  }
 
   Future<void> getUserDataById(String userId) async {
     emit(GetSpecificUserLoading());

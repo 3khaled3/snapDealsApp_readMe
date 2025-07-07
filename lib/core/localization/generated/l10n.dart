@@ -1322,10 +1322,10 @@ class Tr {
     );
   }
 
-  /// `Password must be at least 6 characters`
+  /// `Password must be at least 8 characters`
   String get password_validate2 {
     return Intl.message(
-      'Password must be at least 6 characters',
+      'Password must be at least 8 characters',
       name: 'password_validate2',
       desc: '',
       args: [],

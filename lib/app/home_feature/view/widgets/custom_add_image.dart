@@ -10,8 +10,8 @@ import 'package:snap_deals/core/themes/text_styles.dart';
 
 class CustomAddImage extends StatefulWidget {
   final Function(List<XFile>) onImagesSelected;
-  final List<String> oldImages; // روابط الصور القديمة
-  final Function(int)? onOldImageRemoved; // دالة حذف صورة قديمة (تمرر index)
+  final List<String> oldImages;
+  final Function(int)? onOldImageRemoved;
 
   const CustomAddImage({
     super.key,
@@ -27,18 +27,18 @@ class CustomAddImage extends StatefulWidget {
 class _CustomAddImageState extends State<CustomAddImage> {
   List<XFile> selectedImages = [];
 
-  Future<void> pickMultipleImages() async {
+  Future<void> pickSingleImage() async {
     final ImagePicker picker = ImagePicker();
     try {
-      final List<XFile> images = await picker.pickMultiImage();
-      if (images.isNotEmpty) {
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
         setState(() {
-          selectedImages = images;
+          selectedImages = [image];
         });
-        widget.onImagesSelected(images);
+        widget.onImagesSelected([image]);
       }
     } catch (e) {
-      print('حدث خطأ أثناء اختيار الصور: $e');
+      print('حدث خطأ أثناء اختيار الصورة: $e');
     }
   }
 
@@ -47,7 +47,7 @@ class _CustomAddImageState extends State<CustomAddImage> {
     final hasOldImages = widget.oldImages.isNotEmpty;
     final hasNewImages = selectedImages.isNotEmpty;
 
-    // لو ما فيش صور نهائيًا (قديمة أو جديدة) نعرض الواجهة الأصلية مع زر الإضافة
+    // لا يوجد صور نهائيًا
     if (!hasOldImages && !hasNewImages) {
       return Container(
         height: 220,
@@ -105,7 +105,7 @@ class _CustomAddImageState extends State<CustomAddImage> {
                   .copyWith(fontFamily: AppTextStyles.fontFamilyLora),
               borderColor: ColorsBox.brightBlue,
               borderRadius: 5.0,
-              onTap: pickMultipleImages,
+              onTap: pickSingleImage,
             ),
             16.ph,
             Text(
@@ -119,9 +119,8 @@ class _CustomAddImageState extends State<CustomAddImage> {
       );
     }
 
-    // لو فيه صور، نعرضها (سواء كانت قديمة أو جديدة)، بدون زر إضافة تحتها
+    // عرض صورة قديمة واحدة فقط مع إمكانية الحذف
     if (hasOldImages) {
-      // لو فيه صور قديمة نعرض أول صورة قديمة فقط مع زر الحذف عليها
       return Container(
         height: 220,
         width: double.infinity,
@@ -169,8 +168,8 @@ class _CustomAddImageState extends State<CustomAddImage> {
       );
     }
 
+    // عرض صورة جديدة واحدة فقط
     if (hasNewImages) {
-      // عرض الصورة الجديدة الأولى فقط، بحجم كبير يأخذ كل المساحة
       return Container(
         height: 220,
         width: double.infinity,
@@ -191,8 +190,8 @@ class _CustomAddImageState extends State<CustomAddImage> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    selectedImages.removeAt(0);
-                    widget.onImagesSelected(selectedImages);
+                    selectedImages.clear();
+                    widget.onImagesSelected([]);
                   });
                 },
                 child: Container(
@@ -213,7 +212,6 @@ class _CustomAddImageState extends State<CustomAddImage> {
       );
     }
 
-    // افتراضي رجع SizedBox
     return const SizedBox();
   }
 }

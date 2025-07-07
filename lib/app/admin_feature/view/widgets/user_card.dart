@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/custom_copy_button.dart';
 import 'package:snap_deals/app/admin_feature/view/widgets/custom_dialog.dart';
 import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
@@ -13,108 +12,114 @@ import 'package:snap_deals/core/utils/assets_manager.dart';
 class UserCard extends StatelessWidget {
   const UserCard({super.key, required this.uesrs});
   final UserModel uesrs;
+
   @override
   Widget build(BuildContext context) {
     final String userId = uesrs.id;
     final String userName = uesrs.name;
     final String userEmail = uesrs.email;
     final String userPhoneNumber = uesrs.phone ?? "No Phone Number";
-    final String useerimage = uesrs.profileImg ?? "";
+    final String userImage = uesrs.profileImg ?? "";
+
     return Card(
       color: ColorsBox.white,
-      elevation: 4,
+      elevation: 2,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.grey, width: 0.5),
         borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Colors.grey, width: 0.4),
       ),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// Top Row (ID + Copy + Delete)
             Row(
               children: [
-                Text(
-                  'ID: $userId',
-                  style: AppTextStyles.bold12(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Text(
+                    'ID: $userId',
+                    style: AppTextStyles.bold12(),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                8.pw,
-                CustomCopyButton(
-                  textToCopy: userId,
-                ),
-                const Spacer(),
+                CustomCopyButton(textToCopy: userId),
+                6.pw,
                 IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {
-                      CustomDialog.deleteUser(context, userId);
-                    }),
+                  onPressed: () => CustomDialog.deleteUser(context, userId),
+                  icon: const Icon(Icons.delete, color: Colors.redAccent),
+                  tooltip: 'Delete User',
+                ),
               ],
             ),
-            8.ph,
+            12.ph,
+
+            /// Profile + Details
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /// Avatar
                 CircleAvatar(
-                  radius: 37,
-                  backgroundImage: buildUserImage(useerimage),
+                  radius: 35,
+                  backgroundColor:  Colors.grey.shade200,
+                  backgroundImage: buildUserImage(userImage),
                 ),
-                20.pw,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          userName,
-                          style: AppTextStyles.bold16(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        8.pw,
-                        CustomCopyButton(
-                          textToCopy: userName,
-                        ),
-                      ],
-                    ),
-                    7.ph,
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 190,
-                          child: Text(
-                            userEmail,
-                            style: AppTextStyles.semiBold14(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                16.pw,
+
+                /// User Info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /// Name + Copy
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              userName,
+                              style: AppTextStyles.bold16(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                        8.pw,
-                        CustomCopyButton(
-                          textToCopy: userEmail,
-                        ),
-                      ],
-                    ),
-                    7.ph,
-                    Row(
-                      children: [
-                        Text(
-                          userPhoneNumber,
-                          style: AppTextStyles.semiBold14(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        8.pw,
-                        CustomCopyButton(
-                          textToCopy: userPhoneNumber,
-                        ),
-                      ],
-                    ),
-                  ],
+                          CustomCopyButton(textToCopy: userName),
+                        ],
+                      ),
+                      8.ph,
+
+                      /// Email + Copy
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              userEmail,
+                              style: AppTextStyles.semiBold14(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          CustomCopyButton(textToCopy: userEmail),
+                        ],
+                      ),
+                      8.ph,
+
+                      /// Phone + Copy
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              userPhoneNumber,
+                              style: AppTextStyles.semiBold14(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          CustomCopyButton(textToCopy: userPhoneNumber),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

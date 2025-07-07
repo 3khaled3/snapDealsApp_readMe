@@ -10,26 +10,26 @@ class AccessUsersBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accessUserCubit = context.read<AccessUserCubit>();
-
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          SearchUserByIdWidget(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SearchUserByIdWidget(
             onSearch: (userId) async {
-              await accessUserCubit.getUserDataById(userId);
+              await BlocProvider.of<AccessUserCubit>(context)
+                  .getUserDataById(userId);
             },
             onClearSearch: () {
-              accessUserCubit.getAllUsersData(page: '1', limit: '5');
+              BlocProvider.of<AccessUserCubit>(context)
+                  .getAllUsersData(page: '1', limit: '5');
             },
           ),
-          20.ph,
-          Expanded(
-            child: UserBuilder(accessUserCubit: accessUserCubit),
-          ),
-        ],
-      ),
+        ),
+        8.ph,
+        const Expanded(
+          child: UserBuilder(),
+        ),
+      ],
     );
   }
 }
