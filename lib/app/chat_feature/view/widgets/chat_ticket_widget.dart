@@ -40,7 +40,7 @@ class ChatTicketWidget extends StatelessWidget {
 
     late int unreadMessagesCount;
     if (ProfileCubit.instance.state.profile.role == Role.admin) {
-      unreadMessagesCount = chatRoom.unreadMessagesCount["admin"] ?? 0;
+      unreadMessagesCount = chatRoom.unreadMessagesCount["Support"] ?? 0;
     } else {
       unreadMessagesCount = chatRoom
               .unreadMessagesCount[ProfileCubit.instance.state.profile.id] ??

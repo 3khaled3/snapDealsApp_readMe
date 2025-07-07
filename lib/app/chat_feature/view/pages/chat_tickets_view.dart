@@ -7,8 +7,6 @@ import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/model_view/chat_room_cubit.dart';
 import 'package:snap_deals/app/chat_feature/view/widgets/chat_ticket_widget.dart';
-import 'package:snap_deals/core/themes/text_styles.dart';
-import 'package:snap_deals/core/themes/app_colors.dart';
 
 class ChatTicketsView extends StatelessWidget {
   static const routeName = '/chat_tickets_view';

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hive/hive.dart';
+import 'package:snap_deals/app/auth_feature/data/models/basic_user_model.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_config.dart';
 import 'package:snap_deals/app/chat_feature/data/models/chat_room.dart';
 import 'package:snap_deals/app/chat_feature/data/models/message_model.dart';
@@ -71,7 +72,11 @@ class ChatService {
     if (chatRoom == null) return;
 
     final unreadMessagesCount = chatRoom.unreadMessagesCount;
-    unreadMessagesCount[userId] = 0;
+    if (ProfileCubit.instance.state.profile.role == Role.admin) {
+      unreadMessagesCount["Support"] = 0;
+    } else {
+      unreadMessagesCount[userId] = 0;
+    }
 
     final updatedChatRoom =
         chatRoom.copyWith(unreadMessagesCount: unreadMessagesCount);

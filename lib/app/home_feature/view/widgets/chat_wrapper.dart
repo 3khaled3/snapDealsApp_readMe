@@ -75,16 +75,16 @@ class ChatTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !isAdmin
-        ? BlocProvider.value(
-            value:
+        ? BlocProvider(
+            create: (_) =>
                 ChatRoomCubit(chatConfig: ChatConfig.fromType(ChatType.free)),
             child:
                 ChatTicketsView(chatConfig: ChatConfig.fromType(ChatType.free)),
           )
         : TabBarView(
             children: [
-              BlocProvider.value(
-            value: ChatRoomCubit(
+              BlocProvider(
+                create: (_) => ChatRoomCubit(
                     chatConfig: ChatConfig.fromType(ChatType.support)),
                 child: ChatTicketsView(
                     chatConfig: ChatConfig.fromType(ChatType.support)),

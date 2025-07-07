@@ -36,7 +36,7 @@ class ChatRoomCubit extends Cubit<List<ChatRoom>> {
 
   // Update state from Hive box
   void _updateStateFromHive() {
-    emit(_chatRoomBox.values.toList());
+    if (isClosed) return; emit(_chatRoomBox.values.toList());
   }
 
   // Listen to Firestore for real-time chat room updates
@@ -45,7 +45,7 @@ class ChatRoomCubit extends Cubit<List<ChatRoom>> {
     String currentID = currentUser.id;
 
     if (currentUser.role == Role.admin) {
-      currentID = "admin";
+      currentID = "Support";
     }
     print(
         "currentUser: $currentID userType: ${chatConfig.chatRoomsCollection}");
