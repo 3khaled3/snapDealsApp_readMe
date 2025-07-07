@@ -44,7 +44,7 @@ class _MainHomeViewState extends State<MainHomeView> {
           cancelButtonTitle: Tr.current.continue_as_guest,
           onPressed: () {
             GoRouter.of(context)
-                .push(LoginScreen.routeName, extra: LoginViewArgs());
+                .pushReplacement(LoginScreen.routeName, extra: LoginViewArgs());
           });
     }
   }

@@ -40,13 +40,13 @@ class _ReviewsSectionState extends State<ReviewsSection> {
             _commentController.clear();
             _rating = 0;
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('context.tr.review_added_successfully')),
+              SnackBar(content: Text(context.tr.review_success)),
             );
             context.read<ReviewCubit>().getReviews(courseId: widget.courseId);
           }
           if (state is AddReviewError) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('context.tr.error_adding_review')),
+              SnackBar(content: Text(context.tr.review_error)),
             );
           }
         },
