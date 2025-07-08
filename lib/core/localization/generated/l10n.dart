@@ -632,10 +632,10 @@ class Tr {
     );
   }
 
-  /// `Cancelation Policy`
+  /// `Cancellation Policy`
   String get CancelationPolicy {
     return Intl.message(
-      'Cancelation Policy',
+      'Cancellation Policy',
       name: 'CancelationPolicy',
       desc: '',
       args: [],
@@ -872,10 +872,10 @@ class Tr {
     );
   }
 
-  /// `Drowing Tools`
+  /// `Drawing Tools`
   String get drawingTools {
     return Intl.message(
-      'Drowing Tools',
+      'Drawing Tools',
       name: 'drawingTools',
       desc: '',
       args: [],
@@ -1032,10 +1032,10 @@ class Tr {
     );
   }
 
-  /// `Describtion *`
+  /// `Description *`
   String get describtion {
     return Intl.message(
-      'Describtion *',
+      'Description *',
       name: 'describtion',
       desc: '',
       args: [],
@@ -1162,10 +1162,10 @@ class Tr {
     );
   }
 
-  /// `Describtion`
+  /// `Description`
   String get describtionWord {
     return Intl.message(
-      'Describtion',
+      'Description',
       name: 'describtionWord',
       desc: '',
       args: [],
@@ -2512,10 +2512,10 @@ class Tr {
     );
   }
 
-  /// `Tobic`
+  /// `Topic`
   String get tobic {
     return Intl.message(
-      'Tobic',
+      'Topic',
       name: 'tobic',
       desc: '',
       args: [],

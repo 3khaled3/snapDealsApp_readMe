@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "Audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "CancelationPolicy":
-            MessageLookupByLibrary.simpleMessage("Cancelation Policy"),
+            MessageLookupByLibrary.simpleMessage("Cancellation Policy"),
         "CancelationPolicyDiscription1": MessageLookupByLibrary.simpleMessage(
             "*Cancellation Before Shipping:*"),
         "CancelationPolicyDiscription2": MessageLookupByLibrary.simpleMessage(
@@ -207,16 +207,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error deleting "),
         "delete_product_success":
             MessageLookupByLibrary.simpleMessage(" deleted successfully"),
-        "describtion": MessageLookupByLibrary.simpleMessage("Describtion *"),
+        "describtion": MessageLookupByLibrary.simpleMessage("Description *"),
         "describtionHint": MessageLookupByLibrary.simpleMessage(
             "Describe the item you are selling"),
-        "describtionWord": MessageLookupByLibrary.simpleMessage("Describtion"),
+        "describtionWord": MessageLookupByLibrary.simpleMessage("Description"),
         "descriptionHint":
             MessageLookupByLibrary.simpleMessage("Enter description"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "display_all_users":
             MessageLookupByLibrary.simpleMessage("Display all users"),
-        "drawingTools": MessageLookupByLibrary.simpleMessage("Drowing Tools"),
+        "drawingTools": MessageLookupByLibrary.simpleMessage("Drawing Tools"),
         "editProduct": MessageLookupByLibrary.simpleMessage("Edit Product"),
         "electronics": MessageLookupByLibrary.simpleMessage("Electronic"),
         "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
@@ -414,7 +414,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "storageWord": MessageLookupByLibrary.simpleMessage("Storage *"),
         "text_field_enter_req":
             MessageLookupByLibrary.simpleMessage("this field is required"),
-        "tobic": MessageLookupByLibrary.simpleMessage("Tobic"),
+        "tobic": MessageLookupByLibrary.simpleMessage("Topic"),
         "total_price": MessageLookupByLibrary.simpleMessage("Total Price"),
         "type_to_search":
             MessageLookupByLibrary.simpleMessage("Type to search"),
