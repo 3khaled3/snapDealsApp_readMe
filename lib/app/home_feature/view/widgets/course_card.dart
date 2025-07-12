@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +8,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/course_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/course_details/course_details_view.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -17,6 +20,7 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(" Course ${course.title} course.ratingsAverage: ${course.ratingsAverage}");
     return GestureDetector(
       onTap: () {
         GoRouter.of(context).push(
@@ -126,7 +130,9 @@ class CourseCard extends StatelessWidget {
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          'EGP ${(course.price).toStringAsFixed(2)}',
+                          course.price == 0
+                              ? context.tr.free
+                              : 'EGP ${(course.price).toStringAsFixed(2)}',
                           maxLines: 1,
                           style: AppTextStyles.semiBold14().copyWith(
                             color: ColorsBox.brightBlue,

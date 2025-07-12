@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "أدخل بريدك الإلكتروني لتلقي رابط إعادة تعيين كلمة المرور"),
         "forgotPasswordScreenLabel":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
+        "free": MessageLookupByLibrary.simpleMessage("مجانا"),
         "go_my_requests":
             MessageLookupByLibrary.simpleMessage("اذهب إلى طلباتي"),
         "hintEmail": MessageLookupByLibrary.simpleMessage("example@gmail.com"),

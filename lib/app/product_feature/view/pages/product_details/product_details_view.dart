@@ -6,6 +6,7 @@ import 'package:snap_deals/app/product_feature/view/pages/product_details/widget
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/description_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/details_section.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/widgets/main_details_section.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 
 class ProductDetailsArgs {
@@ -17,7 +18,7 @@ class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({super.key, required this.args});
   final ProductDetailsArgs args;
   static const String routeName = '/product_details_route';
-  
+
   @override
   State<ProductDetailsView> createState() => _ProductDetailsViewState();
 }
@@ -26,7 +27,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   @override
   void initState() {
     super.initState();
-    print('ProductDetailsView initialized with product: ${widget.args.product.title}');
+    print(
+        'ProductDetailsView initialized with product: ${widget.args.product.title}');
     print('Product price: ${widget.args.product.price}');
     print('Product details: ${widget.args.product.details}');
     print('Product updatedAt: ${widget.args.product.updatedAt}');
@@ -48,19 +50,22 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   @override
   Widget build(BuildContext context) {
     final product = widget.args.product;
-    
+
     print('ProductDetailsView building with product: ${product.title}');
     print('ProductDetailsView building with price: ${product.price}');
     print('ProductDetailsView building with updatedAt: ${product.updatedAt}');
     print('ProductDetailsView building with ID: ${product.id}');
-    
-    final formattedPrice = 'EGP ${product.price.toStringAsFixed(2)}';
+
+    final formattedPrice = product.price == 0
+        ? context.tr.free
+        : 'EGP ${product.price.toStringAsFixed(2)}';
     final formattedDate =
         '${product.createdAt.day}/${product.createdAt.month}/${product.createdAt.year}';
-    
+
     // Create a unique key that changes when the product data changes
-    final uniqueKey = ValueKey('product_details_${product.id}_${product.title}_${product.price}_${product.updatedAt.millisecondsSinceEpoch}');
-    
+    final uniqueKey = ValueKey(
+        'product_details_${product.id}_${product.title}_${product.price}_${product.updatedAt.millisecondsSinceEpoch}');
+
     return Scaffold(
       key: uniqueKey,
       body: SingleChildScrollView(

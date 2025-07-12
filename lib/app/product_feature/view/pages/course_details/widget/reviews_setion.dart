@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -93,6 +95,7 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                             const Icon(Icons.star, color: Colors.amber),
                         onRatingUpdate: (rating) {
                           setState(() {
+                            print(rating);
                             _rating = rating;
                           });
                         },
@@ -172,6 +175,7 @@ class _ReviewsSectionState extends State<ReviewsSection> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             final review = state.reviews[index];
+                            log("review.rating ${review.rating}");
                             return Column(
                               children: [
                                 CustomReviewContainer(

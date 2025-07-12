@@ -241,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your email to receive a password reset link"),
         "forgotPasswordScreenLabel":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "free": MessageLookupByLibrary.simpleMessage("Free"),
         "go_my_requests":
             MessageLookupByLibrary.simpleMessage("Go to my requests"),
         "hintEmail": MessageLookupByLibrary.simpleMessage("example@gmail.com"),

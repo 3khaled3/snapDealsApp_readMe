@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:snap_deals/app/home_feature/view_model/cubit/favorite_cubit.dart';
 import 'package:snap_deals/app/product_feature/data/models/product_model.dart';
 import 'package:snap_deals/app/product_feature/view/pages/product_details/product_details_view.dart';
+import 'package:snap_deals/core/extensions/context_extension.dart';
 import 'package:snap_deals/core/extensions/sized_box_extension.dart';
 import 'package:snap_deals/core/themes/app_colors.dart';
 import 'package:snap_deals/core/themes/text_styles.dart';
@@ -108,7 +109,7 @@ class ProductCard extends StatelessWidget {
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          'EGP ${(price).toStringAsFixed(2)}',
+                          price == 0 ? context.tr.free : 'EGP ${(price).toStringAsFixed(2)}',
                           maxLines: 1,
                           style: AppTextStyles.semiBold14().copyWith(
                             color: ColorsBox.brightBlue,

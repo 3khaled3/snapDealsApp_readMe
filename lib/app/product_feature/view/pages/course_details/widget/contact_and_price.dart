@@ -48,7 +48,9 @@ class ContactAndPrice extends StatelessWidget {
               ),
               4.ph,
               Text(
-                '${courseModel.price} EGP',
+                courseModel.price == 0
+                    ? context.tr.free
+                    : '${courseModel.price} EGP',
                 style: AppTextStyles.bold18().copyWith(
                   color: ColorsBox.brightBlue,
                 ),
