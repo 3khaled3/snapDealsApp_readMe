@@ -141,7 +141,7 @@ A comprehensive Flutter application that connects students and educators, enabli
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/snap-deals.git
+   git clone https://github.com/snapDeals/snap-deals.git
    cd snap_deals
    ```
 
@@ -253,14 +253,6 @@ To add new languages:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-For support, email support@snapdeals.com or create an issue in this repository.
 
 ---
 
